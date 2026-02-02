@@ -1,6 +1,4 @@
-build/*
-*.iml
-.gradle
-.idea/*
-.kotlin/*
-
+/.gradle/
+/.idea/
+/.kotlin/
+/build/
