@@ -1,14 +1,13 @@
+import org.gradle.api.JavaVersion.VERSION_17
 import com.android.build.api.dsl.ApplicationExtension
 
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
-android {
+configure<ApplicationExtension> {
     namespace = "com.example.spacirkovnik"
-    // V roku 2026 je SDK 36 (Baklava) v štádiu stabilizácie/preview
     compileSdk = 36
 
     defaultConfig {
@@ -17,12 +16,9 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // Oprava deprecated varovania z AGP 9.0+
-    @Suppress("UnstableApiUsage")
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -34,14 +30,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17 // Moderný štandard pre 2026
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
-        }
+        sourceCompatibility = VERSION_17
+        targetCompatibility = VERSION_17
     }
 
     buildFeatures {
