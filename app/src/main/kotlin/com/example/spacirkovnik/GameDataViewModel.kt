@@ -24,8 +24,8 @@ class GameDataViewModel() : ViewModel() {
     private fun fetchData() {
         viewModelScope.launch {
             try {
-//                val gameResponse = dataHolderService.getDataHolders()
-                val gameResponse = GameResponse(holders = listOf(DataHolder("testString")))
+                val gameResponse = dataHolderService.getDataHolders()
+//                val gameResponse = GameResponse(holders = listOf(DataHolder("testString")))
                 _holderState.value = HolderState(list = gameResponse.holders,
                                                  loading = false,
                                                  error = null)

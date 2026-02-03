@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Arrangement.Bottom
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -31,8 +32,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale.Companion.Crop
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -75,10 +80,9 @@ fun Spacirkovnik(innerPadding: PaddingValues) {
 private fun MyApp(viewModel: GameDataViewModel) {
     Column(modifier = Modifier
             .fillMaxSize()
-           // .paint(painterResource(id = R.drawable.forrester2), contentScale = ContentScale.Crop)
-           ,
-           verticalArrangement = Arrangement.Bottom,
-           horizontalAlignment = Alignment.CenterHorizontally) {
+            .paint(painterResource(id = R.drawable.forrester2), contentScale = Crop),
+           verticalArrangement = Bottom,
+           horizontalAlignment = CenterHorizontally) {
         TextField(value = viewModel.getCurrentDataHolder().displayText,
                   onValueChange = {},
                   modifier = Modifier.padding(vertical = 4.dp),
@@ -90,11 +94,12 @@ private fun MyApp(viewModel: GameDataViewModel) {
                                                             focusedContainerColor = Color(0xffd8e6ff)))
 
         when (viewModel.getCurrentDataHolder().componentType) {
-            ComponentType.ONE_BUTTON -> OneButton({ viewModel.incrementIndex() }, viewModel.getCurrentDataHolder().firstButtonText)
+            ComponentType.ONE_BUTTON -> OneButton({ viewModel.incrementIndex() },
+                                                  viewModel.getCurrentDataHolder().firstButtonText)
             ComponentType.TWO_BUTTONS -> TwoButtons(viewModel.getCurrentIndex() > 0,
                                                     { viewModel.decrementIndex() },
                                                     viewModel.getCurrentDataHolder().firstButtonText,
-                                      viewModel.getCurrentIndex() < viewModel.getHoldersListSize() - 1,
+                                                    viewModel.getCurrentIndex() < viewModel.getHoldersListSize() - 1,
                                                     { viewModel.incrementIndex() },
                                                     viewModel.getCurrentDataHolder().secondButtonText)
             ComponentType.QUESTION -> QuestionWithAnswers(answers = viewModel.getCurrentDataHolder().answers,
