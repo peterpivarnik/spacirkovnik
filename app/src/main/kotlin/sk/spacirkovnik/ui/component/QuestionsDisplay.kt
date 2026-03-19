@@ -1,0 +1,258 @@
+package sk.spacirkovnik.ui.component
+
+import android.content.Context
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
+import sk.spacirkovnik.model.GameAnswer
+import sk.spacirkovnik.model.ScreenType
+import sk.spacirkovnik.ui.theme.BackButton
+import sk.spacirkovnik.ui.theme.BackButtonText
+import sk.spacirkovnik.ui.theme.CardBg
+import sk.spacirkovnik.ui.theme.DisabledButton
+import sk.spacirkovnik.ui.theme.PrimaryButton
+import sk.spacirkovnik.ui.theme.PrimaryButtonText
+import sk.spacirkovnik.ui.theme.SecondaryButton
+import sk.spacirkovnik.ui.theme.SecondaryButtonText
+import sk.spacirkovnik.ui.theme.TextDark
+import sk.spacirkovnik.viewmodel.GameDataViewModel
+import sk.spacirkovnik.viewmodel.LocationViewModel
+
+@Composable
+fun QuestionsDisplay(
+    gameDataViewModel: GameDataViewModel,
+    locationViewModel: LocationViewModel? = null,
+    context: Context? = null
+) {
+    val currentScreen = gameDataViewModel.getCurrentScreen()
+
+    if (currentScreen.type == ScreenType.NAVIGATION
+        && locationViewModel != null && context != null
+    ) {
+        NavigationDisplay(
+            gameScreen = currentScreen,
+            locationViewModel = locationViewModel,
+            context = context,
+            onContinue = { gameDataViewModel.incrementIndex() }
+        )
+        return
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 20.dp, vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            colors = CardDefaults.cardColors(containerColor = CardBg),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                if (!currentScreen.imageUrl.isNullOrEmpty()) {
+                    AsyncImage(
+                        model = currentScreen.imageUrl,
+                        contentDescription = null,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(16f / 10f)
+                            .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+                Text(
+                    text = currentScreen.text ?: "",
+                    fontSize = (currentScreen.fontSize ?: 18).sp,
+                    lineHeight = ((currentScreen.fontSize ?: 18) + 8).sp,
+                    textAlign = TextAlign.Center,
+                    fontWeight = if ((currentScreen.fontSize ?: 18) > 20) FontWeight.Bold else FontWeight.Normal,
+                    modifier = Modifier.padding(20.dp),
+                    color = TextDark
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.padding(bottom = 32.dp, top = 20.dp)
+        ) {
+            when (currentScreen.type) {
+                ScreenType.ONE_BUTTON -> OneButton(
+                    { gameDataViewModel.incrementIndex() },
+                    currentScreen.buttonText ?: "Pokračovať"
+                )
+                ScreenType.TWO_BUTTONS -> TwoButtons(
+                    backButtonEnabled = gameDataViewModel.getCurrentIndex() > 0,
+                    backButtonOnClick = { gameDataViewModel.decrementIndex() },
+                    backButtonText = currentScreen.backButtonText ?: "Späť",
+                    nextButtonEnabled = gameDataViewModel.getCurrentIndex() < gameDataViewModel.getScreenCount() - 1,
+                    nextButtonOnClick = { gameDataViewModel.incrementIndex() },
+                    nextButtonText = currentScreen.nextButtonText ?: "Pokračovať"
+                )
+                ScreenType.QUESTION -> QuestionWithAnswers(
+                    answers = currentScreen.answers ?: emptyList(),
+                    onCorrectChoice = { gameDataViewModel.incrementIndex() }
+                )
+                ScreenType.NAVIGATION -> {}
+                null -> {}
+            }
+        }
+    }
+}
+
+@Composable
+private fun OneButton(buttonOnClick: () -> Unit, buttonText: String) {
+    Button(
+        onClick = buttonOnClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(52.dp),
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+    ) {
+        Text(text = buttonText, fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = PrimaryButtonText)
+    }
+}
+
+@Composable
+private fun TwoButtons(
+    backButtonEnabled: Boolean,
+    backButtonOnClick: () -> Unit,
+    backButtonText: String,
+    nextButtonEnabled: Boolean,
+    nextButtonOnClick: () -> Unit,
+    nextButtonText: String
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Button(
+            enabled = backButtonEnabled,
+            onClick = backButtonOnClick,
+            modifier = Modifier
+                .weight(1f)
+                .height(52.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = BackButton,
+                contentColor = BackButtonText,
+                disabledContainerColor = DisabledButton
+            )
+        ) {
+            Text(text = backButtonText, fontSize = 16.sp)
+        }
+        Button(
+            enabled = nextButtonEnabled,
+            onClick = nextButtonOnClick,
+            modifier = Modifier
+                .weight(1f)
+                .height(52.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = PrimaryButton,
+                contentColor = PrimaryButtonText,
+                disabledContainerColor = DisabledButton
+            )
+        ) {
+            Text(text = nextButtonText, fontSize = 16.sp)
+        }
+    }
+}
+
+@Composable
+private fun QuestionWithAnswers(answers: List<GameAnswer>, onCorrectChoice: () -> Unit) {
+    val showAlertMessage = remember { mutableStateOf(false) }
+    if (showAlertMessage.value) {
+        MyAlertDialog(showAlertMessage)
+    }
+    Column(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        answers.forEach { answer ->
+            Button(
+                onClick = {
+                    if (answer.correct) {
+                        onCorrectChoice.invoke()
+                    } else {
+                        showAlertMessage.value = true
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = SecondaryButton,
+                    contentColor = SecondaryButtonText
+                )
+            ) {
+                Text(text = answer.text, fontSize = 16.sp)
+            }
+        }
+    }
+}
+
+@Composable
+private fun MyAlertDialog(showAlertMessage: MutableState<Boolean>) {
+    AlertDialog(
+        icon = {
+            Icon(Icons.Default.Warning, contentDescription = "Varovanie")
+        },
+        title = {
+            Text(text = "Zlá odpoveď")
+        },
+        text = {
+            Text(text = "Skúš to znova, určite to zvládneš!")
+        },
+        onDismissRequest = {
+            showAlertMessage.value = false
+        },
+        confirmButton = {
+            TextButton(onClick = { showAlertMessage.value = false }) {
+                Text("Skúsim znova")
+            }
+        }
+    )
+}
