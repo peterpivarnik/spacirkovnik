@@ -1,22 +1,31 @@
 import org.gradle.api.JavaVersion.VERSION_17
 import com.android.build.api.dsl.ApplicationExtension
+import java.util.Properties
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+val localPropertiesFile = rootProject.file("local.properties")
+val mapsApiKey: String = if (localPropertiesFile.exists()) {
+    val props = Properties()
+    props.load(localPropertiesFile.inputStream())
+    props.getProperty("MAPS_API_KEY", "")
+} else ""
+
 configure<ApplicationExtension> {
-    namespace = "com.example.spacirkovnik"
+    namespace = "sk.spacirkovnik"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.spacirkovnik"
+        applicationId = "sk.spacirkovnik"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
     }
 
     buildTypes {
@@ -36,6 +45,7 @@ configure<ApplicationExtension> {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -56,6 +66,10 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.play.services.location)
     implementation(libs.play.services.maps)
+    implementation(libs.maps.compose)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
