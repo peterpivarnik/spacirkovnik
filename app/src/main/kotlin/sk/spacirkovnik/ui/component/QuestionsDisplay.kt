@@ -5,10 +5,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,7 +22,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -38,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import sk.spacirkovnik.model.GameAnswer
 import sk.spacirkovnik.model.ScreenType
+import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.BackButton
 import sk.spacirkovnik.ui.theme.BackButtonText
 import sk.spacirkovnik.ui.theme.CardBg
@@ -47,6 +47,7 @@ import sk.spacirkovnik.ui.theme.PrimaryButtonText
 import sk.spacirkovnik.ui.theme.SecondaryButton
 import sk.spacirkovnik.ui.theme.SecondaryButtonText
 import sk.spacirkovnik.ui.theme.TextDark
+import sk.spacirkovnik.ui.theme.TextMedium
 import sk.spacirkovnik.viewmodel.GameDataViewModel
 import sk.spacirkovnik.viewmodel.LocationViewModel
 
@@ -54,7 +55,8 @@ import sk.spacirkovnik.viewmodel.LocationViewModel
 fun QuestionsDisplay(
     gameDataViewModel: GameDataViewModel,
     locationViewModel: LocationViewModel? = null,
-    context: Context? = null
+    context: Context? = null,
+    onGameFinished: () -> Unit = {}
 ) {
     val currentScreen = gameDataViewModel.getCurrentScreen()
 
@@ -93,9 +95,8 @@ fun QuestionsDisplay(
                         contentDescription = null,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .aspectRatio(16f / 10f)
                             .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
-                        contentScale = ContentScale.Crop
+                        contentScale = ContentScale.FillWidth
                     )
                 }
                 Text(
@@ -118,7 +119,14 @@ fun QuestionsDisplay(
         ) {
             when (currentScreen.type) {
                 ScreenType.ONE_BUTTON -> OneButton(
-                    { gameDataViewModel.incrementIndex() },
+                    {
+                        if (gameDataViewModel.isLastScreen()) {
+                            gameDataViewModel.clearProgress()
+                            onGameFinished()
+                        } else {
+                            gameDataViewModel.incrementIndex()
+                        }
+                    },
                     currentScreen.buttonText ?: "Pokračovať"
                 )
                 ScreenType.TWO_BUTTONS -> TwoButtons(
@@ -237,21 +245,43 @@ private fun QuestionWithAnswers(answers: List<GameAnswer>, onCorrectChoice: () -
 @Composable
 private fun MyAlertDialog(showAlertMessage: MutableState<Boolean>) {
     AlertDialog(
+        onDismissRequest = { showAlertMessage.value = false },
         icon = {
-            Icon(Icons.Default.Warning, contentDescription = "Varovanie")
+            Icon(
+                Icons.Default.Warning,
+                contentDescription = "Varovanie",
+                tint = Amber,
+                modifier = Modifier.size(40.dp)
+            )
         },
         title = {
-            Text(text = "Zlá odpoveď")
+            Text(
+                text = "Zlá odpoveď",
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = TextDark,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
         },
         text = {
-            Text(text = "Skúš to znova, určite to zvládneš!")
-        },
-        onDismissRequest = {
-            showAlertMessage.value = false
+            Text(
+                text = "Skúš to znova, určite to zvládneš!",
+                fontSize = 16.sp,
+                color = TextMedium,
+                textAlign = TextAlign.Center,
+                lineHeight = 22.sp,
+                modifier = Modifier.fillMaxWidth()
+            )
         },
         confirmButton = {
-            TextButton(onClick = { showAlertMessage.value = false }) {
-                Text("Skúsim znova")
+            Button(
+                onClick = { showAlertMessage.value = false },
+                modifier = Modifier.fillMaxWidth().height(44.dp),
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+            ) {
+                Text("Skúsim znova", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
             }
         }
     )

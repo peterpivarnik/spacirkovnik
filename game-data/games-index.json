@@ -5,10 +5,33 @@
       "id": "lesnicka-palica",
       "title": "Lesnícka palica Gejzu Dražďáka",
       "description": "Pomôž Gejzovi nájsť stratenú lesnícku palicu v petržalských lesoch.",
-      "version": 1,
+      "version": 5,
       "region": "Bratislava - Petržalka",
       "estimatedDurationMinutes": 60,
-      "distanceKm": 3.5
+      "distanceKm": 3.5,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
+    },
+    {
+      "id": "tajomstvo-hradu",
+      "title": "Tajomstvo starého hradu",
+      "description": "Objav tajomstvá ukryté v ruinách stredovekého hradu nad mestom.",
+      "version": 1,
+      "region": "Bratislava - Devín",
+      "estimatedDurationMinutes": 45,
+      "distanceKm": 2.0,
+      "visible": true,
+      "playable": false
+    },
+    {
+      "id": "ztrateny-poklad",
+      "title": "Stratený poklad templárskych rytierov",
+      "description": "Vydaj sa po stopách templárskych rytierov a nájdi ich ukrytý poklad.",
+      "version": 1,
+      "region": "Bratislava - Staré Mesto",
+      "estimatedDurationMinutes": 90,
+      "distanceKm": 5.0,
+      "visible": false,
+      "playable": false
     }
   ]
 }

@@ -41,13 +41,17 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun incrementIndex() {
-        _index.intValue++
-        saveProgress()
+        if (_index.intValue < _state.value.screens.size - 1) {
+            _index.intValue++
+            saveProgress()
+        }
     }
 
     fun decrementIndex() {
-        _index.intValue--
-        saveProgress()
+        if (_index.intValue > 0) {
+            _index.intValue--
+            saveProgress()
+        }
     }
 
     fun getCurrentScreen(): GameScreen {
@@ -60,6 +64,14 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
 
     fun getCurrentIndex(): Int {
         return _index.intValue
+    }
+
+    fun isLastScreen(): Boolean {
+        return _index.intValue >= _state.value.screens.size - 1
+    }
+
+    fun clearProgress() {
+        currentGameId?.let { progressManager.clearProgress(it) }
     }
 
     private fun saveProgress() {
