@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 3,
+  "version": 5,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -31,13 +31,18 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
+      "text": "Ale počkaj! Niekto musel tú palicu zobrať a ísť s ňou cez les. A kúzelná palica funguje tak, že zvieratká, ktoré stretnú človeka s palicou, sa ešte chvíľu vedia rozprávať s každým človekom! Takže ak sa poponáhľame, zvieratká v lese nám ešte budú rozumieť!",
+      "type": "TWO_BUTTONS",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
+    },
+    {
       "text": "Gejza potrebuje tvoju pomoc! Pomôžeš mu nájsť jeho stratenú kúzelnú palicu? Čaká nás výprava plná záhad a zvieracích kamarátov!",
       "type": "ONE_BUTTON",
       "buttonText": "Jasné, idem pomáhať!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Výborne, odvážny pomocník! Najprv sa musíme dobre rozhliadnuť okolo seba. Skúsime nájsť nejaké stopy. Pozri sa na budovu pred tebou...",
+      "text": "Výborne, odvážny pomocník! Gejza ti veľmi ďakuje, že si sa rozhodol pomôcť. Najprv sa musíme dobre rozhliadnuť okolo seba a skúsiť nájsť nejaké stopy. Každá maličkosť môže byť dôležitá! Pozri sa pozorne na budovu pred tebou...",
       "type": "TWO_BUTTONS"
     },
     {
@@ -51,7 +56,7 @@
       ]
     },
     {
-      "text": "Správne, ty si ale šikovný! Teraz rýchlo - neďaleko odtiaľto býva malý ježko. Možno niečo videl! Poď za ním!",
+      "text": "Správne, ty si ale šikovný stopár! Vidíš? Keď sa pozorne pozeráš okolo seba, všimneš si veci, ktoré iní prehliadnu. Teraz rýchlo - neďaleko odtiaľto na krásnej zelenej lúke býva malý ježko menom Bodko. Možno niečo videl alebo počul! Poď za ním!",
       "type": "NAVIGATION",
       "targetLatitude": 48.1197,
       "targetLongitude": 17.1017,
@@ -64,7 +69,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/jezko.jpeg?alt=media"
     },
     {
-      "text": "Poď teda za mnou, ukážem ti kadiaľ som videl utekať niekoho podozrivého! Len mi musíš stíhať - ja som totiž najrýchlejší ježko v celom lese!",
+      "text": "Poď teda za mnou, ukážem ti kadiaľ som videl utekať niekoho podozrivého! Len mi musíš stíhať - ja som totiž najrýchlejší ježko v celom lese! Keď neprší, rád si tu behám po lúke a zbierám jablčká. Ale dnes máme dôležitejšiu úlohu!",
       "type": "TWO_BUTTONS",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/jezko.jpeg?alt=media"
     },
@@ -92,7 +97,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/korytnacka.jpeg?alt=media"
     },
     {
-      "text": "Tak povedz - medzi aké druhy zvierat patríme my, korytnačky?",
+      "text": "Žijem tu už veľmi dlho a pamätám si časy, keď tu ešte neboli žiadne cesty ani domy. My korytnačky sa totiž dožívame veľmi vysokého veku! Ale najprv mi povedz - medzi aké druhy zvierat patríme my, korytnačky?",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/korytnacka.jpeg?alt=media",
       "answers": [
@@ -115,7 +120,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/bobor.jpeg?alt=media"
     },
     {
-      "text": "Najprv mi dokáž, že nás bobry poznáš! Vieš, čo máme najradšej na jedenie?",
+      "text": "Vidíš tú hrádzu na vode? Tú som postavil celú sám! Staval som ju tri týždne a je z nej najkrajšia hrádza na celom Chorvátskom ramene. Ale dosť o mne - najprv mi dokáž, že nás bobry poznáš! Vieš, čo máme najradšej na jedenie?",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/bobor.jpeg?alt=media",
       "answers": [
@@ -172,7 +177,7 @@
       ]
     },
     {
-      "text": "A na tom stožiari sú antény na prijímanie a vysielanie signálu. Vďaka nim môžu ľudia telefonovať a pozerať televíziu!",
+      "text": "A na tom stožiari sú antény na prijímanie a vysielanie signálu. Vďaka nim môžu ľudia telefonovať a pozerať televíziu! Bez nich by sme nemohli ani volať mame, keď sa nám stane niečo v lese. Technika je niekedy naozaj užitočná!",
       "type": "TWO_BUTTONS",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vevericka.jpeg?alt=media"
     },
@@ -184,12 +189,12 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/labut.jpeg?alt=media"
     },
     {
-      "text": "Ahoj, krásna labuť! Nevidela si tu náhodou niekoho s lesníkovou palicou?",
+      "text": "Pri brehu Dunaja plávala nádherná biela labuť. Jej perie sa trblietalo v slnečných lúčoch a vyzerala ako kráľovná celej rieky. Ahoj, krásna labuť! Nevidela si tu náhodou niekoho s lesníkovou palicou?",
       "type": "TWO_BUTTONS",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/labut.jpeg?alt=media"
     },
     {
-      "text": "Ale áno, videla! Pomôžem ti, ale najprv mi musíš niečo poradiť aj ty mne. Mám pre teba otázočku!",
+      "text": "Ale áno, videla! Prešiel tu niekto a mal so sebou čosi dlhé a drevené. Pomôžem ti zistiť kadiaľ šiel, ale najprv mi musíš niečo poradiť aj ty mne. Už dlho premýšľam nad jednou vecou a mám pre teba otázočku!",
       "type": "TWO_BUTTONS",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/labut.jpeg?alt=media"
     },
@@ -212,7 +217,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/kapor.jpeg?alt=media"
     },
     {
-      "text": "Počkaj na kapra... Ale dokedy tu budem čakať? Hádam sa ukáže čoskoro!",
+      "text": "Počkaj na kapra... Voda je tu pokojná a krásne sa v nej odrážajú stromy. Ale dokedy tu budem čakať? Hádam sa ukáže čoskoro! Trpezlivosť je vraj cnosť, ale ja som naozaj zvedavý, čo mi kapor povie!",
       "type": "TWO_BUTTONS",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/kapor.jpeg?alt=media"
     },
@@ -222,7 +227,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/kapor.jpeg?alt=media"
     },
     {
-      "text": "Je to:",
+      "text": "Na Vianoce sa u nás na Slovensku tradične podáva kapor. A je s tým spojený jeden krásny zvyk. Povedz mi - ktorá časť kapra sa uchováva pre šťastie?",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/kapor.jpeg?alt=media",
       "answers": [
@@ -281,9 +286,17 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/zahrada.jpeg?alt=media"
     },
     {
-      "text": "Pozri sa! Veď tá palica je tu, v záhrade! A drží ju v rukách... lesníkov syn! Palica sa vôbec nestratila - lesníkov syn ju zobral, aby pomáhal zvieratkám namiesto svojho otca! Aký šikovný chlapec! A ty si bol úžasný pomocník - ďakujeme ti za celý les!",
-      "type": "TWO_BUTTONS",
+      "text": "Pozri sa! Veď tá palica je tu, v záhrade! A drží ju v rukách... lesníkov syn! Malý Janko Dražďák! Palica sa vôbec nestratila - Janko ju zobral skoro ráno, aby pomáhal zvieratkám namiesto svojho otca, kým ten spal. Aký šikovný a starostlivý chlapec! Gejza by bol na neho veľmi pyšný!",
+      "type": "ONE_BUTTON",
+      "buttonText": "Hurá!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/zahrada.jpeg?alt=media"
+    },
+    {
+      "text": "Gratulujeme, dokončil si dobrodružstvo! Bol si úžasný pomocník - vďaka tebe sa lesníkova kúzelná palica našla a všetky zvieratká v lese sú šťastné. Gejza Dražďák ti ďakuje za celý les! A malý Janko sľúbil, že nabudúce tatkovi nechá odkaz, keď si palicu požičia.",
+      "type": "ONE_BUTTON",
+      "buttonText": "Späť na zoznam hier",
+      "fontSize": 22,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     }
   ]
 }

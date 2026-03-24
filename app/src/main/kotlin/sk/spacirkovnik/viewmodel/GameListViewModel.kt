@@ -24,7 +24,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             try {
                 val response = RetrofitInstance.apiService.getGameIndex()
-                val gamesWithStatus = response.games.map { info ->
+                val gamesWithStatus = response.games.filter { it.visible != false }.map { info ->
                     val cachedVersion = cacheManager.getCachedVersion(info.id)
                     val status = when {
                         cachedVersion == null -> DownloadStatus.NOT_DOWNLOADED

@@ -8,5 +8,7 @@ data class GameInfo(
     val version: Int = 1,
     val region: String? = null,
     val estimatedDurationMinutes: Int? = null,
-    val distanceKm: Double? = null
+    val distanceKm: Double? = null,
+    val visible: Boolean? = null,
+    val playable: Boolean? = null
 )

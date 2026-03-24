@@ -37,7 +37,10 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("gamePlay/{gameId}") { backStackEntry ->
                             val gameId = backStackEntry.arguments?.getString("gameId") ?: return@composable
-                            GamePlayScreen(gameId = gameId)
+                            GamePlayScreen(
+                                gameId = gameId,
+                                onExit = { navController.popBackStack() }
+                            )
                         }
                     }
                 }
