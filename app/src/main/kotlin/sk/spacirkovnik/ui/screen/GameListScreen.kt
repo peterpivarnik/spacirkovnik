@@ -46,7 +46,7 @@ import sk.spacirkovnik.R
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.AmberLight
 import sk.spacirkovnik.ui.theme.CardBg
-import sk.spacirkovnik.ui.theme.GameBackground
+import sk.spacirkovnik.ui.theme.MainBackground
 import sk.spacirkovnik.ui.theme.PrimaryButton
 import sk.spacirkovnik.ui.theme.PrimaryButtonText
 import sk.spacirkovnik.ui.theme.SecondaryButton
@@ -70,7 +70,7 @@ fun GameListScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(GameBackground)
+            .background(MainBackground)
             .padding(16.dp)
     ) {
         when {

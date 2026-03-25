@@ -8,6 +8,7 @@ import android.hardware.SensorManager
 import android.location.Location
 import android.os.Looper
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -34,8 +35,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.layout.ContentScale
@@ -45,6 +48,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.google.android.gms.location.LocationCallback
@@ -85,6 +89,8 @@ fun NavigationDisplay(
     var bearingToTarget by remember { mutableFloatStateOf(0f) }
     var distanceMeters by remember { mutableStateOf<Int?>(null) }
     var locationStarted by remember { mutableStateOf(false) }
+
+    val scrollState = rememberScrollState()
 
     fun startLocationUpdates() {
         if (locationStarted) return
@@ -186,10 +192,11 @@ fun NavigationDisplay(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
+            .verticalScrollbar(scrollState)
             .padding(horizontal = 20.dp, vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+        verticalArrangement = Arrangement.Top
     ) {
         Spacer(modifier = Modifier.height(24.dp))
 
@@ -281,7 +288,7 @@ fun NavigationDisplay(
             )
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(32.dp))
 
         val isCloseEnough = distanceMeters != null && distanceMeters!! <= 10
         Button(
@@ -349,4 +356,26 @@ private fun DrawScope.drawArrow(center: Offset, length: Float) {
         close()
     }
     drawPath(tailPath, color = Color.White.copy(alpha = 0.5f))
+}
+
+fun Modifier.verticalScrollbar(
+    state: ScrollState,
+    width: Dp = 4.dp,
+    color: Color = Color.White.copy(alpha = 0.3f)
+): Modifier = drawWithContent {
+    drawContent()
+    if (state.maxValue > 0) {
+        val height = size.height
+        val scrollValue = state.value.toFloat()
+        val maxScrollValue = state.maxValue.toFloat()
+
+        val scrollbarHeight = (height * height) / (maxScrollValue + height)
+        val scrollbarOffset = (scrollValue * (height - scrollbarHeight)) / maxScrollValue
+
+        drawRect(
+            color = color,
+            topLeft = Offset(size.width - width.toPx(), scrollbarOffset),
+            size = Size(width.toPx(), scrollbarHeight)
+        )
+    }
 }

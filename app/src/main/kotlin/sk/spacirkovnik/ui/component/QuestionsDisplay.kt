@@ -118,7 +118,7 @@ fun QuestionsDisplay(
             modifier = Modifier.padding(bottom = 32.dp, top = 20.dp)
         ) {
             when (currentScreen.type) {
-                ScreenType.ONE_BUTTON -> OneButton(
+                ScreenType.CONTINUE -> OneButton(
                     {
                         if (gameDataViewModel.isLastScreen()) {
                             gameDataViewModel.clearProgress()
@@ -129,7 +129,7 @@ fun QuestionsDisplay(
                     },
                     currentScreen.buttonText ?: "Pokračovať"
                 )
-                ScreenType.TWO_BUTTONS -> TwoButtons(
+                ScreenType.BROWSE -> TwoButtons(
                     backButtonEnabled = gameDataViewModel.getCurrentIndex() > 0,
                     backButtonOnClick = { gameDataViewModel.decrementIndex() },
                     backButtonText = currentScreen.backButtonText ?: "Späť",
