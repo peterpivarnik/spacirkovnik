@@ -32,3 +32,11 @@ val GameBackground = Brush.verticalGradient(
     )
 )
 
+val MainBackground = Brush.verticalGradient(
+    colors = listOf(
+        Color(0xFF253D52),
+        Color(0xFF2F4F68),
+        Color(0xFF3A6180),
+    )
+)
+
