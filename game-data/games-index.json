@@ -5,10 +5,10 @@
       "id": "lesnicka-palica",
       "title": "Lesnícka palica Gejzu Dražďáka",
       "description": "Pomôž Gejzovi nájsť stratenú lesnícku palicu v petržalských lesoch.",
-      "version": 8,
+      "version": 9,
       "region": "Bratislava - Petržalka",
-      "estimatedDurationMinutes": 60,
-      "distanceKm": 3.5,
+      "estimatedDurationMinutes": 120,
+      "distanceKm": 3.8,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
