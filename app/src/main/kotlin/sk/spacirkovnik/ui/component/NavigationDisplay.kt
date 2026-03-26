@@ -66,7 +66,6 @@ import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import android.content.pm.ApplicationInfo
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.CardBg
 import sk.spacirkovnik.ui.theme.DisabledButton
@@ -192,8 +191,8 @@ fun NavigationDisplay(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .verticalScroll(scrollState)
             .verticalScrollbar(scrollState)
+            .verticalScroll(scrollState)
             .padding(horizontal = 20.dp, vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
@@ -311,26 +310,6 @@ fun NavigationDisplay(
             )
         }
 
-        val isDebug = context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
-        if (isDebug) {
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(
-                onClick = onContinue,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Red.copy(alpha = 0.6f),
-                    contentColor = Color.White
-                )
-            ) {
-                Text(
-                    text = "⏭ Preskočiť (DEBUG)",
-                    fontSize = 14.sp
-                )
-            }
-        }
 
         Spacer(modifier = Modifier.height(32.dp))
     }
@@ -360,8 +339,8 @@ private fun DrawScope.drawArrow(center: Offset, length: Float) {
 
 fun Modifier.verticalScrollbar(
     state: ScrollState,
-    width: Dp = 4.dp,
-    color: Color = Color.White.copy(alpha = 0.3f)
+    width: Dp = 6.dp,
+    color: Color = Color.White.copy(alpha = 0.6f)
 ): Modifier = drawWithContent {
     drawContent()
     if (state.maxValue > 0) {

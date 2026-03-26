@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 8,
+  "version": 9,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -70,20 +70,20 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Mňa musíš najprv chytiť. Všetci si totiž myslia, že my ježkovia sme pomalí. Tak poď, ukáž, čo v tebe je.",
+      "text": "Ahoj ja sa volám Bodko. A ak chceš odo mňa pomoc, musíš ma najprv chytiť. Všetci si totiž myslia, že my ježkovia sme pomalí. Tak poď, ukáž, čo v tebe je.",
       "type": "NAVIGATION",
       "targetLatitude": 48.11030278254697,
       "targetLongitude": 17.115855302541775,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/jezko.jpeg?alt=media"
     },
     {
-      "text": "Ahojky, kamarát! Ja som ježko Bodko a bývam tu na tejto krásnej lúke. Už som počul, že hľadáš lesníkovu kúzelnú palicu. Rád ti pomôžem!",
+      "text": "Dobre už stačí naháňačky. Ja bývam tu na tejto krásnej lúke. Už som počul, že hľadáš lesníkovu kúzelnú palicu. Rád ti pomôžem!",
       "type": "CONTINUE",
       "buttonText": "Super, ďakujem Bodko!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/jezko.jpeg?alt=media"
     },
     {
-      "text": "Už sme tu, vidíš ten maličký mostík? Veľmi sa mi páči! Povedz mi - kde bol vyrobený? Ja ti potom pomôžem!",
+      "text": "Vidíš ten maličký mostík? Veľmi sa mi páči! Povedz mi - kde bol vyrobený? Ja ti potom pomôžem!",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/jezko.jpeg?alt=media",
       "answers": [
@@ -124,7 +124,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/korytnacka.jpeg?alt=media"
     },
     {
-      "text": "Hm? Čo tu chceš? Nevidíš, že som zaneprázdnený? Staviam tu hrádzu! Aha, ty hľadáš tú palicu... No dobre, ale prečo by som ti mal pomáhať zadarmo?",
+      "text": "Hm? Čo tu chceš? Nevidíš, že som zaneprázdnený? Staviam tu hrádzu! Aha, ty hľadáš tú palicu... No dobre, ale prečo by som ti mal pomáhať len tak?",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/bobor.jpeg?alt=media"
     },
@@ -164,14 +164,19 @@
     },
     {
       "text": "Haha, správne! Ty si naozaj múdry! Pozri - práve sem skáče veverička. Tá ti ukáže, kadiaľ utekal ten človek s palicou. Bež za ňou!",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.104488209520696,
-      "targetLongitude": 17.115877634133373,
+      "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vlk.jpeg?alt=media"
     },
     {
-      "text": "Čí-čí-čí! Ahojík! Ja som veverička Viki! Jasné, že ti pomôžem! Ale najprv poď za mnou, musím ti niečo ukázať. Pozri sa na tú obrovskú vec - ja som si myslela, že je to najväčší strom na svete!",
+      "text": "Čí-čí-čí! Ahojík! Ja som veverička Viki! Jasné, že ti pomôžem! Ale najprv poď za mnou, musím ti niečo ukázať.",
       "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vevericka.jpeg?alt=media"
+    },
+    {
+      "text": "Pozri sa na tú obrovskú vec - ja som si myslela, že je to najväčší strom na svete!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.104488209520696,
+      "targetLongitude": 17.115877634133373,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vevericka.jpeg?alt=media"
     },
     {
