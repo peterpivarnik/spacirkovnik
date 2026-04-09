@@ -1,0 +1,290 @@
+{
+  "id": "tajomstvo-janka-krala",
+  "title": "Tajomstvo Janka Kráľa",
+  "version": 1,
+  "screens": [
+    {
+      "text": "Tajomstvo Janka Kráľa",
+      "type": "CONTINUE",
+      "buttonText": "Poď na dobrodružstvo!",
+      "fontSize": 26,
+      "imageUrl": ""
+    },
+    {
+      "text": "Výborne! Dobrodružstvo sa začína! Najprv sa musíš presunúť do Sadu Janka Kráľa - jedného z najstarších verejných parkov v celej Európe. Sleduj mapu a vydaj sa na cestu!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13200,
+      "targetLongitude": 17.10600,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vitaj v Sade Janka Kráľa! Tento krásny park bol založený už v rokoch 1774 až 1776, čo z neho robí jeden z najstarších mestských parkov v celej strednej Európe. Len sa rozhliadni - koruny starých stromov tu šumia už stáročia!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ale pozor! Niečo tu dnes nie je v poriadku. Cítiš ten zvláštny vánok? Hovorí sa, že keď sa v parku zdvihne tajomný vietor, je to znak, že duch básnika Janka Kráľa blúdi medzi stromami...",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "A veru áno! Pred tebou sa zjaví priehľadná postava v dlhom plášti. Je to duch Janka Kráľa! Vyzerá smutne a drží v ruke prázdny zošit.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Vitaj, mladý priateľ! Som Janko Kráľ, básnik. Kedysi som tu sedával pod stromami a písal básne o Slovensku, o slobode a o kráse prírody. Ale dnes v noci prišla strašná búrka a vietor mi rozfúkal všetky básne po celom parku!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Pomôžeš mi nájsť mojich desať stratených básní? Sú ukryté na rôznych miestach v parku. Ale pozor - na každom mieste ťa čaká hádanka! Len ten, kto pozná históriu a prírodu, dokáže básne nájsť!",
+      "type": "CONTINUE",
+      "buttonText": "Jasné, pomôžem ti, Janko!",
+      "imageUrl": ""
+    },
+    {
+      "text": "Výborne! Prvú báseň mi vietor odniesol ku starému dubu. Tento strom tu rastie už vyše dvesto rokov a pamätá si časy, keď tu ešte neboli žiadne mosty cez Dunaj. Poď, ukážem ti cestu!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13250,
+      "targetLongitude": 17.10700,
+      "imageUrl": ""
+    },
+    {
+      "text": "Tu je ten prastarý dub! Pozri, ako má mohutnú korunu. Keď som bol živý, sedával som pod takýmito stromami a písal som básne. Vedel si, že som sa narodil ďaleko odtiaľto, v krásnom meste pod Tatrami?",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Vieš, kde som sa narodil?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Bratislava", "correct": false },
+        { "text": "Liptovský Mikuláš", "correct": true },
+        { "text": "Banská Bystrica", "correct": false },
+        { "text": "Košice", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Narodil som sa v Liptovskom Mikuláši v roku 1822. Ale do Bratislavy som prišiel študovať. A práve tu sa môj život navždy zmenil! Prvá báseň je tu, v konároch duba. Poďme ďalej - musím ti povedať, kde som študoval!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13280,
+      "targetLongitude": 17.10750,
+      "imageUrl": ""
+    },
+    {
+      "text": "V Bratislave som študoval na slávnej škole, kde sa stretávali najlepší mladí Slováci. Bolo to miesto, kde sa rodili veľké myšlienky o budúcnosti nášho národa. Tu som stretol svojho veľkého učiteľa Ľudovíta Štúra!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Vieš, na ktorej bratislavskej škole som študoval?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Univerzita Komenského", "correct": false },
+        { "text": "Evanjelické lýceum", "correct": true },
+        { "text": "Akadémia umení", "correct": false },
+        { "text": "Vojenská akadémia", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Na Evanjelickom lýceu som sa naučil milovať slovenčinu a literatúru. Druhá báseň nájdená! Poďme ku gotickému kostolíku - tam by mala byť tretia.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13350,
+      "targetLongitude": 17.10800,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vidíš tú zaujímavú vežičku? To je gotický kostolík - vlastne to nie je kostolík, ale veža! Bola pôvodne súčasťou kláštora klarisiek v starom meste a v 19. storočí ju preniesli sem do parku. Nie je to úžasné?",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Táto veža je jedným zo symbolov nášho parku. Ale povedz mi - v ktorom storočí bol tento park založený?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "V 16. storočí", "correct": false },
+        { "text": "V 17. storočí", "correct": false },
+        { "text": "V 18. storočí", "correct": true },
+        { "text": "V 19. storočí", "correct": false }
+      ]
+    },
+    {
+      "text": "Výborne! Park bol založený v rokoch 1774 až 1776, za vlády Márie Terézie. Vtedy sa volal jednoducho Mestský park. Moje meno dostal až oveľa neskôr. Tretia báseň visí priamo na veži! Poďme k Dunaju, odtiaľ ťa čaká ďalšia.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13400,
+      "targetLongitude": 17.10850,
+      "imageUrl": ""
+    },
+    {
+      "text": "Pozri sa na tú mohutnú rieku! Dunaj preteká cez celú Európu a spája mnoho národov. Keď som bol mladý, bol som veľký rebel. Raz som sa tak rozčúlil nad nespravodlivosťou, že som hodil do Dunaja svoj klobúk a šabľu! Moji priatelia si mysleli, že som sa zbláznil.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Bol som súčasťou skupiny mladých Slovákov, ktorí bojovali za práva slovenského národa. Volali nás podľa nášho učiteľa. Vieš, ako sa volala naša skupina?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Bernolákovci", "correct": false },
+        { "text": "Matičiari", "correct": false },
+        { "text": "Štúrovci", "correct": true },
+        { "text": "Buditeľia", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne, boli sme Štúrovci! Ľudovít Štúr bol náš vodca a učiteľ. Spolu sme urobili niečo veľké pre celý národ. Štvrtá báseň leží tu pri brehu! Poďme ďalej, poviem ti o tom viac.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13380,
+      "targetLongitude": 17.10950,
+      "imageUrl": ""
+    },
+    {
+      "text": "My Štúrovci sme urobili niečo, čo zmenilo Slovensko navždy. Stretli sme sa na kopci Devín a prisahali sme, že Slováci budú mať vlastný jazyk. A podarilo sa nám to! Uzákonili sme slovenský spisovný jazyk.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Vieš, v ktorom roku sme uzákonili slovenský spisovný jazyk?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "1793", "correct": false },
+        { "text": "1822", "correct": false },
+        { "text": "1843", "correct": true },
+        { "text": "1918", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! V roku 1843 sme na fare v Hlbokom uzákonili spisovnú slovenčinu. Bez toho by si dnes možno čítal tieto vety v úplne inom jazyku! Piata báseň nájdená! Poďme na ďalšie miesto.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13320,
+      "targetLongitude": 17.10950,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vieš, ja som bol známy tým, že som písal básne plné emócií. Moja najslávnejšia báseň je príbeh o odvážnom mladíkovi, ktorý skočí do rieky, aby zachránil zakliatu pannu. Je to vlastne príbeh o odvahe - aj keď ostatní hovoria, že si blázon, musíš nasledovať svoje srdce!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Do ktorej rieky skočil hrdina mojej najslávnejšej básne?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Dunaj", "correct": false },
+        { "text": "Hron", "correct": false },
+        { "text": "Váh", "correct": true },
+        { "text": "Morava", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne, do Váhu! Tá báseň sa volá Zakliata panna vo Váhu a divný Janko. A vieš čo? Ten divný Janko som vlastne ja sám. Aj mňa ľudia pokladali za čudáka. Šiesta báseň je tu! Poďme ďalej.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13300,
+      "targetLongitude": 17.10500,
+      "imageUrl": ""
+    },
+    {
+      "text": "V roku 1848 vypukla revolúcia v celej Európe. Aj my Slováci sme chceli slobodu! Zúčastnil som sa Slovenského povstania - bojovali sme za práva Slovákov v Uhorsku. Bol to ťažký, ale dôležitý boj.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Za svoju účasť v revolúcii ma uhorské úrady zavreli do väzenia. V ktorom roku vypukla táto veľká revolúcia?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "1838", "correct": false },
+        { "text": "1843", "correct": false },
+        { "text": "1848", "correct": true },
+        { "text": "1868", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Revolúcia v roku 1848 zmenila celú Európu. Aj keď sme hneď nedostali všetko, za čo sme bojovali, naše snaženie nebolo márne. Siedma báseň je tu! Poďme ďalej.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13250,
+      "targetLongitude": 17.10550,
+      "imageUrl": ""
+    },
+    {
+      "text": "Pozri sa okolo seba - tento park je plný rôznych druhov stromov. Duby, lipy, javory, platany... Ja som prírodu miloval nadovšetko. V mojich básňach sa často objavuje príroda ako symbol slobody a krásy Slovenska.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Jeden strom je symbolom Slovenska a objavuje sa aj na slovenských minciach. Ktorý je to?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Dub", "correct": false },
+        { "text": "Lipa", "correct": true },
+        { "text": "Javor", "correct": false },
+        { "text": "Breza", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Lipa je symbolom Slovanov a aj Slovenska. Lipový list nájdeš na slovenských eurominciach. My básnici sme lipu často spomínali ako symbol nášho národa. Ôsma báseň nájdená! Zostávajú nám ešte dve.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13220,
+      "targetLongitude": 17.10650,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vieš, že tento park leží na brehu Dunaja? Dunaj je druhá najdlhšia rieka v Európe. Preteká cez desať krajín! Pre Bratislavu bol vždy veľmi dôležitý - vďaka nemu bolo mesto bohaté a spojené so svetom.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ktorá je najdlhšia rieka v Európe, dlhšia ako Dunaj?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Rýn", "correct": false },
+        { "text": "Temža", "correct": false },
+        { "text": "Volga", "correct": true },
+        { "text": "Dunaj je najdlhší", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Volga v Rusku je najdlhšia európska rieka. Dunaj je druhý s dĺžkou takmer 2 860 kilometrov. Deviata báseň je tu! Ešte jedna a máme všetky!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.13280,
+      "targetLongitude": 17.10680,
+      "imageUrl": ""
+    },
+    {
+      "text": "Tu stojím - v kameni vytesaný, navždy hľadiac na park, ktorý nesie moje meno. Vieš, ja som zomrel pomerne mladý, mal som len 54 rokov. Celý život som bojoval za slobodu a spravodlivosť. Zomrel som v meste Zlaté Moravce.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Posledná otázka! V ktorom roku som sa narodil?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "1800", "correct": false },
+        { "text": "1822", "correct": true },
+        { "text": "1848", "correct": false },
+        { "text": "1876", "correct": false }
+      ]
+    },
+    {
+      "text": "Výborne! Narodil som sa 24. januára 1822. A tu, priamo pri mojej soche, leží posledná desiata báseň! Všetky básne sú pohromade!",
+      "type": "CONTINUE",
+      "buttonText": "Hurá!",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ďakujem ti, mladý priateľu! Vďaka tebe som našiel všetkých desať stratených básní. Teraz ich môžem znova čítať ľuďom, ktorí sa prejdú po tomto krásnom parku. Zapamätaj si - nikdy sa neboj byť iný a vždy nasleduj svoje srdce. To je to, čo som sa ja celý život snažil robiť. Zbohom a ďakujem!",
+      "type": "CONTINUE",
+      "buttonText": "Späť na zoznam hier",
+      "fontSize": 22,
+      "imageUrl": ""
+    }
+  ]
+}
