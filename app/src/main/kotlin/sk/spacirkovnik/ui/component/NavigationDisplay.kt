@@ -66,6 +66,7 @@ import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import sk.spacirkovnik.BuildConfig
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.CardBg
 import sk.spacirkovnik.ui.theme.DisabledButton
@@ -310,6 +311,27 @@ fun NavigationDisplay(
             )
         }
 
+
+//        if (BuildConfig.DEBUG) {
+//            Spacer(modifier = Modifier.height(12.dp))
+//            Button(
+//                onClick = onContinue,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .height(44.dp),
+//                shape = RoundedCornerShape(12.dp),
+//                colors = ButtonDefaults.buttonColors(
+//                    containerColor = Color(0xFF444444),
+//                    contentColor = Color.White
+//                )
+//            ) {
+//                Text(
+//                    text = "[DEBUG] Preskočiť navigáciu",
+//                    fontSize = 14.sp,
+//                    fontWeight = FontWeight.Normal
+//                )
+//            }
+//        }
 
         Spacer(modifier = Modifier.height(32.dp))
     }

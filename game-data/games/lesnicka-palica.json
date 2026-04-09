@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 9,
+  "version": 10,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -13,37 +13,22 @@
     {
       "text": "Výborne! Dobrodružstvo sa začína! Najprv sa ale musíš presunúť na štartovacie miesto. Sleduj mapu a vydaj sa na cestu - tam na teba čaká začiatok celého príbehu!",
       "type": "NAVIGATION",
-      "targetLatitude": 48.10872198569169,
-      "targetLongitude": 17.11682153534078,
+      "targetLatitude": 48.108843,
+      "targetLongitude": 17.116646,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Kde bolo, tam bolo, v petržalských lesoch pri krásnom modrom Dunaji žil jeden veselý lesník. Volal sa Gejza Dražďák a všetky zvieratká v lese ho mali rady, pretože sa o ne staral s láskou a starostlivosťou.",
+      "text": "V petržalských lesoch pri Dunaji žije veselý lesník Gejza Dražďák. Má tajný poklad – kúzelnú palicu, vďaka ktorej rozumie reči zvierat! Každé ráno sa jej dotkne, aby vedel, či vtáčiky alebo medvede nepotrebujú jeho pomoc.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Gejza mal jeden veľký tajný poklad - kúzelnú lesnícku palicu! Vďaka nej vedel rozprávať so všetkými zvieratkami v lese. Keď sa ráno palice dotkol, rozumel štebotaniu vtáčikov, bručaniu medveďov aj šušťaniu ježkov.",
+      "text": "Dnes sa však stalo niečo hrozné – palica zmizla! Gejza je zúfalý, no máme nádej. Kúzelná palica funguje tak, že zvieratká, ktoré stretnú človeka s palicou, sa ešte chvíľu vedia rozprávať s každým človekom!",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Bola to naozaj úžasná palica! Stačilo, že ju ráno chytil do ruky a celý deň rozumel každému zvieratku. Vedel tak, či je v lese všetko v poriadku a či niektoré zvieratko nepotrebuje pomoc.",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
-    },
-    {
-      "text": "Ale jedného dňa sa stalo niečo hrozné! Gejza sa ráno zobudil a jeho kúzelná palica bola preč! Nikde ju nemohol nájsť. Bez nej nerozumel zvieratkám a nemohol ísť do lesa. Bol z toho veľmi smutný.",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
-    },
-    {
-      "text": "Ale počkaj! Niekto musel tú palicu zobrať a ísť s ňou cez les. A kúzelná palica funguje tak, že zvieratká, ktoré stretnú človeka s palicou, sa ešte chvíľu vedia rozprávať s každým človekom! Takže ak sa poponáhľame, zvieratká v lese nám ešte budú rozumieť!",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
-    },
-    {
-      "text": "Gejza potrebuje tvoju pomoc! Pomôžeš mu nájsť jeho stratenú kúzelnú palicu? Čaká nás výprava plná záhad a zvieracích kamarátov!",
+      "text": "Ak sa poponáhľame, zvieratká nám ešte budú rozumieť a prezradia nám, kam palica zmizla! Pomôžeš Gejzovi nájsť jeho stratený poklad? Čaká nás výprava plná záhad a zvieracích kamarátov!",
       "type": "CONTINUE",
       "buttonText": "Jasné, idem pomáhať!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
@@ -57,10 +42,10 @@
       "text": "Aby si dokázal, že si pozorný stopár, povedz mi - kedy bola postavená budova, pri ktorej práve stojíš?",
       "type": "QUESTION",
       "answers": [
-        { "text": "1981", "correct": false },
-        { "text": "1982", "correct": false },
-        { "text": "1983", "correct": true },
-        { "text": "1984", "correct": false }
+        { "text": "1879", "correct": false },
+        { "text": "1979", "correct": false },
+        { "text": "1779", "correct": true },
+        { "text": "1878", "correct": false }
       ],
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
@@ -277,8 +262,8 @@
     {
       "text": "Kváá, výborne! Už si skoro pri cieli! Teraz bež do lesa a hľadaj strom, ktorý rastie v tvare písmena \"V\". Na ňom býva stará múdra sova - ona vie úplne všetko!",
       "type": "NAVIGATION",
-      "targetLatitude": 48.1082422745043,
-      "targetLongitude": 17.114067557180455,
+      "targetLatitude": 48.1360625,
+      "targetLongitude": 17.1354375,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/zaba.jpeg?alt=media"
     },
     {

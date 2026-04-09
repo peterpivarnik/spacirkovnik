@@ -1,0 +1,273 @@
+{
+  "id": "danubiana-umenie-na-vode",
+  "title": "Danubiana - Umenie na vode",
+  "version": 1,
+  "screens": [
+    {
+      "text": "Danubiana - Umenie na vode",
+      "type": "CONTINUE",
+      "buttonText": "Poď na dobrodružstvo!",
+      "fontSize": 26,
+      "imageUrl": ""
+    },
+    {
+      "text": "Dnes sa vydáme na výlet k jednému z najkrajších múzeí na svete - k Danubiane! Stojí na poloostrove, ktorý vyčnieva priamo do Dunaja. Sleduj mapu a poď!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06150,
+      "targetLongitude": 17.18800,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vitaj pri Danubiane! Toto múzeum moderného umenia je postavené na úzkom poloostrove medzi dvoma ramenami Dunaja. Keď sa rozhliadneš, z troch strán vidíš vodu. Je to ako loď, ktorá nikam nepláva!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Zrazu si všimneš, že jedna zo sôch v parku pred múzeom sa pohla! Alebo sa ti to len zdalo? Nie - socha naozaj otočila hlavu a pozerá priamo na teba!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Neboj sa, mladý návštevník! Ja som Umka, strážkyňa umenia. Každú noc, keď múzeum zavrú, sochy v parku ožívajú. Ale dnes sa stalo niečo zlé - umelcom sa pomiešali ich diela a ja potrebujem pomoc, aby som všetko dala do poriadku!",
+      "type": "CONTINUE",
+      "buttonText": "Rád pomôžem, Umka!",
+      "imageUrl": ""
+    },
+    {
+      "text": "Výborne! Ale najprv sa musíš naučiť niečo o umení. Danubiana bola otvorená v roku 2000 a jej zakladateľ chcel vytvoriť miesto, kde sa umenie stretáva s prírodou. Preto je tu toľko sôch vonku, pod holým nebom!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Vieš, aký typ umenia nájdeš v Danubiane?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Stredoveké umenie", "correct": false },
+        { "text": "Moderné a súčasné umenie", "correct": true },
+        { "text": "Staroveké egyptské umenie", "correct": false },
+        { "text": "Pravekú jaskynné maľby", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Danubiana je múzeum moderného a súčasného umenia. Nájdeš tu diela umelcov z celého sveta. Poďme k prvej soche, ktorá potrebuje pomoc!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06170,
+      "targetLongitude": 17.18850,
+      "imageUrl": ""
+    },
+    {
+      "text": "Pozri sa na túto sochu. Je vyrobená z kovu a má zvláštny tvar. Moderné umenie nemusí vyzerať ako skutočné veci - umelec chce, aby si sa pri pohľade na dielo zamyslel a cítil niečo zvláštne. Tomu sa hovorí abstraktné umenie.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ako sa nazýva umenie, ktoré nezobrazuje skutočné veci, ale vyjadruje pocity tvarmi a farbami?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Portrét", "correct": false },
+        { "text": "Krajinkárstvo", "correct": false },
+        { "text": "Abstraktné umenie", "correct": true },
+        { "text": "Fotografia", "correct": false }
+      ]
+    },
+    {
+      "text": "Výborne! Abstraktné umenie ti dáva slobodu vidieť v diele čokoľvek chceš. Niekto vidí vtáka, iný zas vlnu na mori. Žiadna odpoveď nie je zlá! Poďme k ďalšej soche.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06180,
+      "targetLongitude": 17.18900,
+      "imageUrl": ""
+    },
+    {
+      "text": "Táto socha je obrovská! Niektoré sochy v parku Danubiany sú väčšie ako dom. Umelci ich vytvárali špeciálne pre toto miesto - premýšľali o tom, ako bude socha vyzerať s vodou a oblohou v pozadí.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ako sa nazýva trojrozmerné umelecké dielo, napríklad postava vytesaná z kameňa alebo odliata z kovu?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Obraz", "correct": false },
+        { "text": "Freska", "correct": false },
+        { "text": "Mozaika", "correct": false },
+        { "text": "Socha", "correct": true }
+      ]
+    },
+    {
+      "text": "Správne! Sochy sú trojrozmerné - môžeš ich obísť dookola a z každej strany vyzerajú inak. V Danubiane ich nájdeš desiatky! Poďme bližšie k vode.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06200,
+      "targetLongitude": 17.18950,
+      "imageUrl": ""
+    },
+    {
+      "text": "Pozri sa na Dunaj! Voda tu je široká a mocná. Danubiana stojí na mieste, kde sa Dunaj rozdeľuje a vytvára veľký poloostrov. Vedel si, že názov Danubiana pochádza z latinského pomenovania Dunaja?",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ako sa po latinsky volá Dunaj, podľa čoho má Danubiana svoje meno?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Danuvius", "correct": false },
+        { "text": "Danubius", "correct": true },
+        { "text": "Danarius", "correct": false },
+        { "text": "Danuvia", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Danubius je latinský názov pre Dunaj. Už starí Rimania poznali túto mohutnú rieku a dali jej toto meno. Poďme ďalej po poloostrove!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06220,
+      "targetLongitude": 17.19000,
+      "imageUrl": ""
+    },
+    {
+      "text": "Tu vonku v parku si umelci hrajú s rôznymi materiálmi. Niektoré sochy sú z bronzu, iné z nehrdzavejúcej ocele, ďalšie z kameňa alebo dokonca z farebného skla. Každý materiál dodáva dielu iný charakter.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Z ktorého kovu sa najčastejšie odlievajú sochy už od staroveku?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Zlato", "correct": false },
+        { "text": "Železo", "correct": false },
+        { "text": "Bronz", "correct": true },
+        { "text": "Hliník", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Bronz je zliatina medi a cínu. Ľudia z neho vyrábajú sochy už tisíce rokov, pretože je pevný, dobre sa odlieva a krásne zelenie na vzduchu. Poďme na druhú stranu polostrova!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06190,
+      "targetLongitude": 17.19050,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vidíš tie farby na niektorých sochách? Umelci často používajú základné farby - červenú, modrú a žltú. Ich miešaním vznikajú všetky ostatné farby. Napríklad keď zmieša červenú a žltú, dostaneš oranžovú!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Aká farba vznikne, keď zmieša modrú a žltú?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Červená", "correct": false },
+        { "text": "Oranžová", "correct": false },
+        { "text": "Zelená", "correct": true },
+        { "text": "Fialová", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Modrá a žltá dávajú zelenú. Takto funguje miešanie farieb v umení. Poďme ďalej, ukážem ti výhľad na obe strany Dunaja!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06210,
+      "targetLongitude": 17.19080,
+      "imageUrl": ""
+    },
+    {
+      "text": "Odtiaľto je nádherný výhľad! Na jednej strane vidíš Slovensko, na druhej Maďarsko. Dunaj tu tvorí hranicu medzi dvoma krajinami. Umenie spája ľudí bez ohľadu na hranice - preto sem chodia návštevníci z celého sveta.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ktorá krajina sa nachádza na druhom brehu Dunaja oproti Danubiane?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Rakúsko", "correct": false },
+        { "text": "Česko", "correct": false },
+        { "text": "Maďarsko", "correct": true },
+        { "text": "Poľsko", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Maďarská dedina Rajka je len kúsok odtiaľto. Poďme ďalej!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06160,
+      "targetLongitude": 17.19000,
+      "imageUrl": ""
+    },
+    {
+      "text": "V múzeu a parku Danubiany nájdeš diela umelcov z mnohých krajín. Jeden z najslávnejších umelcov sveta maľoval slnečnice, hviezdnu noc a autoportréty. Bol Holanďan a žil veľmi ťažký život, ale jeho obrazy dnes patria medzi najdrahšie na svete.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ako sa volal tento slávny holandský maliar?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Pablo Picasso", "correct": false },
+        { "text": "Leonardo da Vinci", "correct": false },
+        { "text": "Vincent van Gogh", "correct": true },
+        { "text": "Claude Monet", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Vincent van Gogh je jedným z najznámejších maliarov histórie. Aj keď za svojho života predal len jeden obraz, dnes sú jeho diela na nezaplatenie. Poďme k poslednému zastaveniu!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06140,
+      "targetLongitude": 17.18900,
+      "imageUrl": ""
+    },
+    {
+      "text": "Budova Danubiany sama o sebe je umelecké dielo. Jej strecha má tvar rímskej galéry - dlhej lode s veslami. Architekti ju navrhli tak, aby splývala s vodou a oblohou. Keď sa na ňu pozrieš zďaleka, vyzerá, akoby plávala na vode!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ako sa volá človek, ktorý navrhuje budovy?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Maliar", "correct": false },
+        { "text": "Sochár", "correct": false },
+        { "text": "Architekt", "correct": true },
+        { "text": "Režisér", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Architekti navrhujú budovy, mosty aj celé mestá. Budova Danubiany je ukážkou toho, že aj dom môže byť umelecké dielo. Poďme na posledné miesto!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.06140,
+      "targetLongitude": 17.18850,
+      "imageUrl": ""
+    },
+    {
+      "text": "Jednou z najznámejších vecí v Danubiane je obrovská farebná socha pred vchodom. Moderné umenie je často veselé a hravé - používa jasné farby, nezvyčajné tvary a prekvapivé materiály. Chce ťa rozveseliť a prinútiť premýšľať!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "V ktorom roku bola Danubiana otvorená pre verejnosť?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "1989", "correct": false },
+        { "text": "1995", "correct": false },
+        { "text": "2000", "correct": true },
+        { "text": "2010", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Danubiana bola otvorená v roku 2000 a odvtedy ju navštívili státisíce ľudí z celého sveta. Je považovaná za jedno z najkrajšie situovaných múzeí umenia v Európe!",
+      "type": "CONTINUE",
+      "buttonText": "To bolo super!",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ďakujem ti za pomoc, mladý priateľ umenia! Všetky diela sú zasa na svojom mieste. Zapamätaj si - umenie je všade okolo nás. Stačí sa zastaviť, pozrieť sa a nechať sa prekvapiť. Každý môže byť umelcom - stačí mať odvahu tvoriť!",
+      "type": "CONTINUE",
+      "buttonText": "Späť na zoznam hier",
+      "fontSize": 22,
+      "imageUrl": ""
+    }
+  ]
+}

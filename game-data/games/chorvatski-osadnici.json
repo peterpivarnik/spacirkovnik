@@ -1,0 +1,273 @@
+{
+  "id": "chorvatski-osadnici",
+  "title": "Chorvátski osadníci",
+  "version": 1,
+  "screens": [
+    {
+      "text": "Chorvátski osadníci",
+      "type": "CONTINUE",
+      "buttonText": "Poď na dobrodružstvo!",
+      "fontSize": 26,
+      "imageUrl": ""
+    },
+    {
+      "text": "Dnes sa vydáme na cestu pozdĺž Chorvátskeho ramena - odnože Dunaja, ktorá preteká cez Petržalku. Prečo sa volá Chorvátske? To sa čoskoro dozvieš! Najprv sa presuň na štartovacie miesto.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10550,
+      "targetLongitude": 17.09800,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vitaj pri Chorvátskom ramene! Pozri sa na tú pokojnú vodu. Vyzerá to tu dnes mierumilovne, však? Ale pred päťsto rokmi to tu vyzeralo úplne inak...",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Zrazu začuješ za sebou kroky. Otočíš sa a uvidíš starého muža v jednoduchom roľníckom odeve. Na hlave má klobúk a v ruke drží vinič s hroznami.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Dobar dan, mladý priateľu! To znamená Dobrý deň po chorvátsky. Volám sa Matej a som duch jedného z prvých chorvátskych osadníkov, ktorí tu kedysi žili. Chceš počuť náš príbeh?",
+      "type": "CONTINUE",
+      "buttonText": "Áno, povedz mi ho!",
+      "imageUrl": ""
+    },
+    {
+      "text": "Dávno, dávno, keď tvoji praprarodičia ešte neboli na svete, žili sme my Chorváti v krásnej krajine na juhu. Ale prišli zlé časy. Mocná ríša začala útočiť na naše dediny a my sme museli utiecť, aby sme si zachránili životy.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Vieš, ktorá ríša nás vyhnala z našej vlasti?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Rímska ríša", "correct": false },
+        { "text": "Osmanská ríša", "correct": true },
+        { "text": "Ruská ríša", "correct": false },
+        { "text": "Britská ríša", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Osmani, ktorým sa tiež hovorí Turci, dobýjali jednu krajinu za druhou. My Chorváti sme pred nimi utekali na sever, kde sme hľadali bezpečný nový domov. A našli sme ho práve tu - pri Dunaji! Poďme ďalej, ukážem ti, kadiaľ sme prišli.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10600,
+      "targetLongitude": 17.10000,
+      "imageUrl": ""
+    },
+    {
+      "text": "Prišli sme sem v 16. storočí. Bolo nás veľa rodín - muži, ženy, deti, starí rodičia. Všetko sme nechali doma a vzali sme si len to, čo sme uniesli. Ale priniesli sme si niečo cennejšie ako zlato - naše zvyky, piesne a hlavne naše zručnosti!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "V ktorom storočí prišli chorvátski osadníci do okolia Bratislavy?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "V 14. storočí", "correct": false },
+        { "text": "V 15. storočí", "correct": false },
+        { "text": "V 16. storočí", "correct": true },
+        { "text": "V 18. storočí", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Prvé chorvátske rodiny sa tu usadili okolo roku 1540. Uhorský kráľ nám dovolil usadiť sa na tomto území, pretože tu bolo dosť voľnej pôdy a potreboval pracovitých ľudí. A my sme pracovití boli! Poď, ukážem ti, čo sme tu robili.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10650,
+      "targetLongitude": 17.10200,
+      "imageUrl": ""
+    },
+    {
+      "text": "Pozri sa na túto krajinu. Keď sme sem prišli, boli tu len lúky, lesy a voda. Ale my sme vedeli, ako premeniť divokú krajinu na úrodnú pôdu. Priniesli sme si zo svojej vlasti špeciálnu zručnosť, ktorá tu predtým nebola veľmi rozšírená.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Čo chorvátski osadníci priniesli a pestovali v okolí Bratislavy?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Olivy", "correct": false },
+        { "text": "Vinič", "correct": true },
+        { "text": "Bavlnu", "correct": false },
+        { "text": "Ryžu", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Boli sme výborní vinohradníci! Sadili sme vinič a vyrábali víno. Petržalské vinohrady boli kedysi slávne v celom Uhorsku. Dnes tu síce vinohrady už nie sú, ale stopy po nás ostali - napríklad názov tejto rieky! Poďme k nej bližšie.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10700,
+      "targetLongitude": 17.10400,
+      "imageUrl": ""
+    },
+    {
+      "text": "Táto odnož Dunaja sa volá Chorvátske rameno. Rameno znamená bočná vetva rieky. Kedysi tu po vode plávali člny s tovarom a deti sa tu v lete kúpali. My Chorváti sme žili pozdĺž tohto ramena, preto dodnes nesie naše meno.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Čo znamená slovo 'rameno' v názve Chorvátske rameno?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Most cez rieku", "correct": false },
+        { "text": "Priehrada na rieke", "correct": false },
+        { "text": "Bočná vetva rieky", "correct": true },
+        { "text": "Jazero pri rieke", "correct": false }
+      ]
+    },
+    {
+      "text": "Výborne! Dunaj má viacero takýchto ramien. Voda si sama nájde cestu krajinou a vytvára odbočky. Toto rameno je dôležité aj pre prírodu - žijú tu ryby, žaby, vtáky a mnoho iných živočíchov. Poďme sa pozrieť, čo tu žije!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10750,
+      "targetLongitude": 17.10600,
+      "imageUrl": ""
+    },
+    {
+      "text": "Pozri sa pozorne na vodu a stromy okolo. Chorvátske rameno je domovom mnohých živočíchov. Žijú tu kačky, labute, volavky, rybáriky a dokonca aj bobry! My osadníci sme sa naučili žiť v súlade s prírodou - brali sme si len toľko, koľko sme potrebovali.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ktorý z týchto vtákov je známy tým, že loví ryby strmhlavým letom do vody?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Kačka", "correct": false },
+        { "text": "Volavka", "correct": false },
+        { "text": "Labuť", "correct": false },
+        { "text": "Rybárik", "correct": true }
+      ]
+    },
+    {
+      "text": "Správne! Rybárik riečny je malý, farebný vtáčik, ktorý sa bleskovo ponorí do vody a chytí rybu. Ak budeš mať šťastie, možno ho tu uvidíš! Má nádherné modro-oranžové perie. Poďme ďalej, poviem ti viac o našom živote.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10800,
+      "targetLongitude": 17.10800,
+      "imageUrl": ""
+    },
+    {
+      "text": "My Chorváti sme si tu postavili domy, kostol a školu. Hovorili sme po chorvátsky, spievali chorvátske piesne a dodržiavali naše tradície. Ale postupne sme sa miešali s miestnymi Slovákmi a Nemcami. Naše deti sa učili viacero jazykov!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Okrem Chorvátov a Slovákov, ktorá ďalšia národnosť žila v starej Petržalke?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Francúzi", "correct": false },
+        { "text": "Angličania", "correct": false },
+        { "text": "Nemci", "correct": true },
+        { "text": "Gréci", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Petržalka bola vždy mnohonárodnostná. Žili tu Slováci, Nemci, Chorváti, Maďari a ďalší. Každý národ priniesol niečo svoje a spolu vytvorili jedinečnú kultúru. Poďme ďalej pozdĺž ramena!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10850,
+      "targetLongitude": 17.11000,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vidíš tie stromy okolo ramena? Mnohé z nich sú vŕby. Vŕby milujú vodu a rastú pri riekach a potokoch. Ich korene spevňujú brehy, aby ich voda neodplavila. My osadníci sme vŕbové prúty používali na výrobu košíkov!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ako sa volá typický strom, ktorý rastie pri vode a má dlhé previsnuté vetvy?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Dub", "correct": false },
+        { "text": "Smrek", "correct": false },
+        { "text": "Vŕba", "correct": true },
+        { "text": "Borovica", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Smutná vŕba, ako jej ľudia hovoria, je neodmysliteľnou súčasťou brehov riek. Z jej prútov sa dajú pliesť nádherné košíky. Chorvátske ženy boli v tomto veľmi zručné! Poďme na ďalšie miesto.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10900,
+      "targetLongitude": 17.11200,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vieš, odkiaľ pochádza názov Petržalka? Kedysi tu ľudia pestovali veľa zeleniny. A jedna z nich bola taká bežná, že podľa nej pomenovali celú dedinu!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Podľa ktorej zeleniny dostala Petržalka svoje meno?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Kapusta", "correct": false },
+        { "text": "Petržlen", "correct": true },
+        { "text": "Mrkva", "correct": false },
+        { "text": "Cibuľa", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Petržalka pochádza od slova petržlen. Kedysi tu boli rozľahlé záhrady, kde sa pestovala zelenina pre celú Bratislavu. Poďme na ďalšie miesto!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10950,
+      "targetLongitude": 17.11300,
+      "imageUrl": ""
+    },
+    {
+      "text": "Kedysi tu bola celá Petržalka malá dedinka s domčekmi, záhradami a poľami. Potom, v druhej polovici 20. storočia, sa tu začalo stavať obrovské sídlisko. Dnes je Petržalka najväčšie sídlisko v strednej Európe!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Koľko obyvateľov má približne Petržalka?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "30 000", "correct": false },
+        { "text": "70 000", "correct": false },
+        { "text": "100 000", "correct": true },
+        { "text": "200 000", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! V Petržalke žije okolo 100 000 ľudí. To je viac ako v mnohých slovenských mestách! A všetci títo ľudia žijú vedľa Chorvátskeho ramena, ktoré im pripomína dávnu históriu. Poďme na posledné miesto!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10950,
+      "targetLongitude": 17.11400,
+      "imageUrl": ""
+    },
+    {
+      "text": "Na záver ťa zoberiem na miesto, kde sa Chorvátske rameno spája s Dunajom. Voda, ktorá tu tečie, putuje ďalej cez Maďarsko, Srbsko a Rumunsko až do Čierneho mora. Presne tou istou cestou, len opačným smerom, sme kedysi prišli aj my Chorváti.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Do ktorého mora vteká Dunaj?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Stredozemné more", "correct": false },
+        { "text": "Severné more", "correct": false },
+        { "text": "Čierne more", "correct": true },
+        { "text": "Baltské more", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Dunaj končí svoju cestu v Čiernom mori. A ja končím svoju cestu s tebou. Ďakujem ti, že si ma počúval! Teraz už vieš, prečo sa toto rameno volá Chorvátske a akú zaujímavú históriu ukrýva.",
+      "type": "CONTINUE",
+      "buttonText": "Ďakujem, Matej!",
+      "imageUrl": ""
+    },
+    {
+      "text": "Chorvátski osadníci sú už dávno preč, ale ich odkaz žije ďalej - v názve Chorvátskeho ramena, v príbehoch a v pestrej histórii Petržalky. Kedykoľvek pôjdeš okolo tejto vody, spomeň si na odvážnych ľudí, ktorí tu kedysi našli nový domov. Dovidenia, priateľu!",
+      "type": "CONTINUE",
+      "buttonText": "Späť na zoznam hier",
+      "fontSize": 22,
+      "imageUrl": ""
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "id": "rybar-z-drazdiaka",
+  "title": "Rybár z Draždiaka",
+  "version": 1,
+  "screens": [
+    {
+      "text": "Rybár z Draždiaka",
+      "type": "CONTINUE",
+      "buttonText": "Poď na dobrodružstvo!",
+      "fontSize": 26,
+      "imageUrl": ""
+    },
+    {
+      "text": "Dnes sa vydáme k jazeru Draždiak - najväčšiemu jazeru v Petržalke. Má zaujímavú históriu a ukrýva nejedno tajomstvo! Sleduj mapu a poď k jazeru.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11700,
+      "targetLongitude": 17.10800,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vitaj pri Draždiaku! Toto jazero je obľúbeným miestom na oddych pre tisíce Petržalčanov. V lete sa tu ľudia kúpu, v zime korčuľujú a po celý rok tu chodia rybári loviť ryby.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Pri brehu si všimneš starého muža s rybárskym prútom a veľkým klobúkom. Sedí na skladacej stoličke a pokojne hľadí na vodu. Keď ťa zbadá, usmieva sa a kýva ti rukou.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ahoj, mladý priateľu! Volám sa Ondrej a rybárčim tu pri Draždiaku už päťdesiat rokov. Pamätám si časy, keď tu ešte žiadne jazero nebolo! Chceš počuť, ako Draždiak vznikol?",
+      "type": "CONTINUE",
+      "buttonText": "Áno, povedz mi to!",
+      "imageUrl": ""
+    },
+    {
+      "text": "Keď som bol malý chlapec, tu boli len lúky a polia. Potom sa v Bratislave začalo veľké stavanie. Petržalka sa mala premeniť na obrovské sídlisko pre desaťtisíce ľudí. A na stavbu panelákov bolo treba veľa materiálu!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Vieš, čo sa tu ťažilo a z čoho potom vzniklo jazero?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Zlato", "correct": false },
+        { "text": "Uhlie", "correct": false },
+        { "text": "Štrk a piesok", "correct": true },
+        { "text": "Hlina na tehly", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Ťažil sa tu štrk a piesok na stavbu sídliska. Keď vyťažili dosť materiálu, ostala tu obrovská jama. Tá sa postupne naplnila spodnou vodou a vzniklo jazero, ktoré dnes poznáme ako Draždiak! Poď, prejdeme sa po brehu.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11750,
+      "targetLongitude": 17.10900,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vedel si, že názov Draždiak pochádza od lesníka Gejzu Dražďáka? Ten sa celý život staral o petržalské lesy a prírodu. Ľudia ho mali tak radi, že po ňom pomenovali toto jazero. Dokonca tu neďaleko má svoju záhradu!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Aké povolanie mal Gejza Dražďák, podľa ktorého je jazero pomenované?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Rybár", "correct": false },
+        { "text": "Lesník", "correct": true },
+        { "text": "Učiteľ", "correct": false },
+        { "text": "Starosta", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Gejza Dražďák bol lesník, ktorý sa staral o prírodu v Petržalke. Vďaka nemu tu máme krásne lesy a parky. Poďme sa pozrieť na samotné jazero!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11780,
+      "targetLongitude": 17.10950,
+      "imageUrl": ""
+    },
+    {
+      "text": "Draždiak je naozaj veľké jazero. Má rozlohu asi 30 hektárov a hĺbku okolo 5 až 8 metrov. To je dosť na to, aby tu žili veľké ryby! Ale nie vždy tu bolo jazero. Pred ťažbou štrku tu boli polia a lúky.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Jazero, ktoré vzniklo ťažbou štrku alebo piesku a naplnilo sa vodou, sa nazýva:",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Priehrada", "correct": false },
+        { "text": "Štrkovisko", "correct": true },
+        { "text": "Rybník", "correct": false },
+        { "text": "Močiar", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Draždiak je štrkovisko - jazero, ktoré vzniklo ťažbou. Na Slovensku je takýchto jazier veľa a mnohé z nich sú obľúbené miesta na kúpanie a rybárčenie. Poďme sa pozrieť, čo tu žije!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11800,
+      "targetLongitude": 17.11000,
+      "imageUrl": ""
+    },
+    {
+      "text": "Draždiak je plný života! V jazere žijú kapry, šťuky, zubáče, ostrieže a mnoho ďalších rýb. Ja som tu za tie roky chytil stovky rýb. Najväčší kapor, akého som kedy chytil, mal takmer desať kilogramov!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ktorá z týchto rýb je dravá a loví iné ryby?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Kapor", "correct": false },
+        { "text": "Pleskáč", "correct": false },
+        { "text": "Šťuka", "correct": true },
+        { "text": "Karas", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Šťuka je obávaný dravec sladkých vôd. Má ostré zuby a dokáže zaútočiť bleskovou rýchlosťou. Rybári ju veľmi radi lovia, ale musíš byť šikovný, aby si ju chytil! Poďme ďalej po brehu.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11850,
+      "targetLongitude": 17.11100,
+      "imageUrl": ""
+    },
+    {
+      "text": "Pozri sa na tie vtáky pri vode! Draždiak je domovom mnohých vodných vtákov. Žijú tu kačky, labute, lysky, potápky a v zime sem priletia aj čajky. Vtáky sú dôležitou súčasťou prírody okolo jazera.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ktorý vodný vták je známy tým, že je celoživotne verný svojmu partnerovi?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Kačka", "correct": false },
+        { "text": "Čajka", "correct": false },
+        { "text": "Lyska", "correct": false },
+        { "text": "Labuť", "correct": true }
+      ]
+    },
+    {
+      "text": "Správne! Labute tvoria páry na celý život. Keď vidíš dve labute plávať vedľa seba, pravdepodobne sú spolu už veľa rokov. Preto sú symbolom lásky a vernosti. Poďme ďalej!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11900,
+      "targetLongitude": 17.11000,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vianoce pri Draždiaku sú niečo úžasné. Jazero zamrzne a deti sa tu korčuľujú. Ale pozor - na ľad sa smie ísť, len keď je dostatočne hrubý! Vedel si, že ľad musí mať aspoň určitú hrúbku, aby unesol človeka?",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Aká minimálna hrúbka ľadu sa považuje za bezpečnú pre chôdzu?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "2 cm", "correct": false },
+        { "text": "5 cm", "correct": false },
+        { "text": "10 cm", "correct": true },
+        { "text": "30 cm", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Aspoň 10 centimetrov ľadu treba, aby unesol dospelého človeka. Ale vždy buď opatrný - hrúbka ľadu nie je všade rovnaká! Radšej choď na ľad, len keď to povolia odborníci. Poďme ďalej.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11870,
+      "targetLongitude": 17.10850,
+      "imageUrl": ""
+    },
+    {
+      "text": "Každý rybár musí mať rybársky lístok - to je povolenie na rybolov. Bez neho sa nesmie loviť! Rybári sa tiež musia starať o čistotu okolo jazera. Žiadne odpadky, žiadne znečisťovanie vody. Príroda nám dáva veľa, ale musíme sa o ňu starať.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ako sa volá povolenie, ktoré musí mať každý rybár, aby mohol loviť ryby?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Vodičský preukaz", "correct": false },
+        { "text": "Rybársky lístok", "correct": true },
+        { "text": "Lovecký preukaz", "correct": false },
+        { "text": "Občiansky preukaz", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Rybársky lístok je povinný pre každého rybára. Okrem neho potrebuješ aj povolenie na konkrétny revír - teda na konkrétne jazero alebo rieku. Pravidlá sú dôležité, aby ryby v jazerách zostali aj pre budúce generácie. Poďme ďalej!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11850,
+      "targetLongitude": 17.10900,
+      "imageUrl": ""
+    },
+    {
+      "text": "Okolo jazera rastú rôzne stromy a kríky. Na brehu nájdeš aj trstinu a rákosie. Trstina je veľmi dôležitá - jej korene čistia vodu a v hustorastúcej trstine si vtáky stavajú hniezda. Je to príroda, ktorá sa stará sama o seba!",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ako sa volá vysoká tráva, ktorá rastie pri brehu jazier a riek a slúži vtákom na hniezdenie?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Pšenica", "correct": false },
+        { "text": "Bambus", "correct": false },
+        { "text": "Trstina", "correct": true },
+        { "text": "Kukurica", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Trstina je neodmysliteľná súčasť každého zdravého jazera. Chráni breh pred eróziou a je domovom mnohých živočíchov. Poďme na ďalšie miesto!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11800,
+      "targetLongitude": 17.10800,
+      "imageUrl": ""
+    },
+    {
+      "text": "Vedel si, že Petržalka je najväčšie sídlisko v strednej Európe? Stavalo sa tu od 70. rokov 20. storočia. Paneláky tu vyrástli za pár rokov a nasťahovali sa sem desaťtisíce ľudí. Draždiak je pre nich kúsok prírody uprostred betónu.",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "V ktorom desaťročí sa začala masová výstavba petržalského sídliska?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "V 50. rokoch", "correct": false },
+        { "text": "V 60. rokoch", "correct": false },
+        { "text": "V 70. rokoch", "correct": true },
+        { "text": "V 90. rokoch", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Výstavba sídliska Petržalka sa začala v roku 1973. Bolo to jedno z najväčších stavebných projektov v Československu. Poďme na posledné zastavenie!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11750,
+      "targetLongitude": 17.10750,
+      "imageUrl": ""
+    },
+    {
+      "text": "Posledná otázka! Každý správny rybár vie, že ryby treba chrániť. Preto existujú pravidlá - niektoré ryby sa nesmú loviť v určitom období, aby sa mohli v pokoji rozmnožovať. Tomuto obdobiu sa hovorí...",
+      "type": "BROWSE",
+      "imageUrl": ""
+    },
+    {
+      "text": "Ako sa volá obdobie, keď sa ryby nesmú loviť, aby sa mohli nerušene rozmnožovať?",
+      "type": "QUESTION",
+      "imageUrl": "",
+      "answers": [
+        { "text": "Rybárska sezóna", "correct": false },
+        { "text": "Rybí čas", "correct": false },
+        { "text": "Doba hájenia", "correct": true },
+        { "text": "Lovný zákaz", "correct": false }
+      ]
+    },
+    {
+      "text": "Správne! Doba hájenia je veľmi dôležitá. Vďaka nej majú ryby pokoj na rozmnožovanie a v jazere ich bude dosť aj pre budúce generácie. To je základ - brať si od prírody len toľko, koľko potrebujeme.",
+      "type": "CONTINUE",
+      "buttonText": "Ďakujem, Ondrej!",
+      "imageUrl": ""
+    },
+    {
+      "text": "Bol som rád, že si ma navštívil, mladý priateľu! Teraz už vieš, ako vznikol Draždiak, čo v ňom žije a prečo je dôležité chrániť prírodu okolo nás. Kedykoľvek pôjdeš okolo jazera, zastav sa, nadýchni sa a počúvaj - príroda ti vždy niečo povie. Tight lines, ako hovoria rybári - pevné šnúry!",
+      "type": "CONTINUE",
+      "buttonText": "Späť na zoznam hier",
+      "fontSize": 22,
+      "imageUrl": ""
+    }
+  ]
+}
