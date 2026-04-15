@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 10,
+  "version": 16,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -18,161 +18,228 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "V petržalských lesoch pri Dunaji žije veselý lesník Gejza Dražďák. Má tajný poklad – kúzelnú palicu, vďaka ktorej rozumie reči zvierat! Každé ráno sa jej dotkne, aby vedel, či vtáčiky alebo medvede nepotrebujú jeho pomoc.",
+      "text": "V petržalských lesoch pri Dunaji žije veselý lesník Gejza Dražďák. Má tajný poklad – kúzelnú palicu, vďaka ktorej rozumie reči zvierat! Každé ráno sa jej dotkne, aby vedel, či vtáčiky alebo srnky nepotrebujú jeho pomoc.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Dnes sa však stalo niečo hrozné – palica zmizla! Gejza je zúfalý, no máme nádej. Kúzelná palica funguje tak, že zvieratká, ktoré stretnú človeka s palicou, sa ešte chvíľu vedia rozprávať s každým človekom!",
+      "text": "Dnes sa však stalo niečo hrozné – palica zmizla! Gejza je zúfalý, no máme nádej. Kúzelná palica má zvláštnu moc – každé zvieratko, okolo ktorého palica prejde, získa na chvíľu schopnosť rozprávať sa s ľuďmi. A práve preto nám zvieratká v lese môžu povedať, kadiaľ palica šla!",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
       "text": "Ak sa poponáhľame, zvieratká nám ešte budú rozumieť a prezradia nám, kam palica zmizla! Pomôžeš Gejzovi nájsť jeho stratený poklad? Čaká nás výprava plná záhad a zvieracích kamarátov!",
       "type": "CONTINUE",
-      "buttonText": "Jasné, idem pomáhať!",
+      "buttonText": "Jasné, poďme na to!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Výborne, odvážny pomocník! Gejza ti veľmi ďakuje, že si sa rozhodol pomôcť. Najprv sa musíme dobre rozhliadnuť okolo seba a skúsiť nájsť nejaké stopy. Každá maličkosť môže byť dôležitá! Pozri sa pozorne na budovu pred tebou...",
+      "text": "Výborne, {odvážny pomocník|odvážna pomocníčka}! Gejza ti veľmi ďakuje, že si sa {rozhodol|rozhodla} pomôcť. Najprv sa musíme dobre rozhliadnuť okolo seba a skúsiť nájsť nejaké stopy. Každá maličkosť môže byť dôležitá! Pozri sa pozorne na budovu pred tebou...",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Aby si dokázal, že si pozorný stopár, povedz mi - kedy bola postavená budova, pri ktorej práve stojíš?",
+      "text": "Aby si {dokázal|dokázala}, že si {pozorný stopár|pozorná stopárka}, povedz mi - kedy bola postavená budova, pri ktorej práve stojíš?",
       "type": "QUESTION",
       "answers": [
-        { "text": "1879", "correct": false },
-        { "text": "1979", "correct": false },
-        { "text": "1779", "correct": true },
-        { "text": "1878", "correct": false }
+        {
+          "text": "1879",
+          "correct": false
+        },
+        {
+          "text": "1979",
+          "correct": false
+        },
+        {
+          "text": "1779",
+          "correct": true
+        },
+        {
+          "text": "1878",
+          "correct": false
+        }
       ],
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Správne, ty si ale šikovný stopár! Vidíš? Keď sa pozorne pozeráš okolo seba, všimneš si veci, ktoré iní prehliadnu. Teraz rýchlo - tuším sa tu práve mihol malý ježko menom Bodko. Možno niečo videl alebo počul!",
+      "text": "Správne, ty si ale {šikovný stopár|šikovná stopárka}! Vidíš? Keď sa pozorne pozeráš okolo seba, všimneš si veci, ktoré iní prehliadnu. Teraz rýchlo - tuším sa tu práve mihol malý ježko menom Bodko. Možno niečo videl alebo počul!",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/lesnik.jpeg?alt=media"
     },
     {
-      "text": "Ahoj ja sa volám Bodko. A ak chceš odo mňa pomoc, musíš ma najprv chytiť. Všetci si totiž myslia, že my ježkovia sme pomalí. Tak poď, ukáž, čo v tebe je.",
+      "text": "„Ahoj, ja sa volám Bodko. A ak chceš odo mňa pomoc, musíš ma najprv chytiť. Všetci si totiž myslia, že my ježkovia sme pomalí. Tak poď, ukáž, čo v tebe je.”",
       "type": "NAVIGATION",
       "targetLatitude": 48.11030278254697,
       "targetLongitude": 17.115855302541775,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/jezko.jpeg?alt=media"
     },
     {
-      "text": "Dobre už stačí naháňačky. Ja bývam tu na tejto krásnej lúke. Už som počul, že hľadáš lesníkovu kúzelnú palicu. Rád ti pomôžem!",
+      "text": "„Dobre, už stačí naháňačky. Ja bývam tu na tejto krásnej lúke. Ráno som počul lesníka Gejzu volať o pomoc - povedal, že stratil svoju kúzelnú palicu! Tak ty si {ten pomocník|tá pomocníčka}, čo ju hľadá? Rád ti pomôžem!”",
       "type": "CONTINUE",
       "buttonText": "Super, ďakujem Bodko!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/jezko.jpeg?alt=media"
     },
     {
-      "text": "Vidíš ten maličký mostík? Veľmi sa mi páči! Povedz mi - kde bol vyrobený? Ja ti potom pomôžem!",
+      "text": "„Vidíš ten maličký mostík? Veľmi sa mi páči! Povedz mi - kde bol vyrobený? Ja ti potom pomôžem!”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/jezko.jpeg?alt=media",
       "answers": [
-        { "text": "Podbrezová", "correct": false },
-        { "text": "Hronec", "correct": true },
-        { "text": "Košice", "correct": false },
-        { "text": "Bratislava", "correct": false }
+        {
+          "text": "Podbrezová",
+          "correct": false
+        },
+        {
+          "text": "Hronec",
+          "correct": true
+        },
+        {
+          "text": "Košice",
+          "correct": false
+        },
+        {
+          "text": "Bratislava",
+          "correct": false
+        }
       ]
     },
     {
-      "text": "Ďakujem, to som chcel vedieť! A počúvaj - videl som niekoho záhadného v kapucni, ako bežal s palicou tam na koniec lúky! Kúsok ďalej býva korytnačka Terka, skús sa jej spýtať, či ho tiež nevidela.",
+      "text": "„Ďakujem, to som chcel vedieť! A počúvaj - videl som niekoho záhadného v kapucni, ako bežal s palicou tam na koniec lúky! Kúsok ďalej býva korytnačka Terka. Choď po chodníku vľavo od jazera, ona je niekde tam. Skús sa jej spýtať, či ho tiež nevidela.”",
       "type": "NAVIGATION",
       "targetLatitude": 48.11088185731993,
       "targetLongitude": 17.119511218485496,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/jezko.jpeg?alt=media"
     },
     {
-      "text": "Ahoj, malý detektív! Ja som korytnačka Terka. Viem, že hľadáš lesnícku palicu. Rada ti pomôžem, ale najprv mi ukáž, že sa vyznáš v prírode!",
+      "text": "„Ahoj, {malý detektív|malá detektívka}! Ja som korytnačka Terka. Viem, že hľadáš lesnícku palicu. Rada ti pomôžem, ale najprv mi dokáž, že sa vyznáš v prírode!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/korytnacka.jpeg?alt=media"
     },
     {
-      "text": "Žijem tu už veľmi dlho a pamätám si časy, keď tu ešte neboli žiadne cesty ani domy. My korytnačky sa totiž dožívame veľmi vysokého veku! Ale najprv mi povedz - medzi aké druhy zvierat patríme my, korytnačky?",
+      "text": "„Žijem tu už veľmi dlho a pamätám si časy, keď tu ešte neboli žiadne cesty ani domy. My korytnačky sa totiž dožívame veľmi vysokého veku — niektoré z nás sa dožijú aj 150 rokov! Ale vieš, čo je zaujímavé? Aj napriek tomu, že žijeme tak dlho, ľudia si nás často mýlia s inými zvieratami. Povedz mi teda —\n  ▎  medzi aké druhy zvierat patríme my, korytnačky?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/korytnacka.jpeg?alt=media",
       "answers": [
-        { "text": "Cicavce", "correct": false },
-        { "text": "Plazy", "correct": true },
-        { "text": "Ryby", "correct": false },
-        { "text": "Vtáky", "correct": false }
+        {
+          "text": "Cicavce",
+          "correct": false
+        },
+        {
+          "text": "Plazy",
+          "correct": true
+        },
+        {
+          "text": "Ryby",
+          "correct": false
+        },
+        {
+          "text": "Vtáky",
+          "correct": false
+        }
       ]
     },
     {
-      "text": "Výborne, vidím, že sa v prírode naozaj vyznáš! Tak počúvaj - videla som niekoho v kapucni, ako sa potichu kradol po tejto cestičke. Choď kúsok ďalej na poloostrov, tam býva bobor Beny. Ten určite niečo vie!",
+      "text": "„Výborne, vidím, že sa v prírode naozaj vyznáš! Tak počúvaj - videla som niekoho v kapucni, ako sa potichu kradol po tejto cestičke. Choď kúsok ďalej na poloostrov, tam býva bobor Beny. Ten určite niečo vie!”",
       "type": "NAVIGATION",
       "targetLatitude": 48.10821832206637,
       "targetLongitude": 17.12134398559479,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/korytnacka.jpeg?alt=media"
     },
     {
-      "text": "Hm? Čo tu chceš? Nevidíš, že som zaneprázdnený? Staviam tu hrádzu! Aha, ty hľadáš tú palicu... No dobre, ale prečo by som ti mal pomáhať len tak?",
+      "text": "„Hm? Čo tu chceš? Nevidíš, že som zaneprázdnený? Staviam tu hrádzu! Aha, ty hľadáš tú palicu... No dobre, ale prečo by som ti mal pomáhať len tak?”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/bobor.jpeg?alt=media"
     },
     {
-      "text": "Vidíš tú hrádzu na vode? Tú som postavil celú sám! Staval som ju tri týždne a je z nej najkrajšia hrádza v celom okolí. Ale dosť o mne - najprv mi dokáž, že nás bobry poznáš! Vieš, čo máme najradšej na jedenie?",
+      "text": "„Vidíš tú hrádzu na vode? Tú som postavil celú sám! Staval som ju tri týždne a je z nej najkrajšia hrádza v celom okolí. Ale dosť bolo reči - dokáž mi, že nás bobry poznáš! Vieš, čo máme najradšej na jedenie?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/bobor.jpeg?alt=media",
       "answers": [
-        { "text": "Listy zo stromov", "correct": false },
-        { "text": "Kôru zo stromov", "correct": true },
-        { "text": "Suchú trávu", "correct": false },
-        { "text": "Čerstvé mušky", "correct": false }
+        {
+          "text": "Listy zo stromov",
+          "correct": false
+        },
+        {
+          "text": "Kôru zo stromov",
+          "correct": true
+        },
+        {
+          "text": "Suchú trávu",
+          "correct": false
+        },
+        {
+          "text": "Čerstvé mušky",
+          "correct": false
+        }
       ]
     },
     {
-      "text": "No tak dobre, keď sa vyznáš, tak ti pomôžem! Videl som niekoho v kapucni utekať tadiaľto! Bežal rýchlo ako vietor. Tam ďalej v húštine býva vlk Vilko - ten stráži celé územie, určite niečo videl!",
+      "text": "„No tak dobre, keď sa vyznáš, tak ti pomôžem! Videl som niekoho v kapucni utekať tadiaľto! Bežal rýchlo ako vietor. Tam ďalej v húštine býva vlk Vilko - ten stráži celé územie, určite niečo videl!”",
       "type": "NAVIGATION",
       "targetLatitude": 48.1067083308672,
       "targetLongitude": 17.11977839018705,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/bobor.jpeg?alt=media"
     },
     {
-      "text": "Auuuuuuuu! Kto sa opovážil vstúpiť na moje územie?! Aha, to si ty - ten odvážlivec, čo hľadá lesnícku palicu! O tebe už vie celý les! Videl som toho záhadného chlapíka s palicou. Ale najprv mi musíš odpovedať na jednu otázku!",
+      "text": "„Auuuuuuuu! Kto sa opovážil vstúpiť na moje územie?! Aha, to si ty - {ten odvážlivec|tá odvážlivkyňa}, čo hľadá lesnícku palicu! O tebe už vie celý les! Videl som toho záhadného chlapíka s palicou. Kým ti pomôžem, musíš mi odpovedať na jednu otázku!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vlk.jpeg?alt=media"
     },
     {
-      "text": "V ktorej rozprávke NIE je vlk v hlavnej úlohe? Dávaj pozor, je to chytáčik!",
+      "text": "„V ktorej rozprávke NIE je vlk v hlavnej úlohe?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vlk.jpeg?alt=media",
       "answers": [
-        { "text": "Sedem kozliatok", "correct": false },
-        { "text": "Tri prasiatka", "correct": false },
-        { "text": "Červená čiapočka", "correct": false },
-        { "text": "Šípková Ruženka", "correct": true }
+        {
+          "text": "Sedem kozliatok",
+          "correct": false
+        },
+        {
+          "text": "Tri prasiatka",
+          "correct": false
+        },
+        {
+          "text": "Červená čiapočka",
+          "correct": false
+        },
+        {
+          "text": "Šípková Ruženka",
+          "correct": true
+        }
       ]
     },
     {
-      "text": "Haha, správne! Ty si naozaj múdry! Pozri - práve sem skáče veverička. Tá ti ukáže, kadiaľ utekal ten človek s palicou. Bež za ňou!",
+      "text": "„Správne! Ty si naozaj múdry! Pozri - práve sem skáče veverička. Tá ti ukáže, kadiaľ utekal ten človek s palicou. Bež za ňou!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vlk.jpeg?alt=media"
     },
     {
-      "text": "Čí-čí-čí! Ahojík! Ja som veverička Viki! Jasné, že ti pomôžem! Ale najprv poď za mnou, musím ti niečo ukázať.",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vevericka.jpeg?alt=media"
-    },
-    {
-      "text": "Pozri sa na tú obrovskú vec - ja som si myslela, že je to najväčší strom na svete!",
+      "text": "„Čí-čí-čí! Ahojky! Ja som veverička Viki! Jasné, že ti pomôžem! Ale najprv poď za mnou, musím ti niečo ukázať.”",
       "type": "NAVIGATION",
       "targetLatitude": 48.104488209520696,
       "targetLongitude": 17.115877634133373,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vevericka.jpeg?alt=media"
     },
     {
-      "text": "Ach, milá Viki, veď to nie je strom! To je predsa:",
+      "text": "„Pozri sa na tú obrovskú vec – ja som si myslela, že je to najväčší strom na svete!”\n„Ach, milá Viki, veď to nie je strom! To je predsa:”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vevericka.jpeg?alt=media",
       "answers": [
-        { "text": "Veľký dom", "correct": false },
-        { "text": "Panelák", "correct": false },
-        { "text": "Krík", "correct": false },
-        { "text": "Stožiar", "correct": true }
+        {
+          "text": "Veža",
+          "correct": false
+        },
+        {
+          "text": "Panelák",
+          "correct": false
+        },
+        {
+          "text": "Komín",
+          "correct": false
+        },
+        {
+          "text": "Stožiar",
+          "correct": true
+        }
       ]
     },
     {
@@ -181,70 +248,94 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vevericka.jpeg?alt=media"
     },
     {
-      "text": "Antény? Joj, tak to som nevedela! Ďakujem za vysvetlenie! A teraz bež rýchlo k vode - tam pri brehu pláva krásna labuť. Určite ti poradí, kadiaľ ísť ďalej!",
+      "text": "„Antény? Joj, tak to som nevedela! Ďakujem za vysvetlenie! A ten záhadný chlapík v kapucni? Videla som ho bežať smerom k vode! Bež rýchlo k brehu - tam pláva labuť Bianka, tá ti určite povie viac!”",
       "type": "NAVIGATION",
       "targetLatitude": 48.10263404673947,
       "targetLongitude": 17.114423078091995,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/vevericka.jpeg?alt=media"
     },
     {
-      "text": "Pri brehu Dunaja plávala nádherná biela labuť. Jej perie sa trblietalo v slnečných lúčoch a vyzerala ako kráľovná celej rieky. Ahoj, krásna labuť! Nevidela si tu náhodou niekoho s lesníkovou palicou?",
+      "text": "Pri brehu jazera plávala nádherná biela labuť menom Bianka. Jej perie sa trblietalo v slnečných lúčoch a vyzerala ako kráľovná celého Draždiaka. „Ahoj, Bianka! Nevidela si tu náhodou niekoho s lesníkovou palicou?”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/labut.jpeg?alt=media"
     },
     {
-      "text": "Ale áno, videla! Prešiel tu niekto a mal so sebou čosi dlhé a drevené. Pomôžem ti zistiť, kadiaľ šiel, ale najprv mi musíš niečo poradiť aj ty mne. Už dlho premýšľam nad jednou vecou a mám pre teba otázočku!",
+      "text": "„Ale áno, videla! Prešiel tu niekto a mal so sebou čosi dlhé a drevené. Pomôžem ti zistiť, kadiaľ šiel, ale najprv mi musíš odpovedať na jednu otázku.”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/labut.jpeg?alt=media"
     },
     {
-      "text": "Poznáš rozprávku, v ktorej sa škaredé mláďa premenilo na krásnu labuť? Ako sa volalo to mláďa?",
+      "text": "„Poznáš rozprávku, v ktorej sa škaredé mláďa premenilo na krásnu labuť? Ako sa volalo to mláďa?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/labut.jpeg?alt=media",
       "answers": [
-        { "text": "Škaredé mačiatko", "correct": false },
-        { "text": "Škaredé kuriatko", "correct": false },
-        { "text": "Škaredé húsatko", "correct": false },
-        { "text": "Škaredé káčatko", "correct": true }
+        {
+          "text": "Škaredé mačiatko",
+          "correct": false
+        },
+        {
+          "text": "Škaredé kuriatko",
+          "correct": false
+        },
+        {
+          "text": "Škaredé húsatko",
+          "correct": false
+        },
+        {
+          "text": "Škaredé káčatko",
+          "correct": true
+        }
       ]
     },
     {
-      "text": "Správne! Videla som niekoho ísť s lesníckou palicou tamtým smerom. Kúsok ďalej sa zvykne z vody vynárať starý múdry kapor. Počkaj na neho pri brehu - on tu pozná každý kútiček!",
+      "text": "„Správne! Videla som niekoho ísť s lesníckou palicou popri brehu. Kúsok ďalej sa zvykne z vody vynárať starý múdry kapor Kvido. Počkaj na neho pri brehu - on tu pozná každý kút!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.102932054773156,
-      "targetLongitude": 17.11025664171095,
+      "targetLatitude": 48.10263404673947,
+      "targetLongitude": 17.114423078091995,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/labut.jpeg?alt=media"
     },
     {
-      "text": "Počkaj na kapra... Voda je tu pokojná a krásne sa v nej odrážajú stromy. Ale dokedy tu budem čakať? Hádam sa ukáže čoskoro! Trpezlivosť je vraj cnosť, ale ja som naozaj zvedavý, čo mi kapor povie!",
+      "text": "„Počkaj na Kvida... Voda je tu pokojná a krásne sa v nej odrážajú stromy. Ale dokedy tu budem čakať? Hádam sa ukáže čoskoro! Trpezlivosť je vraj cnosť, ale ja som naozaj zvedavý, čo mi kapor povie!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/kapor.jpeg?alt=media"
     },
     {
-      "text": "Žblnk! Hmm, niekto ma tu volá? Aha, ty si ten slávny hľadač palice! Pomôžem ti, ale najprv mi povedz - ktorá časť kapra sa uchováva pre šťastie?",
+      "text": "„Žblnk! Hmm, niekto ma tu volá? Aha, ty si ten slávny hľadač palice! Ja som kapor Kvido. Pomôžem ti, ale najskôr mi odpovedz!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/kapor.jpeg?alt=media"
     },
     {
-      "text": "Na Vianoce sa u nás na Slovensku tradične podáva kapor. A je s tým spojený jeden krásny zvyk. Povedz mi - ktorá časť kapra sa uchováva pre šťastie?",
+      "text": "„Na Vianoce sa u nás na Slovensku tradične podáva kapor. A je s tým spojený jeden krásny zvyk. Povedz mi - ktorá časť kapra sa uchováva pre šťastie?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/kapor.jpeg?alt=media",
       "answers": [
-        { "text": "Kaprie oko", "correct": false },
-        { "text": "Kapria kosť", "correct": false },
-        { "text": "Kapria hlava", "correct": false },
-        { "text": "Kapria šupina", "correct": true }
+        {
+          "text": "Kaprie oko",
+          "correct": false
+        },
+        {
+          "text": "Kapria kosť",
+          "correct": false
+        },
+        {
+          "text": "Kapria hlava",
+          "correct": false
+        },
+        {
+          "text": "Kapria šupina",
+          "correct": true
+        }
       ]
     },
     {
-      "text": "Výborne, ty sa naozaj vyznáš! Choď teraz týmto smerom pozdĺž brehu. Tam pri lávke býva veselá žabka - hádam ti aj ona pomôže nájsť tú palicu!",
+      "text": "„Výborne, ty sa naozaj vyznáš! Choď teraz ďalej pozdĺž brehu. Pri neďalekej lávke býva veselá žabka Zelinka - hádam ti aj ona pomôže nájsť tú palicu!”",
       "type": "NAVIGATION",
       "targetLatitude": 48.10566511612079,
       "targetLongitude": 17.109467224681097,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/kapor.jpeg?alt=media"
     },
     {
-      "text": "Kváááá! Kvááá! Vidím ťa, kamarát! Už som o tebe počula od kapra! Hľadáš lesnícku palicu, však? Viem, kadiaľ ísť ďalej, ale najprv musíš uhádnuť, ako sa volá táto časť Dunaja!",
+      "text": "„Kváááá! Kvááá! Vidím ťa, kamarát! Ja som žabka Zelinka! Už som o tebe počula! Videla som niekoho v kapucni bežať tadiaľto! Viem, kadiaľ išiel, ale najprv musíš uhádnuť, ako sa volá táto časť Dunaja!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/zaba.jpeg?alt=media"
     },
@@ -253,32 +344,56 @@
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/zaba.jpeg?alt=media",
       "answers": [
-        { "text": "Slovenské rameno", "correct": false },
-        { "text": "Maďarské rameno", "correct": false },
-        { "text": "Poľské rameno", "correct": false },
-        { "text": "Chorvátske rameno", "correct": true }
+        {
+          "text": "Slovenské rameno",
+          "correct": false
+        },
+        {
+          "text": "Maďarské rameno",
+          "correct": false
+        },
+        {
+          "text": "Poľské rameno",
+          "correct": false
+        },
+        {
+          "text": "Chorvátske rameno",
+          "correct": true
+        }
       ]
     },
     {
-      "text": "Kváá, výborne! Už si skoro pri cieli! Teraz bež do lesa a hľadaj strom, ktorý rastie v tvare písmena \"V\". Na ňom býva stará múdra sova - ona vie úplne všetko!",
+      "text": "„Kváá, výborne! Sova Oľga ti prezradí zvyšok! Teraz bež do lesa a hľadaj strom, ktorý rastie v tvare písmena \"V\". Na ňom býva stará múdra sova Oľga - ona vie úplne všetko!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.1360625,
-      "targetLongitude": 17.1354375,
+      "targetLatitude": 48.10566511612079,
+      "targetLongitude": 17.109467224681097,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/zaba.jpeg?alt=media"
     },
     {
-      "text": "Hu húúú! Vitaj, mladý dobrodruh! Tak ty si ten hrdina, čo pomáha lesníkovi Gejzovi? Mám pre teba poslednú úlohu. Povedz mi - kam išla sova v obľúbenej detskej pesničke?",
+      "text": "„Hu húúú! Vitaj, {mladý dobrodruh|mladá dobrodruhyňa}! Ja som sova Oľga. Tak ty si {ten hrdina|tá hrdinka}, čo pomáha lesníkovi Gejzovi? Mám pre teba poslednú hádanku. Povedz mi - kam išla sova v obľúbenej detskej pesničke?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/sova.jpeg?alt=media",
       "answers": [
-        { "text": "Do kina", "correct": false },
-        { "text": "Do divadla", "correct": false },
-        { "text": "Na tanec", "correct": true },
-        { "text": "Na disco", "correct": false }
+        {
+          "text": "Do kina",
+          "correct": false
+        },
+        {
+          "text": "Do divadla",
+          "correct": false
+        },
+        {
+          "text": "Na tanec",
+          "correct": true
+        },
+        {
+          "text": "Na disco",
+          "correct": false
+        }
       ]
     },
     {
-      "text": "Hu húúú, výborne! Zvládol si všetky úlohy a dokázal si, že si naozaj šikovný a odvážny! Teraz ťa čaká posledný krok - nazri do Záhrady Gejzu Dražďáka. Tam nájdeš odpoveď na záhadu!",
+      "text": "„Hu húúú, výborne! {Zvládol|Zvládla} si všetky hádanky a dokázal si, že si naozaj {múdry a odvážny|múdra a odvážna}! Teraz ťa čaká posledný krok - nazri do Záhrady Gejzu Dražďáka. Tam nájdeš odpoveď na záhadu!”",
       "type": "NAVIGATION",
       "targetLatitude": 48.108464678736055,
       "targetLongitude": 17.11715421471677,
@@ -291,7 +406,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/my-game-65b9c.firebasestorage.app/o/zahrada.jpeg?alt=media"
     },
     {
-      "text": "Gratulujeme, dokončil si dobrodružstvo! Bol si úžasný pomocník - vďaka tebe sa lesníkova kúzelná palica našla a všetky zvieratká v lese sú šťastné. Gejza Dražďák ti ďakuje za celý les! A malý Janko sľúbil, že nabudúce tatkovi nechá odkaz, keď si palicu požičia. A ty, malý pomocník, si zaslúžiš svoju odmenu.",
+      "text": "Gratulujeme, {dokončil|dokončila} si dobrodružstvo! {Bol|Bola} si {úžasný pomocník|úžasná pomocníčka} - vďaka tebe sa lesníkova kúzelná palica našla a všetky zvieratká v lese sú šťastné. Gejza Dražďák ti ďakuje za celý les! A malý Janko sľúbil, že nabudúce tatkovi nechá odkaz, keď si palicu požičia.\n Ak sa ti dobrodružstvo páčilo, určite vyskúšaj aj naše ďalšie hry, čaká ťa ešte viac záhad, zvieratiek a objavovania!",
       "type": "CONTINUE",
       "buttonText": "Späť na zoznam hier",
       "fontSize": 22,

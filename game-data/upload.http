@@ -1,0 +1,45 @@
+### Upload games-index
+PUT https://my-game-65b9c-default-rtdb.europe-west1.firebasedatabase.app/games-index.json
+Content-Type: application/json
+
+< games-index.json
+
+###
+
+### Upload lesnicka-palica
+PUT https://my-game-65b9c-default-rtdb.europe-west1.firebasedatabase.app/games/lesnicka-palica.json
+Content-Type: application/json
+
+< games/lesnicka-palica.json
+
+###
+
+### Upload chorvatski-osadnici
+PUT https://my-game-65b9c-default-rtdb.europe-west1.firebasedatabase.app/games/chorvatski-osadnici.json
+Content-Type: application/json
+
+< games/chorvatski-osadnici.json
+
+###
+
+### Upload danubiana-umenie-na-vode
+PUT https://my-game-65b9c-default-rtdb.europe-west1.firebasedatabase.app/games/danubiana-umenie-na-vode.json
+Content-Type: application/json
+
+< games/danubiana-umenie-na-vode.json
+
+###
+
+### Upload rybar-z-drazdiaka
+PUT https://my-game-65b9c-default-rtdb.europe-west1.firebasedatabase.app/games/rybar-z-drazdiaka.json
+Content-Type: application/json
+
+< games/rybar-z-drazdiaka.json
+
+###
+
+### Upload tajomstvo-janka-krala
+PUT https://my-game-65b9c-default-rtdb.europe-west1.firebasedatabase.app/games/tajomstvo-janka-krala.json
+Content-Type: application/json
+
+< games/tajomstvo-janka-krala.json

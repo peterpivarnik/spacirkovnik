@@ -20,6 +20,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.AccessTime
+import androidx.compose.material.icons.filled.DirectionsWalk
+import androidx.compose.material.icons.filled.NearMe
+import androidx.compose.material.icons.filled.Place
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -157,8 +162,8 @@ fun GameListScreen(
                     }
                 }
             }
-        }
-    }
+        } // Column padding(20.dp)
+    } // Column outer
 }
 
 @Composable
@@ -208,9 +213,9 @@ private fun GameCard(
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
                         text = info.description,
-                        fontSize = 14.sp,
+                        fontSize = 15.sp,
                         color = TextMedium,
-                        lineHeight = 20.sp,
+                        lineHeight = 21.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -222,25 +227,54 @@ private fun GameCard(
                         contentDescription = info.title,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .size(110.dp)
+                            .size(130.dp)
                             .clip(RoundedCornerShape(12.dp))
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
-            Row(
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = 10.dp),
+                thickness = 1.dp,
+                color = TextMedium.copy(alpha = 0.2f)
+            )
+            Column(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 if (info.region != null) {
-                    Text(text = info.region, fontSize = 12.sp, color = TextMedium)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.Place, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(text = info.region, fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
+                    }
                 }
-                if (info.estimatedDurationMinutes != null) {
-                    Text(text = "${info.estimatedDurationMinutes} min", fontSize = 12.sp, color = TextMedium)
+                if (info.estimatedDurationMinutes != null || info.distanceKm != null) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        if (info.estimatedDurationMinutes != null) {
+                            Icon(Icons.Default.AccessTime, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(text = "${info.estimatedDurationMinutes} min", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
+                        }
+                        if (info.estimatedDurationMinutes != null && info.distanceKm != null) {
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Text(text = "•", fontSize = 12.sp, color = TextMedium)
+                            Spacer(modifier = Modifier.width(12.dp))
+                        }
+                        if (info.distanceKm != null) {
+                            Icon(Icons.Default.DirectionsWalk, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(text = "${info.distanceKm} km", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
+                        }
+                    }
                 }
-                if (info.distanceKm != null) {
-                    Text(text = "${info.distanceKm} km", fontSize = 12.sp, color = TextMedium)
+                if (info.startName != null || info.endName != null) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(Icons.Default.NearMe, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(text = "${info.startName ?: ""} → ${info.endName ?: ""}", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
+                    }
                 }
             }
 
