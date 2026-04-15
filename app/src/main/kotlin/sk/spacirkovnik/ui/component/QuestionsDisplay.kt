@@ -24,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -36,7 +37,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import sk.spacirkovnik.model.GameAnswer
+import sk.spacirkovnik.model.Gender
+import sk.spacirkovnik.model.LocationData
 import sk.spacirkovnik.model.ScreenType
+import sk.spacirkovnik.model.applyGender
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.BackButton
 import sk.spacirkovnik.ui.theme.BackButtonText
@@ -58,16 +62,31 @@ fun QuestionsDisplay(
     context: Context? = null,
     onGameFinished: () -> Unit = {}
 ) {
+    val gender by gameDataViewModel.gender
+    val resolvedGender = gender
+
+    if (resolvedGender == null) {
+        GenderSelectionScreen(onSelected = { gameDataViewModel.setGender(it) })
+        return
+    }
+
     val currentScreen = gameDataViewModel.getCurrentScreen()
+    val processedText = currentScreen.text?.applyGender(resolvedGender) ?: ""
 
     if (currentScreen.type == ScreenType.NAVIGATION
         && locationViewModel != null && context != null
     ) {
+        val prevNavLocation = (gameDataViewModel.getCurrentIndex() - 1 downTo 0)
+            .map { gameDataViewModel.state.value.screens[it] }
+            .firstOrNull { it.targetLatitude != null && it.targetLongitude != null }
+            ?.let { LocationData(it.targetLatitude!!, it.targetLongitude!!) }
+
         NavigationDisplay(
-            gameScreen = currentScreen,
+            gameScreen = currentScreen.copy(text = processedText),
             locationViewModel = locationViewModel,
             context = context,
-            onContinue = { gameDataViewModel.incrementIndex() }
+            onContinue = { gameDataViewModel.incrementIndex() },
+            debugStartLocation = prevNavLocation
         )
         return
     }
@@ -103,7 +122,7 @@ fun QuestionsDisplay(
                     )
                 }
                 Text(
-                    text = currentScreen.text ?: "",
+                    text = processedText,
                     fontSize = (currentScreen.fontSize ?: 18).sp,
                     lineHeight = ((currentScreen.fontSize ?: 18) + 8).sp,
                     textAlign = TextAlign.Center,
@@ -288,4 +307,41 @@ private fun MyAlertDialog(showAlertMessage: MutableState<Boolean>) {
             }
         }
     )
+}
+
+@Composable
+private fun GenderSelectionScreen(onSelected: (Gender) -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Kto sa vydáva na dobrodružstvo?",
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            color = TextDark,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(32.dp))
+        Button(
+            onClick = { onSelected(Gender.MALE) },
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+            shape = RoundedCornerShape(14.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+        ) {
+            Text("🧒 Chlapec", fontSize = 18.sp, color = PrimaryButtonText, fontWeight = FontWeight.SemiBold)
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(
+            onClick = { onSelected(Gender.FEMALE) },
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+            shape = RoundedCornerShape(14.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+        ) {
+            Text("👧 Dievča", fontSize = 18.sp, color = PrimaryButtonText, fontWeight = FontWeight.SemiBold)
+        }
+    }
 }

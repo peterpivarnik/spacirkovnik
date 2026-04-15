@@ -1,11 +1,13 @@
 package sk.spacirkovnik.viewmodel
 
 import android.app.Application
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import sk.spacirkovnik.data.GameCacheManager
 import sk.spacirkovnik.data.GameProgressManager
+import sk.spacirkovnik.model.Gender
 import sk.spacirkovnik.model.GameScreen
 
 class GameDataViewModel(application: Application) : AndroidViewModel(application) {
@@ -76,6 +78,13 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
 
     private fun saveProgress() {
         currentGameId?.let { progressManager.saveProgress(it, _index.intValue) }
+    }
+
+    private val _gender = mutableStateOf<Gender?>(null)
+    val gender: State<Gender?> = _gender
+
+    fun setGender(gender: Gender) {
+        _gender.value = gender
     }
 
     data class GameState(
