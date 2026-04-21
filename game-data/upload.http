@@ -1,8 +1,8 @@
-### Upload games-index
-PUT {{dbUrl}}/games-index.json?auth={{dbSecret}}
+### Upload catalog
+PUT {{dbUrl}}/catalog.json?auth={{dbSecret}}
 Content-Type: application/json
 
-< games-index.json
+< catalog.json
 
 ###
 

@@ -12,7 +12,7 @@ const val FIREBASE_DATABASE_URL =
 
 interface ApiService {
 
-    @GET("games-index.json")
+    @GET("catalog.json")
     suspend fun getGameIndex(): GameIndexResponse
 
     @GET("games/{gameId}.json")
