@@ -16,13 +16,12 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import sk.spacirkovnik.data.FIREBASE_DATABASE_URL
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     private val auth = FirebaseAuth.getInstance()
-    private val database = FirebaseDatabase.getInstance(
-        "https://my-game-65b9c-default-rtdb.europe-west1.firebasedatabase.app/"
-    )
+    private val database = FirebaseDatabase.getInstance(FIREBASE_DATABASE_URL)
 
     private val _state = mutableStateOf(AuthState())
     val state: State<AuthState> = _state
