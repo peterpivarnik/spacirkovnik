@@ -7,6 +7,9 @@ import retrofit2.http.Path
 import sk.spacirkovnik.model.GameDefinition
 import sk.spacirkovnik.model.GameInfo
 
+const val FIREBASE_DATABASE_URL =
+    "https://spacirkovnik-app-default-rtdb.europe-west1.firebasedatabase.app/"
+
 interface ApiService {
 
     @GET("games-index.json")
@@ -23,7 +26,7 @@ data class GameIndexResponse(
 
 object RetrofitInstance {
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://my-game-65b9c-default-rtdb.europe-west1.firebasedatabase.app/")
+        .baseUrl(FIREBASE_DATABASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
