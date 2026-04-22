@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "1058528478022-jo786agrkumem32sp00a8fg27p6huudi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sk.spacirkovnik",
+            "certificate_hash": "b01e4385790196628480172d6d12b5a2d83977ab"
+          }
+        },
+        {
+          "client_id": "1058528478022-rolnldgcg1275mlgfol32epag6n1otss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sk.spacirkovnik",
+            "certificate_hash": "22d18a827a4f27ca95aeecd5ff542943a9b45f45"
+          }
+        },
+        {
           "client_id": "1058528478022-smtp7dgq7h7otciv0pq1060fbugj97h4.apps.googleusercontent.com",
           "client_type": 3
         }
