@@ -3,3 +3,6 @@
 /.kotlin/
 /build/
 http-client.private.env.json
+keystore.properties
+*.jks
+*.keystore

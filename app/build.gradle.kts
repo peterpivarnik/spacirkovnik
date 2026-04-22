@@ -15,6 +15,11 @@ val mapsApiKey: String = if (localPropertiesFile.exists()) {
     props.getProperty("MAPS_API_KEY", "")
 } else ""
 
+val keystorePropertiesFile = rootProject.file("keystore.properties")
+val keystoreProperties: Properties? = if (keystorePropertiesFile.exists()) {
+    Properties().apply { load(keystorePropertiesFile.inputStream()) }
+} else null
+
 configure<ApplicationExtension> {
     namespace = "sk.spacirkovnik"
     compileSdk = 36
@@ -30,9 +35,22 @@ configure<ApplicationExtension> {
         buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
     }
 
+    signingConfigs {
+        if (keystoreProperties != null) {
+            create("release") {
+                storeFile = file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            signingConfig = signingConfigs.findByName("release")
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
