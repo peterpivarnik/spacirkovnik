@@ -21,7 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.AccessTime
-import androidx.compose.material.icons.filled.DirectionsWalk
+import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
 import androidx.compose.material.icons.filled.NearMe
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.HorizontalDivider
@@ -39,6 +39,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.layout.offset
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -94,58 +95,85 @@ fun GameListScreen(
             }
             else -> {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                        contentDescription = "Spacirkovnik logo",
+                    Row(
+                        verticalAlignment = Alignment.Top,
                         modifier = Modifier
-                            .size(80.dp)
-                            .padding(top = 8.dp)
-                    )
-                    Text(
-                        text = "Špacírkovník",
-                        fontSize = 32.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = TextOnDark,
-                        modifier = Modifier.padding(bottom = 8.dp, top = 8.dp)
-                    )
-                    Text(
-                        text = "Vyber si dobrodružstvo",
-                        fontSize = 16.sp,
-                        color = TextOnDark.copy(alpha = 0.7f),
-                        modifier = Modifier.padding(bottom = 12.dp)
-                    )
-
-                    if (authState.isSignedIn) {
-                        Text(
-                            text = authState.userName ?: authState.userEmail ?: "",
-                            fontSize = 13.sp,
-                            color = TextOnDark.copy(alpha = 0.6f)
+                            .fillMaxWidth()
+                            .padding(top = 0.dp, bottom = 4.dp)
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.logo),
+                            contentDescription = "Spacirkovnik logo",
+                            modifier = Modifier.size(72.dp)
                         )
-                        TextButton(onClick = { authViewModel.signOut() }) {
-                            Text("Odhlásiť sa", fontSize = 12.sp, color = TextOnDark.copy(alpha = 0.5f))
-                        }
-                    } else {
-                        Button(
-                            onClick = { authViewModel.signIn(activity) },
-                            enabled = !authState.loading,
-                            shape = RoundedCornerShape(12.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Column(
+                            modifier = Modifier.weight(1f).padding(top = 8.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
-                                if (authState.loading) "Prihlasujem..." else "Prihlásiť sa",
-                                color = PrimaryButtonText,
-                                fontSize = 14.sp
+                                text = "Špacírkovník",
+                                fontSize = 26.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = TextOnDark
+                            )
+                            Text(
+                                text = "Vyber si dobrodružstvo",
+                                fontSize = 14.sp,
+                                color = TextOnDark.copy(alpha = 0.7f)
                             )
                         }
-                        if (authState.error != null) {
-                            Text(
-                                text = authState.error!!,
-                                fontSize = 12.sp,
-                                color = AmberLight,
-                                modifier = Modifier.padding(top = 4.dp)
-                            )
+                        if (authState.isSignedIn) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.padding(top = 10.dp)
+                            ) {
+                                Text(
+                                    text = authState.userName ?: authState.userEmail ?: "",
+                                    fontSize = 12.sp,
+                                    color = TextOnDark.copy(alpha = 0.6f)
+                                )
+                                TextButton(
+                                    onClick = { authViewModel.signOut() },
+                                    contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                                        horizontal = 8.dp, vertical = 0.dp
+                                    ),
+                                    modifier = Modifier.padding(top = 0.dp).offset(y = (-6).dp)
+                                ) {
+                                    Text("Odhlásiť sa", fontSize = 11.sp, color = TextOnDark.copy(alpha = 0.5f))
+                                }
+                            }
+                        } else {
+                            Column(
+                                horizontalAlignment = Alignment.End,
+                                verticalArrangement = Arrangement.Center,
+                                modifier = Modifier.padding(top = 6.dp)
+                            ) {
+                                Button(
+                                    onClick = { authViewModel.signIn(activity) },
+                                    enabled = !authState.loading,
+                                    shape = RoundedCornerShape(12.dp),
+                                    colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                                ) {
+                                    Text(
+                                        if (authState.loading) "Prihlasujem..." else "Prihlásiť sa",
+                                        color = PrimaryButtonText,
+                                        fontSize = 13.sp
+                                    )
+                                }
+                                if (authState.error != null) {
+                                    Text(
+                                        text = authState.error!!,
+                                        fontSize = 11.sp,
+                                        color = AmberLight,
+                                        modifier = Modifier.padding(top = 2.dp),
+                                        textAlign = TextAlign.End
+                                    )
+                                }
+                            }
                         }
                     }
+
 
                     Spacer(modifier = Modifier.height(12.dp))
 
@@ -263,7 +291,7 @@ private fun GameCard(
                             Spacer(modifier = Modifier.width(12.dp))
                         }
                         if (info.distanceKm != null) {
-                            Icon(Icons.Default.DirectionsWalk, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                            Icon(Icons.AutoMirrored.Filled.DirectionsWalk, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
                             Spacer(modifier = Modifier.width(4.dp))
                             Text(text = "${info.distanceKm} km", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
                         }
