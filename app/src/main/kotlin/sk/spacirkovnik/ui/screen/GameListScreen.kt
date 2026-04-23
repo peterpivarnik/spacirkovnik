@@ -19,35 +19,46 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
+import androidx.compose.material.icons.filled.AccessTime
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.NearMe
 import androidx.compose.material.icons.filled.Place
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.foundation.layout.offset
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
+import kotlinx.coroutines.launch
 import sk.spacirkovnik.R
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.AmberLight
@@ -72,6 +83,17 @@ fun GameListScreen(
     val state by gameListViewModel.state
     val authState by authViewModel.state
     val activity = LocalActivity.current!!
+    var showSignOutDialog by remember { mutableStateOf(false) }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(authState.error) {
+        val error = authState.error
+        if (error != null) {
+            scope.launch { snackbarHostState.showSnackbar("Prihlásenie sa nepodarilo.") }
+            authViewModel.clearError()
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -80,7 +102,7 @@ fun GameListScreen(
             .padding(16.dp)
     ) {
         when {
-            state.loading -> {
+            state.loading || (authState.isSignedIn && authState.loading) -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center),
                     color = Amber
@@ -96,7 +118,7 @@ fun GameListScreen(
             else -> {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Row(
-                        verticalAlignment = Alignment.Top,
+                        verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(top = 0.dp, bottom = 4.dp)
@@ -115,65 +137,77 @@ fun GameListScreen(
                                 text = "Špacírkovník",
                                 fontSize = 26.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = TextOnDark
+                                color = TextOnDark,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
                             Text(
                                 text = "Vyber si dobrodružstvo",
                                 fontSize = 14.sp,
-                                color = TextOnDark.copy(alpha = 0.7f)
+                                color = TextOnDark.copy(alpha = 0.7f),
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
                         }
-                        if (authState.isSignedIn) {
-                            Column(
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                modifier = Modifier.padding(top = 10.dp)
-                            ) {
-                                Text(
-                                    text = authState.userName ?: authState.userEmail ?: "",
-                                    fontSize = 12.sp,
-                                    color = TextOnDark.copy(alpha = 0.6f)
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.width(56.dp)
+                        ) {
+                            if (authState.loading) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(24.dp),
+                                    color = Amber,
+                                    strokeWidth = 2.dp
                                 )
-                                TextButton(
-                                    onClick = { authViewModel.signOut() },
-                                    contentPadding = androidx.compose.foundation.layout.PaddingValues(
-                                        horizontal = 8.dp, vertical = 0.dp
-                                    ),
-                                    modifier = Modifier.padding(top = 0.dp).offset(y = (-6).dp)
-                                ) {
-                                    Text("Odhlásiť sa", fontSize = 11.sp, color = TextOnDark.copy(alpha = 0.5f))
-                                }
-                            }
-                        } else {
-                            Column(
-                                horizontalAlignment = Alignment.End,
-                                verticalArrangement = Arrangement.Center,
-                                modifier = Modifier.padding(top = 6.dp)
-                            ) {
-                                Button(
-                                    onClick = { authViewModel.signIn(activity) },
-                                    enabled = !authState.loading,
-                                    shape = RoundedCornerShape(12.dp),
-                                    colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
-                                ) {
-                                    Text(
-                                        if (authState.loading) "Prihlasujem..." else "Prihlásiť sa",
-                                        color = PrimaryButtonText,
-                                        fontSize = 13.sp
+                            } else {
+                                IconButton(onClick = {
+                                    if (authState.isSignedIn) showSignOutDialog = true
+                                    else authViewModel.signIn(activity)
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.Default.AccountCircle,
+                                        contentDescription = if (authState.isSignedIn) "Odhlásiť sa" else "Prihlásiť sa",
+                                        tint = if (authState.isSignedIn) Amber else TextOnDark.copy(alpha = 0.4f),
+                                        modifier = Modifier.size(36.dp)
                                     )
                                 }
-                                if (authState.error != null) {
-                                    Text(
-                                        text = authState.error!!,
-                                        fontSize = 11.sp,
-                                        color = AmberLight,
-                                        modifier = Modifier.padding(top = 2.dp),
-                                        textAlign = TextAlign.End
-                                    )
+                                if (authState.isSignedIn) {
+                                    val firstName = authState.userName?.substringBefore(" ") ?: ""
+                                    if (firstName.isNotEmpty()) {
+                                        Text(
+                                            text = firstName,
+                                            fontSize = 11.sp,
+                                            color = TextOnDark.copy(alpha = 0.7f),
+                                            maxLines = 1,
+                                            overflow = TextOverflow.Ellipsis
+                                        )
+                                    }
                                 }
                             }
                         }
                     }
 
+
+                    if (showSignOutDialog) {
+                        AlertDialog(
+                            onDismissRequest = { showSignOutDialog = false },
+                            title = { Text("Odhlásiť sa") },
+                            text = { Text("Naozaj sa chceš odhlásiť?") },
+                            confirmButton = {
+                                TextButton(onClick = {
+                                    showSignOutDialog = false
+                                    authViewModel.signOut()
+                                }) {
+                                    Text("Odhlásiť sa")
+                                }
+                            },
+                            dismissButton = {
+                                TextButton(onClick = { showSignOutDialog = false }) {
+                                    Text("Zrušiť")
+                                }
+                            }
+                        )
+                    }
 
                     Spacer(modifier = Modifier.height(12.dp))
 
@@ -191,6 +225,11 @@ fun GameListScreen(
                 }
             }
         } // Column padding(20.dp)
+
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     } // Column outer
 }
 
@@ -225,7 +264,7 @@ private fun GameCard(
                 .padding(20.dp)
                 .then(if (isLocked) Modifier.alpha(0.5f) else Modifier)
         ) {
-            Row(modifier = Modifier.fillMaxWidth()) {
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Column(
                     modifier = Modifier.weight(1f),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -301,7 +340,7 @@ private fun GameCard(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Default.NearMe, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = "${info.startName ?: ""} → ${info.endName ?: ""}", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
+                        Text(text = "${info.startName ?: ""} → ${info.endName ?: ""}", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium, textAlign = TextAlign.Center)
                     }
                 }
             }
