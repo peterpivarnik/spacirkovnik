@@ -90,6 +90,8 @@ import sk.spacirkovnik.ui.theme.PrimaryButton
 import sk.spacirkovnik.ui.theme.PrimaryButtonText
 import sk.spacirkovnik.ui.theme.TextDark
 import sk.spacirkovnik.ui.theme.TextOnDark
+import androidx.core.graphics.createBitmap
+import androidx.compose.ui.platform.LocalLocale
 
 @Composable
 fun NavigationDisplay(
@@ -433,7 +435,7 @@ fun NavigationDisplay(
 
         if (distanceMeters != null) {
             val distanceText = if (distanceMeters >= 1000) {
-                String.format(java.util.Locale.getDefault(), "%.1f km", distanceMeters / 1000f)
+                String.format(LocalLocale.current.platformLocale, "%.1f km", distanceMeters / 1000f)
             } else {
                 "$distanceMeters m"
             }
@@ -459,7 +461,7 @@ fun NavigationDisplay(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        val isCloseEnough = distanceMeters != null && distanceMeters!! <= 10
+        val isCloseEnough = distanceMeters != null && distanceMeters <= 10
         Button(
             onClick = onContinue,
             enabled = isCloseEnough,
@@ -606,7 +608,7 @@ private fun decodePolyline(encoded: String): List<LatLng> {
 
 private fun createArrowBitmap(): com.google.android.gms.maps.model.BitmapDescriptor {
     val size = 64
-    val bmp = android.graphics.Bitmap.createBitmap(size, size, android.graphics.Bitmap.Config.ARGB_8888)
+    val bmp = createBitmap(size, size)
     val canvas = android.graphics.Canvas(bmp)
     val fillPaint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
         color = android.graphics.Color.rgb(21, 101, 192)

@@ -5,6 +5,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
+import androidx.credentials.exceptions.GetCredentialCancellationException
 import androidx.credentials.exceptions.NoCredentialException
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,7 +33,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             _state.value = AuthState(
                 isSignedIn = true,
                 userName = currentUser.displayName,
-                userEmail = currentUser.email
+                userEmail = currentUser.email,
+                loading = true
             )
             loadActivations()
         }
@@ -79,6 +81,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     userEmail = user?.email
                 )
                 loadActivations()
+            } catch (_: GetCredentialCancellationException) {
+                _state.value = _state.value.copy(loading = false)
             } catch (e: Exception) {
                 _state.value = _state.value.copy(
                     loading = false,
@@ -91,6 +95,10 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     fun signOut() {
         auth.signOut()
         _state.value = AuthState()
+    }
+
+    fun clearError() {
+        _state.value = _state.value.copy(error = null)
     }
 
     private fun loadActivations() {
