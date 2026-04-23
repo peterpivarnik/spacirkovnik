@@ -22,12 +22,12 @@ val keystoreProperties: Properties? = if (keystorePropertiesFile.exists()) {
 
 configure<ApplicationExtension> {
     namespace = "sk.spacirkovnik"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "sk.spacirkovnik"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
