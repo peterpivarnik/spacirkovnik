@@ -73,6 +73,7 @@ import sk.spacirkovnik.ui.theme.CardBg
 import sk.spacirkovnik.ui.theme.MainBackground
 import sk.spacirkovnik.ui.theme.PrimaryButton
 import sk.spacirkovnik.ui.theme.PrimaryButtonText
+import sk.spacirkovnik.ui.theme.PurchaseButton
 import sk.spacirkovnik.ui.theme.SecondaryButton
 import sk.spacirkovnik.ui.theme.TextDark
 import sk.spacirkovnik.ui.theme.TextMedium
@@ -410,12 +411,12 @@ private fun GameCard(
             exit = shrinkVertically()
         ) {
             Column(
-                modifier = Modifier
-                    .padding(start = 12.dp, end = 12.dp, bottom = 16.dp)
-                    .then(if (isLocked) Modifier.alpha(0.5f) else Modifier)
+                modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 16.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .then(if (isLocked) Modifier.alpha(0.5f) else Modifier),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -446,7 +447,9 @@ private fun GameCard(
                 )
 
                 Column(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .then(if (isLocked) Modifier.alpha(0.5f) else Modifier),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
@@ -493,7 +496,7 @@ private fun GameCard(
                         enabled = !isPurchasing,
                         modifier = Modifier.fillMaxWidth().height(48.dp),
                         shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Amber)
+                        colors = ButtonDefaults.buttonColors(containerColor = PurchaseButton)
                     ) {
                         if (isPurchasing) {
                             CircularProgressIndicator(
