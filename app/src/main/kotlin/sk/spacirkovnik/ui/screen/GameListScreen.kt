@@ -30,6 +30,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.NearMe
+import androidx.compose.material.icons.filled.WifiOff
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -214,6 +215,31 @@ fun GameListScreen(
                                     }
                                 }
                             }
+                        }
+                    }
+
+                    if (state.offline) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(TextMedium.copy(alpha = 0.15f))
+                                .padding(horizontal = 12.dp, vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.WifiOff,
+                                contentDescription = null,
+                                tint = TextOnDark.copy(alpha = 0.6f),
+                                modifier = Modifier.size(14.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "Offline režim — zobrazujú sa uložené hry",
+                                fontSize = 12.sp,
+                                color = TextOnDark.copy(alpha = 0.7f)
+                            )
                         }
                     }
 
