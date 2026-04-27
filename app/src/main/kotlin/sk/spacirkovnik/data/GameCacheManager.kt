@@ -8,7 +8,21 @@ import java.io.File
 class GameCacheManager(context: Context) {
 
     private val cacheDir = File(context.filesDir, "games").apply { mkdirs() }
+    private val catalogFile = File(context.filesDir, "catalog.json")
     private val gson = Gson()
+
+    fun saveCatalog(catalog: GameIndexResponse) {
+        catalogFile.writeText(gson.toJson(catalog))
+    }
+
+    fun loadCatalog(): GameIndexResponse? {
+        if (!catalogFile.exists()) return null
+        return try {
+            gson.fromJson(catalogFile.readText(), GameIndexResponse::class.java)
+        } catch (_: Exception) {
+            null
+        }
+    }
 
     fun saveGame(game: GameDefinition) {
         val file = File(cacheDir, "${game.id}.json")

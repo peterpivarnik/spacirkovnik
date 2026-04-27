@@ -24,27 +24,45 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             try {
                 val response = RetrofitInstance.apiService.getGameIndex()
-                val gamesWithStatus = response.games.filter { it.visible != false }.map { info ->
-                    val cachedVersion = cacheManager.getCachedVersion(info.id)
-                    val status = when {
-                        cachedVersion == null -> DownloadStatus.NOT_DOWNLOADED
-                        cachedVersion < info.version -> DownloadStatus.UPDATE_AVAILABLE
-                        else -> DownloadStatus.DOWNLOADED
-                    }
-                    GameWithStatus(info, status)
-                }
+                cacheManager.saveCatalog(response)
                 _state.value = GameListState(
-                    games = gamesWithStatus,
+                    games = buildGameList(response),
                     loading = false
                 )
             } catch (e: Exception) {
-                _state.value = GameListState(
-                    loading = false,
-                    error = "Nepodarilo sa načítať zoznam hier: ${e.message}"
-                )
+                val cached = cacheManager.loadCatalog()
+                if (cached != null) {
+                    _state.value = GameListState(
+                        games = buildGameList(cached),
+                        loading = false,
+                        offline = true
+                    )
+                } else {
+                    val isNetworkError = e is java.net.UnknownHostException
+                        || e is java.net.ConnectException
+                        || e is java.net.SocketTimeoutException
+                    _state.value = GameListState(
+                        loading = false,
+                        error = if (isNetworkError)
+                            "Nie je dostupné internetové pripojenie."
+                        else
+                            "Nepodarilo sa načítať zoznam hier."
+                    )
+                }
             }
         }
     }
+
+    private fun buildGameList(response: sk.spacirkovnik.data.GameIndexResponse) =
+        response.games.filter { it.visible != false }.map { info ->
+            val cachedVersion = cacheManager.getCachedVersion(info.id)
+            val status = when {
+                cachedVersion == null -> DownloadStatus.NOT_DOWNLOADED
+                cachedVersion < info.version -> DownloadStatus.UPDATE_AVAILABLE
+                else -> DownloadStatus.DOWNLOADED
+            }
+            GameWithStatus(info, status)
+        }
 
     fun downloadGame(gameId: String) {
         viewModelScope.launch {
@@ -73,6 +91,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
     data class GameListState(
         val games: List<GameWithStatus> = emptyList(),
         val loading: Boolean = true,
+        val offline: Boolean = false,
         val error: String? = null
     )
 
