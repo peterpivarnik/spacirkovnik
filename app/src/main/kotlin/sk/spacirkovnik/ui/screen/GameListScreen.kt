@@ -26,12 +26,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
 import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.NearMe
-import androidx.compose.material.icons.filled.WifiOff
 import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.filled.SportsScore
+import androidx.compose.material.icons.filled.WifiOff
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -479,11 +480,18 @@ private fun GameCard(
                             }
                         }
                     }
-                    if (info.startName != null || info.endName != null) {
+                    if (info.startName != null) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(Icons.Default.NearMe, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                            Icon(Icons.Default.Flag, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
                             Spacer(modifier = Modifier.width(4.dp))
-                            Text(text = "${info.startName ?: ""} → ${info.endName ?: ""}", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium, textAlign = TextAlign.Center)
+                            Text(text = info.startName, fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
+                        }
+                    }
+                    if (info.endName != null) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Default.SportsScore, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(text = info.endName, fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
                         }
                     }
                 }
