@@ -131,6 +131,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         return _state.value.activatedGames.contains(gameId)
     }
 
+    fun grantActivation(gameId: String) {
+        val updated = _state.value.activatedGames.toMutableSet().also { it.add(gameId) }
+        _state.value = _state.value.copy(activatedGames = updated)
+    }
+
     private fun getWebClientId(): String {
         val appContext = getApplication<Application>()
         return appContext.getString(sk.spacirkovnik.R.string.default_web_client_id)

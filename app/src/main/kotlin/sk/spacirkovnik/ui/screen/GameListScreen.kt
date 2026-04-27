@@ -1,6 +1,10 @@
 package sk.spacirkovnik.ui.screen
 
 import androidx.activity.compose.LocalActivity
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,6 +26,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.DirectionsWalk
 import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.NearMe
 import androidx.compose.material.icons.filled.Place
@@ -73,17 +79,21 @@ import sk.spacirkovnik.ui.theme.TextOnDark
 import sk.spacirkovnik.viewmodel.AuthViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel.DownloadStatus
+import sk.spacirkovnik.viewmodel.PurchaseViewModel
 
 @Composable
 fun GameListScreen(
     onGameSelected: (String) -> Unit,
     gameListViewModel: GameListViewModel = viewModel(),
-    authViewModel: AuthViewModel = viewModel()
+    authViewModel: AuthViewModel = viewModel(),
+    purchaseViewModel: PurchaseViewModel = viewModel()
 ) {
     val state by gameListViewModel.state
     val authState by authViewModel.state
+    val purchaseState by purchaseViewModel.state
     val activity = LocalActivity.current!!
     var showSignOutDialog by remember { mutableStateOf(false) }
+    var expandedGameId by remember { mutableStateOf<String?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
@@ -93,6 +103,26 @@ fun GameListScreen(
             scope.launch { snackbarHostState.showSnackbar("Prihlásenie sa nepodarilo.") }
             authViewModel.clearError()
         }
+    }
+
+    LaunchedEffect(purchaseState.justPurchasedGameId) {
+        val gameId = purchaseState.justPurchasedGameId ?: return@LaunchedEffect
+        authViewModel.grantActivation(gameId)
+        purchaseViewModel.clearPurchased()
+        snackbarHostState.showSnackbar("Hra bola úspešne zakúpená!")
+    }
+
+    LaunchedEffect(purchaseState.error) {
+        val error = purchaseState.error ?: return@LaunchedEffect
+        snackbarHostState.showSnackbar(error)
+        purchaseViewModel.clearError()
+    }
+
+    LaunchedEffect(state.games) {
+        val lockedIds = state.games
+            .filter { it.info.playable == false }
+            .map { it.info.id }
+        if (lockedIds.isNotEmpty()) purchaseViewModel.loadProductPrices(lockedIds)
     }
 
     Box(
@@ -187,7 +217,6 @@ fun GameListScreen(
                         }
                     }
 
-
                     if (showSignOutDialog) {
                         AlertDialog(
                             onDismissRequest = { showSignOutDialog = false },
@@ -211,41 +240,65 @@ fun GameListScreen(
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         items(state.games) { gameWithStatus ->
-                            val isActivated = authViewModel.isGameActivated(gameWithStatus.info.id)
+                            val gameId = gameWithStatus.info.id
+                            val isExpanded = expandedGameId == gameId
+                            val isActivated = authViewModel.isGameActivated(gameId)
                             GameCard(
                                 gameWithStatus = gameWithStatus,
                                 isActivated = isActivated,
-                                onPlay = { onGameSelected(gameWithStatus.info.id) },
-                                onDownload = { gameListViewModel.downloadGame(gameWithStatus.info.id) }
+                                isExpanded = isExpanded,
+                                isPurchasing = purchaseState.purchasingGameId == gameId,
+                                price = purchaseState.productPrices[gameId],
+                                onToggle = {
+                                    expandedGameId = if (isExpanded) null else gameId
+                                },
+                                onPlay = { onGameSelected(gameId) },
+                                onDownload = { gameListViewModel.downloadGame(gameId) },
+                                onPurchase = {
+                                    if (!authState.isSignedIn) {
+                                        scope.launch {
+                                            snackbarHostState.showSnackbar("Pre kúpu hry sa najprv prihláste.")
+                                        }
+                                    } else {
+                                        purchaseViewModel.purchaseGame(gameId, activity)
+                                    }
+                                }
                             )
                         }
                     }
                 }
             }
-        } // Column padding(20.dp)
+        }
 
         SnackbarHost(
             hostState = snackbarHostState,
             modifier = Modifier.align(Alignment.BottomCenter)
         )
-    } // Column outer
+    }
 }
 
 @Composable
 private fun GameCard(
     gameWithStatus: GameListViewModel.GameWithStatus,
     isActivated: Boolean,
+    isExpanded: Boolean,
+    isPurchasing: Boolean,
+    price: String?,
+    onToggle: () -> Unit,
     onPlay: () -> Unit,
-    onDownload: () -> Unit
+    onDownload: () -> Unit,
+    onPurchase: () -> Unit
 ) {
     val info = gameWithStatus.info
     val isLocked = info.playable == false && !isActivated
 
     Card(
+        onClick = onToggle,
         modifier = Modifier
             .fillMaxWidth()
+            .animateContentSize()
             .then(
                 if (isLocked) Modifier.border(
                     width = 1.dp,
@@ -259,163 +312,231 @@ private fun GameCard(
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = if (isLocked) 0.dp else 6.dp)
     ) {
-        Column(
+        // Compact header — always visible
+        Row(
             modifier = Modifier
-                .padding(20.dp)
-                .then(if (isLocked) Modifier.alpha(0.5f) else Modifier)
+                .fillMaxWidth()
+                .padding(horizontal = 12.dp, vertical = 10.dp)
+                .then(if (isLocked) Modifier.alpha(0.5f) else Modifier),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Column(
-                    modifier = Modifier.weight(1f),
-                    horizontalAlignment = Alignment.CenterHorizontally
+            if (!info.imageUrl.isNullOrEmpty()) {
+                AsyncImage(
+                    model = info.imageUrl,
+                    contentDescription = info.title,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .size(44.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Amber.copy(alpha = 0.2f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.DirectionsWalk,
+                        contentDescription = null,
+                        tint = Amber,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.width(12.dp))
+
+            Text(
+                text = info.title,
+                modifier = Modifier.weight(1f),
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = TextDark,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            if (isLocked) {
+                Icon(
+                    imageVector = Icons.Default.Lock,
+                    contentDescription = null,
+                    tint = TextMedium,
+                    modifier = Modifier.size(18.dp)
+                )
+            } else {
+                Icon(
+                    imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                    contentDescription = null,
+                    tint = TextMedium,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+        }
+
+        // Expanded detail section
+        AnimatedVisibility(
+            visible = isExpanded,
+            enter = expandVertically(),
+            exit = shrinkVertically()
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(start = 12.dp, end = 12.dp, bottom = 16.dp)
+                    .then(if (isLocked) Modifier.alpha(0.5f) else Modifier)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = info.title,
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = TextDark,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(6.dp))
-                    Text(
                         text = info.description,
+                        modifier = Modifier.weight(1f),
                         fontSize = 15.sp,
                         color = TextMedium,
                         lineHeight = 21.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
+                        textAlign = TextAlign.Center
                     )
-                }
-                if (!info.imageUrl.isNullOrEmpty()) {
-                    Spacer(modifier = Modifier.width(12.dp))
-                    AsyncImage(
-                        model = info.imageUrl,
-                        contentDescription = info.title,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(130.dp)
-                            .clip(RoundedCornerShape(12.dp))
-                    )
-                }
-            }
-
-            HorizontalDivider(
-                modifier = Modifier.padding(vertical = 10.dp),
-                thickness = 1.dp,
-                color = TextMedium.copy(alpha = 0.2f)
-            )
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                if (info.region != null) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.Place, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = info.region, fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
+                    if (!info.imageUrl.isNullOrEmpty()) {
+                        Spacer(modifier = Modifier.width(12.dp))
+                        AsyncImage(
+                            model = info.imageUrl,
+                            contentDescription = info.title,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(130.dp)
+                                .clip(RoundedCornerShape(12.dp))
+                        )
                     }
                 }
-                if (info.estimatedDurationMinutes != null || info.distanceKm != null) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        if (info.estimatedDurationMinutes != null) {
-                            Icon(Icons.Default.AccessTime, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(text = "${info.estimatedDurationMinutes} min", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
-                        }
-                        if (info.estimatedDurationMinutes != null && info.distanceKm != null) {
-                            Spacer(modifier = Modifier.width(12.dp))
-                            Text(text = "•", fontSize = 12.sp, color = TextMedium)
-                            Spacer(modifier = Modifier.width(12.dp))
-                        }
-                        if (info.distanceKm != null) {
-                            Icon(Icons.AutoMirrored.Filled.DirectionsWalk, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
-                            Spacer(modifier = Modifier.width(4.dp))
-                            Text(text = "${info.distanceKm} km", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
-                        }
-                    }
-                }
-                if (info.startName != null || info.endName != null) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.NearMe, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(text = "${info.startName ?: ""} → ${info.endName ?: ""}", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium, textAlign = TextAlign.Center)
-                    }
-                }
-            }
 
-            Spacer(modifier = Modifier.height(16.dp))
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 10.dp),
+                    thickness = 1.dp,
+                    color = TextMedium.copy(alpha = 0.2f)
+                )
 
-            if (isLocked) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(48.dp),
-                    horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Lock,
-                        contentDescription = null,
-                        tint = TextMedium,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("Vyžaduje aktiváciu", fontSize = 14.sp, color = TextMedium)
-                }
-            } else {
-                when (gameWithStatus.status) {
-                    DownloadStatus.NOT_DOWNLOADED -> {
-                        Button(
-                            onClick = onDownload,
-                            modifier = Modifier.fillMaxWidth().height(48.dp),
-                            shape = RoundedCornerShape(12.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = SecondaryButton)
-                        ) {
-                            Text("Stiahnuť", color = PrimaryButtonText, fontSize = 16.sp)
+                    if (info.region != null) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Default.Place, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(text = info.region, fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
                         }
                     }
-                    DownloadStatus.DOWNLOADING -> {
-                        Button(
-                            onClick = {},
-                            enabled = false,
-                            modifier = Modifier.fillMaxWidth().height(48.dp),
-                            shape = RoundedCornerShape(12.dp)
-                        ) {
-                            Text("Sťahujem...", fontSize = 16.sp)
-                        }
-                    }
-                    DownloadStatus.DOWNLOADED -> {
-                        Button(
-                            onClick = onPlay,
-                            modifier = Modifier.fillMaxWidth().height(48.dp),
-                            shape = RoundedCornerShape(12.dp),
-                            colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
-                        ) {
-                            Text("Hrať", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                        }
-                    }
-                    DownloadStatus.UPDATE_AVAILABLE -> {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            Button(
-                                onClick = onPlay,
-                                modifier = Modifier.weight(1f).height(48.dp),
-                                shape = RoundedCornerShape(12.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
-                            ) {
-                                Text("Hrať", color = PrimaryButtonText, fontWeight = FontWeight.Bold)
+                    if (info.estimatedDurationMinutes != null || info.distanceKm != null) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            if (info.estimatedDurationMinutes != null) {
+                                Icon(Icons.Default.AccessTime, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text(text = "${info.estimatedDurationMinutes} min", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
                             }
+                            if (info.estimatedDurationMinutes != null && info.distanceKm != null) {
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Text(text = "•", fontSize = 12.sp, color = TextMedium)
+                                Spacer(modifier = Modifier.width(12.dp))
+                            }
+                            if (info.distanceKm != null) {
+                                Icon(Icons.AutoMirrored.Filled.DirectionsWalk, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                                Spacer(modifier = Modifier.width(4.dp))
+                                Text(text = "${info.distanceKm} km", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium)
+                            }
+                        }
+                    }
+                    if (info.startName != null || info.endName != null) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(Icons.Default.NearMe, contentDescription = null, tint = TextMedium, modifier = Modifier.size(13.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(text = "${info.startName ?: ""} → ${info.endName ?: ""}", fontSize = 12.sp, lineHeight = 14.sp, color = TextMedium, textAlign = TextAlign.Center)
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                if (isLocked) {
+                    Button(
+                        onClick = onPurchase,
+                        enabled = !isPurchasing,
+                        modifier = Modifier.fillMaxWidth().height(48.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(containerColor = Amber)
+                    ) {
+                        if (isPurchasing) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(20.dp),
+                                color = PrimaryButtonText,
+                                strokeWidth = 2.dp
+                            )
+                        } else {
+                            Text(
+                                text = if (!price.isNullOrEmpty()) "Kúpiť hru · $price" else "Kúpiť hru",
+                                color = PrimaryButtonText,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                } else {
+                    when (gameWithStatus.status) {
+                        DownloadStatus.NOT_DOWNLOADED -> {
                             Button(
                                 onClick = onDownload,
-                                modifier = Modifier.weight(1f).height(48.dp),
+                                modifier = Modifier.fillMaxWidth().height(48.dp),
                                 shape = RoundedCornerShape(12.dp),
                                 colors = ButtonDefaults.buttonColors(containerColor = SecondaryButton)
                             ) {
-                                Text("Aktualizovať", color = PrimaryButtonText)
+                                Text("Stiahnuť", color = PrimaryButtonText, fontSize = 16.sp)
+                            }
+                        }
+                        DownloadStatus.DOWNLOADING -> {
+                            Button(
+                                onClick = {},
+                                enabled = false,
+                                modifier = Modifier.fillMaxWidth().height(48.dp),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text("Sťahujem...", fontSize = 16.sp)
+                            }
+                        }
+                        DownloadStatus.DOWNLOADED -> {
+                            Button(
+                                onClick = onPlay,
+                                modifier = Modifier.fillMaxWidth().height(48.dp),
+                                shape = RoundedCornerShape(12.dp),
+                                colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                            ) {
+                                Text("Hrať", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                            }
+                        }
+                        DownloadStatus.UPDATE_AVAILABLE -> {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Button(
+                                    onClick = onPlay,
+                                    modifier = Modifier.weight(1f).height(48.dp),
+                                    shape = RoundedCornerShape(12.dp),
+                                    colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                                ) {
+                                    Text("Hrať", color = PrimaryButtonText, fontWeight = FontWeight.Bold)
+                                }
+                                Button(
+                                    onClick = onDownload,
+                                    modifier = Modifier.weight(1f).height(48.dp),
+                                    shape = RoundedCornerShape(12.dp),
+                                    colors = ButtonDefaults.buttonColors(containerColor = SecondaryButton)
+                                ) {
+                                    Text("Aktualizovať", color = PrimaryButtonText)
+                                }
                             }
                         }
                     }
