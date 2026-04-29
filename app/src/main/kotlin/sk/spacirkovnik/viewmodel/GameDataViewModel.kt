@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import sk.spacirkovnik.data.GameCacheManager
+import sk.spacirkovnik.data.GameCompletionManager
 import sk.spacirkovnik.data.GameProgressManager
 import sk.spacirkovnik.model.Gender
 import sk.spacirkovnik.model.GameScreen
@@ -14,6 +15,7 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
 
     private val cacheManager = GameCacheManager(application)
     private val progressManager = GameProgressManager(application)
+    private val completionManager = GameCompletionManager()
 
     private val _index = mutableIntStateOf(0)
     private val _state = mutableStateOf(GameState())
@@ -70,6 +72,10 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
 
     fun isLastScreen(): Boolean {
         return _index.intValue >= _state.value.screens.size - 1
+    }
+
+    fun recordCompletion() {
+        currentGameId?.let { completionManager.recordCompletion(it) }
     }
 
     fun clearProgress() {

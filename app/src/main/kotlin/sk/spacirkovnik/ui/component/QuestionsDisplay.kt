@@ -143,6 +143,7 @@ fun QuestionsDisplay(
                 ScreenType.CONTINUE -> OneButton(
                     {
                         if (gameDataViewModel.isLastScreen()) {
+                            gameDataViewModel.recordCompletion()
                             gameDataViewModel.clearProgress()
                             onGameFinished()
                         } else {
