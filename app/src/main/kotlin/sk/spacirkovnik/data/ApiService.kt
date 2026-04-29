@@ -12,17 +12,12 @@ const val FIREBASE_DATABASE_URL =
 
 interface ApiService {
 
-    @GET("catalog.json")
-    suspend fun getGameIndex(): GameIndexResponse
+    @GET("catalog/games-info.json")
+    suspend fun getGameIndex(): List<GameInfo>
 
     @GET("games/{gameId}.json")
     suspend fun getGame(@Path("gameId") gameId: String): GameDefinition
 }
-
-data class GameIndexResponse(
-    val version: Int = 1,
-    val games: List<GameInfo>
-)
 
 object RetrofitInstance {
     private val retrofit = Retrofit.Builder()
