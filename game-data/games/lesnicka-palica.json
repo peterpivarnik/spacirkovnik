@@ -290,8 +290,8 @@
     {
       "text": "„Správne! Videla som niekoho ísť s lesníckou palicou popri brehu. Kúsok ďalej sa zvykne z vody vynárať starý múdry kapor Kvido. Počkaj na neho pri brehu - on tu pozná každý kút!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.10263404673947,
-      "targetLongitude": 17.114423078091995,
+      "targetLatitude": 48.102238,
+      "targetLongitude": 17.110986,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/labut.jpeg?alt=media"
     },
     {
@@ -365,8 +365,8 @@
     {
       "text": "„Kváá, výborne! Sova Oľga ti prezradí zvyšok! Teraz bež do lesa a hľadaj strom, ktorý rastie v tvare písmena \"V\". Na ňom býva stará múdra sova Oľga - ona vie úplne všetko!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.10566511612079,
-      "targetLongitude": 17.109467224681097,
+      "targetLatitude": 48.108218,
+      "targetLongitude": 17.113962,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/zaba.jpeg?alt=media"
     },
     {
