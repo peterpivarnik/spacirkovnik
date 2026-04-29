@@ -53,8 +53,8 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    private fun buildGameList(response: sk.spacirkovnik.data.GameIndexResponse) =
-        response.games.filter { it.visible != false }.map { info ->
+    private fun buildGameList(response: List<GameInfo>) =
+        response.filter { it.visible != false }.map { info ->
             val cachedVersion = cacheManager.getCachedVersion(info.id)
             val status = when {
                 cachedVersion == null -> DownloadStatus.NOT_DOWNLOADED
