@@ -5,7 +5,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -58,7 +57,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -156,8 +154,8 @@ fun GameListScreen(
                             .fillMaxWidth()
                             .padding(top = 0.dp, bottom = 4.dp)
                     ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.logo),
+                        AsyncImage(
+                            model = R.drawable.logo,
                             contentDescription = "Spacirkovnik logo",
                             modifier = Modifier.size(72.dp)
                         )
