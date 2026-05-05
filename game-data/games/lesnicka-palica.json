@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 17,
+  "version": 18,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -208,7 +208,7 @@
       ]
     },
     {
-      "text": "„Správne! Ty si naozaj múdry! Pozri - práve sem skáče veverička. Tá ti ukáže, kadiaľ utekal ten človek s palicou. Bež za ňou!”",
+      "text": "„Správne! Ty si naozaj {múdry|múdra}! Pozri - práve sem skáče veverička. Tá ti ukáže, kadiaľ utekal ten človek s palicou. Bež za ňou!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vlk.jpeg?alt=media"
     },
@@ -295,12 +295,12 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/labut.jpeg?alt=media"
     },
     {
-      "text": "„Počkaj na Kvida... Voda je tu pokojná a krásne sa v nej odrážajú stromy. Ale dokedy tu budem čakať? Hádam sa ukáže čoskoro! Trpezlivosť je vraj cnosť, ale ja som naozaj zvedavý, čo mi kapor povie!”",
+      "text": "„Počkaj na Kvida... Voda je tu pokojná a krásne sa v nej odrážajú stromy. Ale dokedy tu budem čakať? Hádam sa ukáže čoskoro! Trpezlivosť je vraj cnosť, ale ja som naozaj {zvedavý|zvedavá}, čo mi kapor povie!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/kapor.jpeg?alt=media"
     },
     {
-      "text": "„Žblnk! Hmm, niekto ma tu volá? Aha, ty si ten slávny hľadač palice! Ja som kapor Kvido. Pomôžem ti, ale najskôr mi odpovedz!”",
+      "text": "„Žblnk! Hmm, niekto ma tu volá? Aha, ty si {ten slávny hľadač|tá slávna hľadačka} palice! Ja som kapor Kvido. Pomôžem ti, ale najskôr mi odpovedz!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/kapor.jpeg?alt=media"
     },
@@ -335,7 +335,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/kapor.jpeg?alt=media"
     },
     {
-      "text": "„Kváááá! Kvááá! Vidím ťa, kamarát! Ja som žabka Zelinka! Už som o tebe počula! Videla som niekoho v kapucni bežať tadiaľto! Viem, kadiaľ išiel, ale najprv musíš uhádnuť, ako sa volá táto časť Dunaja!”",
+      "text": "„Kváááá! Kvááá! Vidím ťa, {kamarát|kamarátka}! Ja som žabka Zelinka! Už som o tebe počula! Videla som niekoho v kapucni bežať tadiaľto! Viem, kadiaľ išiel, ale najprv musíš uhádnuť, ako sa volá táto časť Dunaja!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/zaba.jpeg?alt=media"
     },
