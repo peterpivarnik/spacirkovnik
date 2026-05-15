@@ -1,273 +1,376 @@
 {
   "id": "rybar-z-drazdiaka",
   "title": "Rybár z Draždiaka",
-  "version": 1,
+  "version": 2,
   "screens": [
     {
       "text": "Rybár z Draždiaka",
       "type": "CONTINUE",
       "buttonText": "Poď na dobrodružstvo!",
       "fontSize": 26,
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+      "screenId": 0
     },
     {
-      "text": "Dnes sa vydáme k jazeru Draždiak - najväčšiemu jazeru v Petržalke. Má zaujímavú históriu a ukrýva nejedno tajomstvo! Sleduj mapu a poď k jazeru.",
+      "text": "Špacírkovník sa zakrútil a z jednej šípky vyleteli drobné modré iskričky! Tá šípka ukazuje k vode — k jazeru Draždiak. Vraj tam dnes rybár ulovil niečo naozaj výnimočné... Bež sa tam pozrieť!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
+      "screenId": 1
+    },
+    {
+      "text": "Dnes sa vydáme k jazeru Draždiak — najväčšiemu jazeru v Petržalke. Sleduj mapu a poď k jazeru.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.11700,
-      "targetLongitude": 17.10800,
-      "imageUrl": ""
+      "targetLatitude": 48.106303,
+      "targetLongitude": 17.110427,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero.jpeg?alt=media",
+      "screenId": 2
     },
     {
-      "text": "Vitaj pri Draždiaku! Toto jazero je obľúbeným miestom na oddych pre tisíce Petržalčanov. V lete sa tu ľudia kúpu, v zime korčuľujú a po celý rok tu chodia rybári loviť ryby.",
+      "text": "Vitaj pri Draždiaku! Pri brehu je informačná tabuľa o jazere. Zastav sa a prečítaj si ju. Akú rozlohu má jazero Draždiak?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "19,4 ha",
+          "correct": false
+        },
+        {
+          "text": "23,2 ha",
+          "correct": true
+        },
+        {
+          "text": "31,5 ha",
+          "correct": false
+        },
+        {
+          "text": "15,8 ha",
+          "correct": false
+        }
+      ],
+      "screenId": 2
+    },
+    {
+      "text": "Len 23,2 hektárov — nie je to veľa. Poď bližšie k brehu, kde sedí starý rybár s udicou!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10643,
+      "targetLongitude": 17.111921,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+      "screenId": 3
+    },
+    {
+      "text": "Vedľa rybára sedia tri vnúčatá — Kubko, Zuzka a Jurko — a netrpezlivo čakajú, čo dedko uloví.",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar_vnucata.jpeg?alt=media",
+      "screenId": 4
     },
     {
-      "text": "Pri brehu si všimneš starého muža s rybárskym prútom a veľkým klobúkom. Sedí na skladacej stoličke a pokojne hľadí na vodu. Keď ťa zbadá, usmieva sa a kýva ti rukou.",
+      "text": "Zrazu sa udica prudko zachveje! Rybár ju zdvihne a z vody vyletí malá zlatá rybka. Celá žiari ako slnko a na hlave má korunku z drobných perál. Vnúčatá zašepkajú: „Dedko, to je zlatá rybka! Tá plní želania!“",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar_vnucata.jpeg?alt=media",
+      "screenId": 5
     },
     {
-      "text": "Ahoj, mladý priateľu! Volám sa Ondrej a rybárčim tu pri Draždiaku už päťdesiat rokov. Pamätám si časy, keď tu ešte žiadne jazero nebolo! Chceš počuť, ako Draždiak vznikol?",
+      "text": "Rybka prehovorí: „Prepusť ma, rybár, a splním ti tri želania!“ Rybár sa zamyslí — je to dobrý rybár, ktorý vždy dodržiava pravidlá. Existuje napríklad obdobie, keď sa ryby nesmú loviť vôbec. Vieš, ako sa volá?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fzlata_rybka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Rybárska sezóna",
+          "correct": false
+        },
+        {
+          "text": "Rybí čas",
+          "correct": false
+        },
+        {
+          "text": "Doba hájenia",
+          "correct": true
+        },
+        {
+          "text": "Lovný zákaz",
+          "correct": false
+        }
+      ],
+      "screenId": 6
+    },
+    {
+      "text": "Správne — doba hájenia! V tom čase majú ryby pokoj na rozmnožovanie. Rybár to dobre vie a vždy to rešpektoval.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fzlata_rybka.jpeg?alt=media",
+      "screenId": 7
+    },
+    {
+      "text": "Rybár sa usmeje: „Dobre, rybka, si voľná.“ Spustí ju späť do vody. V tom deti stískajú dedka za ruku: „Dedko! Prvé želanie! Chceme hračky — hneď, tu, pri jazere!“ Rybka pokrúti chvostom a zavolá: „Nech sa stane!“ Z ničoho nič sa pri brehu objavili škatule plné hračiek — roboty, poníky, stavebnice. Deti sa rozkričali od radosti.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.106985,
+      "targetLongitude": 17.114214,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fzlata_rybka.jpeg?alt=media",
+      "screenId": 8
+    },
+    {
+      "text": "Kým sa deti hrajú, rozhliadneš sa okolo. Po hladine plávajú rôzne vodné vtáky. Ktorý vták je známy tým, že je celoživotné verný svojmu partnerovi?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fhracky.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Kačka",
+          "correct": false
+        },
+        {
+          "text": "Čajka",
+          "correct": false
+        },
+        {
+          "text": "Lyska",
+          "correct": false
+        },
+        {
+          "text": "Labuť",
+          "correct": true
+        }
+      ],
+      "screenId": 9
+    },
+    {
+      "text": "Zrazu počuješ krik — deti odhodili hračky do trávy a kričia na dedka: „Dedko, hračky sú super, ale chceme každý VLASTNÉ ihrisko priamo tu pri jazere! S trampolínami a šmykľavkami!“ Rybár zaváha, ale deti naliehajú.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fhracky.jpeg?alt=media",
+      "screenId": 10
+    },
+    {
+      "text": "Deti behnú k brehu a ukazujú prstom: „Tu! Práve tu chceme ihrisko! S trampolínami až po stromy a šmykľavkou do vody!“ Rybár pokrúti hlavou, ale podľahne. Poď za nimi k brehu!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.104608,
+      "targetLongitude": 17.114232,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fhracky.jpeg?alt=media",
+      "screenId": 11
+    },
+    {
+      "text": "Rybár zavolá rybku: „Druhé želanie — chceme ihriská pri jazere!“ Rybka sa zamračí, ale prikývne: „Nech sa stane. Ale zostáva ti už len jedno želanie.“ Pri brehu sa zrazu objavili tri obrovské ihriská!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media",
+      "screenId": 12
+    },
+    {
+      "text": "Ihriská zabrali kus brehu a siahajú takmer až k vodnej hladine. Vieš, ako vlastne toto jazero vzniklo — z čoho sa tu ťažilo, kým tu bola jama, ktorá sa naplnila vodou?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Zlato",
+          "correct": false
+        },
+        {
+          "text": "Uhlie",
+          "correct": false
+        },
+        {
+          "text": "Štrk a piesok",
+          "correct": true
+        },
+        {
+          "text": "Hlina na tehly",
+          "correct": false
+        }
+      ],
+      "screenId": 13
+    },
+    {
+      "text": "Správne — štrk a piesok na stavbu Petržalky. Keď ho vyťažili, ostala jama, ktorá sa naplnila vodou. A teraz tu stoja ihriská práve na brehu tohto vzácneho miesta. Poď sa pozrieť bližšie — ihriská zasahujú do vysokej trávy pri brehu!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.102797,
+      "targetLongitude": 17.11424,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media",
+      "screenId": 14
+    },
+    {
+      "text": "Táto vysoká tráva priamo pri vode chráni breh, čistí vodu a vtáky si v nej stavajú hniezda. Vieš, ako sa volá?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Ftrstina.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Pšenica",
+          "correct": false
+        },
+        {
+          "text": "Bambus",
+          "correct": false
+        },
+        {
+          "text": "Trstina",
+          "correct": true
+        },
+        {
+          "text": "Kukurica",
+          "correct": false
+        }
+      ],
+      "screenId": 15
+    },
+    {
+      "text": "Ihriská zničili trstinu a vtáky vyplašene odletovali. Ale deťom to bolo jedno — Jurko kričí: „Dedko, ihriská sú nuda! Chceme ZÁBAVNÝ PARK s horskými dráhami!\" Rybár sa zdvihne a ide za rybkou — musí ju nájsť na druhom konci jazera. Poď za ním!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.101135,
+      "targetLongitude": 17.113436,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Ftrstina.jpeg?alt=media",
+      "screenId": 16
+    },
+    {
+      "text": "Rybár ide zavolať rybku. Ale predtým si hodí udicu — rybolov má v krvi. Na rybolov vždy chodil poctivo — s povolením. Ako sa volá povolenie, ktoré musí mať každý rybár?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Vodičský preukaz",
+          "correct": false
+        },
+        {
+          "text": "Rybársky lístok",
+          "correct": true
+        },
+        {
+          "text": "Lovecký preukaz",
+          "correct": false
+        },
+        {
+          "text": "Občiansky preukaz",
+          "correct": false
+        }
+      ],
+      "screenId": 17
+    },
+    {
+      "text": "Rybár zavolá rybku naposledy — ale rybka sa neozýva. Musíte ju nájsť! Poď pozdĺž brehu, možno je niekde tam!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.101855,
+      "targetLongitude": 17.11154,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+      "screenId": 18
+    },
+    {
+      "text": "Rybka sa konečne vynorí! Rybár rýchlo kričí: „Tretie želanie — tri zábavné parky pri jazere!“ Rybka sa zamračí a otočí sa na teba: „Ty! {Mladý priateľ|Mladá priateľka}! Počul{·a} si, čo chce. Čo si myslíš — mám to splniť?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Áno, spľň to! Deti budú šťastné.",
+          "correct": false
+        },
+        {
+          "text": "Nie! Zničilo by to celé jazero.",
+          "correct": true
+        }
+      ],
+      "screenId": 19
+    },
+    {
+      "text": "„Správne! Ja som strážkyňa tohto jazera — a toto želanie nesplním. Keby som ho splnila, trstina by zmizla, vtáky by odleteli, ryby by zahynuli. Zničila by som vlastný domov.“ Rybka sa otočí k rybárovi: „A keďže vaša nenásytnosť nemá konca — beriem späť aj predchádzajúce želania.“ Ihriská zmizli. Hračky zmizli.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
+      "screenId": 20
+    },
+    {
+      "text": "Všetko zmizlo. Breh je tichý, hladina pokojná — akoby sa nič nestalo. Rybár smutne stojí pri vode. Vtom si všimneš tabuľku pri brehu. Poď sa na ňu pozrieť!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.102236,
+      "targetLongitude": 17.110948,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
+      "screenId": 21
+    },
+    {
+      "text": "Na tabuľke je napísaný zákaz. Smieš pri Draždiaku kŕmiť zvierata?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Áno, kŕmiť sa smie",
+          "correct": false
+        },
+        {
+          "text": "Nie, kŕmenie je zakázané",
+          "correct": true
+        },
+        {
+          "text": "Smú sa kŕmiť len labute",
+          "correct": false
+        },
+        {
+          "text": "Len kŕmenie labutí je zakázané",
+          "correct": false
+        }
+      ],
+      "screenId": 22
+    },
+    {
+      "text": "Správne — kŕmenie je tu zakázané. Rybár sa zahľadí na hladinu a potichu povie: „Možno to tak malo byť. Toto jazero nepotrebuje zábavné parky ani ihriská. Potrebuje pokoj.“ Deti sa blížia, stíchnu a pozerajú na vodu.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
+      "screenId": 23
+    },
+    {
+      "text": "Vráť sa k miestu, kde rybár chytil rybku!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10643,
+      "targetLongitude": 17.111921,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
+      "screenId": 24
+    },
+    {
+      "text": "Draždiak vznikol z obrovskej jamy po ťažbe štrku — a teraz je to najväčšie jazero v Petržalke a domov zlatej rybky.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
+      "screenId": 25
+    },
+    {
+      "text": "Rybár pokojne sedí pri brehu, kde všetko začalo. „Pozrite sa — krásne jazero, čistá voda, labute, kačky a trstina. To je ten najväčší poklad. Netreba mať vždy viac a viac.“ Deti sa upokojili a začali hádzať kamienky do vody.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
+      "screenId": 26
+    },
+    {
+      "text": "Zlatá rybka sa vynorí a usmeje sa. „A ešte jedna posledná otázka pre teba — vieš, kto je najobávanejší dravec v tomto jazere? Ryba s ostrými zubami, ktorá loví iné ryby.“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fzlata_rybka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Kapor",
+          "correct": false
+        },
+        {
+          "text": "Pleskáč",
+          "correct": false
+        },
+        {
+          "text": "Šťuka",
+          "correct": true
+        },
+        {
+          "text": "Karas",
+          "correct": false
+        }
+      ],
+      "screenId": 27
+    },
+    {
+      "text": "Zlatá rybka sa pozrie na teba: „Áno, šťuka! Správne. A ďakujem ti, {mladý priateľ|mladá priateľka}, že si tu bol{·a}. Zapamätaj si — príroda nám dáva viac, než si myslíme. Stačí sa zastaviť, nadýchnuť sa a počúvať. A keď niekedy uvidíš zlatý odlesk pod hladinou... to som ja!“",
       "type": "CONTINUE",
-      "buttonText": "Áno, povedz mi to!",
-      "imageUrl": ""
+      "buttonText": "Ďakujem, rybka!",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fzlata_rybka.jpeg?alt=media",
+      "screenId": 28
     },
     {
-      "text": "Keď som bol malý chlapec, tu boli len lúky a polia. Potom sa v Bratislave začalo veľké stavanie. Petržalka sa mala premeniť na obrovské sídlisko pre desaťtisíce ľudí. A na stavbu panelákov bolo treba veľa materiálu!",
+      "text": "Zlatá rybka mávla chvostom a zmizla pod hladinou. Na vode zostal len jemný zlatý odlesk, ktorý sa pomaly rozplynul. Ale ty vieš, že tam niekde dole pláva a stráži toto krásne jazero.",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fzlata_rybka.jpeg?alt=media",
+      "screenId": 29
     },
     {
-      "text": "Vieš, čo sa tu ťažilo a z čoho potom vzniklo jazero?",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "Zlato", "correct": false },
-        { "text": "Uhlie", "correct": false },
-        { "text": "Štrk a piesok", "correct": true },
-        { "text": "Hlina na tehly", "correct": false }
-      ]
-    },
-    {
-      "text": "Správne! Ťažil sa tu štrk a piesok na stavbu sídliska. Keď vyťažili dosť materiálu, ostala tu obrovská jama. Tá sa postupne naplnila spodnou vodou a vzniklo jazero, ktoré dnes poznáme ako Draždiak! Poď, prejdeme sa po brehu.",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.11750,
-      "targetLongitude": 17.10900,
-      "imageUrl": ""
-    },
-    {
-      "text": "Vedel si, že názov Draždiak pochádza od lesníka Gejzu Dražďáka? Ten sa celý život staral o petržalské lesy a prírodu. Ľudia ho mali tak radi, že po ňom pomenovali toto jazero. Dokonca tu neďaleko má svoju záhradu!",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Aké povolanie mal Gejza Dražďák, podľa ktorého je jazero pomenované?",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "Rybár", "correct": false },
-        { "text": "Lesník", "correct": true },
-        { "text": "Učiteľ", "correct": false },
-        { "text": "Starosta", "correct": false }
-      ]
-    },
-    {
-      "text": "Správne! Gejza Dražďák bol lesník, ktorý sa staral o prírodu v Petržalke. Vďaka nemu tu máme krásne lesy a parky. Poďme sa pozrieť na samotné jazero!",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.11780,
-      "targetLongitude": 17.10950,
-      "imageUrl": ""
-    },
-    {
-      "text": "Draždiak je naozaj veľké jazero. Má rozlohu asi 30 hektárov a hĺbku okolo 5 až 8 metrov. To je dosť na to, aby tu žili veľké ryby! Ale nie vždy tu bolo jazero. Pred ťažbou štrku tu boli polia a lúky.",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Jazero, ktoré vzniklo ťažbou štrku alebo piesku a naplnilo sa vodou, sa nazýva:",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "Priehrada", "correct": false },
-        { "text": "Štrkovisko", "correct": true },
-        { "text": "Rybník", "correct": false },
-        { "text": "Močiar", "correct": false }
-      ]
-    },
-    {
-      "text": "Správne! Draždiak je štrkovisko - jazero, ktoré vzniklo ťažbou. Na Slovensku je takýchto jazier veľa a mnohé z nich sú obľúbené miesta na kúpanie a rybárčenie. Poďme sa pozrieť, čo tu žije!",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.11800,
-      "targetLongitude": 17.11000,
-      "imageUrl": ""
-    },
-    {
-      "text": "Draždiak je plný života! V jazere žijú kapry, šťuky, zubáče, ostrieže a mnoho ďalších rýb. Ja som tu za tie roky chytil stovky rýb. Najväčší kapor, akého som kedy chytil, mal takmer desať kilogramov!",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Ktorá z týchto rýb je dravá a loví iné ryby?",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "Kapor", "correct": false },
-        { "text": "Pleskáč", "correct": false },
-        { "text": "Šťuka", "correct": true },
-        { "text": "Karas", "correct": false }
-      ]
-    },
-    {
-      "text": "Správne! Šťuka je obávaný dravec sladkých vôd. Má ostré zuby a dokáže zaútočiť bleskovou rýchlosťou. Rybári ju veľmi radi lovia, ale musíš byť šikovný, aby si ju chytil! Poďme ďalej po brehu.",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.11850,
-      "targetLongitude": 17.11100,
-      "imageUrl": ""
-    },
-    {
-      "text": "Pozri sa na tie vtáky pri vode! Draždiak je domovom mnohých vodných vtákov. Žijú tu kačky, labute, lysky, potápky a v zime sem priletia aj čajky. Vtáky sú dôležitou súčasťou prírody okolo jazera.",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Ktorý vodný vták je známy tým, že je celoživotne verný svojmu partnerovi?",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "Kačka", "correct": false },
-        { "text": "Čajka", "correct": false },
-        { "text": "Lyska", "correct": false },
-        { "text": "Labuť", "correct": true }
-      ]
-    },
-    {
-      "text": "Správne! Labute tvoria páry na celý život. Keď vidíš dve labute plávať vedľa seba, pravdepodobne sú spolu už veľa rokov. Preto sú symbolom lásky a vernosti. Poďme ďalej!",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.11900,
-      "targetLongitude": 17.11000,
-      "imageUrl": ""
-    },
-    {
-      "text": "Vianoce pri Draždiaku sú niečo úžasné. Jazero zamrzne a deti sa tu korčuľujú. Ale pozor - na ľad sa smie ísť, len keď je dostatočne hrubý! Vedel si, že ľad musí mať aspoň určitú hrúbku, aby unesol človeka?",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Aká minimálna hrúbka ľadu sa považuje za bezpečnú pre chôdzu?",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "2 cm", "correct": false },
-        { "text": "5 cm", "correct": false },
-        { "text": "10 cm", "correct": true },
-        { "text": "30 cm", "correct": false }
-      ]
-    },
-    {
-      "text": "Správne! Aspoň 10 centimetrov ľadu treba, aby unesol dospelého človeka. Ale vždy buď opatrný - hrúbka ľadu nie je všade rovnaká! Radšej choď na ľad, len keď to povolia odborníci. Poďme ďalej.",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.11870,
-      "targetLongitude": 17.10850,
-      "imageUrl": ""
-    },
-    {
-      "text": "Každý rybár musí mať rybársky lístok - to je povolenie na rybolov. Bez neho sa nesmie loviť! Rybári sa tiež musia starať o čistotu okolo jazera. Žiadne odpadky, žiadne znečisťovanie vody. Príroda nám dáva veľa, ale musíme sa o ňu starať.",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Ako sa volá povolenie, ktoré musí mať každý rybár, aby mohol loviť ryby?",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "Vodičský preukaz", "correct": false },
-        { "text": "Rybársky lístok", "correct": true },
-        { "text": "Lovecký preukaz", "correct": false },
-        { "text": "Občiansky preukaz", "correct": false }
-      ]
-    },
-    {
-      "text": "Správne! Rybársky lístok je povinný pre každého rybára. Okrem neho potrebuješ aj povolenie na konkrétny revír - teda na konkrétne jazero alebo rieku. Pravidlá sú dôležité, aby ryby v jazerách zostali aj pre budúce generácie. Poďme ďalej!",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.11850,
-      "targetLongitude": 17.10900,
-      "imageUrl": ""
-    },
-    {
-      "text": "Okolo jazera rastú rôzne stromy a kríky. Na brehu nájdeš aj trstinu a rákosie. Trstina je veľmi dôležitá - jej korene čistia vodu a v hustorastúcej trstine si vtáky stavajú hniezda. Je to príroda, ktorá sa stará sama o seba!",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Ako sa volá vysoká tráva, ktorá rastie pri brehu jazier a riek a slúži vtákom na hniezdenie?",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "Pšenica", "correct": false },
-        { "text": "Bambus", "correct": false },
-        { "text": "Trstina", "correct": true },
-        { "text": "Kukurica", "correct": false }
-      ]
-    },
-    {
-      "text": "Správne! Trstina je neodmysliteľná súčasť každého zdravého jazera. Chráni breh pred eróziou a je domovom mnohých živočíchov. Poďme na ďalšie miesto!",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.11800,
-      "targetLongitude": 17.10800,
-      "imageUrl": ""
-    },
-    {
-      "text": "Vedel si, že Petržalka je najväčšie sídlisko v strednej Európe? Stavalo sa tu od 70. rokov 20. storočia. Paneláky tu vyrástli za pár rokov a nasťahovali sa sem desaťtisíce ľudí. Draždiak je pre nich kúsok prírody uprostred betónu.",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "V ktorom desaťročí sa začala masová výstavba petržalského sídliska?",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "V 50. rokoch", "correct": false },
-        { "text": "V 60. rokoch", "correct": false },
-        { "text": "V 70. rokoch", "correct": true },
-        { "text": "V 90. rokoch", "correct": false }
-      ]
-    },
-    {
-      "text": "Správne! Výstavba sídliska Petržalka sa začala v roku 1973. Bolo to jedno z najväčších stavebných projektov v Československu. Poďme na posledné zastavenie!",
-      "type": "NAVIGATION",
-      "targetLatitude": 48.11750,
-      "targetLongitude": 17.10750,
-      "imageUrl": ""
-    },
-    {
-      "text": "Posledná otázka! Každý správny rybár vie, že ryby treba chrániť. Preto existujú pravidlá - niektoré ryby sa nesmú loviť v určitom období, aby sa mohli v pokoji rozmnožovať. Tomuto obdobiu sa hovorí...",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Ako sa volá obdobie, keď sa ryby nesmú loviť, aby sa mohli nerušene rozmnožovať?",
-      "type": "QUESTION",
-      "imageUrl": "",
-      "answers": [
-        { "text": "Rybárska sezóna", "correct": false },
-        { "text": "Rybí čas", "correct": false },
-        { "text": "Doba hájenia", "correct": true },
-        { "text": "Lovný zákaz", "correct": false }
-      ]
-    },
-    {
-      "text": "Správne! Doba hájenia je veľmi dôležitá. Vďaka nej majú ryby pokoj na rozmnožovanie a v jazere ich bude dosť aj pre budúce generácie. To je základ - brať si od prírody len toľko, koľko potrebujeme.",
-      "type": "CONTINUE",
-      "buttonText": "Ďakujem, Ondrej!",
-      "imageUrl": ""
-    },
-    {
-      "text": "Bol som rád, že si ma navštívil, mladý priateľu! Teraz už vieš, ako vznikol Draždiak, čo v ňom žije a prečo je dôležité chrániť prírodu okolo nás. Kedykoľvek pôjdeš okolo jazera, zastav sa, nadýchni sa a počúvaj - príroda ti vždy niečo povie. Tight lines, ako hovoria rybári - pevné šnúry!",
+      "text": "Modré iskričky na šípke zhasli a Špacírkovník spokojne stíchol. Jazero je v pokoji a zlatá rybka stráži jeho hladinu. Ale rozcestník má ešte veľa šípok — kam pôjdeš nabudúce?",
       "type": "CONTINUE",
       "buttonText": "Späť na zoznam hier",
       "fontSize": 22,
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
+      "screenId": 30
     }
   ]
 }

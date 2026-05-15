@@ -1,290 +1,504 @@
 {
   "id": "tajomstvo-janka-krala",
   "title": "Tajomstvo Janka Kráľa",
-  "version": 1,
+  "version": 2,
   "screens": [
     {
       "text": "Tajomstvo Janka Kráľa",
       "type": "CONTINUE",
       "buttonText": "Poď na dobrodružstvo!",
       "fontSize": 26,
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fbasne_vietor.jpeg?alt=media",
+      "screenId": 0
     },
     {
-      "text": "Výborne! Dobrodružstvo sa začína! Najprv sa musíš presunúť do Sadu Janka Kráľa - jedného z najstarších verejných parkov v celej Európe. Sleduj mapu a vydaj sa na cestu!",
+      "text": "Na Špacírkovníku sa rozvíril vietor a jedna šípka sa rozsvietila tajomným fialovým svetlom! Ukazuje k Sadu Janka Kráľa — jednému z najstarších parkov v Európe. Hovorí sa, že tam dnes blúdi duch slávneho básnika a že potrebuje pomoc! Poď sa pozrieť, čo sa tam deje!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
+      "screenId": 1
+    },
+    {
+      "text": "Výborne! Dobrodružstvo sa začína! Najprv sa musíš presunúť do Sadu Janka Kráľa - jedného z najstarších verejných parkov v celej Európe. Dnes sa tam však deje niečo zvláštne. Sleduj mapu a vydaj sa na cestu!",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13200,
-      "targetLongitude": 17.10600,
-      "imageUrl": ""
+      "targetLatitude": 48.133991,
+      "targetLongitude": 17.109076,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_stary_strom.jpeg?alt=media",
+      "screenId": 2
     },
     {
-      "text": "Vitaj v Sade Janka Kráľa! Tento krásny park bol založený už v rokoch 1774 až 1776, čo z neho robí jeden z najstarších mestských parkov v celej strednej Európe. Len sa rozhliadni - koruny starých stromov tu šumia už stáročia!",
+      "text": "Vitaj v Sade Janka Kráľa! Tento krásny park bol založený už v rokoch 1774 až 1776, čo z neho robí jeden z najstarších mestských parkov v celej strednej Európe. Hovorí sa, že duch básnika Janka Kráľa tu blúdi dodnes - veď park nesie práve jeho meno.",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_stary_strom.jpeg?alt=media",
+      "screenId": 2
     },
     {
-      "text": "Ale pozor! Niečo tu dnes nie je v poriadku. Cítiš ten zvláštny vánok? Hovorí sa, že keď sa v parku zdvihne tajomný vietor, je to znak, že duch básnika Janka Kráľa blúdi medzi stromami...",
+      "text": "Pozor! Niečo tu dnes nie je v poriadku. Cítiš ten zvláštny vánok? Dnes v noci prišla strašná búrka - a zdá sa, že rozfúkala niečo dôležité.",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fbasne_vietor.jpeg?alt=media",
+      "screenId": 3
     },
     {
-      "text": "A veru áno! Pred tebou sa zjaví priehľadná postava v dlhom plášti. Je to duch Janka Kráľa! Vyzerá smutne a drží v ruke prázdny zošit.",
+      "text": "Zrazu sa pred tebou objaví priehľadná postava v dlhom plášti. Je to duch Janka Kráľa! Vyzerá smutne a drží v ruke prázdny zošit.",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 4
     },
     {
-      "text": "Vitaj, mladý priateľ! Som Janko Kráľ, básnik. Kedysi som tu sedával pod stromami a písal básne o Slovensku, o slobode a o kráse prírody. Ale dnes v noci prišla strašná búrka a vietor mi rozfúkal všetky básne po celom parku!",
+      "text": "„Vitaj, {mladý priateľ|mladá priateľka}! Som Janko Kráľ, básnik. Celé roky strážim tento park a písal som tu básne o Slovensku, o slobode a o kráse prírody. Ale dnešná búrka mi rozfúkala všetky básne po celom parku - a čo je horšie, otvorila časové okno späť do roku 1848, najsilnejšieho roka môjho života.”",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 5
     },
     {
-      "text": "Pomôžeš mi nájsť mojich desať stratených básní? Sú ukryté na rôznych miestach v parku. Ale pozor - na každom mieste ťa čaká hádanka! Len ten, kto pozná históriu a prírodu, dokáže básne nájsť!",
+      "text": "„Pomôžeš mi nájsť mojich desať stratených básní? Každá z nich je kúsok časovej skladačky. Keď ich obnovíme všetky, časové okno sa uzavrie. Ak ich nenájdeme, čas v parku by sa mohol začať opakovať a všetko by opakovalo stále dookola. Ale pozor - na každom mieste ťa čaká hádanka!”",
       "type": "CONTINUE",
       "buttonText": "Jasné, pomôžem ti, Janko!",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 6
     },
     {
-      "text": "Výborne! Prvú báseň mi vietor odniesol ku starému dubu. Tento strom tu rastie už vyše dvesto rokov a pamätá si časy, keď tu ešte neboli žiadne mosty cez Dunaj. Poď, ukážem ti cestu!",
+      "text": "„Výborne, {odvážny pomocník|odvážna pomocníčka}! Prvú báseň mi vietor odniesol ku starému stromu. Tento strom tu rastie už vyše dvesto rokov a pamätá si časy, keď tu ešte neboli žiadne mosty cez Dunaj. Poď, ukážem ti cestu!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13250,
-      "targetLongitude": 17.10700,
-      "imageUrl": ""
+      "targetLatitude": 48.133325,
+      "targetLongitude": 17.110224,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_stary_strom.jpeg?alt=media",
+      "screenId": 7
     },
     {
-      "text": "Tu je ten prastarý dub! Pozri, ako má mohutnú korunu. Keď som bol živý, sedával som pod takýmito stromami a písal som básne. Vedel si, že som sa narodil ďaleko odtiaľto, v krásnom meste pod Tatrami?",
+      "text": "„Tu je ten starý strom! Pozri, ako má mohutnú korunu. Keď som bol živý, sedával som pod takýmito stromami a písal som básne. Vedel si, že som sa narodil ďaleko odtiaľto, v krásnom meste pod Tatrami?”",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_stary_strom.jpeg?alt=media",
+      "screenId": 8
     },
     {
-      "text": "Vieš, kde som sa narodil?",
+      "text": "„Vieš, kde som sa narodil?”",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
       "answers": [
-        { "text": "Bratislava", "correct": false },
-        { "text": "Liptovský Mikuláš", "correct": true },
-        { "text": "Banská Bystrica", "correct": false },
-        { "text": "Košice", "correct": false }
-      ]
+        {
+          "text": "Bratislava",
+          "correct": false
+        },
+        {
+          "text": "Liptovský Mikuláš",
+          "correct": true
+        },
+        {
+          "text": "Banská Bystrica",
+          "correct": false
+        },
+        {
+          "text": "Košice",
+          "correct": false
+        }
+      ],
+      "screenId": 9
     },
     {
-      "text": "Správne! Narodil som sa v Liptovskom Mikuláši v roku 1822. Ale do Bratislavy som prišiel študovať. A práve tu sa môj život navždy zmenil! Prvá báseň je tu, v konároch duba. Poďme ďalej - musím ti povedať, kde som študoval!",
+      "text": "„Správne, {šikovný bádateľ|šikovná bádateľka}! Narodil som sa v Liptovskom Mikuláši v roku 1822. Ale do Bratislavy som prišiel študovať. A práve tu sa môj život navždy zmenil! Prvý kúsok časovej skladačky drží - časové okno na chvíľu zoslablo. Prvá báseň je tu, v konároch stromu. Poďme ďalej!”",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 10
+    },
+    {
+      "text": "„Ale pozri, vidím ďalší list papiera! Vietor ho zaniesol k lavičke neďaleko odtiaľto. Poď, musíme sa poponáhľať!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13280,
-      "targetLongitude": 17.10750,
-      "imageUrl": ""
+      "targetLatitude": 48.132811,
+      "targetLongitude": 17.112275,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fbasne_vietor.jpeg?alt=media",
+      "screenId": 11
     },
     {
-      "text": "V Bratislave som študoval na slávnej škole, kde sa stretávali najlepší mladí Slováci. Bolo to miesto, kde sa rodili veľké myšlienky o budúcnosti nášho národa. Tu som stretol svojho veľkého učiteľa Ľudovíta Štúra!",
+      "text": "„V Bratislave som študoval na slávnej škole, kde sa stretávali najlepší mladí Slováci. Bolo to miesto, kde sa rodili veľké myšlienky o budúcnosti nášho národa. Tu som stretol svojho veľkého učiteľa Ľudovíta Štúra!”",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 12
     },
     {
-      "text": "Vieš, na ktorej bratislavskej škole som študoval?",
+      "text": "„Vieš, na ktorej bratislavskej škole som študoval?”",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
       "answers": [
-        { "text": "Univerzita Komenského", "correct": false },
-        { "text": "Evanjelické lýceum", "correct": true },
-        { "text": "Akadémia umení", "correct": false },
-        { "text": "Vojenská akadémia", "correct": false }
-      ]
+        {
+          "text": "Univerzita Komenského",
+          "correct": false
+        },
+        {
+          "text": "Evanjelické lýceum",
+          "correct": true
+        },
+        {
+          "text": "Akadémia umení",
+          "correct": false
+        },
+        {
+          "text": "Vojenská akadémia",
+          "correct": false
+        }
+      ],
+      "screenId": 13
     },
     {
-      "text": "Správne! Na Evanjelickom lýceu som sa naučil milovať slovenčinu a literatúru. Druhá báseň nájdená! Poďme ku gotickému kostolíku - tam by mala byť tretia.",
+      "text": "„Správne! Na Evanjelickom lýceu som sa naučil milovať slovenčinu a literatúru. Druhá báseň je späť a časové okno sa ešte viac zúžilo. Poďme ku gotickému kostolíku - tam by mala byť tretia.”",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 14
+    },
+    {
+      "text": "„Vidíš tú zaujímavú vežičku? To je gotický kostolík - vlastne to nie je kostolík, ale veža! Bola pôvodne súčasťou kláštora klarisiek v starom meste a v 19. storočí ju preniesli sem do parku. Pozri sa na jej portály - práve ony skrývajú ďalšiu stopu.”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13350,
-      "targetLongitude": 17.10800,
-      "imageUrl": ""
+      "targetLatitude": 48.134028,
+      "targetLongitude": 17.113959,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fveza_klarisiek.jpeg?alt=media",
+      "screenId": 15
     },
     {
-      "text": "Vidíš tú zaujímavú vežičku? To je gotický kostolík - vlastne to nie je kostolík, ale veža! Bola pôvodne súčasťou kláštora klarisiek v starom meste a v 19. storočí ju preniesli sem do parku. Nie je to úžasné?",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Táto veža je jedným zo symbolov nášho parku. Ale povedz mi - v ktorom storočí bol tento park založený?",
+      "text": "„Táto veža je jedným zo symbolov nášho parku. Dobre sa rozhliadni a spočítaj portály. Koľko vchodov (portálov) na veži vidíš?”",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fveza_klarisiek.jpeg?alt=media",
       "answers": [
-        { "text": "V 16. storočí", "correct": false },
-        { "text": "V 17. storočí", "correct": false },
-        { "text": "V 18. storočí", "correct": true },
-        { "text": "V 19. storočí", "correct": false }
-      ]
+        {
+          "text": "Jeden",
+          "correct": false
+        },
+        {
+          "text": "Tri",
+          "correct": false
+        },
+        {
+          "text": "Päť",
+          "correct": true
+        },
+        {
+          "text": "Sedem",
+          "correct": false
+        }
+      ],
+      "screenId": 16
     },
     {
-      "text": "Výborne! Park bol založený v rokoch 1774 až 1776, za vlády Márie Terézie. Vtedy sa volal jednoducho Mestský park. Moje meno dostal až oveľa neskôr. Tretia báseň visí priamo na veži! Poďme k Dunaju, odtiaľ ťa čaká ďalšia.",
+      "text": "„Výborne! Veža má päť výrazných gotických portálov - a za jedným z nich bola ukrytá tretia báseň. Tretí kúsok časovej skladačky je obnovený!”",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fveza_klarisiek.jpeg?alt=media",
+      "screenId": 17
+    },
+    {
+      "text": "„Ďalšiu báseň cítim niekde ďalej v parku — poďme!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13400,
-      "targetLongitude": 17.10850,
-      "imageUrl": ""
+      "targetLatitude": 48.135353,
+      "targetLongitude": 17.112342,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 18
     },
     {
-      "text": "Pozri sa na tú mohutnú rieku! Dunaj preteká cez celú Európu a spája mnoho národov. Keď som bol mladý, bol som veľký rebel. Raz som sa tak rozčúlil nad nespravodlivosťou, že som hodil do Dunaja svoj klobúk a šabľu! Moji priatelia si mysleli, že som sa zbláznil.",
+      "text": "„My Štúrovci sme urobili niečo, čo zmenilo Slovensko navždy. Stretli sme sa na kopci Devín a prisahali sme, že Slováci budú mať vlastný jazyk. A podarilo sa nám to! Uzákonili sme slovenský spisovný jazyk.”",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 19
     },
     {
-      "text": "Bol som súčasťou skupiny mladých Slovákov, ktorí bojovali za práva slovenského národa. Volali nás podľa nášho učiteľa. Vieš, ako sa volala naša skupina?",
+      "text": "„Vieš, v ktorom roku sme uzákonili slovenský spisovný jazyk?”",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
       "answers": [
-        { "text": "Bernolákovci", "correct": false },
-        { "text": "Matičiari", "correct": false },
-        { "text": "Štúrovci", "correct": true },
-        { "text": "Buditeľia", "correct": false }
-      ]
+        {
+          "text": "1793",
+          "correct": false
+        },
+        {
+          "text": "1822",
+          "correct": false
+        },
+        {
+          "text": "1843",
+          "correct": true
+        },
+        {
+          "text": "1918",
+          "correct": false
+        }
+      ],
+      "screenId": 20
     },
     {
-      "text": "Správne, boli sme Štúrovci! Ľudovít Štúr bol náš vodca a učiteľ. Spolu sme urobili niečo veľké pre celý národ. Štvrtá báseň leží tu pri brehu! Poďme ďalej, poviem ti o tom viac.",
+      "text": "„Správne! V roku 1843 sme na fare v Hlbokom uzákonili spisovnú slovenčinu. Bez toho by si dnes možno čítal tieto vety v úplne inom jazyku! Štvrtá báseň nájdená - a časové okno už nemá takú silu.”",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 21
+    },
+    {
+      "text": "„Počkaj — cítim ďalšiu báseň! Je niekde pri vode, tam kde Dunaj obteká park. Poď so mnou k nábrežiu! Dunaj tečie cez celú Európu a spája mnoho národov. Keď som bol mladý, bol som veľký rebel. Raz som sa tak rozčúlil nad nespravodlivosťou, že som hodil do Dunaja svoj klobúk a šabľu! Moji priatelia si mysleli, že som sa zbláznil.”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13380,
-      "targetLongitude": 17.10950,
-      "imageUrl": ""
+      "targetLatitude": 48.136908,
+      "targetLongitude": 17.112471,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
+      "screenId": 22
     },
     {
-      "text": "My Štúrovci sme urobili niečo, čo zmenilo Slovensko navždy. Stretli sme sa na kopci Devín a prisahali sme, že Slováci budú mať vlastný jazyk. A podarilo sa nám to! Uzákonili sme slovenský spisovný jazyk.",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Vieš, v ktorom roku sme uzákonili slovenský spisovný jazyk?",
+      "text": "„Rozhliadni sa na druhý breh. Aký historický dom vidíš oproti?”",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
       "answers": [
-        { "text": "1793", "correct": false },
-        { "text": "1822", "correct": false },
-        { "text": "1843", "correct": true },
-        { "text": "1918", "correct": false }
-      ]
+        {
+          "text": "Dóm sv. Martina",
+          "correct": true
+        },
+        {
+          "text": "Dóm sv. Michala",
+          "correct": false
+        },
+        {
+          "text": "Dóm sv. Juraja",
+          "correct": false
+        },
+        {
+          "text": "Dóm sv. Alžbety",
+          "correct": false
+        }
+      ],
+      "screenId": 23
     },
     {
-      "text": "Správne! V roku 1843 sme na fare v Hlbokom uzákonili spisovnú slovenčinu. Bez toho by si dnes možno čítal tieto vety v úplne inom jazyku! Piata báseň nájdená! Poďme na ďalšie miesto.",
+      "text": "„Správne! Je to Dóm sv. Martina, ktorý stál aj v mojich časoch. A tu pri brehu je piata báseň!”",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
+      "screenId": 24
+    },
+    {
+      "text": "„Piata báseň je späť! Ale cítim ďalšiu — pri tej budove s kaviarňou. Poď!“",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13320,
-      "targetLongitude": 17.10950,
-      "imageUrl": ""
+      "targetLatitude": 48.136996,
+      "targetLongitude": 17.109321,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
+      "screenId": 25
     },
     {
-      "text": "Vieš, ja som bol známy tým, že som písal básne plné emócií. Moja najslávnejšia báseň je príbeh o odvážnom mladíkovi, ktorý skočí do rieky, aby zachránil zakliatu pannu. Je to vlastne príbeh o odvahe - aj keď ostatní hovoria, že si blázon, musíš nasledovať svoje srdce!",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Do ktorej rieky skočil hrdina mojej najslávnejšej básne?",
+      "text": "„Táto reštaurácia tu stála už v časoch, keď som študoval v Bratislave. Vieš, v ktorom roku bola pôvodne otvorená?",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
       "answers": [
-        { "text": "Dunaj", "correct": false },
-        { "text": "Hron", "correct": false },
-        { "text": "Váh", "correct": true },
-        { "text": "Morava", "correct": false }
-      ]
+        {
+          "text": "1776",
+          "correct": false
+        },
+        {
+          "text": "1827",
+          "correct": true
+        },
+        {
+          "text": "1848",
+          "correct": false
+        },
+        {
+          "text": "2003",
+          "correct": false
+        }
+      ],
+      "screenId": 26
     },
     {
-      "text": "Správne, do Váhu! Tá báseň sa volá Zakliata panna vo Váhu a divný Janko. A vieš čo? Ten divný Janko som vlastne ja sám. Aj mňa ľudia pokladali za čudáka. Šiesta báseň je tu! Poďme ďalej.",
+      "text": "„Správne, bolo to v roku 1827! Šiesta báseň je späť!“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
+      "screenId": 27
+    },
+    {
+      "text": "„Poď so mnou ďalej pozdĺž nábrežia — cítim ďalšiu báseň!“",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13300,
-      "targetLongitude": 17.10500,
-      "imageUrl": ""
+      "targetLatitude": 48.136987,
+      "targetLongitude": 17.107117,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
+      "screenId": 28
     },
     {
-      "text": "V roku 1848 vypukla revolúcia v celej Európe. Aj my Slováci sme chceli slobodu! Zúčastnil som sa Slovenského povstania - bojovali sme za práva Slovákov v Uhorsku. Bol to ťažký, ale dôležitý boj.",
+      "text": "„Vieš, ja som bol známy tým, že som písal básne plné emócií. Moja najslávnejšia báseň je príbeh o odvážnom mladíkovi, ktorý skočí do rieky, aby zachránil zakliatu pannu. Je to vlastne príbeh o odvahe - aj keď ostatní hovoria, že si blázon, musíš nasledovať svoje srdce!",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fzakliata_panna.jpeg?alt=media",
+      "screenId": 29
     },
     {
-      "text": "Za svoju účasť v revolúcii ma uhorské úrady zavreli do väzenia. V ktorom roku vypukla táto veľká revolúcia?",
+      "text": "„Do ktorej rieky skočil hrdina mojej najslávnejšej básne?",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fzakliata_panna.jpeg?alt=media",
       "answers": [
-        { "text": "1838", "correct": false },
-        { "text": "1843", "correct": false },
-        { "text": "1848", "correct": true },
-        { "text": "1868", "correct": false }
-      ]
+        {
+          "text": "Dunaj",
+          "correct": false
+        },
+        {
+          "text": "Hron",
+          "correct": false
+        },
+        {
+          "text": "Váh",
+          "correct": true
+        },
+        {
+          "text": "Morava",
+          "correct": false
+        }
+      ],
+      "screenId": 30
     },
     {
-      "text": "Správne! Revolúcia v roku 1848 zmenila celú Európu. Aj keď sme hneď nedostali všetko, za čo sme bojovali, naše snaženie nebolo márne. Siedma báseň je tu! Poďme ďalej.",
+      "text": "„Správne, do Váhu! Tá báseň sa volá Zakliata panna vo Váhu a divný Janko. A vieš čo? Ten divný Janko som vlastne ja sám. Aj mňa ľudia pokladali za čudáka. Siedma báseň je tu!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fzakliata_panna.jpeg?alt=media",
+      "screenId": 31
+    },
+    {
+      "text": "„V roku 1848 vypukla revolúcia v celej Európe. Aj my Slováci sme chceli slobodu! Zúčastnil som sa Slovenského povstania - bojovali sme za práva Slovákov v Uhorsku. A vieš čo? Práve príroda v tomto parku mi vždy pomáhala zachovať si pokoj a nádej.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 32
+    },
+    {
+      "text": "„Poďme ďalej — cítim, že ďalšia báseň je niekde v hĺbke parku.”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13250,
-      "targetLongitude": 17.10550,
-      "imageUrl": ""
+      "targetLatitude": 48.135856,
+      "targetLongitude": 17.107794,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
+      "screenId": 33
     },
     {
-      "text": "Pozri sa okolo seba - tento park je plný rôznych druhov stromov. Duby, lipy, javory, platany... Ja som prírodu miloval nadovšetko. V mojich básňach sa často objavuje príroda ako symbol slobody a krásy Slovenska.",
-      "type": "BROWSE",
-      "imageUrl": ""
-    },
-    {
-      "text": "Jeden strom je symbolom Slovenska a objavuje sa aj na slovenských minciach. Ktorý je to?",
+      "text": "„Rozhliadni sa okolo seba. Čo je v tomto parku najvýraznejšie a dodáva mu pokoj?”",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
       "answers": [
-        { "text": "Dub", "correct": false },
-        { "text": "Lipa", "correct": true },
-        { "text": "Javor", "correct": false },
-        { "text": "Breza", "correct": false }
-      ]
+        {
+          "text": "Mrakodrapy",
+          "correct": false
+        },
+        {
+          "text": "Stromy",
+          "correct": true
+        },
+        {
+          "text": "Priemyselné haly",
+          "correct": false
+        },
+        {
+          "text": "Diaľničné mosty",
+          "correct": false
+        }
+      ],
+      "screenId": 34
     },
     {
-      "text": "Správne! Lipa je symbolom Slovanov a aj Slovenska. Lipový list nájdeš na slovenských eurominciach. My básnici sme lipu často spomínali ako symbol nášho národa. Ôsma báseň nájdená! Zostávajú nám ešte dve.",
+      "text": "„Správne! Tento park je najmä o stromoch a prírode. Aj preto som tu rád písal svoje básne. Ôsma báseň je tu - časové okno sa výrazne oslabilo.”",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
+      "screenId": 35
+    },
+    {
+      "text": "„Ďalšia báseň by mala byť niekde medzi stromami. Poďme hlbšie do parku!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13220,
-      "targetLongitude": 17.10650,
-      "imageUrl": ""
+      "targetLatitude": 48.134181,
+      "targetLongitude": 17.107529,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
+      "screenId": 36
     },
     {
-      "text": "Vieš, že tento park leží na brehu Dunaja? Dunaj je druhá najdlhšia rieka v Európe. Preteká cez desať krajín! Pre Bratislavu bol vždy veľmi dôležitý - vďaka nemu bolo mesto bohaté a spojené so svetom.",
+      "text": "„Pozri sa okolo seba - tento park je plný rôznych druhov stromov. Duby, lipy, javory, platany... Ja som prírodu miloval nadovšetko. V mojich básňach sa často objavuje príroda ako symbol slobody a krásy Slovenska.”",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
+      "screenId": 37
     },
     {
-      "text": "Ktorá je najdlhšia rieka v Európe, dlhšia ako Dunaj?",
+      "text": "„Jeden strom je symbolom Slovenska a objavuje sa aj na slovenských minciach. Ktorý je to?”",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
       "answers": [
-        { "text": "Rýn", "correct": false },
-        { "text": "Temža", "correct": false },
-        { "text": "Volga", "correct": true },
-        { "text": "Dunaj je najdlhší", "correct": false }
-      ]
+        {
+          "text": "Dub",
+          "correct": false
+        },
+        {
+          "text": "Lipa",
+          "correct": true
+        },
+        {
+          "text": "Javor",
+          "correct": false
+        },
+        {
+          "text": "Breza",
+          "correct": false
+        }
+      ],
+      "screenId": 38
     },
     {
-      "text": "Správne! Volga v Rusku je najdlhšia európska rieka. Dunaj je druhý s dĺžkou takmer 2 860 kilometrov. Deviata báseň je tu! Ešte jedna a máme všetky!",
+      "text": "„Správne! Lipa je symbolom Slovanov a aj Slovenska. Lipový list nájdeš na slovenských eurominciach. My básnici sme lipu často spomínali ako symbol nášho národa. Deviata báseň nájdená! Zostáva nám už len jedna.”",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
+      "screenId": 39
+    },
+    {
+      "text": "„Zostáva nám posledná báseň! Poď — je pri mojej soche!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.13280,
-      "targetLongitude": 17.10680,
-      "imageUrl": ""
+      "targetLatitude": 48.135377,
+      "targetLongitude": 17.109341,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fsocha.jpeg?alt=media",
+      "screenId": 40
     },
     {
-      "text": "Tu stojím - v kameni vytesaný, navždy hľadiac na park, ktorý nesie moje meno. Vieš, ja som zomrel pomerne mladý, mal som len 54 rokov. Celý život som bojoval za slobodu a spravodlivosť. Zomrel som v meste Zlaté Moravce.",
+      "text": "„Tu stojím - v kameni vytesaný, navždy hľadiac na park, ktorý nesie moje meno. Vieš, ja som zomrel pomerne mladý, mal som len 54 rokov. Celý život som bojoval za slobodu a spravodlivosť.”",
       "type": "BROWSE",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fsocha.jpeg?alt=media",
+      "screenId": 41
     },
     {
-      "text": "Posledná otázka! V ktorom roku som sa narodil?",
+      "text": "„Posledná otázka! Pozri sa na sochu a podstavec. Čo má moja socha v ľavej ruke?”",
       "type": "QUESTION",
-      "imageUrl": "",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fsocha.jpeg?alt=media",
       "answers": [
-        { "text": "1800", "correct": false },
-        { "text": "1822", "correct": true },
-        { "text": "1848", "correct": false },
-        { "text": "1876", "correct": false }
-      ]
+        {
+          "text": "Knihu",
+          "correct": true
+        },
+        {
+          "text": "Meč",
+          "correct": false
+        },
+        {
+          "text": "Veniec",
+          "correct": false
+        },
+        {
+          "text": "Hudobný nástroj",
+          "correct": false
+        }
+      ],
+      "screenId": 42
     },
     {
-      "text": "Výborne! Narodil som sa 24. januára 1822. A tu, priamo pri mojej soche, leží posledná desiata báseň! Všetky básne sú pohromade!",
+      "text": "„Výborne, {múdry bádateľ|múdra bádateľka}! Presne tak, v ruke drží knihu. A tu, priamo pri mojej soche, leží posledná desiata báseň! Posledný kúsok časovej skladačky zapadol na miesto - časové okno sa zatvára!”",
       "type": "CONTINUE",
       "buttonText": "Hurá!",
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fsocha.jpeg?alt=media",
+      "screenId": 43
     },
     {
-      "text": "Ďakujem ti, mladý priateľu! Vďaka tebe som našiel všetkých desať stratených básní. Teraz ich môžem znova čítať ľuďom, ktorí sa prejdú po tomto krásnom parku. Zapamätaj si - nikdy sa neboj byť iný a vždy nasleduj svoje srdce. To je to, čo som sa ja celý život snažil robiť. Zbohom a ďakujem!",
+      "text": "„Ďakujem ti, {mladý priateľ|mladá priateľka}! Vďaka tebe som našiel všetkých desať stratených básní a uzavrel časové okno do roku 1848. Teraz ich môžem znova čítať ľuďom, ktorí sa prejdú po tomto krásnom parku. Zapamätaj si - nikdy sa neboj byť iný a vždy nasleduj svoje srdce.”",
+      "type": "CONTINUE",
+      "buttonText": "Pokračovať",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "screenId": 44
+    },
+    {
+      "text": "Ak sa ti táto hra páčila, vyskúšaj aj ďalšie hry! Každá ťa zavedie na iné miesto a čaká ťa nový príbeh plný zábavy a zaujímavostí.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_pokojny.jpeg?alt=media",
+      "screenId": 45
+    },
+    {
+      "text": "Fialové svetlo na šípke pohaslo a Špacírkovník sa spokojne zastavil. Básne sú zachránené a duch básnika môže pokojne strážiť svoj park. Na rozcestníku však svietia ďalšie šípky — každá skrýva nový príbeh!",
       "type": "CONTINUE",
       "buttonText": "Späť na zoznam hier",
       "fontSize": 22,
-      "imageUrl": ""
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
+      "screenId": 46
     }
   ]
 }
