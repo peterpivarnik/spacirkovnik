@@ -14,22 +14,6 @@ Content-Type: application/json
 
 ###
 
-### Upload chorvatski-osadnici
-PUT {{dbUrl}}/games/chorvatski-osadnici.json?auth={{dbSecret}}
-Content-Type: application/json
-
-< games/chorvatski-osadnici.json
-
-###
-
-### Upload danubiana-umenie-na-vode
-PUT {{dbUrl}}/games/danubiana-umenie-na-vode.json?auth={{dbSecret}}
-Content-Type: application/json
-
-< games/danubiana-umenie-na-vode.json
-
-###
-
 ### Upload rybar-z-drazdiaka
 PUT {{dbUrl}}/games/rybar-z-drazdiaka.json?auth={{dbSecret}}
 Content-Type: application/json
@@ -43,3 +27,19 @@ PUT {{dbUrl}}/games/tajomstvo-janka-krala.json?auth={{dbSecret}}
 Content-Type: application/json
 
 < games/tajomstvo-janka-krala.json
+
+###
+
+### Upload vila-z-pecnianskeho-lesa
+PUT {{dbUrl}}/games/vila-z-pecnianskeho-lesa.json?auth={{dbSecret}}
+Content-Type: application/json
+
+< games/vila-z-pecnianskeho-lesa.json
+
+###
+
+### Upload vodnik-z-chorvatskeho-ramena
+PUT {{dbUrl}}/games/vodnik-z-chorvatskeho-ramena.json?auth={{dbSecret}}
+Content-Type: application/json
+
+< games/vodnik-z-chorvatskeho-ramena.json

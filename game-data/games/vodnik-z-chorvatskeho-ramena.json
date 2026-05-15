@@ -1,0 +1,484 @@
+{
+  "id": "vodnik-z-chorvatskeho-ramena",
+  "title": "Vodník z Chorvátského ramena",
+  "version": 1,
+  "screens": [
+    {
+      "text": "Vodník z Chorvátského ramena",
+      "type": "CONTINUE",
+      "buttonText": "Poď na dobrodružstvo!",
+      "fontSize": 26,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 0
+    },
+    {
+      "text": "Špacírkovník sa zachvel a jedna šípka sa rozsvietila zelenkavým svetlom — ako hladina rieky v slnečný deň! Ukazuje k Chorvátskemu ramenu v Petržalke. Z vody sa vynárajú podivné bubliny... Niečo tam nie je v poriadku. Poď to zistiť!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
+      "screenId": 1
+    },
+    {
+      "text": "Presuň sa k Chorvátskemu ramenu — ramenu Dunaja, ktoré preteká cez Petržalku. Sleduj mapu!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.1273,
+      "targetLongitude": 17.119013,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Frameno.jpeg?alt=media",
+      "screenId": 2
+    },
+    {
+      "text": "Vitaj pri Chorvátskom ramene! Pozri sa na tú pokojnú vodu. Toto rameno je odnožou Dunaja a preteká cez celú Petržalku. Ale dnes je tu niečo divné — voda je zakalená a z hĺbky stúpajú veľké bubliny.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Frameno.jpeg?alt=media",
+      "screenId": 3
+    },
+    {
+      "text": "Zrazu sa z vody vynoría zelená hlava s veľkými očami a dlhou bradou z rias! Je to vodník! Vyzerá ustarane.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 4
+    },
+    {
+      "text": "„Ahoj, {mladý priateľ|mladá priateľka}! Ja som vodník Chrčo a žijem v tomto ramene už tristopäťdesiat rokov. Strážim kúzelnu perlu, ktorá udržiava vodu čistú a všetky zvieratká zdravé. Ale včera v noci sa vodné bytosti — rusalka, žabiak, leknička, sumec, bludička, kapor, divožienka a korytnačka — pohádali o to, kto z nich perlu najlepšie stráži. Pri hádke sa perla rozbila na osem kúskov a každý si jeden vzal!“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 5
+    },
+    {
+      "text": "„Odkedy sa perla rozbila, voda sa kalí, ryby sú nervózne a žabky prestali spievať. Ak nepozbierame všetkých osem kúskov a nezložíme perlu späť, rameno sa zakalí úplne! Každá bytosť ti dá svoj kúsok, ale najprv ťa vyskúša. Pomôžeš mi?“",
+      "type": "CONTINUE",
+      "buttonText": "Jasné, Chrčo, poďme na to!",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 6
+    },
+    {
+      "text": "„Výborne! Najprv mi ale dokáž, že poznáš toto miesto. Chorvátske rameno sa volá Chorvátske, pretože tu kedysi žili osadníci z jednej krajiny. Vieš, z ktorej?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Srbsko",
+          "correct": false
+        },
+        {
+          "text": "Chorvátsko",
+          "correct": true
+        },
+        {
+          "text": "Maďarsko",
+          "correct": false
+        },
+        {
+          "text": "Rakúsko",
+          "correct": false
+        }
+      ],
+      "screenId": 7
+    },
+    {
+      "text": "„Správne! Chorvátski osadníci tu žili už od 16. storočia. Boli to šikovní roľníci a rybári — a boli to aj moji prví ľudskí susedia! Prvý kúsok perly ti dám ja. Zostáva sedem — a prvá na rade je rusalka. Býva kúsok ďalej po prúde. Poď!“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 8
+    },
+    {
+      "text": "Rusalka býva kúsok ďalej po prúde. Poď za ňou!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.12478,
+      "targetLongitude": 17.11653,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Frusalka.jpeg?alt=media",
+      "screenId": 9
+    },
+    {
+      "text": "Pri brehu sa z vody vynorila krásna postava so zelenými vlasmi a perleťovými očami. Je to rusalka! Usmieva sa, ale vyzerá trochu smutne.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Frusalka.jpeg?alt=media",
+      "screenId": 10
+    },
+    {
+      "text": "„Ahoj, {mladý priateľ|mladá priateľka}. Viem, prečo si tu. Mrzí ma, že sme sa pohádali. Dám ti svoj kúsok perly, ale najprv mi odpovedz: Ktorý čas dňa je pre rusalku najnebezpečnejší?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Frusalka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Polnoc",
+          "correct": false
+        },
+        {
+          "text": "Ráno o piatej",
+          "correct": false
+        },
+        {
+          "text": "Pravé poludnie, keď slnko najviac páli",
+          "correct": true
+        },
+        {
+          "text": "Večer pri západe slnka",
+          "correct": false
+        }
+      ],
+      "screenId": 11
+    },
+    {
+      "text": "„Správne! Na poludnie musím byť hlboko pod vodou, inak by ma slnko vysušilo. Tu máš môj kúsok perly. Ďalšieho sa spýtaj žabiaka Kvaka — býva pri detskom ihrisku kúsok ďalej. Je trochu hlučný, ale milý!“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Frusalka.jpeg?alt=media",
+      "screenId": 12
+    },
+    {
+      "text": "Žabiak Kvako býva pri detskom ihrisku. Poď za ním!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.122517,
+      "targetLongitude": 17.109306,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fzabiak.jpeg?alt=media",
+      "screenId": 13
+    },
+    {
+      "text": "Pri brehu pri detskom ihrisku sedí na kameni veľký zelený žabiak. Keď ťa zbadá, radostne zakváká: „Kváááá! Návšteva!“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fzabiak.jpeg?alt=media",
+      "screenId": 14
+    },
+    {
+      "text": "„Ja som Kvako a mám rád hádanky! Dám ti svoj kúsok perly, ale najprv mi povedz: Čím sa živia žaby?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fzabiak.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Rybami",
+          "correct": false
+        },
+        {
+          "text": "Trávou a listami",
+          "correct": false
+        },
+        {
+          "text": "Hmyzom — komármi a muchami",
+          "correct": true
+        },
+        {
+          "text": "Inými žabami",
+          "correct": false
+        }
+      ],
+      "screenId": 15
+    },
+    {
+      "text": "„Kváááá, správne! Jeme komáre a muchy — sme prírodní lovci komárov! Bez nás by tu bolo komárov neúrekom. Tu máš môj kúsok. Ďalej choď za leknič kou — nájdeš ju tam, kde na vode plávajú veľké okrúhle listy.“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fzabiak.jpeg?alt=media",
+      "screenId": 16
+    },
+    {
+      "text": "Leknička býva medzi leknami. Poď za ňou!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.11802,
+      "targetLongitude": 17.107342,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fleknicka.jpeg?alt=media",
+      "screenId": 17
+    },
+    {
+      "text": "Medzi leknami sa objaví maličká postavička sediaca na leknovom liste — je to leknička, kúzelná princezná vodných kvetov! Má šaty z lupienkov lekna a korunku z kvapiek rosy.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fleknicka.jpeg?alt=media",
+      "screenId": 18
+    },
+    {
+      "text": "„Vitaj v mojom kráľovstve! Ja som leknička a starám sa o všetky lekná v ramene. Vieš, prečo sú lekná také užitočné pre vodu?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fleknicka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Robia vodu sladkú",
+          "correct": false
+        },
+        {
+          "text": "Ich korene čistia vodu a listy poskytujú tieň rybám",
+          "correct": true
+        },
+        {
+          "text": "Priťahujú dážď",
+          "correct": false
+        },
+        {
+          "text": "Odpudzujú komáre",
+          "correct": false
+        }
+      ],
+      "screenId": 19
+    },
+    {
+      "text": "„Správne! Lekná sú čistička prírody — ich korene filtrujú vodu a pod ich listami sa schovávajú ryby a žabky. Tu máš môj kúsok perly. Teraz choď za sumcom — je starý a múdry, nájdeš ho hlbšie po prúde.“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fleknicka.jpeg?alt=media",
+      "screenId": 20
+    },
+    {
+      "text": "Sumec býva hlbšie po prúde. Poď za ním!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.113323,
+      "targetLongitude": 17.108032,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fsumec.jpeg?alt=media",
+      "screenId": 21
+    },
+    {
+      "text": "Voda sa zrazu zvírila a z hĺbky sa vynorila obrovská hlava s dlhými fúzmi. Je to sumec! Najväčšia ryba v celom ramene.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fsumec.jpeg?alt=media",
+      "screenId": 22
+    },
+    {
+      "text": "„Hmmm, malý človiečik. Ja som sumec Fúzan a som tu najstarší po Chrčovi. Dám ti kúsok perly, ak mi povieš: Ako dlho sa môže dožiť sumec?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fsumec.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Asi 5 rokov",
+          "correct": false
+        },
+        {
+          "text": "Asi 20 rokov",
+          "correct": false
+        },
+        {
+          "text": "Aj 50 rokov a viac",
+          "correct": true
+        },
+        {
+          "text": "Asi 100 rokov",
+          "correct": false
+        }
+      ],
+      "screenId": 23
+    },
+    {
+      "text": "„Správne! My sumce sa dožívame aj päťdesiat rokov. Som tu najstarší a pamätám časy, keď bola voda krištáľovo čistá. Tu máš môj kúsok. Ďalej hľadaj bludičku — uvidíš ju tam, kde sa nad vodou mihajú zvláštne svetielka.“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fsumec.jpeg?alt=media",
+      "screenId": 24
+    },
+    {
+      "text": "Bludička sa zjavuje tam, kde sa nad vodou mihajú svetielka. Poď!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.10825,
+      "targetLongitude": 17.11139,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fbludicka.jpeg?alt=media",
+      "screenId": 25
+    },
+    {
+      "text": "Nad hladinou tancujú malé zelenkavé svetielka! Jedno z nich sa zastavilo priamo pred tebou — je to bludička! Malinkatá žiariaca bytosť, čo vyzerá ako plameň sviečky.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fbludicka.jpeg?alt=media",
+      "screenId": 26
+    },
+    {
+      "text": "„Hí hí hí! Chytíš ma, nechytíš ma! Dám ti kúsok perly, ale najprv hádaj: Čo je bludička v prírode naozaj — odkiaľ pochádza to tajomné svetlo nad mokraďami?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fbludicka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Sú to svetlušky",
+          "correct": false
+        },
+        {
+          "text": "Je to plyn, ktorý sa uvoľňuje z bahna a zapáli sa",
+          "correct": true
+        },
+        {
+          "text": "Je to odraz mesiaca",
+          "correct": false
+        },
+        {
+          "text": "Sú to oči žiab",
+          "correct": false
+        }
+      ],
+      "screenId": 27
+    },
+    {
+      "text": "„Správne! V bahne sa rozkladajú rastliny a uvoľňuje sa plyn, ktorý sa niekedy zapáli. Kedysi si ľudia mysleli, že sú to kúzelné bytosti — a možno aj sú, hí hí! Tu máš kúsok. Choď za kaprom — nájdeš ho ďalej pri brehu.“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fbludicka.jpeg?alt=media",
+      "screenId": 28
+    },
+    {
+      "text": "Kapor sa zdržiava ďalej po ramene. Poď za ním!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.102352,
+      "targetLongitude": 17.108877,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkapor.jpeg?alt=media",
+      "screenId": 29
+    },
+    {
+      "text": "Pri brehu sa líne otáča veľká ryba so zlatistými šupinami. Je to kapor! Vyzerá kráľovsky — veď kapor je kráľ rybníkov.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkapor.jpeg?alt=media",
+      "screenId": 30
+    },
+    {
+      "text": "„Vitaj, {mladý priateľ|mladá priateľka}. Ja som kapor Zlatko. Dám ti kúsok perly, ak mi povieš: Čím sa živí kapor na dne rieky?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkapor.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Inými rybami",
+          "correct": false
+        },
+        {
+          "text": "Červíkmi, slimákmi a rastlinami zo dna",
+          "correct": true
+        },
+        {
+          "text": "Lístím zo stromov",
+          "correct": false
+        },
+        {
+          "text": "Kameňmi",
+          "correct": false
+        }
+      ],
+      "screenId": 31
+    },
+    {
+      "text": "„Správne! Prehrabávame bahno a hľadáme červíky, slimáky a všetko chutné, čo sa na dne nájde. Tu máš môj kúsok perly. Teraz choď za divožienkou — nájdeš ju tam, kde rastú trstiny pri brehu.“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkapor.jpeg?alt=media",
+      "screenId": 32
+    },
+    {
+      "text": "Divožienka sa ukrýva v trstinách. Poď za ňou!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.100285,
+      "targetLongitude": 17.118536,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fdivozienka.jpeg?alt=media",
+      "screenId": 33
+    },
+    {
+      "text": "Medzi trstinami sa ozvalo jemné šušťanie a objavila sa drobná postavička s vlasmi z trávy a očami ako kvapky vody. Je to divožienka — strážkyňa brehov!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fdivozienka.jpeg?alt=media",
+      "screenId": 34
+    },
+    {
+      "text": "„Pssst! Ja som divožienka Trstinka a strážim brehy tohto ramena. Dám ti kúsok perly, ale najprv mi povedz: Prečo sú trstiny pri brehu také dôležité?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fdivozienka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Sú pekné na pohľad",
+          "correct": false
+        },
+        {
+          "text": "Spevňujú brehy a sú domovom pre vtáky a hmyz",
+          "correct": true
+        },
+        {
+          "text": "Z nich sa robia metly",
+          "correct": false
+        },
+        {
+          "text": "Odpudzujú ryby",
+          "correct": false
+        }
+      ],
+      "screenId": 35
+    },
+    {
+      "text": "„Správne! Trstiny držia brehy pohromade, čistia vodu a sú domovom pre vtáčiky aj hmyz. Tu máš kúsok perly. Posledný kúsok má korytnačka — nájdeš ju kúsok ďalej, rada sa vyhrieva na slnku.“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fdivozienka.jpeg?alt=media",
+      "screenId": 36
+    },
+    {
+      "text": "Korytnačka sa vyhrieva niekde ďalej. Poď za ňou!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.100037,
+      "targetLongitude": 17.12923,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkorytnacka.jpeg?alt=media",
+      "screenId": 37
+    },
+    {
+      "text": "Na kameni pri brehu leží stará korytnačka a vyhrieva si pancier na slnku. Keď ťa zbadá, pomaly otočí hlavu a múdro sa na teba pozrie.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkorytnacka.jpeg?alt=media",
+      "screenId": 38
+    },
+    {
+      "text": "„Zdravím ťa, {mladý priateľ|mladá priateľka}. Ja som korytnačka Korka a som tu najpomalšia, ale aj najtrpezlivejšia. Dám ti posledný kúsok perly, ak mi povieš: Koľko rokov sa môže dožiť korytnačka?“",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkorytnacka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Asi 5 rokov",
+          "correct": false
+        },
+        {
+          "text": "Asi 20 rokov",
+          "correct": false
+        },
+        {
+          "text": "Aj 100 rokov a viac",
+          "correct": true
+        },
+        {
+          "text": "Asi 10 rokov",
+          "correct": false
+        }
+      ],
+      "screenId": 39
+    },
+    {
+      "text": "„Správne! Niektoré korytnačky sa dožívajú aj sto rokov — preto som taká múdra, hehe. Tu máš posledný kúsok perly! Máš všetkých osem. Teraz musíš ísť ku Chrčovmu domovu — on ich spojí dohromady. Poď, ukážem ti cestu!“",
+      "type": "CONTINUE",
+      "buttonText": "Poďme k Chrčovi!",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkorytnacka.jpeg?alt=media",
+      "screenId": 40
+    },
+    {
+      "text": "Korytnačka ťa posiela ku Chrčovmu domovu. Poď!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.099354,
+      "targetLongitude": 17.131454,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 41
+    },
+    {
+      "text": "Chrčo sa vynoril z vody a keď uvidel všetkých osem kúskov perly, rozžiaril sa: „Máš ich! Teraz musíme povedať kúzelné slová, aby sa perla spojila. Povedz so mnou:",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 42
+    },
+    {
+      "text": "„Voda spája, voda žije, perla mocou svojou bije. Čo sa kúpe v jase vody, krásou znovu nech sa zrodí.“ Kúsky perly sa rozžiarili, zdvihli sa do vzduchu a spojili sa do jednej dokonalej žiariacej perly! Z vody vyšľahol zelenkavý lúč svetla a voda sa začala okamžite čistiť.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 43
+    },
+    {
+      "text": "A potom to začuješ — kváááá! Kváááá! Žabky začali spievať! Všetky vodné bytosti sa zjavili okolo — rusalka, Kvako, leknička, sumec Fúzan, bludička, kapor Zlatko, divožienka Trstinka aj korytnačka Múdra. Všetci sa usmievajú.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 44
+    },
+    {
+      "text": "Chrčo sa usmial: „{Bol|Bola} si {úžasný|úžasná}! Bez teba by sme sa nikdy nezmierili. Teraz už vieme, že perlu musíme strážiť spolu — nie sa o ňu hádať.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 45
+    },
+    {
+      "text": "„Zapamätaj si, {mladý priateľ|mladá priateľka} — voda je život. Bez čistej vody by tu neboli žiadne ryby, žiadne žabky, žiadne kačky, ani žiadny vodník. Staraj sa o prírodu a ona sa postará o teba. A keď niekedy pôjdeš okolo Chorvátského ramena a uvidíš zelenkavé bubliny pod hladinou... to som ja!“",
+      "type": "CONTINUE",
+      "buttonText": "Ďakujem, Chrčo!",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "screenId": 46
+    },
+    {
+      "text": "Zelenkavé svetlo na šípke Špacírkovníka pomaly pohaslo a rozcestník spokojne zamrmlal. Chorvátske rameno je zasa čisté a vodník Chrčo so svojimi priateľmi stráži perlu spoločne. Ale na Špacírkovníku sa trblietajú ďalšie šípky — každá ukrýva nové dobrodružstvo!",
+      "type": "CONTINUE",
+      "buttonText": "Späť na zoznam hier",
+      "fontSize": 22,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
+      "screenId": 47
+    }
+  ]
+}
