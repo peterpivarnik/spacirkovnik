@@ -8,6 +8,7 @@
     "estimatedDurationMinutes": 120,
     "distanceKm": 3.8,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media",
+    "status": "active",
     "startName": "Horáreň pri Draždiaku",
     "endName": "Horáreň pri Draždiaku"
   },
@@ -20,10 +21,9 @@
     "estimatedDurationMinutes": 90,
     "distanceKm": 2.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+    "status": "coming_soon",
     "startName": "Sad Janka Kráľa",
-    "endName": "Sad Janka Kráľa",
-    "visible": true,
-    "playable": false
+    "endName": "Sad Janka Kráľa"
   },
   {
     "id": "rybar-z-drazdiaka",
@@ -34,10 +34,9 @@
     "estimatedDurationMinutes": 90,
     "distanceKm": 2.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+    "status": "coming_soon",
     "startName": "Draždiak",
-    "endName": "Draždiak",
-    "visible": true,
-    "playable": false
+    "endName": "Draždiak"
   },
   {
     "id": "vila-z-pecnianskeho-lesa",
@@ -48,10 +47,9 @@
     "estimatedDurationMinutes": 90,
     "distanceKm": 3.5,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
+    "status": "coming_soon",
     "startName": "Viedenská cesta oproti Inchebe",
-    "endName": "Cyklochodník ku Lanfranconi mostu",
-    "visible": true,
-    "playable": false
+    "endName": "Cyklochodník ku Lanfranconi mostu"
   },
   {
     "id": "vodnik-z-chorvatskeho-ramena",
@@ -62,9 +60,8 @@
     "estimatedDurationMinutes": 120,
     "distanceKm": 4.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+    "status": "coming_soon",
     "startName": "Začiatok Chorvátskeho ramena pri Bosákovej",
-    "endName": "Koniec Chorvátskeho ramena pri čerpacej stanici",
-    "visible": true,
-    "playable": false
+    "endName": "Koniec Chorvátskeho ramena pri čerpacej stanici"
   }
 ]

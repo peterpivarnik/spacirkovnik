@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import sk.spacirkovnik.data.GameCacheManager
 import sk.spacirkovnik.data.RetrofitInstance
 import sk.spacirkovnik.model.GameInfo
+import sk.spacirkovnik.model.GameStatus
 
 class GameListViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -16,8 +17,18 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
     private val _state = mutableStateOf(GameListState())
     val state: State<GameListState> = _state
 
+    private var rawCatalog: List<GameInfo> = emptyList()
+    private var testGames: Set<String> = emptySet()
+
     init {
         fetchGameIndex()
+    }
+
+    fun setTestGames(games: Set<String>) {
+        testGames = games
+        if (rawCatalog.isNotEmpty()) {
+            _state.value = _state.value.copy(games = buildGameList(rawCatalog))
+        }
     }
 
     private fun fetchGameIndex() {
@@ -25,6 +36,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
             try {
                 val response = RetrofitInstance.apiService.getGameIndex()
                 cacheManager.saveCatalog(response)
+                rawCatalog = response
                 _state.value = GameListState(
                     games = buildGameList(response),
                     loading = false
@@ -32,6 +44,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
             } catch (e: Exception) {
                 val cached = cacheManager.loadCatalog()
                 if (cached != null) {
+                    rawCatalog = cached
                     _state.value = GameListState(
                         games = buildGameList(cached),
                         loading = false,
@@ -54,15 +67,17 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
     }
 
     private fun buildGameList(response: List<GameInfo>) =
-        response.filter { it.visible != false }.map { info ->
-            val cachedVersion = cacheManager.getCachedVersion(info.id)
-            val status = when {
-                cachedVersion == null -> DownloadStatus.NOT_DOWNLOADED
-                cachedVersion < info.version -> DownloadStatus.UPDATE_AVAILABLE
-                else -> DownloadStatus.DOWNLOADED
+        response
+            .filter { it.status != GameStatus.HIDDEN || testGames.contains(it.id) }
+            .map { info ->
+                val cachedVersion = cacheManager.getCachedVersion(info.id)
+                val downloadStatus = when {
+                    cachedVersion == null -> DownloadStatus.NOT_DOWNLOADED
+                    cachedVersion < info.version -> DownloadStatus.UPDATE_AVAILABLE
+                    else -> DownloadStatus.DOWNLOADED
+                }
+                GameWithStatus(info, downloadStatus)
             }
-            GameWithStatus(info, status)
-        }
 
     fun downloadGame(gameId: String) {
         viewModelScope.launch {
