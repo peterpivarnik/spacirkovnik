@@ -77,6 +77,7 @@ import sk.spacirkovnik.ui.theme.SecondaryButton
 import sk.spacirkovnik.ui.theme.TextDark
 import sk.spacirkovnik.ui.theme.TextMedium
 import sk.spacirkovnik.ui.theme.TextOnDark
+import sk.spacirkovnik.model.GameStatus
 import sk.spacirkovnik.viewmodel.AuthViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel.DownloadStatus
@@ -119,11 +120,15 @@ fun GameListScreen(
         purchaseViewModel.clearError()
     }
 
+    LaunchedEffect(authState.testGames) {
+        gameListViewModel.setTestGames(authState.testGames)
+    }
+
     LaunchedEffect(state.games) {
-        val lockedIds = state.games
-            .filter { it.info.playable == false }
+        val purchasableIds = state.games
+            .filter { it.info.status == GameStatus.PURCHASABLE }
             .map { it.info.id }
-        if (lockedIds.isNotEmpty()) purchaseViewModel.loadProductPrices(lockedIds)
+        if (purchasableIds.isNotEmpty()) purchaseViewModel.loadProductPrices(purchasableIds)
     }
 
     Box(
@@ -271,9 +276,11 @@ fun GameListScreen(
                             val gameId = gameWithStatus.info.id
                             val isExpanded = expandedGameId == gameId
                             val isActivated = authViewModel.isGameActivated(gameId)
+                            val isTestGame = authViewModel.isTestGame(gameId)
                             GameCard(
                                 gameWithStatus = gameWithStatus,
                                 isActivated = isActivated,
+                                isTestGame = isTestGame,
                                 isExpanded = isExpanded,
                                 isPurchasing = purchaseState.purchasingGameId == gameId,
                                 price = purchaseState.productPrices[gameId],
@@ -309,6 +316,7 @@ fun GameListScreen(
 private fun GameCard(
     gameWithStatus: GameListViewModel.GameWithStatus,
     isActivated: Boolean,
+    isTestGame: Boolean,
     isExpanded: Boolean,
     isPurchasing: Boolean,
     price: String?,
@@ -318,7 +326,9 @@ private fun GameCard(
     onPurchase: () -> Unit
 ) {
     val info = gameWithStatus.info
-    val isLocked = info.playable == false && !isActivated
+    val isUnlocked = info.status == GameStatus.ACTIVE || isActivated || isTestGame
+    val isLocked = !isUnlocked
+    val showPurchaseButton = isLocked && info.status == GameStatus.PURCHASABLE
 
     Card(
         onClick = onToggle,
@@ -496,7 +506,7 @@ private fun GameCard(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                if (isLocked) {
+                if (showPurchaseButton) {
                     Button(
                         onClick = onPurchase,
                         enabled = !isPurchasing,
@@ -519,6 +529,14 @@ private fun GameCard(
                             )
                         }
                     }
+                } else if (isLocked) {
+                    Text(
+                        text = "Čoskoro k dispozícii",
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                        fontSize = 15.sp,
+                        color = TextMedium.copy(alpha = 0.7f)
+                    )
                 } else {
                     when (gameWithStatus.status) {
                         DownloadStatus.NOT_DOWNLOADED -> {

@@ -37,6 +37,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 loading = true
             )
             loadActivations()
+            loadTestGames()
         }
     }
 
@@ -81,6 +82,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     userEmail = user?.email
                 )
                 loadActivations()
+                loadTestGames()
             } catch (_: GetCredentialCancellationException) {
                 _state.value = _state.value.copy(loading = false)
             } catch (e: Exception) {
@@ -127,8 +129,35 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    private fun loadTestGames() {
+        val uid = auth.currentUser?.uid ?: return
+        viewModelScope.launch {
+            try {
+                val snapshot = database.reference
+                    .child("testGames")
+                    .child(uid)
+                    .get()
+                    .await()
+
+                val testGames = mutableSetOf<String>()
+                snapshot.children.forEach { child ->
+                    if (child.getValue(Boolean::class.java) == true) {
+                        testGames.add(child.key ?: return@forEach)
+                    }
+                }
+                _state.value = _state.value.copy(testGames = testGames)
+            } catch (_: Exception) {
+                // testGames stays empty on error
+            }
+        }
+    }
+
     fun isGameActivated(gameId: String): Boolean {
         return _state.value.activatedGames.contains(gameId)
+    }
+
+    fun isTestGame(gameId: String): Boolean {
+        return _state.value.testGames.contains(gameId)
     }
 
     fun grantActivation(gameId: String) {
@@ -146,6 +175,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         val userName: String? = null,
         val userEmail: String? = null,
         val activatedGames: Set<String> = emptySet(),
+        val testGames: Set<String> = emptySet(),
         val loading: Boolean = false,
         val error: String? = null
     )
