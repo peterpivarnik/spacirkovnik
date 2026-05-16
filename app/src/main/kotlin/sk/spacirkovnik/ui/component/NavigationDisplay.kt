@@ -300,10 +300,6 @@ fun NavigationDisplay(
                 LatLng(it.latitude, it.longitude)
             }
 
-            var routePoints by remember { mutableStateOf<List<LatLng>>(emptyList()) }
-            var arrowData by remember { mutableStateOf<Pair<LatLng, Float>?>(null) }
-            var arrowIcon by remember { mutableStateOf<com.google.android.gms.maps.model.BitmapDescriptor?>(null) }
-
             LaunchedEffect(userLatLng) {
                 if (userLatLng != null) {
                     val bounds = LatLngBounds.builder()
@@ -315,28 +311,42 @@ fun NavigationDisplay(
                             CameraUpdateFactory.newLatLngBounds(bounds, 120)
                         )
                     }
-                    kotlinx.coroutines.delay(800)
-                    val points = fetchWalkingRoute(userLatLng, targetLatLng, BuildConfig.MAPS_API_KEY)
-                    routePoints = points
-                    if (points.size >= 2) {
-                        val idx = points.size / 3
-                        val next = minOf(idx + 1, points.size - 1)
-                        val results = FloatArray(2)
-                        Location.distanceBetween(
-                            points[idx].latitude, points[idx].longitude,
-                            points[next].latitude, points[next].longitude,
-                            results
-                        )
-                        arrowData = Pair(points[idx], results[1])
-                    }
-                }
-                else {
+                } else {
                     coroutineScope.launch {
                         cameraPositionState.animate(
                             CameraUpdateFactory.newLatLngZoom(targetLatLng, 15f)
                         )
                     }
                 }
+            }
+
+            if (userLatLng != null) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFFFEDD5))
+                ) {
+                    androidx.compose.foundation.layout.Row(
+                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        androidx.compose.material3.Icon(
+                            imageVector = Icons.Default.Warning,
+                            contentDescription = null,
+                            tint = Color(0xFFC05800),
+                            modifier = Modifier.size(22.dp)
+                        )
+                        Text(
+                            text = "Nevidím tu žiadny chodník. Musíš si nájsť správnu cestu sám — ukážem ti aspoň smer.",
+                            fontSize = 13.sp,
+                            lineHeight = 18.sp,
+                            color = Color(0xFF7A3500)
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(8.dp))
             }
 
             GoogleMap(
@@ -346,8 +356,7 @@ fun NavigationDisplay(
                         .clip(RoundedCornerShape(12.dp)),
                 cameraPositionState = cameraPositionState,
                 properties = MapProperties(isMyLocationEnabled = false),
-                uiSettings = MapUiSettings(zoomControlsEnabled = false, myLocationButtonEnabled = false),
-                onMapLoaded = { arrowIcon = createArrowBitmap() }
+                uiSettings = MapUiSettings(zoomControlsEnabled = false, myLocationButtonEnabled = false)
             ) {
                 Marker(
                     state = rememberUpdatedMarkerState(position = targetLatLng),
@@ -361,35 +370,15 @@ fun NavigationDisplay(
                         title = "Tu sa nachádzaš",
                         icon = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)
                     )
-                    if (routePoints.size >= 2) {
-                        Polyline(
-                            points = routePoints,
-                            color = Color(0xFF1565C0),
-                            width = 10f
+                    Polyline(
+                        points = listOf(it, targetLatLng),
+                        color = Color(0xFF1565C0),
+                        width = 6f,
+                        pattern = listOf(
+                            com.google.android.gms.maps.model.Dash(20f),
+                            com.google.android.gms.maps.model.Gap(10f)
                         )
-                        if (arrowIcon != null) {
-                            arrowData?.let { (pos, bearing) ->
-                                Marker(
-                                    state = rememberUpdatedMarkerState(position = pos),
-                                    icon = arrowIcon,
-                                    rotation = bearing,
-                                    anchor = Offset(0.5f, 0.5f),
-                                    flat = true,
-                                    title = null
-                                )
-                            }
-                        }
-                    } else {
-                        Polyline(
-                            points = listOf(it, targetLatLng),
-                            color = Color(0xFF1565C0),
-                            width = 6f,
-                            pattern = listOf(
-                                com.google.android.gms.maps.model.Dash(20f),
-                                com.google.android.gms.maps.model.Gap(10f)
-                            )
-                        )
-                    }
+                    )
                 }
             }
         }
@@ -553,83 +542,6 @@ private fun DrawScope.drawArrow(center: Offset, length: Float) {
     drawPath(tailPath, color = Color.White.copy(alpha = 0.5f))
 }
 
-private suspend fun fetchWalkingRoute(
-    origin: LatLng,
-    destination: LatLng,
-    apiKey: String
-): List<LatLng> = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
-    try {
-        val url = "https://maps.googleapis.com/maps/api/directions/json" +
-            "?origin=${origin.latitude},${origin.longitude}" +
-            "&destination=${destination.latitude},${destination.longitude}" +
-            "&mode=walking" +
-            "&key=$apiKey"
-        val response = java.net.URL(url).readText()
-        val json = com.google.gson.JsonParser.parseString(response).asJsonObject
-        val routes = json.getAsJsonArray("routes")
-        if (routes.size() > 0) {
-            val encoded = routes[0].asJsonObject
-                .getAsJsonObject("overview_polyline")
-                .get("points").asString
-            decodePolyline(encoded)
-        } else emptyList()
-    } catch (_: Exception) {
-        emptyList()
-    }
-}
-
-private fun decodePolyline(encoded: String): List<LatLng> {
-    val poly = mutableListOf<LatLng>()
-    var index = 0
-    var lat = 0
-    var lng = 0
-    while (index < encoded.length) {
-        var b: Int
-        var shift = 0
-        var result = 0
-        do {
-            b = encoded[index++].code - 63
-            result = result or ((b and 0x1f) shl shift)
-            shift += 5
-        } while (b >= 0x20)
-        lat += if (result and 1 != 0) (result shr 1).inv() else result shr 1
-        shift = 0
-        result = 0
-        do {
-            b = encoded[index++].code - 63
-            result = result or ((b and 0x1f) shl shift)
-            shift += 5
-        } while (b >= 0x20)
-        lng += if (result and 1 != 0) (result shr 1).inv() else result shr 1
-        poly.add(LatLng(lat / 1e5, lng / 1e5))
-    }
-    return poly
-}
-
-private fun createArrowBitmap(): com.google.android.gms.maps.model.BitmapDescriptor {
-    val size = 64
-    val bmp = createBitmap(size, size)
-    val canvas = android.graphics.Canvas(bmp)
-    val fillPaint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
-        color = android.graphics.Color.rgb(21, 101, 192)
-        style = android.graphics.Paint.Style.FILL
-    }
-    val strokePaint = android.graphics.Paint(android.graphics.Paint.ANTI_ALIAS_FLAG).apply {
-        color = android.graphics.Color.WHITE
-        style = android.graphics.Paint.Style.STROKE
-        strokeWidth = 4f
-    }
-    val path = android.graphics.Path().apply {
-        moveTo(size / 2f, 4f)
-        lineTo(size - 8f, size - 8f)
-        lineTo(size / 2f, size * 0.58f)
-        lineTo(8f, size - 8f)
-        close()
-    }
-    canvas.drawPath(path, fillPaint)
-    canvas.drawPath(path, strokePaint)
-    return BitmapDescriptorFactory.fromBitmap(bmp)
-}
 
 fun Modifier.verticalScrollbar(
         state: ScrollState,
