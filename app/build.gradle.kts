@@ -20,6 +20,19 @@ val keystoreProperties: Properties? = if (keystorePropertiesFile.exists()) {
     Properties().apply { load(keystorePropertiesFile.inputStream()) }
 } else null
 
+val versionPropertiesFile = file("version.properties")
+val versionProperties = Properties().apply { load(versionPropertiesFile.inputStream()) }
+
+tasks.register("releaseBundle") {
+    doFirst {
+        val newVersionCode = versionProperties["versionCode"].toString().toInt() + 1
+        versionProperties["versionCode"] = newVersionCode.toString()
+        versionProperties.store(versionPropertiesFile.outputStream(), null)
+        println("versionCode → $newVersionCode")
+    }
+    finalizedBy("bundleRelease")
+}
+
 configure<ApplicationExtension> {
     namespace = "sk.spacirkovnik"
     compileSdk = 37
@@ -28,8 +41,8 @@ configure<ApplicationExtension> {
         applicationId = "sk.spacirkovnik"
         minSdk = 24
         targetSdk = 37
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = versionProperties["versionCode"].toString().toInt()
+        versionName = versionProperties["versionName"].toString()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
         buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
