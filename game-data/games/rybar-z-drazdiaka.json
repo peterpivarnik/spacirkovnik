@@ -100,7 +100,7 @@
       "screenId": 7
     },
     {
-      "text": "Rybár sa usmeje: „Dobre, rybka, si voľná.“ Spustí ju späť do vody. V tom deti stískajú dedka za ruku: „Dedko! Prvé želanie! Chceme hračky — hneď, tu, pri jazere!“ Rybka pokrúti chvostom a zavolá: „Nech sa stane!“ Z ničoho nič sa pri brehu objavili škatule plné hračiek — roboty, poníky, stavebnice. Deti sa rozkričali od radosti.",
+      "text": "Rybár sa usmeje: „Dobre, rybka, si voľná.“ Pustí ju späť do vody. V tom deti stískajú dedka za ruku: „Dedko! Prvé želanie! Chceme hračky — hneď, tu, pri jazere!“ Rybka pokrúti chvostom a zavolá: „Nech sa stane!“ Z ničoho nič sa pri brehu objavili škatule plné hračiek — roboty, poníky, jednorožce, stavebnice. Deti sa jasali od radosti.",
       "type": "NAVIGATION",
       "targetLatitude": 48.106985,
       "targetLongitude": 17.114214,
@@ -152,7 +152,7 @@
       "screenId": 12
     },
     {
-      "text": "Ihriská zabrali kus brehu a siahajú takmer až k vodnej hladine. Vieš, ako vlastne toto jazero vzniklo — z čoho sa tu ťažilo, kým tu bola jama, ktorá sa naplnila vodou?",
+      "text": "Ihriská zabrali kus brehu a siahajú takmer až k vodnej hladine. Vieš, ako vlastne toto jazero vzniklo — čo sa tu ťažilo, kým tu bola jama, ktorá sa naplnila vodou?",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media",
       "answers": [
@@ -176,7 +176,7 @@
       "screenId": 13
     },
     {
-      "text": "Správne — štrk a piesok na stavbu Petržalky. Keď ho vyťažili, ostala jama, ktorá sa naplnila vodou. A teraz tu stoja ihriská práve na brehu tohto vzácneho miesta. Poď sa pozrieť bližšie — ihriská zasahujú do vysokej trávy pri brehu!",
+      "text": "Správne — štrk a piesok na stavbu Petržalky. Hlboká jama po vyťaženom štrku sa okamžite prirodzene naplnila čistou podzemnou vodou. A teraz tu stoja ihriská práve na brehu tohto vzácneho miesta. Poď sa pozrieť bližšie — ihriská zasahujú do vysokej trávy pri brehu!",
       "type": "NAVIGATION",
       "targetLatitude": 48.102797,
       "targetLongitude": 17.11424,
@@ -208,7 +208,7 @@
       "screenId": 15
     },
     {
-      "text": "Ihriská zničili trstinu a vtáky vyplašene odletovali. Ale deťom to bolo jedno — Jurko kričí: „Dedko, ihriská sú nuda! Chceme ZÁBAVNÝ PARK s horskými dráhami!\" Rybár sa zdvihne a ide za rybkou — musí ju nájsť na druhom konci jazera. Poď za ním!",
+      "text": "Ihriská zničili trstinu a vtáky vyplašene odletovali. Ale deťom to bolo jedno — Jurko kričí: „Dedko, ihriská sú nuda! Chceme ZÁBAVNÝ PARK s horskými dráhami!\" Rybár sa zdvihne a ide za rybkou — musí ju nájsť na druhej strane jazera. Poď za ním!",
       "type": "NAVIGATION",
       "targetLatitude": 48.101135,
       "targetLongitude": 17.113436,
@@ -240,7 +240,7 @@
       "screenId": 17
     },
     {
-      "text": "Rybár zavolá rybku naposledy — ale rybka sa neozýva. Musíte ju nájsť! Poď pozdĺž brehu, možno je niekde tam!",
+      "text": "Rybár zavolá rybku naposledy — ale rybka sa neozýva. Musíš ju nájsť! Poď pozdĺž brehu, možno je niekde tam!",
       "type": "NAVIGATION",
       "targetLatitude": 48.101855,
       "targetLongitude": 17.11154,
@@ -264,13 +264,13 @@
       "screenId": 19
     },
     {
-      "text": "„Správne! Ja som strážkyňa tohto jazera — a toto želanie nesplním. Keby som ho splnila, trstina by zmizla, vtáky by odleteli, ryby by zahynuli. Zničila by som vlastný domov.“ Rybka sa otočí k rybárovi: „A keďže vaša nenásytnosť nemá konca — beriem späť aj predchádzajúce želania.“ Ihriská zmizli. Hračky zmizli.",
+      "text": "„Správne! Ja som strážkyňa tohto jazera — a toto želanie nesplním. Keby som ho splnila, trstina by zmizla, vtáky by odleteli, ryby by zahynuli. Zničila by som vlastný domov.“ Rybka sa otočí k rybárovi: „Keďže vaša nenásytnosť nemá konca — beriem späť aj predchádzajúce želania.“ Ihriská zmizli. Aj hračky zmizli.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
       "screenId": 20
     },
     {
-      "text": "Všetko zmizlo. Breh je tichý, hladina pokojná — akoby sa nič nestalo. Rybár smutne stojí pri vode. Vtom si všimneš tabuľku pri brehu. Poď sa na ňu pozrieť!",
+      "text": "Všetko zmizlo. Breh je tichý, hladina pokojná — akoby sa nič nestalo. Rybár smutne stojí pri vode. Vtom si všimne tabuľu pri brehu. Poď sa na ňu pozrieť!",
       "type": "NAVIGATION",
       "targetLatitude": 48.102236,
       "targetLongitude": 17.110948,
@@ -278,7 +278,7 @@
       "screenId": 21
     },
     {
-      "text": "Na tabuľke je napísaný zákaz. Smieš pri Draždiaku kŕmiť zvierata?",
+      "text": "Na tabuli je napísaný zákaz. Smieš pri Draždiaku kŕmiť zvierata?",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero.jpeg?alt=media",
       "answers": [
