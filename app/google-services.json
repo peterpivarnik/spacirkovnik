@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1058528478022-7j1eoo3v0p4jg1jople2e18gpr2khh3p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sk.spacirkovnik",
+            "certificate_hash": "7f2dffb5b5d40c62fc9ae55e0cae0f3ccd4ac298"
+          }
+        },
+        {
           "client_id": "1058528478022-jo786agrkumem32sp00a8fg27p6huudi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
