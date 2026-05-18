@@ -1,7 +1,7 @@
 {
   "id": "vila-z-pecnianskeho-lesa",
   "title": "Víla z Pečnianskeho lesa",
-  "version": 1,
+  "version": 2,
   "screens": [
     {
       "text": "Víla z Pečnianskeho lesa",
@@ -197,7 +197,7 @@
       "screenId": 17
     },
     {
-      "text": "„Správne, smrek! Vedel{·a} si, že smrek spoznáš aj podľa toho, že jeho šišky visia dole. Zapamätaj si: smrek — šišky smer dole. Kliatba praskla — štvrté semienko žiari!“",
+      "text": "„Správne, smrek! Vedel{|a} si, že smrek spoznáš aj podľa toho, že jeho šišky visia dole. Zapamätaj si: smrek — šišky smer dole. Kliatba praskla — štvrté semienko žiari!“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fsmrek.jpeg?alt=media",
       "screenId": 18

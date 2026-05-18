@@ -181,8 +181,9 @@ fun GameListScreen(
                                 text = "Vyber si dobrodružstvo",
                                 fontSize = 14.sp,
                                 color = TextOnDark.copy(alpha = 0.7f),
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                                textAlign = TextAlign.Center
                             )
                         }
                         Column(
@@ -390,8 +391,9 @@ private fun GameCard(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = TextDark,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.Center
             )
 
             Spacer(modifier = Modifier.width(8.dp))

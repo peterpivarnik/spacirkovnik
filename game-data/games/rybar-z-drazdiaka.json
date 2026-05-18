@@ -1,7 +1,7 @@
 {
   "id": "rybar-z-drazdiaka",
   "title": "Rybár z Draždiaka",
-  "version": 2,
+  "version": 3,
   "screens": [
     {
       "text": "Rybár z Draždiaka",
@@ -35,7 +35,7 @@
           "correct": false
         },
         {
-          "text": "23,2 ha",
+          "text": "20,5 ha",
           "correct": true
         },
         {
@@ -50,7 +50,7 @@
       "screenId": 2
     },
     {
-      "text": "Len 23,2 hektárov — nie je to veľa. Poď bližšie k brehu, kde sedí starý rybár s udicou!",
+      "text": "Len 20,5 hektárov — nie je to veľa. Poď bližšie k brehu, kde sedí starý rybár s udicou!",
       "type": "NAVIGATION",
       "targetLatitude": 48.10643,
       "targetLongitude": 17.111921,
@@ -248,7 +248,7 @@
       "screenId": 18
     },
     {
-      "text": "Rybka sa konečne vynorí! Rybár rýchlo kričí: „Tretie želanie — tri zábavné parky pri jazere!“ Rybka sa zamračí a otočí sa na teba: „Ty! {Mladý priateľ|Mladá priateľka}! Počul{·a} si, čo chce. Čo si myslíš — mám to splniť?“",
+      "text": "Rybka sa konečne vynorí! Rybár rýchlo kričí: „Tretie želanie — tri zábavné parky pri jazere!“ Rybka sa zamračí a otočí sa na teba: „Ty! {Mladý priateľ|Mladá priateľka}! Počul{|a} si, čo chce. Čo si myslíš — mám to splniť?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
       "answers": [
@@ -308,7 +308,7 @@
       "screenId": 23
     },
     {
-      "text": "Vráť sa k miestu, kde rybár chytil rybku!",
+      "text": "Vráť sa k miestu, kde si stretol rybára!",
       "type": "NAVIGATION",
       "targetLatitude": 48.10643,
       "targetLongitude": 17.111921,
@@ -352,7 +352,7 @@
       "screenId": 27
     },
     {
-      "text": "Zlatá rybka sa pozrie na teba: „Áno, šťuka! Správne. A ďakujem ti, {mladý priateľ|mladá priateľka}, že si tu bol{·a}. Zapamätaj si — príroda nám dáva viac, než si myslíme. Stačí sa zastaviť, nadýchnuť sa a počúvať. A keď niekedy uvidíš zlatý odlesk pod hladinou... to som ja!“",
+      "text": "Zlatá rybka sa pozrie na teba: „Áno, šťuka! Správne. A ďakujem ti, {mladý priateľ|mladá priateľka}, že si tu bol{|a}. Zapamätaj si — príroda nám dáva viac, než si myslíme. Stačí sa zastaviť, nadýchnuť sa a počúvať. A keď niekedy uvidíš zlatý odlesk pod hladinou... to som ja!“",
       "type": "CONTINUE",
       "buttonText": "Ďakujem, rybka!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fzlata_rybka.jpeg?alt=media",
