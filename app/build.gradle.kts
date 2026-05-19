@@ -42,7 +42,7 @@ configure<ApplicationExtension> {
         minSdk = 24
         targetSdk = 37
         versionCode = versionProperties["versionCode"].toString().toInt()
-        versionName = versionProperties["versionName"].toString()
+        versionName = versionProperties["versionCode"].toString()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
         buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
