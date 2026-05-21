@@ -1,0 +1,304 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="sk">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+
+		<!-- HERO -->
+		<section class="hero">
+			<img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/banner.png?alt=media" alt="Špacírkovník – Sleduj mapu, lúšti hádanky, objavuj mesto!" class="hero-banner" />
+			<p class="hero-sub">Rodinné prechádzky, ktoré sa hrajú ako dobrodružstvo</p>
+			<div class="hero-ctas">
+				<a class="btn-primary" href="https://play.google.com/store/apps/details?id=sk.spacirkovnik" target="_blank" rel="noopener">
+					▶ Stiahnuť na Google Play
+				</a>
+				<a class="btn-secondary" href="/hry">Pozrieť hry →</a>
+			</div>
+		</section>
+
+		<!-- AKO TO FUNGUJE -->
+		<section class="how">
+			<h2>Ako to funguje?</h2>
+			<div class="steps">
+				<div class="step">
+					<div class="step-icon">📱</div>
+					<h3>Stiahni appku</h3>
+					<p>Zadarmo na Google Play. Jedna hra je vždy zdarma – skús to bez záväzkov.</p>
+				</div>
+				<div class="step">
+					<div class="step-icon">🗺️</div>
+					<h3>Vyraz na trasu</h3>
+					<p>Appka ťa zavedie po skutočnej trase plnej krásnej prírody a zaujímavých miest.</p>
+				</div>
+				<div class="step">
+					<div class="step-icon">🧩</div>
+					<h3>Lúšti hádanky</h3>
+					<p>Na zastávkach plníš úlohy, odhaľuješ príbeh a spoznávaš okolie novým pohľadom.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- SCREENSHOTY -->
+		<section class="screenshots">
+			<h2>Pozri, ako vyzerá hra</h2>
+			<div class="screenshot-grid">
+				<img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/screenshots%2F01_zoznam_hier.png?alt=media" alt="Zoznam hier" />
+				<img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/screenshots%2F03_uvod_hry.png?alt=media" alt="Úvod hry" />
+				<img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/screenshots%2F05_kvizova_otazka.png?alt=media" alt="Kvízová otázka" />
+				<img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/screenshots%2F04_navigacia.png?alt=media" alt="Navigácia po trase" />
+			</div>
+		</section>
+
+		<!-- DOSTUPNÉ HRY PREVIEW -->
+		<section class="games-preview">
+			<h2>Dostupné hry</h2>
+			<p class="games-sub">Každá hra je jedinečný príbeh na skutočnom mieste.</p>
+			<div class="games-grid">
+				<div class="game-card free">
+					<div class="game-badge">Zadarmo</div>
+					<h3>Lesnícka palica Gejzu Dražďáka</h3>
+					<p>Pomôž Gejzovi nájsť stratenú lesnícku palicu v petržalských lesoch. Dostupná teraz!</p>
+				</div>
+				<div class="game-card">
+					<div class="game-badge soon">Čoskoro</div>
+					<h3>Tajomstvo Janka Kráľa</h3>
+					<p>Pomôž duchovi básnika nájsť stratené básne v najstaršom parku v Európe.</p>
+				</div>
+				<div class="game-card">
+					<div class="game-badge soon">Čoskoro</div>
+					<h3>Víla z Pečnianskeho lesa</h3>
+					<p>Zachráň Pečniansky les pred zlomyseľným škriatkom Pŕhľavníkom.</p>
+				</div>
+				<div class="game-card">
+					<div class="game-badge soon">Čoskoro</div>
+					<h3>Vodník z Chorvátského ramena</h3>
+					<p>Pomôž vodníkovi Chrčovi pozbierať kúsky rozbitej kúzelnej perly.</p>
+				</div>
+			</div>
+			<a class="btn-secondary" href="/hry">Všetky hry →</a>
+		</section>
+
+		<!-- ZÁVEREČNÁ CTA -->
+		<section class="cta-final">
+			<img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media" alt="Špacírkovník logo" class="cta-logo" />
+			<h2>Vyraz na dobrodružstvo</h2>
+			<p>Stačí appka, pohodlná obuv a chuť objavovať.</p>
+			<a class="btn-primary" href="https://play.google.com/store/apps/details?id=sk.spacirkovnik" target="_blank" rel="noopener">
+				▶ Stiahnuť zadarmo
+			</a>
+		</section>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	/* HERO */
+	.hero {
+		text-align: center;
+		padding: 3rem 1rem 2rem;
+		background: linear-gradient(180deg, #F0E9DF 0%, #fff 100%);
+	}
+	.hero-banner {
+		max-width: 600px;
+		width: 100%;
+		border-radius: 16px;
+		box-shadow: 0 8px 32px rgba(61,35,20,0.12);
+		margin-bottom: 1.5rem;
+	}
+	.hero-sub {
+		font-size: 1.15rem;
+		color: #6B4C35;
+		margin-bottom: 2rem;
+	}
+	.hero-ctas {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	/* BUTTONS */
+	.btn-primary {
+		display: inline-block;
+		background: #7A4F2E;
+		color: #fff;
+		text-decoration: none;
+		padding: 0.85rem 1.75rem;
+		border-radius: 50px;
+		font-weight: 600;
+		font-size: 1rem;
+		transition: background 0.2s, transform 0.15s;
+		box-shadow: 0 4px 16px rgba(122,79,46,0.3);
+	}
+	.btn-primary:hover {
+		background: #3D2314;
+		transform: translateY(-2px);
+		color: #fff;
+	}
+	.btn-secondary {
+		display: inline-block;
+		background: transparent;
+		color: #7A4F2E;
+		text-decoration: none;
+		padding: 0.85rem 1.75rem;
+		border-radius: 50px;
+		font-weight: 600;
+		font-size: 1rem;
+		border: 2px solid #7A4F2E;
+		transition: all 0.2s;
+	}
+	.btn-secondary:hover {
+		background: #7A4F2E;
+		color: #fff;
+	}
+
+	/* HOW IT WORKS */
+	.how {
+		padding: 4rem 1rem;
+		text-align: center;
+		background: #fff;
+	}
+	.how h2 {
+		margin-bottom: 2.5rem;
+		color: #3D2314;
+	}
+	.steps {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 2rem;
+		max-width: 860px;
+		margin: 0 auto;
+	}
+	.step {
+		padding: 2rem 1.5rem;
+		background: #FAF6F1;
+		border-radius: 16px;
+	}
+	.step-icon {
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+	}
+	.step h3 {
+		font-size: 1.1rem;
+		color: #3D2314;
+		margin-bottom: 0.5rem;
+	}
+	.step p {
+		font-size: 0.95rem;
+		color: #6B4C35;
+		margin: 0;
+	}
+
+	/* SCREENSHOTS */
+	.screenshots {
+		padding: 4rem 1rem;
+		text-align: center;
+		background: #FAF6F1;
+	}
+	.screenshots h2 {
+		margin-bottom: 2rem;
+		color: #3D2314;
+	}
+	.screenshot-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+		gap: 1rem;
+		max-width: 860px;
+		margin: 0 auto;
+	}
+	.screenshot-grid img {
+		width: 100%;
+		border-radius: 12px;
+		box-shadow: 0 4px 16px rgba(61,35,20,0.12);
+	}
+
+	/* GAMES */
+	.games-preview {
+		padding: 4rem 1rem;
+		text-align: center;
+		background: #fff;
+	}
+	.games-preview h2 {
+		margin-bottom: 0.5rem;
+		color: #3D2314;
+	}
+	.games-sub {
+		color: #6B4C35;
+		margin-bottom: 2.5rem;
+	}
+	.games-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1.5rem;
+		max-width: 960px;
+		margin: 0 auto 2rem;
+		text-align: left;
+	}
+	.game-card {
+		background: #FAF6F1;
+		border-radius: 16px;
+		padding: 1.5rem;
+		border: 2px solid transparent;
+		transition: border-color 0.2s;
+		position: relative;
+	}
+	.game-card:hover {
+		border-color: #7A4F2E;
+	}
+	.game-card h3 {
+		font-size: 1rem;
+		color: #3D2314;
+		margin: 0.75rem 0 0.5rem;
+	}
+	.game-card p {
+		font-size: 0.9rem;
+		color: #6B4C35;
+		margin: 0;
+	}
+	.game-badge {
+		display: inline-block;
+		font-size: 0.8rem;
+		font-weight: 700;
+		padding: 0.25rem 0.75rem;
+		border-radius: 50px;
+		background: #52A47A;
+		color: #fff;
+	}
+	.game-badge.paid {
+		background: #7A4F2E;
+	}
+	.game-badge.soon {
+		background: #A09080;
+	}
+
+	/* FINAL CTA */
+	.cta-final {
+		padding: 5rem 1rem;
+		text-align: center;
+		background: linear-gradient(135deg, #F0E9DF 0%, #E8D9C8 100%);
+	}
+	.cta-logo {
+		width: 120px;
+		height: 120px;
+		object-fit: contain;
+		margin-bottom: 1.5rem;
+	}
+	.cta-final h2 {
+		color: #3D2314;
+		margin-bottom: 0.75rem;
+	}
+	.cta-final p {
+		color: #6B4C35;
+		margin-bottom: 2rem;
+	}
+</style>

@@ -1,0 +1,47 @@
+---
+const today = new Date();
+---
+
+<footer>
+	<div class="footer-links">
+		<a href="mailto:info@spacirkovnik.sk">info@spacirkovnik.sk</a>
+		<span>·</span>
+		<a href="/kontakt">Kontakt</a>
+		<span>·</span>
+		<a href="https://peterpivarnik.github.io/spacirkovnik/privacy.html" target="_blank">Ochrana súkromia</a>
+	</div>
+	<div class="copyright">
+		&copy; {today.getFullYear()} Špacírkovník. Všetky práva vyhradené.
+	</div>
+</footer>
+<style>
+	footer {
+		padding: 2em 1em 3em 1em;
+		background: linear-gradient(var(--gray-gradient)) no-repeat;
+		color: rgb(var(--gray));
+		text-align: center;
+	}
+	.footer-links {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75em;
+		margin-bottom: 0.75em;
+		flex-wrap: wrap;
+	}
+	.footer-links a {
+		text-decoration: none;
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+	}
+	.footer-links a:hover {
+		color: var(--accent);
+	}
+	.footer-links span {
+		color: rgb(var(--gray-light));
+	}
+	.copyright {
+		font-size: 0.85em;
+		color: rgb(var(--gray));
+	}
+</style>

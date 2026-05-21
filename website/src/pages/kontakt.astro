@@ -1,0 +1,99 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="sk">
+	<head>
+		<BaseHead title={`Kontakt | ${SITE_TITLE}`} description="Kontaktuj nás na info@spacirkovnik.sk" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-hero">
+				<h1>✉️ Kontakt</h1>
+				<p>Máš otázku, nápad alebo spätnú väzbu? Radi sa ozveme.</p>
+			</div>
+
+			<div class="contact-grid">
+				<div class="contact-card">
+					<div class="contact-icon">📧</div>
+					<h2>Email</h2>
+					<p>Pre všetky otázky ohľadom appky, hier alebo spolupráce.</p>
+					<a href="mailto:info@spacirkovnik.sk">info@spacirkovnik.sk</a>
+				</div>
+
+				<div class="contact-card">
+					<div class="contact-icon">▶️</div>
+					<h2>Google Play</h2>
+					<p>Stiahni appku zadarmo a vyraz na prvé dobrodružstvo.</p>
+					<a href="https://play.google.com/store/apps/details?id=sk.spacirkovnik" target="_blank" rel="noopener">Stiahnuť appku</a>
+				</div>
+
+				<div class="contact-card">
+					<div class="contact-icon">🔒</div>
+					<h2>Ochrana súkromia</h2>
+					<p>Informácie o spracovaní osobných údajov.</p>
+					<a href="https://peterpivarnik.github.io/spacirkovnik/privacy.html" target="_blank">Zobraziť zásady</a>
+				</div>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.page-hero {
+		text-align: center;
+		padding: 2rem 0 3rem;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		margin-bottom: 3rem;
+	}
+	.page-hero h1 { margin-bottom: 0.75rem; }
+	.page-hero p {
+		color: rgb(var(--gray));
+		font-size: 1.1rem;
+	}
+
+	.contact-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 4rem;
+	}
+
+	.contact-card {
+		background: #FAF6F1;
+		border-radius: 16px;
+		padding: 2rem 1.5rem;
+		text-align: center;
+		border: 2px solid transparent;
+		transition: border-color 0.2s;
+	}
+	.contact-card:hover { border-color: #7A4F2E; }
+
+	.contact-icon {
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+	}
+	.contact-card h2 {
+		font-size: 1.1rem;
+		color: #3D2314;
+		margin-bottom: 0.5rem;
+	}
+	.contact-card p {
+		font-size: 0.9rem;
+		color: #6B4C35;
+		margin-bottom: 1rem;
+	}
+	.contact-card a {
+		color: #7A4F2E;
+		font-weight: 600;
+		text-decoration: none;
+		font-size: 0.95rem;
+	}
+	.contact-card a:hover { text-decoration: underline; }
+</style>
