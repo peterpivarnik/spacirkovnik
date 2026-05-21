@@ -1,0 +1,61 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header>
+	<nav>
+		<h2><a href="/"><img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media" alt={SITE_TITLE} class="nav-logo" /> {SITE_TITLE}</a></h2>
+		<div class="internal-links">
+			<HeaderLink href="/">Domov</HeaderLink>
+			<HeaderLink href="/hry">Hry</HeaderLink>
+			<HeaderLink href="/blog">Blog</HeaderLink>
+			<HeaderLink href="/kontakt">Kontakt</HeaderLink>
+		</div>
+	</nav>
+</header>
+<style>
+	header {
+		margin: 0;
+		padding: 0 1em;
+		background: white;
+		box-shadow: 0 2px 8px rgba(61, 35, 20, 0.08);
+	}
+	h2 {
+		margin: 0;
+		font-size: 1.1em;
+	}
+
+	h2 a,
+	h2 a.active {
+		text-decoration: none;
+		color: #3D2314;
+		display: flex;
+		align-items: center;
+		gap: 0.4em;
+	}
+	.nav-logo {
+		width: 32px;
+		height: 32px;
+		object-fit: contain;
+		border-radius: 0;
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	nav a {
+		padding: 1em 0.5em;
+		color: #3D2314;
+		border-bottom: 4px solid transparent;
+		text-decoration: none;
+	}
+	nav a.active {
+		text-decoration: none;
+		border-bottom-color: var(--accent);
+	}
+	@media (max-width: 720px) {
+		h2 { font-size: 1em; }
+	}
+</style>

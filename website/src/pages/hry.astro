@@ -1,0 +1,245 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const hry = [
+	{
+		id: 'lesnicka-palica',
+		nazov: 'Lesnícka palica Gejzu Dražďáka',
+		popis: 'Pomôž Gejzovi nájsť stratenú lesnícku palicu v petržalských lesoch.',
+		region: 'Bratislava – Petržalka',
+		dlzka: '3,0 km',
+		cas: '~2 hod',
+		status: 'active',
+		cena: 'Zadarmo',
+		start: 'Horáreň pri Draždiaku',
+		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media',
+	},
+	{
+		id: 'tajomstvo-janka-krala',
+		nazov: 'Tajomstvo Janka Kráľa',
+		popis: 'Pomôž duchovi básnika Janka Kráľa nájsť stratené básne v najstaršom parku v Európe.',
+		region: 'Bratislava – Petržalka',
+		dlzka: '2,0 km',
+		cas: '~90 min',
+		status: 'coming_soon',
+		cena: '9,99 €',
+		start: 'Sad Janka Kráľa',
+		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media',
+	},
+	{
+		id: 'rybar-z-drazdiaka',
+		nazov: 'Rybár z Draždiaka',
+		popis: 'Starý rybár ti prezradí tajomstvá najväčšieho jazera v Petržalke.',
+		region: 'Bratislava – Petržalka',
+		dlzka: '1,2 km',
+		cas: '~60 min',
+		status: 'coming_soon',
+		cena: '9,99 €',
+		start: 'Draždiak',
+		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media',
+	},
+	{
+		id: 'vila-z-pecnianskeho-lesa',
+		nazov: 'Víla z Pečnianskeho lesa',
+		popis: 'Pomôž víle Lesničke odklíať deväť kúzelných semienok a zachráň Pečniansky les pred zlomyseľným škriatkom Pŕhľavníkom.',
+		region: 'Bratislava – Petržalka',
+		dlzka: '3,5 km',
+		cas: '~2 hod',
+		status: 'coming_soon',
+		cena: '9,99 €',
+		start: 'Viedenská cesta oproti Inchebe',
+		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media',
+	},
+	{
+		id: 'vodnik-z-chorvatskeho-ramena',
+		nazov: 'Vodník z Chorvátského ramena',
+		popis: 'Pomôž vodníkovi Chrčovi pozbierať kúsky rozbitej kúzelnej perly od vodných bytostí pozdĺž Chorvátského ramena.',
+		region: 'Bratislava – Petržalka',
+		dlzka: '5,0 km',
+		cas: '~3 hod',
+		status: 'coming_soon',
+		cena: '9,99 €',
+		start: 'Začiatok Chorvátskeho ramena pri Bosákovej',
+		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media',
+	},
+];
+---
+
+<!doctype html>
+<html lang="sk">
+	<head>
+		<BaseHead title={`Hry a trasy | ${SITE_TITLE}`} description="Zoznam všetkých dostupných hier a trás v Špacírkovníku." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="page-hero">
+				<h1>🗺️ Hry a trasy</h1>
+				<p>Každá hra je skutočná trasa na skutočnom mieste – s príbehom, hádankami a zážitkami pre celú rodinu.</p>
+			</div>
+
+			<div class="games-list">
+				{hry.map((hra) => (
+					<div class={`game-item ${hra.status === 'active' ? 'active' : 'soon'}`}>
+						<img src={hra.imageUrl} alt={hra.nazov} class="game-image" loading="lazy" />
+						<div class="game-content">
+							<div class="game-header">
+								<div>
+									<h2>{hra.nazov}</h2>
+									<div class="game-meta">
+										<span>📍 {hra.region}</span>
+										<span>🚶 {hra.dlzka}</span>
+										<span>⏱️ {hra.cas}</span>
+									</div>
+								</div>
+								<div class={`price-tag ${hra.status === 'active' ? 'free' : hra.status === 'coming_soon' ? 'soon' : ''}`}>
+									{hra.status === 'coming_soon' ? 'Čoskoro' : hra.cena}
+								</div>
+							</div>
+							<p class="game-desc">{hra.popis}</p>
+							<p class="game-start">🏁 Štart: <strong>{hra.start}</strong></p>
+						</div>
+					</div>
+				))}
+			</div>
+
+			<div class="download-cta">
+				<p>Všetky hry sú dostupné v appke Špacírkovník.</p>
+				<a class="btn-primary" href="https://play.google.com/store/apps/details?id=sk.spacirkovnik" target="_blank" rel="noopener">
+					▶ Stiahnuť na Google Play
+				</a>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.page-hero {
+		text-align: center;
+		padding: 2rem 0 3rem;
+		border-bottom: 1px solid rgb(var(--gray-light));
+		margin-bottom: 3rem;
+	}
+	.page-hero h1 { margin-bottom: 0.75rem; }
+	.page-hero p {
+		color: rgb(var(--gray));
+		font-size: 1.1rem;
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.games-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-bottom: 4rem;
+	}
+
+	.game-item {
+		display: flex;
+		gap: 1.5rem;
+		background: #FAF6F1;
+		border-radius: 16px;
+		overflow: hidden;
+		border: 2px solid transparent;
+		transition: border-color 0.2s;
+	}
+	.game-item:hover { border-color: #7A4F2E; }
+	.game-item.soon { opacity: 0.85; }
+
+	.game-image {
+		width: 160px;
+		min-height: 160px;
+		object-fit: cover;
+		border-radius: 0;
+		flex-shrink: 0;
+	}
+
+	.game-content {
+		padding: 1.5rem 1.5rem 1.5rem 0;
+		flex: 1;
+	}
+
+	.game-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 1rem;
+		margin-bottom: 0.75rem;
+	}
+	.game-header h2 {
+		font-size: 1.15rem;
+		color: #3D2314;
+		margin-bottom: 0.4rem;
+	}
+	.game-meta {
+		display: flex;
+		gap: 1rem;
+		font-size: 0.82rem;
+		color: #8B6043;
+		flex-wrap: wrap;
+	}
+
+	.price-tag {
+		white-space: nowrap;
+		background: #7A4F2E;
+		color: #fff;
+		padding: 0.35rem 0.9rem;
+		border-radius: 50px;
+		font-weight: 700;
+		font-size: 0.9rem;
+		flex-shrink: 0;
+	}
+	.price-tag.free { background: #52A47A; }
+	.price-tag.soon { background: #A09080; }
+
+	.game-desc {
+		color: #6B4C35;
+		font-size: 0.95rem;
+		margin: 0 0 0.5rem;
+		line-height: 1.6;
+	}
+	.game-start {
+		font-size: 0.85rem;
+		color: #8B6043;
+		margin: 0;
+	}
+
+	.download-cta {
+		text-align: center;
+		padding: 3rem 0;
+		border-top: 1px solid rgb(var(--gray-light));
+	}
+	.download-cta p {
+		color: rgb(var(--gray));
+		margin-bottom: 1.5rem;
+	}
+
+	.btn-primary {
+		display: inline-block;
+		background: #7A4F2E;
+		color: #fff;
+		text-decoration: none;
+		padding: 0.85rem 1.75rem;
+		border-radius: 50px;
+		font-weight: 600;
+		font-size: 1rem;
+		transition: background 0.2s, transform 0.15s;
+		box-shadow: 0 4px 16px rgba(122,79,46,0.3);
+	}
+	.btn-primary:hover {
+		background: #3D2314;
+		transform: translateY(-2px);
+		color: #fff;
+	}
+
+	@media (max-width: 600px) {
+		.game-item { flex-direction: column; }
+		.game-image { width: 100%; height: 180px; }
+		.game-content { padding: 1.25rem; }
+	}
+</style>
