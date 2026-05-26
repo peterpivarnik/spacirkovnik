@@ -7,7 +7,7 @@
   "id": "kebab-case-nazov",
   "title": "Názov hry",
   "version": 1,
-  "screens": [ ... ]
+  "screens": []
 }
 ```
 
@@ -58,7 +58,7 @@ Používa sa formát `{mužský tvar|ženský tvar}` — aplikácia zobrazí spr
 - `{múdry|múdra}`
 - `{dokázal|dokázala}`
 - `{bol|bola}`
-- Prípona pre minulý čas: `{·a}` → zobrazí sa ako "" alebo "a" (napr. `počul{·a}`)
+- Prípona pre minulý čas: `{|a}` → zobrazí sa ako "" alebo "a" (napr. `počul{|a}`)
 
 ---
 

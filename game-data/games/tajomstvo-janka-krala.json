@@ -1,7 +1,7 @@
 {
   "id": "tajomstvo-janka-krala",
   "title": "Tajomstvo Janka Kráľa",
-  "version": 2,
+  "version": 3,
   "screens": [
     {
       "text": "Tajomstvo Janka Kráľa",
@@ -20,8 +20,8 @@
     {
       "text": "Výborne! Dobrodružstvo sa začína! Najprv sa musíš presunúť do Sadu Janka Kráľa - jedného z najstarších verejných parkov v celej Európe. Dnes sa tam však deje niečo zvláštne. Sleduj mapu a vydaj sa na cestu!",
       "type": "NAVIGATION",
-      "targetLatitude": 48.133991,
-      "targetLongitude": 17.109076,
+      "targetLatitude": 48.13389,
+      "targetLongitude": 17.10897,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_stary_strom.jpeg?alt=media",
       "screenId": 2
     },
@@ -59,8 +59,8 @@
     {
       "text": "„Výborne, {odvážny pomocník|odvážna pomocníčka}! Prvú báseň mi vietor odniesol ku starému stromu. Tento strom tu rastie už vyše dvesto rokov a pamätá si časy, keď tu ešte neboli žiadne mosty cez Dunaj. Poď, ukážem ti cestu!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.133325,
-      "targetLongitude": 17.110224,
+      "targetLatitude": 48.133046,
+      "targetLongitude": 17.111225,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_stary_strom.jpeg?alt=media",
       "screenId": 7
     },
@@ -103,8 +103,8 @@
     {
       "text": "„Ale pozri, vidím ďalší list papiera! Vietor ho zaniesol k lavičke neďaleko odtiaľto. Poď, musíme sa poponáhľať!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.132811,
-      "targetLongitude": 17.112275,
+      "targetLatitude": 48.132828,
+      "targetLongitude": 17.112476,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fbasne_vietor.jpeg?alt=media",
       "screenId": 11
     },
@@ -145,7 +145,7 @@
       "screenId": 14
     },
     {
-      "text": "„Vidíš tú zaujímavú vežičku? To je gotický kostolík - vlastne to nie je kostolík, ale veža! Bola pôvodne súčasťou kláštora klarisiek v starom meste a v 19. storočí ju preniesli sem do parku. Pozri sa na jej portály - práve ony skrývajú ďalšiu stopu.”",
+      "text": "„Vidíš tú zaujímavú vežičku? To je gotický kostolík - vlastne to nie je kostolík, ale veža! Bola pôvodne súčasťou kláštora klarisiek v starom meste a v 19. storočí ju preniesli sem do parku. Pozri sa na jej oblúky - práve ony skrývajú ďalšiu stopu.”",
       "type": "NAVIGATION",
       "targetLatitude": 48.134028,
       "targetLongitude": 17.113959,
@@ -153,31 +153,31 @@
       "screenId": 15
     },
     {
-      "text": "„Táto veža je jedným zo symbolov nášho parku. Dobre sa rozhliadni a spočítaj portály. Koľko vchodov (portálov) na veži vidíš?”",
+      "text": "„Táto veža je jedným zo symbolov nášho parku. Dobre sa rozhliadni a spočítaj oblúky. Koľko vchodov (oblúkov) na veži vidíš?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fveza_klarisiek.jpeg?alt=media",
       "answers": [
         {
-          "text": "Jeden",
+          "text": "Dva",
           "correct": false
         },
         {
-          "text": "Tri",
+          "text": "Štyri",
           "correct": false
         },
         {
-          "text": "Päť",
+          "text": "Šesť",
           "correct": true
         },
         {
-          "text": "Sedem",
+          "text": "Osem",
           "correct": false
         }
       ],
       "screenId": 16
     },
     {
-      "text": "„Výborne! Veža má päť výrazných gotických portálov - a za jedným z nich bola ukrytá tretia báseň. Tretí kúsok časovej skladačky je obnovený!”",
+      "text": "„Výborne! Veža má šesť výrazných gotických oblúkov - a za jedným z nich bola ukrytá tretia báseň. Tretí kúsok časovej skladačky je obnovený!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fveza_klarisiek.jpeg?alt=media",
       "screenId": 17
@@ -185,8 +185,8 @@
     {
       "text": "„Ďalšiu báseň cítim niekde ďalej v parku — poďme!”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.135353,
-      "targetLongitude": 17.112342,
+      "targetLatitude": 48.134945,
+      "targetLongitude": 17.112918,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
       "screenId": 18
     },
@@ -221,7 +221,7 @@
       "screenId": 20
     },
     {
-      "text": "„Správne! V roku 1843 sme na fare v Hlbokom uzákonili spisovnú slovenčinu. Bez toho by si dnes možno čítal tieto vety v úplne inom jazyku! Štvrtá báseň nájdená - a časové okno už nemá takú silu.”",
+      "text": "„Správne! V roku 1843 sme na fare v obci Hlboké uzákonili spisovnú slovenčinu. Bez toho by si dnes možno čítal tieto vety v úplne inom jazyku! Štvrtá báseň nájdená - a časové okno už nemá takú silu.”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
       "screenId": 21
@@ -229,8 +229,8 @@
     {
       "text": "„Počkaj — cítim ďalšiu báseň! Je niekde pri vode, tam kde Dunaj obteká park. Poď so mnou k nábrežiu! Dunaj tečie cez celú Európu a spája mnoho národov. Keď som bol mladý, bol som veľký rebel. Raz som sa tak rozčúlil nad nespravodlivosťou, že som hodil do Dunaja svoj klobúk a šabľu! Moji priatelia si mysleli, že som sa zbláznil.”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.136908,
-      "targetLongitude": 17.112471,
+      "targetLatitude": 48.136948,
+      "targetLongitude": 17.111683,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
       "screenId": 22
     },
@@ -265,39 +265,39 @@
       "screenId": 24
     },
     {
-      "text": "„Piata báseň je späť! Ale cítim ďalšiu — pri tej budove s kaviarňou. Poď!“",
+      "text": "„Piata báseň je späť! Ale cítim ďalšiu — pri tej budove na nábreží. Poď!“",
       "type": "NAVIGATION",
-      "targetLatitude": 48.136996,
-      "targetLongitude": 17.109321,
+      "targetLatitude": 48.136926,
+      "targetLongitude": 17.11008,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
       "screenId": 25
     },
     {
-      "text": "„Táto reštaurácia tu stála už v časoch, keď som študoval v Bratislave. Vieš, v ktorom roku bola pôvodne otvorená?",
+      "text": "„Do Sadu Janka Kráľa sa kedysi dalo dostať aj na lodi. Tá loď pristávala práve pri tejto budove. Vieš, ako sa tá loď volala?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
       "answers": [
         {
-          "text": "1776",
+          "text": "Ponorka",
           "correct": false
         },
         {
-          "text": "1827",
+          "text": "Propeler",
           "correct": true
         },
         {
-          "text": "1848",
+          "text": "Plachetnica",
           "correct": false
         },
         {
-          "text": "2003",
+          "text": "Gondola",
           "correct": false
         }
       ],
       "screenId": 26
     },
     {
-      "text": "„Správne, bolo to v roku 1827! Šiesta báseň je späť!“",
+      "text": "„Správne, bol to Propeler! Šiesta báseň je späť!“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
       "screenId": 27
@@ -355,8 +355,8 @@
     {
       "text": "„Poďme ďalej — cítim, že ďalšia báseň je niekde v hĺbke parku.”",
       "type": "NAVIGATION",
-      "targetLatitude": 48.135856,
-      "targetLongitude": 17.107794,
+      "targetLatitude": 48.135846,
+      "targetLongitude": 17.107390,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
       "screenId": 33
     },
