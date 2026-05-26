@@ -1,7 +1,7 @@
 {
   "id": "vodnik-z-chorvatskeho-ramena",
   "title": "Vodník z Chorvátského ramena",
-  "version": 1,
+  "version": 2,
   "screens": [
     {
       "text": "Vodník z Chorvátského ramena",
@@ -32,7 +32,7 @@
       "screenId": 3
     },
     {
-      "text": "Zrazu sa z vody vynoría zelená hlava s veľkými očami a dlhou bradou z rias! Je to vodník! Vyzerá ustarane.",
+      "text": "Zrazu sa z vody vynorí zelená hlava s veľkými očami a dlhou bradou z rias! Je to vodník! Vyzerá ustarane.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
       "screenId": 4
@@ -81,7 +81,7 @@
       "screenId": 8
     },
     {
-      "text": "Rusalka býva kúsok ďalej po prúde. Poď za ňou!",
+      "text": "Rusalka býva kúsok ďalej. Poď za ňou!",
       "type": "NAVIGATION",
       "targetLatitude": 48.12478,
       "targetLongitude": 17.11653,
@@ -163,7 +163,7 @@
       "screenId": 15
     },
     {
-      "text": "„Kváááá, správne! Jeme komáre a muchy — sme prírodní lovci komárov! Bez nás by tu bolo komárov neúrekom. Tu máš môj kúsok. Ďalej choď za leknič kou — nájdeš ju tam, kde na vode plávajú veľké okrúhle listy.“",
+      "text": "„Kváááá, správne! Jeme komáre a muchy — sme prírodní lovci komárov! Bez nás by tu bolo komárov neúrekom. Tu máš môj kúsok. Ďalej choď za lekničkou — nájdeš ju tam, kde na vode plávajú veľké okrúhle listy.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fzabiak.jpeg?alt=media",
       "screenId": 16
@@ -227,7 +227,7 @@
       "screenId": 22
     },
     {
-      "text": "„Hmmm, malý človiečik. Ja som sumec Fúzan a som tu najstarší po Chrčovi. Dám ti kúsok perly, ak mi povieš: Ako dlho sa môže dožiť sumec?“",
+      "text": "„Hmmm, malý človiečik. Ja som sumec Fúzan a som tu najstarší po Chrčovi. Dám ti kúsok perly, ak mi povieš: Koľko rokov sa dožíva sumec?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fsumec.jpeg?alt=media",
       "answers": [

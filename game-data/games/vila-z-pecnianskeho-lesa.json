@@ -1,7 +1,7 @@
 {
   "id": "vila-z-pecnianskeho-lesa",
   "title": "Víla z Pečnianskeho lesa",
-  "version": 2,
+  "version": 3,
   "screens": [
     {
       "text": "Víla z Pečnianskeho lesa",
@@ -12,7 +12,7 @@
       "screenId": 0
     },
     {
-      "text": "Špacírkovník sa roztriasol a jedna šípka zažiarila jemným zeleným svetlom — ako slnečný lúč prenikajúci cez listy stromov! Ukazuje do Pečnianskeho lesa. Niekto tam úporne čaká na pomoc... Poď to zistiť!",
+      "text": "Špacírkovník sa roztriasol a jedna šípka zažiarila jemným zeleným svetlom — ako oči lesnej vily skrytej medzi stromami! Ukazuje do Pečnianskeho lesa. Niekto tam úporne čaká na pomoc... Poď to zistiť!",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
       "screenId": 1
@@ -44,7 +44,7 @@
       "screenId": 5
     },
     {
-      "text": "„Zlomyseľný škriatok Pŕhľavník — taký malý zelený chlapisko, čo miluje len pŕhľavy — mi v noci zaklial všetkých deväť kúzelných semienok! Každé semienka obalil pŕhľavovým kúzlom — a zakliate semienka nikdy nevyklíčia. Zostanú navždy mŕtve. Rehotal sa pri tom: ‚Keď nevyrastie ani jeden nový strom, bude viac slnka pre moje pŕhľavy!' Kliatbu dokáže prelomiť len ten, kto pozná meno stromu, z ktorého semienka pochádzajú. Pomôžeš mi ich nájsť a odklíať?“",
+      "text": "„Zlomyseľný škriatok Pŕhľavník — taký malý zelený chlapisko, čo miluje len pŕhľavy — mi v noci zaklial všetkých deväť kúzelných semienok! Každé semienka obalil pŕhľavovým kúzlom — a zakliate semienka nikdy nevyklíčia. Zostanú navždy mŕtve. Rehotal sa pri tom: \n‚Stromy, kriky, všetko preč — moje srdce plesá, \npŕhľavy, len pŕhľavy v každom kúte lesa!' \nKliatbu dokáže prelomiť len ten, kto pozná meno stromu, z ktorého semienka pochádzajú. Pomôžeš mi ich nájsť a odklíať?“",
       "type": "CONTINUE",
       "buttonText": "Jasné, Lesnička, pomôžem!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fprhlavnik.jpeg?alt=media",
@@ -55,7 +55,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.135227,
       "targetLongitude": 17.095148,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fles.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 7
     },
     {
@@ -89,11 +89,11 @@
       "screenId": 9
     },
     {
-      "text": "„Druhé listnaté semienko cítim kúsok ďalej. Zrazu sa mi krídla rozochveli — to znamená, že sme blízko! Poď!“",
+      "text": "„Druhé listnaté semienko cítim kúsok ďalej. Cítim ako sa mi krídla rozochveli — to znamená, že sme blízko! Poď!“",
       "type": "NAVIGATION",
       "targetLatitude": 48.13452,
       "targetLongitude": 17.090212,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fdub.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 10
     },
     {
@@ -127,11 +127,11 @@
       "screenId": 12
     },
     {
-      "text": "„Tretie listnaté semienko je neďaleko. Cítim, ako Pŕhľavníkovo kúzlo slabšie — už sa bojí! Poď za mnou!“",
+      "text": "„Tretie listnaté semienko je neďaleko. Cítim, ako Pŕhľavníkovo kúzlo slabne — už sa bojí! Poď za mnou!“",
       "type": "NAVIGATION",
       "targetLatitude": 48.134872,
       "targetLongitude": 17.087624,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fbuk.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 13
     },
     {
@@ -169,7 +169,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.133556,
       "targetLongitude": 17.085808,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fjavor.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 16
     },
     {
@@ -207,11 +207,11 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.135303,
       "targetLongitude": 17.085234,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fsmrek.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 19
     },
     {
-      "text": "„Toto semienko pochádza zo stromu s dlhým ihličím, ktoré rastie v zväzkoch po dva. Má aj veľmi charakteristickú kôru — hore červenkavú. Aký je to strom?“",
+      "text": "„Toto semienko pochádza zo stromu s dlhým ihličím, ktoré rastie v zväzkoch po dva. Má aj veľmi charakteristickú červenkavú kôru. Aký je to strom?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fborovice.jpeg?alt=media",
       "answers": [
@@ -243,13 +243,13 @@
     {
       "text": "„Šieste semienko — posledné ihličnaté! Cítim ho tamto. Ešte trochu a máme všetky ihličnaté! Poďme!“",
       "type": "NAVIGATION",
-      "targetLatitude": 48.136005,
-      "targetLongitude": 17.081873,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fborovice.jpeg?alt=media",
+      "targetLatitude": 48.135821,
+      "targetLongitude": 17.082530,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 22
     },
     {
-      "text": "„Toto semienko pochádza zo stromu, ktorý vyzerá podobne ako smrek, ale má jedno veľké tajomstvo — jeho šišky STOJA na konároch ako sviečky na torte! Nikdy nespadnú celé — rozpadávajú sa priamo na strome. Aký je to strom?“",
+      "text": "„Toto semienko pochádza zo stromu, ktorý vyzerá podobne ako smrek, ale spoznáš ho podľa jednej zvláštnosti — jeho šišky STOJA na konároch ako sviečky na torte! Nikdy nespadnú celé — rozpadávajú sa priamo na strome. Aký je to strom?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fjedla.jpeg?alt=media",
       "answers": [
@@ -283,11 +283,11 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.137764,
       "targetLongitude": 17.080372,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fbaza.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 25
     },
     {
-      "text": "„Toto semienko pochádza z kríku, ktorý na jar kvitne bielo veľkými plochými súkvetiami. Na jeseň má čierne bobule. Z kvetov sa robí sirup a z bobúľ džem. Vieš, ako sa volá?“",
+      "text": "„Toto semienko pochádza z kríku, ktorý na jar kvitne veľkými plochými bielymi súkvetiami. Na jeseň má čierne bobule. Z kvetov sa robí sirup a z bobúľ džem. Vieš, ako sa volá?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fbaza.jpeg?alt=media",
       "answers": [
@@ -321,7 +321,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.136597,
       "targetLongitude": 17.077242,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fsipky.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 28
     },
     {
@@ -359,11 +359,11 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.13814,
       "targetLongitude": 17.075354,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flieska.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 31
     },
     {
-      "text": "„Posledné semienko pochádzajú z kríku, ktorý má veľké okrúhle listy. Na jeseň na ňom rastú oriešky v zelených obaloch. Veveričky ich zbierajú a schovávajú na zimu. Vieš, aké oriešky to sú?“",
+      "text": "„Posledné semienko pochádza z kríku, ktorý má veľké okrúhle listy. Na jeseň na ňom rastú oriešky v zelených obaloch. Veveričky ich zbierajú a schovávajú na zimu. Vieš, aké oriešky to sú?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flieska.jpeg?alt=media",
       "answers": [
@@ -414,7 +414,7 @@
       "screenId": 36
     },
     {
-      "text": "Spoza pŕhľavy vyskočil malý zelený škriatok a začal dupkať nohami od zlosti: „Nie! Moje kliatby! Všetky ste prelomili!“ Ale Lesnička sa len usmeje: „Neboj sa, Pŕhľavník. V lese je miesto pre všetkých — aj pre pŕhľavy. Len nie v celom lese.“ Škriatok zamrmlá a zmizne v kríkoch.",
+      "text": "Spoza pŕhľavy vyskočil malý zelený škriatok a začal dupkať nohami od zlosti: „Nie! Moje kliatby! Všetky ste prelomili!“ Ale Lesnička sa len usmeje: „Neboj sa, Pŕhľavník. V lese je miesto pre všetkých — aj pre pŕhľavy. Len nie v celom lese.“ Škriatok zamrmle a zmizne v kríkoch.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fprhlavnik.jpeg?alt=media",
       "screenId": 37

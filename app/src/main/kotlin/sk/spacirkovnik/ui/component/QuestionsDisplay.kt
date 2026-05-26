@@ -214,7 +214,7 @@ private fun OneButton(buttonOnClick: () -> Unit, buttonText: String) {
         onClick = buttonOnClick,
         modifier = Modifier
             .fillMaxWidth()
-            .height(52.dp),
+            .defaultMinSize(minHeight = 52.dp),
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
     ) {
@@ -240,7 +240,7 @@ private fun TwoButtons(
             onClick = backButtonOnClick,
             modifier = Modifier
                 .weight(1f)
-                .height(52.dp),
+                .defaultMinSize(minHeight = 52.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = BackButton,
@@ -255,7 +255,7 @@ private fun TwoButtons(
             onClick = nextButtonOnClick,
             modifier = Modifier
                 .weight(1f)
-                .height(52.dp),
+                .defaultMinSize(minHeight = 52.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = PrimaryButton,
@@ -341,7 +341,7 @@ private fun MyAlertDialog(showAlertMessage: MutableState<Boolean>) {
         confirmButton = {
             Button(
                 onClick = { showAlertMessage.value = false },
-                modifier = Modifier.fillMaxWidth().height(44.dp),
+                modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 44.dp),
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
             ) {
@@ -370,7 +370,7 @@ private fun GenderSelectionScreen(onSelected: (Gender) -> Unit) {
         Spacer(modifier = Modifier.height(32.dp))
         Button(
             onClick = { onSelected(Gender.MALE) },
-            modifier = Modifier.fillMaxWidth().height(56.dp),
+            modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
             shape = RoundedCornerShape(14.dp),
             colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
         ) {
@@ -379,7 +379,7 @@ private fun GenderSelectionScreen(onSelected: (Gender) -> Unit) {
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = { onSelected(Gender.FEMALE) },
-            modifier = Modifier.fillMaxWidth().height(56.dp),
+            modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 56.dp),
             shape = RoundedCornerShape(14.dp),
             colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
         ) {
