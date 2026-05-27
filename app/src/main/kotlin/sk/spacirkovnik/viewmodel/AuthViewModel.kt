@@ -1,17 +1,14 @@
 package sk.spacirkovnik.viewmodel
 
 import android.app.Application
+import android.content.Intent
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.credentials.CredentialManager
-import androidx.credentials.GetCredentialRequest
-import androidx.credentials.exceptions.GetCredentialCancellationException
-import androidx.credentials.exceptions.NoCredentialException
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.libraries.identity.googleid.GetGoogleIdOption
-import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
-import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
@@ -41,36 +38,23 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun signIn(activityContext: android.app.Activity) {
+    fun getSignInIntent(): Intent {
+        val webClientId = getWebClientId()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(webClientId)
+            .requestEmail()
+            .build()
+        val googleSignInClient = GoogleSignIn.getClient(getApplication(), gso)
+        return googleSignInClient.signInIntent
+    }
+
+    fun handleSignInResult(data: Intent?) {
         viewModelScope.launch {
             try {
                 _state.value = _state.value.copy(loading = true, error = null)
-
-                val credentialManager = CredentialManager.create(activityContext)
-                val webClientId = getWebClientId()
-
-                val idToken = try {
-                    val googleIdOption = GetGoogleIdOption.Builder()
-                        .setFilterByAuthorizedAccounts(false)
-                        .setServerClientId(webClientId)
-                        .build()
-
-                    val request = GetCredentialRequest.Builder()
-                        .addCredentialOption(googleIdOption)
-                        .build()
-
-                    val result = credentialManager.getCredential(activityContext, request)
-                    GoogleIdTokenCredential.createFrom(result.credential.data).idToken
-                } catch (_: NoCredentialException) {
-                    val signInOption = GetSignInWithGoogleOption.Builder(webClientId).build()
-
-                    val request = GetCredentialRequest.Builder()
-                        .addCredentialOption(signInOption)
-                        .build()
-
-                    val result = credentialManager.getCredential(activityContext, request)
-                    GoogleIdTokenCredential.createFrom(result.credential.data).idToken
-                }
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                val account = task.getResult(ApiException::class.java)
+                val idToken = account.idToken ?: throw Exception("Chýba ID token")
 
                 val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
                 val authResult = auth.signInWithCredential(firebaseCredential).await()
@@ -83,8 +67,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 )
                 loadActivations()
                 loadTestGames()
-            } catch (_: GetCredentialCancellationException) {
-                _state.value = _state.value.copy(loading = false)
+            } catch (e: ApiException) {
+                _state.value = _state.value.copy(
+                    loading = false,
+                    error = "Prihlásenie zlyhalo: ${e.statusCode}"
+                )
             } catch (e: Exception) {
                 _state.value = _state.value.copy(
                     loading = false,
@@ -96,6 +83,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
     fun signOut() {
         auth.signOut()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+        GoogleSignIn.getClient(getApplication<Application>(), gso).signOut()
         _state.value = AuthState()
     }
 

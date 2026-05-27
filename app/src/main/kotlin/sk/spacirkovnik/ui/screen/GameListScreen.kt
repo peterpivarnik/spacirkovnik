@@ -1,6 +1,8 @@
 package sk.spacirkovnik.ui.screen
 
 import androidx.activity.compose.LocalActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.expandVertically
@@ -94,6 +96,11 @@ fun GameListScreen(
     val authState by authViewModel.state
     val purchaseState by purchaseViewModel.state
     val activity = LocalActivity.current!!
+    val signInLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        authViewModel.handleSignInResult(result.data)
+    }
     var showSignOutDialog by remember { mutableStateOf(false) }
     var expandedGameId by remember { mutableStateOf<String?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
@@ -199,7 +206,7 @@ fun GameListScreen(
                             } else {
                                 IconButton(onClick = {
                                     if (authState.isSignedIn) showSignOutDialog = true
-                                    else authViewModel.signIn(activity)
+                                    else signInLauncher.launch(authViewModel.getSignInIntent())
                                 }) {
                                     Icon(
                                         imageVector = Icons.Default.AccountCircle,

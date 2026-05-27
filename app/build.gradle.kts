@@ -110,6 +110,7 @@ dependencies {
     implementation(libs.credentials)
     implementation(libs.credentials.play.services)
     implementation(libs.googleid)
+    implementation(libs.play.services.auth)
     implementation(libs.billing.ktx)
 
     testImplementation(libs.junit)
