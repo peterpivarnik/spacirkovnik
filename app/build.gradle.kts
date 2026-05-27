@@ -12,7 +12,6 @@ val localPropertiesFile = rootProject.file("local.properties")
 val localProps = Properties().apply {
     if (localPropertiesFile.exists()) load(localPropertiesFile.inputStream())
 }
-val mapsApiKey: String = localProps.getProperty("MAPS_API_KEY", "")
 val mapboxPublicToken: String = localProps.getProperty("MAPBOX_PUBLIC_TOKEN", "")
 
 val keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -44,8 +43,6 @@ configure<ApplicationExtension> {
         versionCode = versionProperties["versionCode"].toString().toInt()
         versionName = versionProperties["versionCode"].toString()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
-        buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
         manifestPlaceholders["MAPBOX_PUBLIC_TOKEN"] = mapboxPublicToken
         resValue("string", "mapbox_access_token", mapboxPublicToken)
     }
