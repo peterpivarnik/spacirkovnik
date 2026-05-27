@@ -4,5 +4,6 @@
 /build/
 http-client.private.env.json
 keystore.properties
+local.properties
 *.jks
 *.keystore
