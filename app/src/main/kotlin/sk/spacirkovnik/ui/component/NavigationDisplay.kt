@@ -18,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,7 +35,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -55,6 +55,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.text.font.FontWeight
@@ -112,7 +113,6 @@ fun NavigationDisplay(
     var deviceAzimuth by remember { mutableFloatStateOf(0f) }
     var bearingToTarget by remember { mutableFloatStateOf(0f) }
     var locationStarted by remember { mutableStateOf(false) }
-    var showMap by remember { mutableStateOf(false) }
 
     // Pre-build icon bitmaps once; IconImage wraps them for Mapbox annotations
     val targetPinIcon = remember { IconImage(bitmap = createPinBitmap(android.graphics.Color.rgb(213, 0, 0))) }
@@ -325,21 +325,11 @@ fun NavigationDisplay(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        OutlinedButton(
-            onClick = { showMap = !showMap },
-            modifier = Modifier.fillMaxWidth(),
-            shape = RoundedCornerShape(10.dp),
-            colors = ButtonDefaults.outlinedButtonColors(contentColor = TextOnDark)
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
         ) {
-            Text(
-                text = if (showMap) "Zobraziť kompas" else "Zobraziť mapu",
-                fontSize = 14.sp
-            )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        if (showMap) {
             NavigationMap(
                 mapViewportState = mapViewportState,
                 targetPoint = targetPoint,
@@ -348,42 +338,47 @@ fun NavigationDisplay(
                 userPinIcon = userPinIcon,
                 arrowIcon = arrowIcon
             )
-        }
-        else {
-            Canvas(modifier = Modifier.size(160.dp)) {
+
+            // Compass overlay — bottom-right corner of the map
+            Canvas(
+                modifier = Modifier
+                    .size(90.dp)
+                    .align(Alignment.BottomEnd)
+                    .padding(10.dp)
+            ) {
                 val center = Offset(size.width / 2, size.height / 2)
                 val radius = size.minDimension / 2
 
-                drawCircle(
-                    color = TextOnDark,
-                    radius = radius,
-                    center = center,
-                    alpha = 0.15f
-                )
-                drawCircle(
-                    color = TextOnDark,
-                    radius = radius,
-                    center = center,
-                    style = Stroke(width = 3f),
-                    alpha = 0.6f
-                )
-                drawCircle(
-                    color = TextOnDark,
-                    radius = radius * 0.85f,
-                    center = center,
-                    style = Stroke(width = 1.5f),
-                    alpha = 0.3f
-                )
+                // semi-transparent dark backdrop so compass is readable on any map tile
+                drawCircle(color = Color(0x99000000), radius = radius, center = center)
+                drawCircle(color = TextOnDark, radius = radius, center = center,
+                    style = Stroke(width = 2f), alpha = 0.5f)
+                drawCircle(color = TextOnDark, radius = radius * 0.82f, center = center,
+                    style = Stroke(width = 1f), alpha = 0.25f)
 
+                // Cardinal labels rotate with actual world orientation
+                rotate(degrees = -deviceAzimuth, pivot = center) {
+                    val nc = drawContext.canvas.nativeCanvas
+                    val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                        color = android.graphics.Color.WHITE
+                        textSize = radius * 0.40f
+                        textAlign = Paint.Align.CENTER
+                        typeface = android.graphics.Typeface.DEFAULT_BOLD
+                    }
+                    val lr = radius * 0.64f
+                    val dy = textPaint.textSize * 0.36f
+                    nc.drawText("S", center.x,      center.y - lr + dy, textPaint)
+                    nc.drawText("J", center.x,      center.y + lr + dy, textPaint)
+                    nc.drawText("V", center.x + lr, center.y      + dy, textPaint)
+                    nc.drawText("Z", center.x - lr, center.y      + dy, textPaint)
+                }
+
+                // Arrow pointing toward target
                 rotate(degrees = arrowRotation, pivot = center) {
                     drawArrow(center, radius * 0.7f)
                 }
 
-                drawCircle(
-                    color = TextOnDark,
-                    radius = 6f,
-                    center = center
-                )
+                drawCircle(color = TextOnDark, radius = 5f, center = center)
             }
         }
 
