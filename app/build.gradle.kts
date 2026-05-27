@@ -9,11 +9,11 @@ plugins {
 }
 
 val localPropertiesFile = rootProject.file("local.properties")
-val mapsApiKey: String = if (localPropertiesFile.exists()) {
-    val props = Properties()
-    props.load(localPropertiesFile.inputStream())
-    props.getProperty("MAPS_API_KEY", "")
-} else ""
+val localProps = Properties().apply {
+    if (localPropertiesFile.exists()) load(localPropertiesFile.inputStream())
+}
+val mapsApiKey: String = localProps.getProperty("MAPS_API_KEY", "")
+val mapboxPublicToken: String = localProps.getProperty("MAPBOX_PUBLIC_TOKEN", "")
 
 val keystorePropertiesFile = rootProject.file("keystore.properties")
 val keystoreProperties: Properties? = if (keystorePropertiesFile.exists()) {
@@ -46,6 +46,8 @@ configure<ApplicationExtension> {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["MAPS_API_KEY"] = mapsApiKey
         buildConfigField("String", "MAPS_API_KEY", "\"$mapsApiKey\"")
+        manifestPlaceholders["MAPBOX_PUBLIC_TOKEN"] = mapboxPublicToken
+        resValue("string", "mapbox_access_token", mapboxPublicToken)
     }
 
     signingConfigs {
@@ -79,6 +81,7 @@ configure<ApplicationExtension> {
     buildFeatures {
         compose = true
         buildConfig = true
+        resValues = true
     }
 }
 
@@ -98,8 +101,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.play.services.location)
-    implementation(libs.play.services.maps)
-    implementation(libs.maps.compose)
+    implementation(libs.mapbox.maps)
+    implementation(libs.mapbox.compose)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)

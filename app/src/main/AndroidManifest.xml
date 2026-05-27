@@ -17,6 +17,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+        <meta-data
+            android:name="com.mapbox.token"
+            android:value="${MAPBOX_PUBLIC_TOKEN}" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
