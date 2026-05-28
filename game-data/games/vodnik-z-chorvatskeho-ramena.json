@@ -1,7 +1,7 @@
 {
   "id": "vodnik-z-chorvatskeho-ramena",
   "title": "Vodník z Chorvátského ramena",
-  "version": 2,
+  "version": 3,
   "screens": [
     {
       "text": "Vodník z Chorvátského ramena",
@@ -227,24 +227,24 @@
       "screenId": 22
     },
     {
-      "text": "„Hmmm, malý človiečik. Ja som sumec Fúzan a som tu najstarší po Chrčovi. Dám ti kúsok perly, ak mi povieš: Koľko rokov sa dožíva sumec?“",
+      "text": "„Hmmm, malý človiečik. Ja som sumec Fúzan, pán týchto hlbín. Tieto moje fúzy toho videli už mnoho — poznám každý kút tohto ramena. Dám ti kúsok perly, ak mi povieš: Na čo slúžia sumcovi jeho dlhé fúzy?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fsumec.jpeg?alt=media",
       "answers": [
         {
-          "text": "Asi 5 rokov",
+          "text": "Na obranu pred nepriateľmi",
           "correct": false
         },
         {
-          "text": "Asi 20 rokov",
+          "text": "Na plávanie",
           "correct": false
         },
         {
-          "text": "Aj 50 rokov a viac",
+          "text": "Na hľadanie potravy v bahne",
           "correct": true
         },
         {
-          "text": "Asi 100 rokov",
+          "text": "Na lákanie samičky",
           "correct": false
         }
       ],
@@ -271,24 +271,24 @@
       "screenId": 26
     },
     {
-      "text": "„Hí hí hí! Chytíš ma, nechytíš ma! Dám ti kúsok perly, ale najprv hádaj: Čo je bludička v prírode naozaj — odkiaľ pochádza to tajomné svetlo nad mokraďami?“",
+      "text": "„Hí hí hí! Chytíš ma, nechytíš ma! Dám ti kúsok perly, ale najprv hádaj: Čo podľa povestí robí bludička pocestným?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fbludicka.jpeg?alt=media",
       "answers": [
         {
-          "text": "Sú to svetlušky",
+          "text": "Pomáha im nájsť cestu domov",
           "correct": false
         },
         {
-          "text": "Je to plyn, ktorý sa uvoľňuje z bahna a zapáli sa",
+          "text": "Zvedie ich z cesty do tmy",
           "correct": true
         },
         {
-          "text": "Je to odraz mesiaca",
+          "text": "Spieva im uspávanky",
           "correct": false
         },
         {
-          "text": "Sú to oči žiab",
+          "text": "Daruje im poklady",
           "correct": false
         }
       ],

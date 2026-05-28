@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 20,
+  "version": 21,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -125,24 +125,24 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fkorytnacka.jpeg?alt=media"
     },
     {
-      "text": "„Žijem tu už veľmi dlho a pamätám si časy, keď tu ešte neboli žiadne cesty ani domy. My korytnačky sa totiž dožívame veľmi vysokého veku — niektoré z nás sa dožijú aj 150 rokov! Ale vieš, čo je zaujímavé? Aj napriek tomu, že žijeme tak dlho, ľudia si nás často mýlia s inými zvieratami. Povedz mi teda —\n  ▎  medzi aké druhy zvierat patríme my, korytnačky?”",
+      "text": "„Žijem tu už veľmi dlho a pamätám si časy, keď tu ešte neboli žiadne cesty ani domy. My korytnačky sa totiž dožívame veľmi vysokého veku — niektoré z nás sa dožijú aj 150 rokov! Ale dokáž mi, že sa vyznáš v prírode! Čo chráni korytnačku pred nepriateľmi?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fkorytnacka.jpeg?alt=media",
       "answers": [
         {
-          "text": "Cicavce",
+          "text": "Jedovaté zuby",
           "correct": false
         },
         {
-          "text": "Plazy",
+          "text": "Pancier",
           "correct": true
         },
         {
-          "text": "Ryby",
+          "text": "Ostrý chvost",
           "correct": false
         },
         {
-          "text": "Vtáky",
+          "text": "Rýchle nohy",
           "correct": false
         }
       ]
