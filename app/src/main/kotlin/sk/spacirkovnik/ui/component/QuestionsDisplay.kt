@@ -220,7 +220,7 @@ private fun OneButton(buttonOnClick: () -> Unit, buttonText: String) {
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
     ) {
-        Text(text = buttonText, fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = PrimaryButtonText)
+        Text(text = buttonText, fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = PrimaryButtonText, textAlign = TextAlign.Center)
     }
 }
 

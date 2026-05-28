@@ -1,7 +1,7 @@
 {
   "id": "vila-z-pecnianskeho-lesa",
   "title": "Víla z Pečnianskeho lesa",
-  "version": 4,
+  "version": 5,
   "screens": [
     {
       "text": "Víla z Pečnianskeho lesa",
@@ -44,7 +44,7 @@
       "screenId": 5
     },
     {
-      "text": "„Zlomyseľný škriatok Pŕhľavník — taký malý zelený chlapisko, čo miluje len pŕhľavy — mi v noci zaklial všetkých deväť kúzelných semienok! Každé semienka obalil pŕhľavovým kúzlom — a zakliate semienka nikdy nevyklíčia. Zostanú navždy mŕtve. Rehotal sa pri tom: \n‚Stromy, kriky, všetko preč — moje srdce plesá, \npŕhľavy, len pŕhľavy v každom kúte lesa!' \nKliatbu dokáže prelomiť len ten, kto pozná meno stromu, z ktorého semienka pochádzajú. Pomôžeš mi ich nájsť a odklíať?“",
+      "text": "„Zlomyseľný škriatok Pŕhľavník — taký malý zelený chlapisko, čo miluje len pŕhľavy — mi v noci zaklial všetkých deväť kúzelných semienok! Každé semienka obalil pŕhľavovým kúzlom — a zakliate semienka nikdy nevyklíčia. Zostanú navždy mŕtve. Rehotal sa pri tom: “\n„Stromy, kriky, všetko preč — moje srdce plesá, \npŕhľavy, len pŕhľavy v každom kúte lesa!“ \n„Kliatbu dokáže prelomiť len ten, kto pozná meno stromu, z ktorého semienka pochádzajú. Pomôžeš mi ich nájsť a odkliať?“",
       "type": "CONTINUE",
       "buttonText": "Jasné, Lesnička, pomôžem!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fprhlavnik.jpeg?alt=media",

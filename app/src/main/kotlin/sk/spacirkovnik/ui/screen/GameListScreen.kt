@@ -52,6 +52,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -568,7 +570,7 @@ private fun GameCard(
                                 shape = RoundedCornerShape(12.dp),
                                 colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
                             ) {
-                                Text("Hrať", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                                AutoSizeText("Hrať", color = PrimaryButtonText, fontWeight = FontWeight.Bold)
                             }
                         }
                         DownloadStatus.UPDATE_AVAILABLE -> {
@@ -582,15 +584,15 @@ private fun GameCard(
                                     shape = RoundedCornerShape(12.dp),
                                     colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
                                 ) {
-                                    Text("Hrať", color = PrimaryButtonText, fontWeight = FontWeight.Bold)
+                                    Text("Hrať", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
                                 }
                                 Button(
                                     onClick = onDownload,
-                                    modifier = Modifier.weight(1f).height(48.dp),
+                                    modifier = Modifier.weight(2f).height(48.dp),
                                     shape = RoundedCornerShape(12.dp),
                                     colors = ButtonDefaults.buttonColors(containerColor = SecondaryButton)
                                 ) {
-                                    Text("Aktualizovať", color = PrimaryButtonText)
+                                    Text("Aktualizovať", color = PrimaryButtonText, fontSize = 16.sp)
                                 }
                             }
                         }
@@ -599,4 +601,31 @@ private fun GameCard(
             }
         }
     }
+}
+
+@Composable
+private fun AutoSizeText(
+    text: String,
+    color: Color = Color.Unspecified,
+    fontWeight: FontWeight? = null,
+    maxFontSize: TextUnit = 16.sp,
+    minFontSize: TextUnit = 10.sp,
+) {
+    var fontSize by remember(text) { mutableStateOf(maxFontSize) }
+    Text(
+        text = text,
+        fontSize = fontSize,
+        color = color,
+        fontWeight = fontWeight,
+        maxLines = 1,
+        softWrap = false,
+        overflow = TextOverflow.Clip,
+        textAlign = TextAlign.Center,
+        onTextLayout = { result ->
+            if (result.didOverflowWidth && fontSize > minFontSize) {
+                val reduced = fontSize.value * 0.9f
+                fontSize = if (reduced < minFontSize.value) minFontSize else reduced.sp
+            }
+        }
+    )
 }
