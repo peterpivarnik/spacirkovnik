@@ -5,8 +5,18 @@ import HeaderLink from './HeaderLink.astro';
 
 <header>
 	<nav>
-		<h2><a href="/"><img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media" alt={SITE_TITLE} class="nav-logo" /> {SITE_TITLE}</a></h2>
-		<div class="internal-links">
+		<h2>
+			<a href="/">
+				<img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media" alt={SITE_TITLE} class="nav-logo" />
+				{SITE_TITLE}
+			</a>
+		</h2>
+		<button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
+		<div class="internal-links" id="nav-links">
 			<HeaderLink href="/">Domov</HeaderLink>
 			<HeaderLink href="/hry">Hry</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
@@ -14,18 +24,41 @@ import HeaderLink from './HeaderLink.astro';
 		</div>
 	</nav>
 </header>
+
+<script>
+	const hamburger = document.getElementById('hamburger')!;
+	const navLinks = document.getElementById('nav-links')!;
+
+	hamburger.addEventListener('click', () => {
+		const isOpen = navLinks.classList.toggle('open');
+		hamburger.classList.toggle('open', isOpen);
+		hamburger.setAttribute('aria-expanded', String(isOpen));
+	});
+
+	navLinks.querySelectorAll('a').forEach(link => {
+		link.addEventListener('click', () => {
+			navLinks.classList.remove('open');
+			hamburger.classList.remove('open');
+			hamburger.setAttribute('aria-expanded', 'false');
+		});
+	});
+</script>
+
 <style>
 	header {
 		margin: 0;
 		padding: 0 1em;
 		background: white;
 		box-shadow: 0 2px 8px rgba(61, 35, 20, 0.08);
+		position: sticky;
+		top: 0;
+		z-index: 100;
 	}
 	h2 {
 		margin: 0;
 		font-size: 1.1em;
+		white-space: nowrap;
 	}
-
 	h2 a,
 	h2 a.active {
 		text-decoration: none;
@@ -38,24 +71,77 @@ import HeaderLink from './HeaderLink.astro';
 		width: 32px;
 		height: 32px;
 		object-fit: contain;
-		border-radius: 0;
 	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		/* ŽIADNY flex-wrap – linky sa nesmú zalomiť na desktop */
 	}
 	nav a {
 		padding: 1em 0.5em;
 		color: #3D2314;
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
+		white-space: nowrap;
 	}
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
-	@media (max-width: 720px) {
-		h2 { font-size: 1em; }
+
+	/* Hamburger – skrytý na desktope */
+	.hamburger {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0.5em;
+		border-radius: 6px;
+		flex-shrink: 0;
+	}
+	.hamburger span {
+		display: block;
+		width: 24px;
+		height: 2px;
+		background: #3D2314;
+		border-radius: 2px;
+		transition: transform 0.25s, opacity 0.25s;
+	}
+	.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+	.hamburger.open span:nth-child(2) { opacity: 0; }
+	.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+	/* ── Mobile ──────────────────────────────────────────────── */
+	@media (max-width: 860px) {
+		nav {
+			flex-wrap: wrap;  /* povolíme wrap len na mobile */
+		}
+		.hamburger {
+			display: flex;
+		}
+		.internal-links {
+			display: none;
+			width: 100%;
+			flex-direction: column;
+			border-top: 1px solid #f0e9df;
+			padding: 0.5rem 0;
+		}
+		.internal-links.open {
+			display: flex;
+		}
+		.internal-links a {
+			padding: 0.85em 0.5em;
+			border-bottom: none;
+			border-left: 4px solid transparent;
+			font-size: 1.05rem;
+		}
+		.internal-links a.active {
+			border-left-color: var(--accent);
+			border-bottom: none;
+		}
 	}
 </style>

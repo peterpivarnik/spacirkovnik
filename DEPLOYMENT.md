@@ -1,43 +1,43 @@
 # Deployment – spacirkovnik.sk (Astro)
 
-Tento dokument popisuje postup nasadenia novej Astro prezentačnej stránky na Websupport hosting.
+## Štruktúra servera (Websupport)
 
-## Situácia
-
-- `spacirkovnik.sk/web/` – obsahuje WordPress (slúži pre `album.spacirkovnik.sk`)
-- Websupport aliasy nepodporujú vlastný document root
-- Riešenie: Astro site sa uloží do `web/site/`, `.htaccess` transparentne presmeruje `spacirkovnik.sk` na tento priečinok
-
-## Postup
-
-### 1. Build
-
-```bash
-cd website
-npm run build
+```
+FTP root /
+├── spacirkovnik.sk/
+│   └── web/                 ← document root pre spacirkovnik.sk
+│       ├── site/            ← Astro stránka (sem deploy.sh nahrá súbory)
+│       ├── wp-admin/        ← WordPress (slúži pre album.spacirkovnik.sk)
+│       ├── wp-content/
+│       ├── .htaccess        ← rewrite: spacirkovnik.sk → /site/
+│       └── index.php
+├── tmp/
+└── ...
 ```
 
-Výstup je v `website/dist/`.
+## Nasadenie (bežná aktualizácia)
 
-### 2. Nahratie súborov cez Monsta FTP
+```bash
+./deploy.sh
+```
 
-1. Prihlás sa na Websupport → Pokročilá konfigurácia → Web → File Manager (Monsta FTP)
-2. Prejdi do `web/`
-3. Vytvor nový priečinok `site/`
-4. Nahraj **obsah** `website/dist/` do `web/site/`
-   - `index.html`
-   - `blog/`
-   - `hry/`
-   - `kontakt/`
-   - `favicon.png`
-   - `_astro/`
-   - `sitemap-0.xml`
-   - `sitemap-index.xml`
+Skript automaticky:
+1. Zbuilduje stránku (`npm run build`)
+2. Nahrá zmenené súbory na server cez FTPS
 
-### 3. Úprava .htaccess
+## Prvotné nastavenie (už hotové)
 
-Otvor `web/.htaccess` a **na úplný začiatok** (pred `# BEGIN W3TC`) pridaj:
+### FTP credentials
+Uložené v `website/.env` (nie je v gite):
+```
+FTP_HOST=...
+FTP_USER=...
+FTP_PASS=...
+FTP_REMOTE_DIR=spacirkovnik.sk/web/site
+```
 
+### .htaccess
+V `spacirkovnik.sk/web/.htaccess` je na začiatku (pred `# BEGIN W3TC`):
 ```apache
 # Astro site pre spacirkovnik.sk
 RewriteEngine On
@@ -46,17 +46,9 @@ RewriteCond %{REQUEST_URI} !^/site/
 RewriteRule ^(.*)$ /site/$1 [L]
 ```
 
-> Súčasný blok s `under-construction.html` presmerovaním zmaž – nahradí ho tento.
+## Overenie
 
-### 4. Overenie
-
-- `https://spacirkovnik.sk` → zobrazí Astro landing page
-- `https://album.spacirkovnik.sk` → zobrazí WordPress fotoalbum (bez zmeny)
-- `https://spacirkovnik.sk/blog/` → zobrazí blog
-- `https://spacirkovnik.sk/hry/` → zobrazí zoznam hier
-
-## Aktualizácia webu
-
-Pri každej zmene stačí:
-1. `npm run build`
-2. Nahrať zmenené súbory do `web/site/` (prepísať existujúce)
+- `https://spacirkovnik.sk` → Astro landing page
+- `https://album.spacirkovnik.sk` → WordPress fotoalbum (bez zmeny)
+- `https://spacirkovnik.sk/hry/` → zoznam hier
+- `https://spacirkovnik.sk/blog/` → blog
