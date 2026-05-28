@@ -9,9 +9,9 @@ Prvá hra Špacírkovníka je vonku – a je **zadarmo**!
 
 ## Príbeh
 
-Lesník Gejzo Dražďák stratil svoju obľúbenú lesnícku palicu niekde v petržalských lesoch. Bez nej sa nevie poriadne pohybovať po lese a jeho práca stojí. Pomôžeš mu ju nájsť?
+Lesník Gejza Dražďák stratil svoju obľúbenú lesnícku palicu. Bez nej nerozumie zvieratkám po lese a jeho práca stojí. Pomôžeš mu ju nájsť?
 
-Počas prechádzky spoznáš Gejzov svet – jeho lesnú búdku, obľúbené miesta aj pár neočakávaných postáv, ktoré na trase stretneš.
+Počas prechádzky spoznáš Gejzov svet – obľúbené miesta aj pár neočakávaných postáv, ktoré na trase stretneš.
 
 ## Trasa
 
