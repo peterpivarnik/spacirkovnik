@@ -1,7 +1,7 @@
 {
   "id": "tajomstvo-janka-krala",
   "title": "Tajomstvo Janka Kráľa",
-  "version": 3,
+  "version": 4,
   "screens": [
     {
       "text": "Tajomstvo Janka Kráľa",
@@ -482,7 +482,7 @@
     {
       "text": "„Ďakujem ti, {mladý priateľ|mladá priateľka}! Vďaka tebe som našiel všetkých desať stratených básní a uzavrel časové okno do roku 1848. Teraz ich môžem znova čítať ľuďom, ktorí sa prejdú po tomto krásnom parku. Zapamätaj si - nikdy sa neboj byť iný a vždy nasleduj svoje srdce.”",
       "type": "CONTINUE",
-      "buttonText": "Pokračovať",
+      "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
       "screenId": 44
     },

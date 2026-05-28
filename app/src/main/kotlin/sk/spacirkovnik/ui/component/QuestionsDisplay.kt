@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
@@ -187,7 +189,7 @@ fun QuestionsDisplay(
                             gameDataViewModel.incrementIndex()
                         }
                     },
-                    currentScreen.buttonText ?: "Pokračovať"
+                    currentScreen.buttonText ?: "Ďalej"
                 )
                 ScreenType.BROWSE -> TwoButtons(
                     backButtonEnabled = gameDataViewModel.getCurrentIndex() > 0,
@@ -195,7 +197,7 @@ fun QuestionsDisplay(
                     backButtonText = currentScreen.backButtonText ?: "Späť",
                     nextButtonEnabled = gameDataViewModel.getCurrentIndex() < gameDataViewModel.getScreenCount() - 1,
                     nextButtonOnClick = { gameDataViewModel.incrementIndex() },
-                    nextButtonText = currentScreen.nextButtonText ?: "Pokračovať"
+                    nextButtonText = currentScreen.nextButtonText ?: "Ďalej"
                 )
                 ScreenType.QUESTION -> QuestionWithAnswers(
                     answers = currentScreen.answers ?: emptyList(),
@@ -232,7 +234,9 @@ private fun TwoButtons(
     nextButtonText: String
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(IntrinsicSize.Max),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Button(
@@ -240,6 +244,7 @@ private fun TwoButtons(
             onClick = backButtonOnClick,
             modifier = Modifier
                 .weight(1f)
+                .fillMaxHeight()
                 .defaultMinSize(minHeight = 52.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
@@ -248,13 +253,14 @@ private fun TwoButtons(
                 disabledContainerColor = DisabledButton
             )
         ) {
-            Text(text = backButtonText, fontSize = 16.sp)
+            Text(text = backButtonText, fontSize = 16.sp, textAlign = TextAlign.Center)
         }
         Button(
             enabled = nextButtonEnabled,
             onClick = nextButtonOnClick,
             modifier = Modifier
                 .weight(1f)
+                .fillMaxHeight()
                 .defaultMinSize(minHeight = 52.dp),
             shape = RoundedCornerShape(12.dp),
             colors = ButtonDefaults.buttonColors(
@@ -263,7 +269,7 @@ private fun TwoButtons(
                 disabledContainerColor = DisabledButton
             )
         ) {
-            Text(text = nextButtonText, fontSize = 16.sp)
+            Text(text = nextButtonText, fontSize = 16.sp, textAlign = TextAlign.Center)
         }
     }
 }

@@ -1,7 +1,7 @@
 {
   "id": "vila-z-pecnianskeho-lesa",
   "title": "Víla z Pečnianskeho lesa",
-  "version": 3,
+  "version": 4,
   "screens": [
     {
       "text": "Víla z Pečnianskeho lesa",
@@ -435,7 +435,7 @@
     {
       "text": "Zelené svetlo na šípke Špacírkovníka pomaly pohaslo a rozcestník spokojne zaševelil. Pečniansky les je v bezpečí a víla Lesnička stráži svoje semienka. Ale na Špacírkovníku sa trblietajú ďalšie šípky — každá ukrýva nové dobrodružstvo!",
       "type": "CONTINUE",
-      "buttonText": "Pokračovať",
+      "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fles_ziarenie.jpeg?alt=media",
       "screenId": 40
     },

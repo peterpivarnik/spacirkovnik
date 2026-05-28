@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 19,
+  "version": 20,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -453,7 +453,7 @@
     {
       "text": "Šípka rozcestníka pomaly zhasína — les je zasa v bezpečí. Špacírkovník veselo zakrútil a nové šípky už netrpezlivo čakajú. Aké dobrodružstvo si vyberieš nabudúce?",
       "type": "CONTINUE",
-      "buttonText": "Pokračovať",
+      "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media"
     },
     {
