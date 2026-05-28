@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -87,7 +88,7 @@ import sk.spacirkovnik.viewmodel.PurchaseViewModel
 
 @Composable
 fun GameListScreen(
-    onGameSelected: (String) -> Unit,
+    onGameSelected: (String, String?) -> Unit,
     gameListViewModel: GameListViewModel = viewModel(),
     authViewModel: AuthViewModel = viewModel(),
     purchaseViewModel: PurchaseViewModel = viewModel()
@@ -290,7 +291,7 @@ fun GameListScreen(
                                 onToggle = {
                                     expandedGameId = if (isExpanded) null else gameId
                                 },
-                                onPlay = { onGameSelected(gameId) },
+                                onPlay = { onGameSelected(gameId, gameWithStatus.info.colorHex) },
                                 onDownload = { gameListViewModel.downloadGame(gameId) },
                                 onPurchase = {
                                     if (!authState.isSignedIn) {
@@ -387,16 +388,23 @@ private fun GameCard(
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            Text(
-                text = info.title,
-                modifier = Modifier.weight(1f),
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = TextDark,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Center
-            )
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .defaultMinSize(minHeight = 48.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = info.title,
+                    modifier = Modifier.fillMaxWidth(),
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = TextDark,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center
+                )
+            }
 
             Spacer(modifier = Modifier.width(8.dp))
 

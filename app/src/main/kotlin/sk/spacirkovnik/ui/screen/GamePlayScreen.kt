@@ -36,7 +36,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import sk.spacirkovnik.ui.component.QuestionsDisplay
 import sk.spacirkovnik.ui.theme.Amber
 import androidx.compose.ui.graphics.Color
-import sk.spacirkovnik.ui.theme.GameBackground
+import sk.spacirkovnik.ui.theme.gameGradient
 import sk.spacirkovnik.ui.theme.PrimaryButton
 import sk.spacirkovnik.ui.theme.PrimaryButtonText
 import sk.spacirkovnik.ui.theme.TextDark
@@ -48,6 +48,7 @@ import sk.spacirkovnik.viewmodel.LocationViewModel
 @Composable
 fun GamePlayScreen(
     gameId: String,
+    colorHex: String? = null,
     onExit: () -> Unit = {},
     gameDataViewModel: GameDataViewModel = viewModel(),
     locationViewModel: LocationViewModel = viewModel()
@@ -62,7 +63,7 @@ fun GamePlayScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(GameBackground)
+            .background(gameGradient(colorHex))
     ) {
         Box(
             modifier = Modifier
@@ -106,7 +107,10 @@ fun GamePlayScreen(
 
     if (showExitDialog) {
         AlertDialog(
-            onDismissRequest = { showExitDialog = false },
+            onDismissRequest = {
+            @Suppress("UNUSED_VALUE")
+            showExitDialog = false
+        },
             title = {
                 Text("Ukončiť hru", fontWeight = FontWeight.Bold, color = TextDark)
             },
@@ -146,7 +150,10 @@ fun GamePlayScreen(
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     TextButton(
-                        onClick = { showExitDialog = false },
+                        onClick = {
+                            @Suppress("UNUSED_VALUE")
+                            showExitDialog = false
+                        },
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text("Zrušiť", color = TextMedium)

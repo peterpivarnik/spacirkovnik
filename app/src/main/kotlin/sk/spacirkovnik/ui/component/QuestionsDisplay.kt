@@ -59,6 +59,7 @@ import sk.spacirkovnik.ui.theme.SecondaryButton
 import sk.spacirkovnik.ui.theme.SecondaryButtonText
 import sk.spacirkovnik.ui.theme.TextDark
 import sk.spacirkovnik.ui.theme.TextMedium
+import sk.spacirkovnik.ui.theme.TextOnDark
 import sk.spacirkovnik.viewmodel.GameDataViewModel
 import sk.spacirkovnik.viewmodel.LocationViewModel
 
@@ -370,7 +371,7 @@ private fun GenderSelectionScreen(onSelected: (Gender) -> Unit) {
             text = "Kto sa vydáva na dobrodružstvo?",
             fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
-            color = TextDark,
+            color = TextOnDark,
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(32.dp))

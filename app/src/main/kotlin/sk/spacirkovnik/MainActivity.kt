@@ -30,15 +30,18 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable("gameList") {
                             GameListScreen(
-                                onGameSelected = { gameId ->
-                                    navController.navigate("gamePlay/$gameId")
+                                onGameSelected = { gameId, colorHex ->
+                                    val color = colorHex ?: ""
+                                    navController.navigate("gamePlay/$gameId/$color")
                                 }
                             )
                         }
-                        composable("gamePlay/{gameId}") { backStackEntry ->
+                        composable("gamePlay/{gameId}/{colorHex}") { backStackEntry ->
                             val gameId = backStackEntry.arguments?.getString("gameId") ?: return@composable
+                            val colorHex = backStackEntry.arguments?.getString("colorHex")?.takeIf { it.isNotEmpty() }
                             GamePlayScreen(
                                 gameId = gameId,
+                                colorHex = colorHex,
                                 onExit = { navController.popBackStack() }
                             )
                         }

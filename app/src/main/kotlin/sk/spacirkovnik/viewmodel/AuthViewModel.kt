@@ -15,8 +15,10 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withTimeout
 import sk.spacirkovnik.data.FIREBASE_DATABASE_URL
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
@@ -49,27 +51,29 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 val credentialManager = CredentialManager.create(activityContext)
                 val webClientId = getWebClientId()
 
-                val idToken = try {
-                    val googleIdOption = GetGoogleIdOption.Builder()
-                        .setFilterByAuthorizedAccounts(false)
-                        .setServerClientId(webClientId)
-                        .build()
+                val idToken = withTimeout(60_000) {
+                    try {
+                        val googleIdOption = GetGoogleIdOption.Builder()
+                            .setFilterByAuthorizedAccounts(false)
+                            .setServerClientId(webClientId)
+                            .build()
 
-                    val request = GetCredentialRequest.Builder()
-                        .addCredentialOption(googleIdOption)
-                        .build()
+                        val request = GetCredentialRequest.Builder()
+                            .addCredentialOption(googleIdOption)
+                            .build()
 
-                    val result = credentialManager.getCredential(activityContext, request)
-                    GoogleIdTokenCredential.createFrom(result.credential.data).idToken
-                } catch (_: NoCredentialException) {
-                    val signInOption = GetSignInWithGoogleOption.Builder(webClientId).build()
+                        val result = credentialManager.getCredential(activityContext, request)
+                        GoogleIdTokenCredential.createFrom(result.credential.data).idToken
+                    } catch (_: NoCredentialException) {
+                        val signInOption = GetSignInWithGoogleOption.Builder(webClientId).build()
 
-                    val request = GetCredentialRequest.Builder()
-                        .addCredentialOption(signInOption)
-                        .build()
+                        val request = GetCredentialRequest.Builder()
+                            .addCredentialOption(signInOption)
+                            .build()
 
-                    val result = credentialManager.getCredential(activityContext, request)
-                    GoogleIdTokenCredential.createFrom(result.credential.data).idToken
+                        val result = credentialManager.getCredential(activityContext, request)
+                        GoogleIdTokenCredential.createFrom(result.credential.data).idToken
+                    }
                 }
 
                 val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
@@ -84,6 +88,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 loadActivations()
                 loadTestGames()
             } catch (_: GetCredentialCancellationException) {
+                _state.value = _state.value.copy(loading = false)
+            } catch (_: TimeoutCancellationException) {
                 _state.value = _state.value.copy(loading = false)
             } catch (e: Exception) {
                 _state.value = _state.value.copy(
@@ -107,11 +113,13 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         val uid = auth.currentUser?.uid ?: return
         viewModelScope.launch {
             try {
-                val snapshot = database.reference
-                    .child("activations")
-                    .child(uid)
-                    .get()
-                    .await()
+                val snapshot = withTimeout(10_000) {
+                    database.reference
+                        .child("activations")
+                        .child(uid)
+                        .get()
+                        .await()
+                }
 
                 val activatedGames = mutableSetOf<String>()
                 snapshot.children.forEach { child ->

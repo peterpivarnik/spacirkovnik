@@ -2,6 +2,7 @@ package sk.spacirkovnik.ui.theme
 
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.core.graphics.toColorInt
 
 val ForestMid = Color(0xFF3A6B5A)
 val ForestLight = Color(0xFF4E8E7A)
@@ -40,4 +41,23 @@ val MainBackground = Brush.verticalGradient(
         Color(0xFF3A6180),
     )
 )
+
+fun gameGradient(colorHex: String?): Brush {
+    if (colorHex == null) return GameBackground
+    return try {
+        val base = "#$colorHex".toColorInt()
+        val r = (base shr 16 and 0xFF) / 255f
+        val g = (base shr 8 and 0xFF) / 255f
+        val b = (base and 0xFF) / 255f
+        Brush.verticalGradient(
+            colors = listOf(
+                Color(r * 0.7f, g * 0.7f, b * 0.7f),
+                Color(r * 0.85f, g * 0.85f, b * 0.85f),
+                Color(r, g, b)
+            )
+        )
+    } catch (_: Exception) {
+        GameBackground
+    }
+}
 

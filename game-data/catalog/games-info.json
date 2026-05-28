@@ -8,6 +8,7 @@
     "estimatedDurationMinutes": 120,
     "distanceKm": 3.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media",
+    "colorHex": "1C3A2E",
     "status": "active",
     "startName": "Horáreň pri Draždiaku",
     "endName": "Horáreň pri Draždiaku"
@@ -21,6 +22,7 @@
     "estimatedDurationMinutes": 90,
     "distanceKm": 2.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+    "colorHex": "2A1A3E",
     "status": "coming_soon",
     "startName": "Sad Janka Kráľa",
     "endName": "Sad Janka Kráľa"
@@ -34,6 +36,7 @@
     "estimatedDurationMinutes": 60,
     "distanceKm": 1.2,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+    "colorHex": "1A3A5C",
     "status": "coming_soon",
     "startName": "Draždiak",
     "endName": "Draždiak"
@@ -47,6 +50,7 @@
     "estimatedDurationMinutes": 120,
     "distanceKm": 3.5,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
+    "colorHex": "1A3D1A",
     "status": "coming_soon",
     "startName": "Viedenská cesta oproti Inchebe",
     "endName": "Cyklochodník ku Lanfranconi mostu"
@@ -60,6 +64,7 @@
     "estimatedDurationMinutes": 180,
     "distanceKm": 6.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+    "colorHex": "0D3040",
     "status": "coming_soon",
     "startName": "Začiatok Chorvátskeho ramena pri Bosákovej",
     "endName": "Koniec Chorvátskeho ramena pri čerpacej stanici"

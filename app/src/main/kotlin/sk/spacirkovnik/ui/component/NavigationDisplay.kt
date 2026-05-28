@@ -423,7 +423,8 @@ fun NavigationDisplay(
             colors = ButtonDefaults.buttonColors(
                 containerColor = PrimaryButton,
                 contentColor = PrimaryButtonText,
-                disabledContainerColor = DisabledButton
+                disabledContainerColor = DisabledButton,
+                disabledContentColor = PrimaryButtonText.copy(alpha = 0.6f)
             )
         ) {
             Text(

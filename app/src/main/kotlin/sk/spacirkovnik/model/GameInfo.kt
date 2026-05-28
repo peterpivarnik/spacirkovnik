@@ -4,10 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 enum class GameStatus {
     @SerializedName("active") ACTIVE,
+    @Suppress("unused")
     @SerializedName("coming_soon") COMING_SOON,
     @SerializedName("purchasable") PURCHASABLE,
     @SerializedName("hidden") HIDDEN,
-    UNKNOWN
+    @Suppress("unused") UNKNOWN
 }
 
 data class GameInfo(
@@ -15,6 +16,7 @@ data class GameInfo(
     val title: String,
     val description: String,
     val imageUrl: String? = null,
+    val colorHex: String? = null,
     val version: Int = 1,
     val region: String? = null,
     val estimatedDurationMinutes: Int? = null,
