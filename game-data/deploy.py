@@ -5,6 +5,7 @@ deploy.py — Aktualizuje verzie zmenených hier a nahrá ich na Firebase RTDB.
 Použitie:
   python3 deploy.py                     # automaticky zistí zmenené hry (git diff HEAD)
   python3 deploy.py --all               # nahrá všetky hry + katalóg
+  python3 deploy.py --catalog-only      # nahrá len katalóg bez zmeny verzií
   python3 deploy.py lesnicka-palica     # konkrétna hra (môžeš zadať viac naraz)
 """
 
@@ -26,6 +27,22 @@ with open(os.path.join(SCRIPT_DIR, "http-client.private.env.json")) as f:
 
 # --- Zisti ktoré hry treba aktualizovať ---
 args = sys.argv[1:]
+
+if "--catalog-only" in args:
+    print("Nahrávam len katalóg na Firebase...")
+    def firebase_put(path, file_path):
+        url = f"{DB_URL}/{path}?auth={DB_SECRET}"
+        result = subprocess.run(
+            ["curl", "-s", "-o", "/dev/null", "-w", "%{http_code}",
+             "-X", "PUT", "-H", "Content-Type: application/json",
+             "--data-binary", f"@{file_path}", url],
+            capture_output=True, text=True
+        )
+        return result.stdout.strip()
+    status = firebase_put("catalog/games-info.json", CATALOG)
+    icon = "✅" if status == "200" else "❌"
+    print(f"  {icon} katalóg: HTTP {status}")
+    sys.exit(0)
 
 if "--all" in args:
     game_ids = sorted([f[:-5] for f in os.listdir(GAMES_DIR) if f.endswith(".json")])

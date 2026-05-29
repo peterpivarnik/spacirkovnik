@@ -8,7 +8,7 @@
       "type": "CONTINUE",
       "buttonText": "Poď na dobrodružstvo!",
       "fontSize": 26,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media&v=2",
       "screenId": 0
     },
     {
@@ -54,19 +54,19 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.10643,
       "targetLongitude": 17.111921,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media&v=2",
       "screenId": 3
     },
     {
       "text": "Vedľa rybára sedia tri vnúčatá — Kubko, Zuzka a Jurko — a netrpezlivo čakajú, čo dedko uloví.",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar_vnucata.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar_vnucata.jpeg?alt=media&v=2",
       "screenId": 4
     },
     {
       "text": "Zrazu sa udica prudko zachveje! Rybár ju zdvihne a z vody vyletí malá zlatá rybka. Celá žiari ako slnko a na hlave má korunku z drobných perál. Vnúčatá zašepkajú: „Dedko, to je zlatá rybka! Tá plní želania!“",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar_vnucata.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar_vnucata.jpeg?alt=media&v=2",
       "screenId": 5
     },
     {
@@ -218,7 +218,7 @@
     {
       "text": "Rybár ide zavolať rybku. Ale predtým si hodí udicu — rybolov má v krvi. Na rybolov vždy chodil poctivo — s povolením. Ako sa volá povolenie, ktoré musí mať každý rybár?",
       "type": "QUESTION",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media&v=2",
       "answers": [
         {
           "text": "Vodičský preukaz",
@@ -244,7 +244,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.101855,
       "targetLongitude": 17.11154,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media&v=2",
       "screenId": 18
     },
     {
