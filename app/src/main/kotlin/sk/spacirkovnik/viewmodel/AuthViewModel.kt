@@ -1,21 +1,26 @@
 package sk.spacirkovnik.viewmodel
 
 import android.app.Application
+import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.credentials.CredentialManager
-import androidx.credentials.GetCredentialRequest
-import androidx.credentials.exceptions.GetCredentialCancellationException
-import androidx.credentials.exceptions.NoCredentialException
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.libraries.identity.googleid.GetGoogleIdOption
-import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
-import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+// FIXME: GoogleSignIn API je deprecated v prospech androidx.credentials.CredentialManager.
+// Dôvod ponechania: CredentialManager zobrazuje sign-in ako priehľadný overlay (SignInCredentialChooserActivity
+// s TRANSLUCENT témou), ktorý používateľ na Moto G73 / Android 14 nevidí — appka vyzerá zamrznutá.
+// Legacy GoogleSignIn otvára klasický plnohodnotný dialóg výberu účtu, ktorý funguje spoľahlivo.
+// Odstrániť keď: Google opraví UX CredentialManager-a (viditeľný bottom sheet / plnohodnotný dialóg)
+// alebo keď play-services-auth prestane byť súčasťou Play Services (nepravdepodobné v blízkej budúcnosti).
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeout
@@ -43,42 +48,32 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun signIn(activityContext: android.app.Activity) {
+    @Suppress("DEPRECATION")
+    fun getSignInIntent(context: Context): Intent {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(context.getString(sk.spacirkovnik.R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        return GoogleSignIn.getClient(context, gso).signInIntent
+    }
+
+    @Suppress("DEPRECATION")
+    fun handleSignInResult(data: Intent?) {
         viewModelScope.launch {
             try {
                 _state.value = _state.value.copy(loading = true, error = null)
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
+                val idToken = account.idToken
+                    ?: throw Exception("ID token je null")
 
-                val credentialManager = CredentialManager.create(activityContext)
-                val webClientId = getWebClientId()
-
-                val idToken = withTimeout(60_000) {
-                    try {
-                        val googleIdOption = GetGoogleIdOption.Builder()
-                            .setFilterByAuthorizedAccounts(false)
-                            .setServerClientId(webClientId)
-                            .build()
-
-                        val request = GetCredentialRequest.Builder()
-                            .addCredentialOption(googleIdOption)
-                            .build()
-
-                        val result = credentialManager.getCredential(activityContext, request)
-                        GoogleIdTokenCredential.createFrom(result.credential.data).idToken
-                    } catch (_: NoCredentialException) {
-                        val signInOption = GetSignInWithGoogleOption.Builder(webClientId).build()
-
-                        val request = GetCredentialRequest.Builder()
-                            .addCredentialOption(signInOption)
-                            .build()
-
-                        val result = credentialManager.getCredential(activityContext, request)
-                        GoogleIdTokenCredential.createFrom(result.credential.data).idToken
-                    }
+                Log.d("AuthVM", "Mám idToken, prihlasujem do Firebase...")
+                val credential = GoogleAuthProvider.getCredential(idToken, null)
+                val authResult = withTimeout(15_000) {
+                    auth.signInWithCredential(credential).await()
                 }
-
-                val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
-                val authResult = auth.signInWithCredential(firebaseCredential).await()
                 val user = authResult.user
+                Log.d("AuthVM", "Firebase OK: ${user?.email}")
 
                 _state.value = AuthState(
                     isSignedIn = true,
@@ -87,11 +82,15 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 )
                 loadActivations()
                 loadTestGames()
-            } catch (_: GetCredentialCancellationException) {
-                _state.value = _state.value.copy(loading = false)
-            } catch (_: TimeoutCancellationException) {
-                _state.value = _state.value.copy(loading = false)
+            } catch (e: ApiException) {
+                Log.e("AuthVM", "GoogleSignIn ApiException code=${e.statusCode}: ${e.message}")
+                _state.value = _state.value.copy(
+                    loading = false,
+                    error = if (e.statusCode == 12501) null // user cancelled
+                    else "Prihlásenie zlyhalo (${e.statusCode})"
+                )
             } catch (e: Exception) {
+                Log.e("AuthVM", "Chyba prihlásenia: ${e::class.simpleName}: ${e.message}", e)
                 _state.value = _state.value.copy(
                     loading = false,
                     error = "Prihlásenie zlyhalo: ${e.message}"
@@ -171,11 +170,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     fun grantActivation(gameId: String) {
         val updated = _state.value.activatedGames.toMutableSet().also { it.add(gameId) }
         _state.value = _state.value.copy(activatedGames = updated)
-    }
-
-    private fun getWebClientId(): String {
-        val appContext = getApplication<Application>()
-        return appContext.getString(sk.spacirkovnik.R.string.default_web_client_id)
     }
 
     data class AuthState(

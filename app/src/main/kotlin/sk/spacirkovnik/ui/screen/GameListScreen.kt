@@ -85,6 +85,8 @@ import sk.spacirkovnik.viewmodel.AuthViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel.DownloadStatus
 import sk.spacirkovnik.viewmodel.PurchaseViewModel
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.ui.platform.LocalContext
 import sk.spacirkovnik.data.GameProgressManager
 
@@ -99,10 +101,17 @@ fun GameListScreen(
     val authState by authViewModel.state
     val purchaseState by purchaseViewModel.state
     val activity = LocalActivity.current!!
+    val context = LocalContext.current
     var showSignOutDialog by remember { mutableStateOf(false) }
     var expandedGameId by remember { mutableStateOf<String?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+
+    val signInLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        authViewModel.handleSignInResult(result.data)
+    }
 
     LaunchedEffect(authState.error) {
         val error = authState.error
@@ -204,7 +213,7 @@ fun GameListScreen(
                             } else {
                                 IconButton(onClick = {
                                     if (authState.isSignedIn) showSignOutDialog = true
-                                    else authViewModel.signIn(activity)
+                                    else signInLauncher.launch(authViewModel.getSignInIntent(context))
                                 }) {
                                     Icon(
                                         imageVector = Icons.Default.AccountCircle,
@@ -277,7 +286,6 @@ fun GameListScreen(
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    val context = LocalContext.current
                     val progressManager = remember { GameProgressManager(context) }
 
                     LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
