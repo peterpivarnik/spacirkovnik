@@ -1,7 +1,7 @@
 {
   "id": "rybar-z-drazdiaka",
   "title": "Rybár z Draždiaka",
-  "version": 4,
+  "version": 5,
   "screens": [
     {
       "text": "Rybár z Draždiaka",
@@ -148,13 +148,13 @@
     {
       "text": "Rybár zavolá rybku: „Druhé želanie — chceme ihriská pri jazere!“ Rybka sa zamračí, ale prikývne: „Nech sa stane. Ale zostáva ti už len jedno želanie.“ Pri brehu sa zrazu objavili tri obrovské ihriská!",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media&v=2",
       "screenId": 12
     },
     {
       "text": "Ihriská zabrali kus brehu a siahajú takmer až k vodnej hladine. Vieš, ako vlastne toto jazero vzniklo — čo sa tu ťažilo, kým tu bola jama, ktorá sa naplnila vodou?",
       "type": "QUESTION",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media&v=2",
       "answers": [
         {
           "text": "Zlato",
@@ -180,7 +180,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.102797,
       "targetLongitude": 17.11424,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media&v=2",
       "screenId": 14
     },
     {
