@@ -1,7 +1,7 @@
 {
   "id": "vila-z-pecnianskeho-lesa",
   "title": "Víla z Pečnianskeho lesa",
-  "version": 6,
+  "version": 7,
   "screens": [
     {
       "text": "Víla z Pečnianskeho lesa",
@@ -99,7 +99,7 @@
     {
       "text": "„Toto semienko pochádza zo stromu, ktorý má hladkú sivú kôru ako slonia koža. Na jeseň má krásne oranžovo-hnedé listy. Jeho plody sú malé trojhranné oriešky v chlpatom obale — voláme ich bukvice. Aký je to strom?“",
       "type": "QUESTION",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fbuk.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fbuk.jpeg?alt=media&v=2",
       "answers": [
         {
           "text": "Jaseň",
@@ -123,7 +123,7 @@
     {
       "text": "„Správne, buk! Bukové lesy sú najkrajšie na jeseň — celý les sa zmení na zlatý a oranžový. Kliatba praskla a druhé semienko žiari! Ešte jedno listnaté.“",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fbuk.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fbuk.jpeg?alt=media&v=2",
       "screenId": 12
     },
     {
