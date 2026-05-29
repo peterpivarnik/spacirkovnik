@@ -1,7 +1,7 @@
 {
   "id": "vila-z-pecnianskeho-lesa",
   "title": "Víla z Pečnianskeho lesa",
-  "version": 5,
+  "version": 6,
   "screens": [
     {
       "text": "Víla z Pečnianskeho lesa",
@@ -12,7 +12,7 @@
       "screenId": 0
     },
     {
-      "text": "Špacírkovník sa roztriasol a jedna šípka zažiarila jemným zeleným svetlom — ako oči lesnej vily skrytej medzi stromami! Ukazuje do Pečnianskeho lesa. Niekto tam úporne čaká na pomoc... Poď to zistiť!",
+      "text": "Špacírkovník sa roztriasol a jedna šípka zažiarila jemným zeleným svetlom — ako oči lesnej vily skrytej medzi stromami! Ukazuje do Pečnianskeho lesa. Niekto tam úporne čaká na pomoc... Poď zistiť kto!",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
       "screenId": 1
@@ -32,13 +32,13 @@
       "screenId": 3
     },
     {
-      "text": "Zrazu sa pred tebou objavil malinkatý trblietavý záblesk! Je to malá víla, so zelenými krídlami a venčekom z dubového lístia na hlave. Vyzerá vyľakaná.",
+      "text": "Zrazu sa pred tebou objavil malinký trblietavý záblesk! Je to malá víla, so zelenými krídlami a venčekom z dubového lístia na hlave.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 4
     },
     {
-      "text": "„Ahoj, {mladý priateľ|mladá priateľka}! Ja som lesná víla Lesnička a starám sa o všetky stromy v tomto lese. Každú jar sadím deväť kúzelných semienok, z ktorých vyrastajú nové stromy a kríky. Ale dnes v noci sa stalo niečo strašné!“",
+      "text": "„Ahoj, {mladý priateľ|mladá priateľka}! Ja som lesná víla Lesnička a starám sa o všetky stromy v tomto lese. Každú jar sadím deväť kúzelných semienok, z ktorých vyrastú nové stromy a kríky. Ale dnes v noci sa stalo niečo strašné!“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 5
@@ -97,7 +97,7 @@
       "screenId": 10
     },
     {
-      "text": "„Toto semienko pochádza zo stromu, ktorý má hladkú sivú kôru ako slonia koža. Na jeseň má krásne oranžovo-hnede listy. Jeho plody sú malé trojhranné oriešky v chlpatom obale — voláme ich bukvice. Aký je to strom?“",
+      "text": "„Toto semienko pochádza zo stromu, ktorý má hladkú sivú kôru ako slonia koža. Na jeseň má krásne oranžovo-hnedé listy. Jeho plody sú malé trojhranné oriešky v chlpatom obale — voláme ich bukvice. Aký je to strom?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fbuk.jpeg?alt=media",
       "answers": [
@@ -173,7 +173,7 @@
       "screenId": 16
     },
     {
-      "text": "„Toto semienko pochádza z ihličnatého stromu, ktorý má krátke ihličie rastúce všetkými smermi okolo konárika. Jeho šišky visia smerom nadol. Je to najbežnejší ihličnatý strom u nás. Vieš, aký je to strom?“",
+      "text": "„Toto semienko pochádza z ihličnatého stromu, ktorý má krátke ihličie rastúce všetkými smermi okolo konárika. Jeho šišky visia smerom dole. Je to najbežnejší ihličnatý strom u nás. Vieš, aký je to strom?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fsmrek.jpeg?alt=media",
       "answers": [
@@ -203,7 +203,7 @@
       "screenId": 18
     },
     {
-      "text": "„Piate semienko nie je ďaleko. Pozorne počúvaj — počuješ ten šum lístia? Les nám fandí! Poď!“",
+      "text": "„Piate semienko nie je ďaleko. Pozorne počúvaj — počuješ ten šum lístia? Les nám praje, tlieska nám lístím! Poď!“",
       "type": "NAVIGATION",
       "targetLatitude": 48.135303,
       "targetLongitude": 17.085234,
@@ -273,7 +273,7 @@
       "screenId": 23
     },
     {
-      "text": "„Správne, jedľa! Zapamätaj si: jedľa — šišky hore. Kliatba praskla! Všetky tri ihličnaté semienka sú odkliate! Teraz nám zostávajú už len kríky — menšie drevité rastliny, ktoré sú rovnako dôležité ako stromy.“",
+      "text": "„Správne, jedľa! Zapamätaj si: jedľa — šišky hore. Kliatba praskla! Všetky tri ihličnaté semienka sú odkliate! Teraz nám zostávajú už len kríky — menšie drevnaté rastliny, ktoré sú rovnako dôležité ako stromy.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fjedla.jpeg?alt=media",
       "screenId": 24
@@ -311,7 +311,7 @@
       "screenId": 26
     },
     {
-      "text": "„Správne, baza čierna! Bazový sirup je najlepší nápoj leta. A baza je dôležitá aj pre vtáky — milujú jej čierne bobule. Kliatba praskla — siedme semienko žiari! Ešte dve!“",
+      "text": "„Správne, baza čierna! Bazová limonáda je najlepší nápoj leta. A baza je dôležitá aj pre vtáky — milujú jej čierne bobule. Kliatba praskla — siedme semienko žiari! Ešte dve!“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fbaza.jpeg?alt=media",
       "screenId": 27
@@ -363,7 +363,7 @@
       "screenId": 31
     },
     {
-      "text": "„Posledné semienko pochádza z kríku, ktorý má veľké okrúhle listy. Na jeseň na ňom rastú oriešky v zelených obaloch. Veveričky ich zbierajú a schovávajú na zimu. Vieš, aké oriešky to sú?“",
+      "text": "„Posledné semienko pochádza z kríku, ktorý má veľké vajcovité až okrúhle listy. Na jeseň na ňom rastú oriešky v zelených obaloch. Veveričky ich zbierajú a schovávajú na zimu. Vieš, aké oriešky to sú?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flieska.jpeg?alt=media",
       "answers": [
@@ -394,7 +394,7 @@
       "screenId": 33
     },
     {
-      "text": "„Výborne! Ale ešte nie sme hotoví — semienka sú odkliaté, ale ich kúzlo musíme rozoslať po celom lese! Poď so mnou miesto, kde fúka vietor — tam ich rozsypeme do vetra!“",
+      "text": "„Výborne! Ale ešte nie sme hotoví — semienka sú odkliaté, ale ich kúzlo musíme rozoslať po celom lese! Poď so mnou na miesto, kde fúka vietor — tam ich rozsypeme do vetra!“",
       "type": "NAVIGATION",
       "targetLatitude": 48.137074,
       "targetLongitude": 17.08677,
@@ -402,38 +402,38 @@
       "screenId": 34
     },
     {
-      "text": "Víla Lesnička vytiahla kúzelné vrečúško a vysypala všetkých deväť žiariacich semienok na dlaň. Zdvihla ich vysoko nad hlavu a zašepkala: „Teraz spoločne — fúkni na ne čo najsilnejšie!“",
+      "text": "Víla Lesnička vytiahla kúzelné vrečúško a vysypala všetkých deväť žiariacich semienok na dlaň. Zdvihla ich vysoko nad hlavu a zašepkala: „Teraz spoločne — fúkni do nich čo najsilnejšie!“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fsemienka_vietor.jpeg?alt=media",
       "screenId": 35
     },
     {
-      "text": "Fúúúú! Semienka sa rozleteli do vetra ako trblietavý zlatozelený prach. Vietor ich zachytil a odniesol nad koruny stromov — nad celý Pečniansky les! Všade, kam dopadli, sa stromy a kríky jemne zachveli. Kúzelný prach sa usadil na každom liste, každej šiške, každej bobuľke — a ochránil všetky semienka v celom lese pred akoukoľvek kliatbou.",
+      "text": "Fúúúú! Semienka sa rozleteli do vetra ako trblietavý zlatozelený prach. Vietor ich zachytil a odniesol nad koruny stromov — nad celý Pečniansky les! Všade, kam dopadli, sa stromy a kríky jemne zachveli. Kúzelný prach sa usadil na každom liste, každej šiške, každej bobuľke — a ochránil všetky semienka v celom lese pred každou kliatbou.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fsemienka_vietor.jpeg?alt=media",
       "screenId": 36
     },
     {
-      "text": "Spoza pŕhľavy vyskočil malý zelený škriatok a začal dupkať nohami od zlosti: „Nie! Moje kliatby! Všetky ste prelomili!“ Ale Lesnička sa len usmeje: „Neboj sa, Pŕhľavník. V lese je miesto pre všetkých — aj pre pŕhľavy. Len nie v celom lese.“ Škriatok zamrmle a zmizne v kríkoch.",
+      "text": "Spoza pŕhľavy vyskočil malý zelený škriatok a začal dupať nohami od zlosti: „Nie! Moje kliatby! Všetky ste prelomili!“ Ale Lesnička sa len usmeje: „Neboj sa, Pŕhľavník. V lese je miesto pre všetkých — aj pre pŕhľavy. Len nie v celom lese.“ Škriatok zamrmle a zmizne v kríkoch.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fprhlavnik.jpeg?alt=media",
       "screenId": 37
     },
     {
-      "text": "Lesnička sa otočí k tebe: „Ďakujem ti, {mladý priateľ|mladá priateľka}! Bez teba by semienka zostali zakliané navždy a les by pomaly chradol. Zapamätaj si — každý strom začína ako malé semienko. A každý veľký les začína jedným človekom, ktorý sa oň stará. To si dnes {bol|bola} ty.“",
+      "text": "Lesnička sa otočí k tebe: „Ďakujem ti, {mladý priateľ|mladá priateľka}! Bez teba by semienka zostali zakliané navždy a les by pomaly chradol. Zapamätaj si — každý strom začína ako malé semienko. A každý veľký les potrebuje človeka, ktorý sa oň stará. To si dnes {bol|bola} ty.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 38
     },
     {
-      "text": "„A keď niekedy nabudúce pôjdeš Pečnianskym lesom a uvidíš jemný zelený trbliet medzi listami... vedz, že to som ja!“",
+      "text": "„A keď niekedy nabudúce pôjdeš Pečnianskym lesom a uvidíš jemný zelený jas medzi listami... vedz, že to som ja!“",
       "type": "CONTINUE",
       "buttonText": "Ďakujem, Lesnička!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 39
     },
     {
-      "text": "Zelené svetlo na šípke Špacírkovníka pomaly pohaslo a rozcestník spokojne zaševelil. Pečniansky les je v bezpečí a víla Lesnička stráži svoje semienka. Ale na Špacírkovníku sa trblietajú ďalšie šípky — každá ukrýva nové dobrodružstvo!",
+      "text": "Zelené svetlo na šípke Špacírkovníka pomaly pohaslo a rozcestník spokojne zaprašťal. Pečniansky les je v bezpečí a víla Lesnička stráži svoje semienka. Ale na Špacírkovníku sa trblietajú ďalšie šípky — každá ukrýva nové dobrodružstvo!",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fles_ziarenie.jpeg?alt=media",

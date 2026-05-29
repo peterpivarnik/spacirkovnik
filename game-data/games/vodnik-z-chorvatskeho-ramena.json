@@ -1,7 +1,7 @@
 {
   "id": "vodnik-z-chorvatskeho-ramena",
   "title": "Vodník z Chorvátského ramena",
-  "version": 3,
+  "version": 4,
   "screens": [
     {
       "text": "Vodník z Chorvátského ramena",
@@ -44,7 +44,7 @@
       "screenId": 5
     },
     {
-      "text": "„Odkedy sa perla rozbila, voda sa kalí, ryby sú nervózne a žabky prestali spievať. Ak nepozbierame všetkých osem kúskov a nezložíme perlu späť, rameno sa zakalí úplne! Každá bytosť ti dá svoj kúsok, ale najprv ťa vyskúša. Pomôžeš mi?“",
+      "text": "„Odkedy sa perla rozbila, voda sa kalí, ryby sú nervózne a žabky prestali spievať. Ak nepozbierame všetkých osem kúskov a nezložíme perlu späť, rameno sa zakalí úplne! Každá bytosť ti dá svoj kúsok, ale najskôr ťa vyskúša. Pomôžeš mi?“",
       "type": "CONTINUE",
       "buttonText": "Jasné, Chrčo, poďme na to!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
@@ -75,7 +75,7 @@
       "screenId": 7
     },
     {
-      "text": "„Správne! Chorvátski osadníci tu žili už od 16. storočia. Boli to šikovní roľníci a rybári — a boli to aj moji prví ľudskí susedia! Prvý kúsok perly ti dám ja. Zostáva sedem — a prvá na rade je rusalka. Býva kúsok ďalej po prúde. Poď!“",
+      "text": "„Správne! Chorvátski osadníci tu žili už od 16. storočia. Boli to šikovní roľníci a rybári — a boli to aj moji prví ľudskí susedia! Teraz choď za rusalkou. Býva kúsok ďalej.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
       "screenId": 8
@@ -125,7 +125,7 @@
       "screenId": 12
     },
     {
-      "text": "Žabiak Kvako býva pri detskom ihrisku. Poď za ním!",
+      "text": "Žabiak Kvako býva pri detskom ihrisku. Choď za ním!",
       "type": "NAVIGATION",
       "targetLatitude": 48.122517,
       "targetLongitude": 17.109306,
@@ -251,7 +251,7 @@
       "screenId": 23
     },
     {
-      "text": "„Správne! My sumce sa dožívame aj päťdesiat rokov. Som tu najstarší a pamätám časy, keď bola voda krištáľovo čistá. Tu máš môj kúsok. Ďalej hľadaj bludičku — uvidíš ju tam, kde sa nad vodou mihajú zvláštne svetielka.“",
+      "text": "„Správne! Bez fúzov by som v tejto tme nevedel nájsť ani jedinú rybu. Sú citlivejšie ako oči — cítia každý pohyb v bahne. Tu máš môj kúsok. Ďalej hľadaj bludičku — uvidíš ju tam, kde sa nad vodou mihajú zvláštne svetielka.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fsumec.jpeg?alt=media",
       "screenId": 24
@@ -271,7 +271,7 @@
       "screenId": 26
     },
     {
-      "text": "„Hí hí hí! Chytíš ma, nechytíš ma! Dám ti kúsok perly, ale najprv hádaj: Čo podľa povestí robí bludička pocestným?“",
+      "text": "„Chi chi chí! Chytíš ma, nechytíš ma! Dám ti kúsok perly, ale najprv hádaj: Čo podľa povestí robí bludička pocestným?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fbludicka.jpeg?alt=media",
       "answers": [
@@ -295,7 +295,7 @@
       "screenId": 27
     },
     {
-      "text": "„Správne! V bahne sa rozkladajú rastliny a uvoľňuje sa plyn, ktorý sa niekedy zapáli. Kedysi si ľudia mysleli, že sú to kúzelné bytosti — a možno aj sú, hí hí! Tu máš kúsok. Choď za kaprom — nájdeš ho ďalej pri brehu.“",
+      "text": "„Správne! Chi chí, zblúdiť v tme je také jednoduché, keď tancujem a vábim. Ľudia vždy nasledovali moje svetielko — a raz-dva sa ocitli hlboko v mokradi! Ale teba som nezvádzala, si šikovný! Tu máš kúsok perly. Choď za kaprom — nájdeš ho ďalej pri brehu.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fbludicka.jpeg?alt=media",
       "screenId": 28
@@ -427,7 +427,7 @@
       "screenId": 39
     },
     {
-      "text": "„Správne! Niektoré korytnačky sa dožívajú aj sto rokov — preto som taká múdra, hehe. Tu máš posledný kúsok perly! Máš všetkých osem. Teraz musíš ísť ku Chrčovmu domovu — on ich spojí dohromady. Poď, ukážem ti cestu!“",
+      "text": "„Správne! Niektoré korytnačky sa dožívajú aj sto rokov — preto som taká múdra, hehe. Tu máš posledný kúsok perly! Máš všetkých osem. Teraz musíš ísť ku Chrčovmu domovu — on ich spojí dohromady. Choď ešte kúsok ďalej!“",
       "type": "CONTINUE",
       "buttonText": "Poďme k Chrčovi!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkorytnacka.jpeg?alt=media",
@@ -448,7 +448,7 @@
       "screenId": 42
     },
     {
-      "text": "„Voda spája, voda žije, perla mocou svojou bije. Čo sa kúpe v jase vody, krásou znovu nech sa zrodí.“ Kúsky perly sa rozžiarili, zdvihli sa do vzduchu a spojili sa do jednej dokonalej žiariacej perly! Z vody vyšľahol zelenkavý lúč svetla a voda sa začala okamžite čistiť.",
+      "text": "„Voda spája, voda žije, \nperla mocou svojou bije. \nČo sa kúpe v jase vody, \nkrásou znovu nech sa zrodí.“ \n\nKúsky perly sa rozžiarili, zdvihli sa do vzduchu a spojili sa do jednej dokonalej žiariacej perly! Z vody vyšľahol zelenkavý lúč svetla a voda sa začala okamžite čistiť.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
       "screenId": 43

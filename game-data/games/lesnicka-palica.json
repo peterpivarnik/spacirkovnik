@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 21,
+  "version": 22,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -11,7 +11,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media"
     },
     {
-      "text": "Špacírkovník — magický rozcestník — začal bzučať a jedna z jeho šípok sa rozziarila zlatým svetlom! Smeruje k dunajským lesom. Kdesi tam lesník Gejza Dražďák volá o pomoc... Poď zistiť, čo sa stalo!",
+      "text": "Špacírkovník — magický rozcestník — začal bzučať a jedna z jeho šípok sa rozžiarila zlatým svetlom! Smeruje k dunajským lesom. Kdesi tam lesník Gejza Dražďák volá o pomoc... Poď zistiť, čo sa stalo!",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media"
     },
@@ -23,7 +23,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media"
     },
     {
-      "text": "V petržalských lesoch pri Dunaji žije veselý lesník Gejza Dražďák. Má tajný poklad – kúzelnú palicu, vďaka ktorej rozumie reči zvierat! Každé ráno sa jej dotkne, aby vedel, či vtáčiky alebo srnky nepotrebujú jeho pomoc.",
+      "text": "V petržalských lesoch pri Dunaji žije veselý lesník Gejza Dražďák. Má tajný poklad – kúzelnú palicu, vďaka ktorej rozumie reči zvierat! Každé ráno sa jej dotkne, aby vedel, či niektoré zo zvieratiek nepotrebujú jeho pomoc.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media"
     },
@@ -148,7 +148,7 @@
       ]
     },
     {
-      "text": "„Výborne, vidím, že sa v prírode naozaj vyznáš! Tak počúvaj - videla som niekoho v kapucni, ako sa potichu kradol po tejto cestičke. Choď kúsok ďalej na poloostrov, tam býva bobor Beny. Ten určite niečo vie!”",
+      "text": "„Výborne, vidím, že sa v prírode naozaj vyznáš! Tak počúvaj - videla som niekoho v kapucni, ako sa potichu zakrádal po tejto cestičke. Choď kúsok ďalej na poloostrov, tam býva bobor Beny. Ten určite niečo vie!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fkorytnacka.jpeg?alt=media"
     },
@@ -405,7 +405,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fzaba.jpeg?alt=media"
     },
     {
-      "text": "„Hu húúú! Vitaj, {mladý dobrodruh|mladá dobrodruhyňa}! Ja som sova Oľga. Tak ty si {ten hrdina|tá hrdinka}, čo pomáha lesníkovi Gejzovi? Mám pre teba poslednú hádanku. Povedz mi - kam išla sova v obľúbenej detskej pesničke?”",
+      "text": "„Hu húúú! Vitaj, {mladý dobrodruh|mladá dobrodružka}! Ja som sova Oľga. Tak ty si {ten hrdina|tá hrdinka}, čo pomáha lesníkovi Gejzovi? Mám pre teba poslednú hádanku. Povedz mi - kam išla sova v obľúbenej detskej pesničke?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fsova.jpeg?alt=media",
       "answers": [
@@ -428,7 +428,7 @@
       ]
     },
     {
-      "text": "„Hu húúú, výborne! {Zvládol|Zvládla} si všetky hádanky a dokázal si, že si naozaj {múdry a odvážny|múdra a odvážna}! Teraz ťa čaká posledný krok - nazri do Záhrady Gejzu Dražďáka. Tam nájdeš odpoveď na záhadu!”",
+      "text": "„Hu húúú, výborne! {Zvládol|Zvládla} si všetky hádanky a {dokázal|dokázala} si, že si naozaj {múdry a odvážny|múdra a odvážna}! Teraz ťa čaká posledný krok - nazri do Záhrady Gejzu Dražďáka. Tam nájdeš odpoveď na záhadu!”",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fsova.jpeg?alt=media"
     },
@@ -451,7 +451,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media"
     },
     {
-      "text": "Šípka rozcestníka pomaly zhasína — les je zasa v bezpečí. Špacírkovník veselo zakrútil a nové šípky už netrpezlivo čakajú. Aké dobrodružstvo si vyberieš nabudúce?",
+      "text": "Šípka rozcestníka pomaly zhasína — les je zasa v bezpečí. Špacírkovník sa veselo zakrútil a nové šípky už netrpezlivo čakajú. Aké dobrodružstvo si vyberieš nabudúce?",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media"

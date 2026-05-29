@@ -1,7 +1,7 @@
 {
   "id": "rybar-z-drazdiaka",
   "title": "Rybár z Draždiaka",
-  "version": 3,
+  "version": 4,
   "screens": [
     {
       "text": "Rybár z Draždiaka",
@@ -70,7 +70,7 @@
       "screenId": 5
     },
     {
-      "text": "Rybka prehovorí: „Prepusť ma, rybár, a splním ti tri želania!“ Rybár sa zamyslí — je to dobrý rybár, ktorý vždy dodržiava pravidlá. Existuje napríklad obdobie, keď sa ryby nesmú loviť vôbec. Vieš, ako sa volá?",
+      "text": "Rybka prehovorí: „Pusť ma, rybár, a splním ti tri želania!“ Rybár sa zamyslí — je to dobrý rybár, ktorý vždy dodržiava pravidlá. Existuje napríklad obdobie, keď sa ryby nesmú loviť vôbec. Vieš, ako sa volá?",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fzlata_rybka.jpeg?alt=media",
       "answers": [
@@ -100,7 +100,7 @@
       "screenId": 7
     },
     {
-      "text": "Rybár sa usmeje: „Dobre, rybka, si voľná.“ Pustí ju späť do vody. V tom deti stískajú dedka za ruku: „Dedko! Prvé želanie! Chceme hračky — hneď, tu, pri jazere!“ Rybka pokrúti chvostom a zavolá: „Nech sa stane!“ Z ničoho nič sa pri brehu objavili škatule plné hračiek — roboty, poníky, jednorožce, stavebnice. Deti sa jasali od radosti.",
+      "text": "Rybár sa usmeje: „Dobre, rybka, si voľná.“ Pustí ju späť do vody. V tom deti stískajú dedka za ruku: „Dedko! Prvé želanie! Chceme hračky — hneď, tu, pri jazere!“ Rybka pokrúti chvostom a zavolá: „Nech sa stane!“ Z ničoho nič sa pri brehu objavili krabice plné hračiek — roboty, poníky, jednorožce, stavebnice. Deti jasali od radosti.",
       "type": "NAVIGATION",
       "targetLatitude": 48.106985,
       "targetLongitude": 17.114214,
@@ -138,7 +138,7 @@
       "screenId": 10
     },
     {
-      "text": "Deti behnú k brehu a ukazujú prstom: „Tu! Práve tu chceme ihrisko! S trampolínami až po stromy a šmykľavkou do vody!“ Rybár pokrúti hlavou, ale podľahne. Poď za nimi k brehu!",
+      "text": "Deti pribehnú k brehu a ukazujú prstom: „Tu! Práve tu chceme ihrisko! S trampolínami a šmykľavkou do vody!“ Rybár pokrúti hlavou, ale podľahne. Poď za nimi k brehu!",
       "type": "NAVIGATION",
       "targetLatitude": 48.104608,
       "targetLongitude": 17.114232,
