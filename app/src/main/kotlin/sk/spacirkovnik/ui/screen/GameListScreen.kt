@@ -85,6 +85,8 @@ import sk.spacirkovnik.viewmodel.AuthViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel.DownloadStatus
 import sk.spacirkovnik.viewmodel.PurchaseViewModel
+import androidx.compose.ui.platform.LocalContext
+import sk.spacirkovnik.data.GameProgressManager
 
 @Composable
 fun GameListScreen(
@@ -275,12 +277,17 @@ fun GameListScreen(
 
                     Spacer(modifier = Modifier.height(12.dp))
 
+                    val context = LocalContext.current
+                    val progressManager = remember { GameProgressManager(context) }
+
                     LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         items(state.games) { gameWithStatus ->
                             val gameId = gameWithStatus.info.id
                             val isExpanded = expandedGameId == gameId
                             val isActivated = authViewModel.isGameActivated(gameId)
                             val isTestGame = authViewModel.isTestGame(gameId)
+                            val hasSavedProgress = progressManager.hasProgress(gameId)
+                            val isCompleted = progressManager.isCompleted(gameId)
                             GameCard(
                                 gameWithStatus = gameWithStatus,
                                 isActivated = isActivated,
@@ -288,10 +295,17 @@ fun GameListScreen(
                                 isExpanded = isExpanded,
                                 isPurchasing = purchaseState.purchasingGameId == gameId,
                                 price = purchaseState.productPrices[gameId],
+                                hasSavedProgress = hasSavedProgress,
+                                isCompleted = isCompleted,
                                 onToggle = {
                                     expandedGameId = if (isExpanded) null else gameId
                                 },
                                 onPlay = { onGameSelected(gameId, gameWithStatus.info.colorHex) },
+                                onPlayFresh = {
+                                    progressManager.clearProgress(gameId)
+                                    progressManager.clearCompleted(gameId)
+                                    onGameSelected(gameId, gameWithStatus.info.colorHex)
+                                },
                                 onDownload = { gameListViewModel.downloadGame(gameId) },
                                 onPurchase = {
                                     if (!authState.isSignedIn) {
@@ -324,8 +338,11 @@ private fun GameCard(
     isExpanded: Boolean,
     isPurchasing: Boolean,
     price: String?,
+    hasSavedProgress: Boolean,
+    isCompleted: Boolean,
     onToggle: () -> Unit,
     onPlay: () -> Unit,
+    onPlayFresh: () -> Unit,
     onDownload: () -> Unit,
     onPurchase: () -> Unit
 ) {
@@ -572,13 +589,47 @@ private fun GameCard(
                             }
                         }
                         DownloadStatus.DOWNLOADED -> {
-                            Button(
-                                onClick = onPlay,
-                                modifier = Modifier.fillMaxWidth().height(48.dp),
-                                shape = RoundedCornerShape(12.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
-                            ) {
-                                AutoSizeText("Hrať", color = PrimaryButtonText, fontWeight = FontWeight.Bold)
+                            when {
+                                isCompleted -> {
+                                    Button(
+                                        onClick = onPlayFresh,
+                                        modifier = Modifier.fillMaxWidth().height(48.dp),
+                                        shape = RoundedCornerShape(12.dp),
+                                        colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                                    ) {
+                                        Text("Hrať znova", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                                    }
+                                }
+                                hasSavedProgress -> {
+                                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                        Button(
+                                            onClick = onPlay,
+                                            modifier = Modifier.fillMaxWidth().height(48.dp),
+                                            shape = RoundedCornerShape(12.dp),
+                                            colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                                        ) {
+                                            Text("Pokračovať", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                                        }
+                                        Button(
+                                            onClick = onPlayFresh,
+                                            modifier = Modifier.fillMaxWidth().height(48.dp),
+                                            shape = RoundedCornerShape(12.dp),
+                                            colors = ButtonDefaults.buttonColors(containerColor = SecondaryButton)
+                                        ) {
+                                            Text("Hrať od začiatku", color = PrimaryButtonText, fontSize = 16.sp)
+                                        }
+                                    }
+                                }
+                                else -> {
+                                    Button(
+                                        onClick = onPlay,
+                                        modifier = Modifier.fillMaxWidth().height(48.dp),
+                                        shape = RoundedCornerShape(12.dp),
+                                        colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                                    ) {
+                                        AutoSizeText("Hrať", color = PrimaryButtonText, fontWeight = FontWeight.Bold)
+                                    }
+                                }
                             }
                         }
                         DownloadStatus.UPDATE_AVAILABLE -> {

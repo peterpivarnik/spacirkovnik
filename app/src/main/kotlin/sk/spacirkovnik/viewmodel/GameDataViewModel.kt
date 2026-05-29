@@ -75,7 +75,10 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun recordCompletion() {
-        currentGameId?.let { completionManager.recordCompletion(it) }
+        currentGameId?.let {
+            completionManager.recordCompletion(it)
+            progressManager.markCompleted(it)
+        }
     }
 
     fun clearProgress() {
