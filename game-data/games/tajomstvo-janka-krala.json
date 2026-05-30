@@ -1,14 +1,14 @@
 {
   "id": "tajomstvo-janka-krala",
   "title": "Tajomstvo Janka Kráľa",
-  "version": 6,
+  "version": 7,
   "screens": [
     {
       "text": "Tajomstvo Janka Kráľa",
       "type": "CONTINUE",
       "buttonText": "Poď na dobrodružstvo!",
       "fontSize": 26,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fbasne_vietor.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
       "screenId": 0
     },
     {
@@ -73,7 +73,7 @@
     {
       "text": "„Vieš, kde som sa narodil?”",
       "type": "QUESTION",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_vysoky_strom.jpeg?alt=media",
       "answers": [
         {
           "text": "Bratislava",
@@ -105,7 +105,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.132828,
       "targetLongitude": 17.112476,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fbasne_vietor.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
       "screenId": 11
     },
     {
@@ -275,7 +275,7 @@
     {
       "text": "„Do Sadu Janka Kráľa sa kedysi dalo dostať aj na lodi. Tá loď pristávala práve pri tejto budove. Vieš, ako sa tá loď volala?“",
       "type": "QUESTION",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpropeler.jpeg?alt=media",
       "answers": [
         {
           "text": "Ponorka",
@@ -299,7 +299,7 @@
     {
       "text": "„Správne, bol to Propeler! Šiesta báseň je späť!“",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpropeler.jpeg?alt=media",
       "screenId": 27
     },
     {
@@ -307,7 +307,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.136987,
       "targetLongitude": 17.107117,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fdunaj_nabrezie.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpropeler.jpeg?alt=media",
       "screenId": 28
     },
     {
@@ -356,14 +356,14 @@
       "text": "„Poďme ďalej — cítim, že ďalšia báseň je niekde v hĺbke parku.”",
       "type": "NAVIGATION",
       "targetLatitude": 48.135846,
-      "targetLongitude": 17.107390,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
+      "targetLongitude": 17.10739,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_pokojny.jpeg?alt=media",
       "screenId": 33
     },
     {
       "text": "„Rozhliadni sa okolo seba. Čo je v tomto parku najvýraznejšie a dodáva mu pokoj?”",
       "type": "QUESTION",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_pokojny.jpeg?alt=media",
       "answers": [
         {
           "text": "Mrakodrapy",
@@ -387,7 +387,7 @@
     {
       "text": "„Správne! Tento park je najmä o stromoch a prírode. Aj preto som tu rád písal svoje básne. Ôsma báseň je tu - časové okno sa výrazne oslabilo.”",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_pokojny.jpeg?alt=media",
       "screenId": 35
     },
     {
