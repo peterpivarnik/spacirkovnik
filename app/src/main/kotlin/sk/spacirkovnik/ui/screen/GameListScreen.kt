@@ -1,18 +1,21 @@
 package sk.spacirkovnik.ui.screen
 
 import androidx.activity.compose.LocalActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -42,6 +45,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -53,22 +57,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import kotlinx.coroutines.launch
 import sk.spacirkovnik.R
+import sk.spacirkovnik.data.GameProgressManager
+import sk.spacirkovnik.model.GameStatus
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.AmberLight
 import sk.spacirkovnik.ui.theme.CardBg
@@ -76,19 +83,15 @@ import sk.spacirkovnik.ui.theme.MainBackground
 import sk.spacirkovnik.ui.theme.PrimaryButton
 import sk.spacirkovnik.ui.theme.PrimaryButtonText
 import sk.spacirkovnik.ui.theme.PurchaseButton
-import sk.spacirkovnik.ui.theme.SecondaryButton
+import sk.spacirkovnik.ui.theme.SecondaryOutlineButton
 import sk.spacirkovnik.ui.theme.TextDark
 import sk.spacirkovnik.ui.theme.TextMedium
-import sk.spacirkovnik.ui.theme.TextOnDark
-import sk.spacirkovnik.model.GameStatus
+import sk.spacirkovnik.ui.theme.TextOnBeige
+import sk.spacirkovnik.ui.theme.TextOnBeigeSecondary
 import sk.spacirkovnik.viewmodel.AuthViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel
 import sk.spacirkovnik.viewmodel.GameListViewModel.DownloadStatus
 import sk.spacirkovnik.viewmodel.PurchaseViewModel
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.ui.platform.LocalContext
-import sk.spacirkovnik.data.GameProgressManager
 
 @Composable
 fun GameListScreen(
@@ -187,14 +190,14 @@ fun GameListScreen(
                                 text = "Špacírkovník",
                                 fontSize = 26.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = TextOnDark,
+                                color = TextOnBeige,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
                             Text(
                                 text = "Vyber si dobrodružstvo",
                                 fontSize = 14.sp,
-                                color = TextOnDark.copy(alpha = 0.7f),
+                                color = TextOnBeigeSecondary,
                                 maxLines = 2,
                                 overflow = TextOverflow.Ellipsis,
                                 textAlign = TextAlign.Center
@@ -218,7 +221,7 @@ fun GameListScreen(
                                     Icon(
                                         imageVector = Icons.Default.AccountCircle,
                                         contentDescription = if (authState.isSignedIn) "Odhlásiť sa" else "Prihlásiť sa",
-                                        tint = if (authState.isSignedIn) Amber else TextOnDark.copy(alpha = 0.4f),
+                                        tint = if (authState.isSignedIn) Amber else TextOnBeigeSecondary.copy(alpha = 0.5f),
                                         modifier = Modifier.size(36.dp)
                                     )
                                 }
@@ -228,7 +231,7 @@ fun GameListScreen(
                                         Text(
                                             text = firstName,
                                             fontSize = 11.sp,
-                                            color = TextOnDark.copy(alpha = 0.7f),
+                                            color = TextOnBeigeSecondary,
                                             maxLines = 1,
                                             overflow = TextOverflow.Ellipsis
                                         )
@@ -251,14 +254,14 @@ fun GameListScreen(
                             Icon(
                                 imageVector = Icons.Default.WifiOff,
                                 contentDescription = null,
-                                tint = TextOnDark.copy(alpha = 0.6f),
+                                tint = TextOnBeigeSecondary,
                                 modifier = Modifier.size(14.dp)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
                                 text = "Offline režim — zobrazujú sa uložené hry",
                                 fontSize = 12.sp,
-                                color = TextOnDark.copy(alpha = 0.7f)
+                                color = TextOnBeigeSecondary
                             )
                         }
                     }
@@ -367,7 +370,7 @@ private fun GameCard(
             .then(
                 if (isLocked) Modifier.border(
                     width = 1.dp,
-                    color = TextMedium.copy(alpha = 0.4f),
+                    color = TextMedium.copy(alpha = 0.2f),
                     shape = RoundedCornerShape(16.dp)
                 ) else Modifier
             ),
@@ -375,7 +378,7 @@ private fun GameCard(
         colors = CardDefaults.cardColors(
             containerColor = if (isLocked) CardBg.copy(alpha = 0.5f) else CardBg
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = if (isLocked) 0.dp else 6.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         // Compact header — always visible
         Row(
@@ -581,7 +584,7 @@ private fun GameCard(
                                 onClick = onDownload,
                                 modifier = Modifier.fillMaxWidth().height(48.dp),
                                 shape = RoundedCornerShape(12.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = SecondaryButton)
+                                colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
                             ) {
                                 Text("Stiahnuť", color = PrimaryButtonText, fontSize = 16.sp)
                             }
@@ -618,13 +621,17 @@ private fun GameCard(
                                         ) {
                                             Text("Pokračovať", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
                                         }
-                                        Button(
+                                        OutlinedButton(
                                             onClick = onPlayFresh,
                                             modifier = Modifier.fillMaxWidth().height(48.dp),
                                             shape = RoundedCornerShape(12.dp),
-                                            colors = ButtonDefaults.buttonColors(containerColor = SecondaryButton)
+                                            border = BorderStroke(1.5.dp, SecondaryOutlineButton),
+                                            colors = ButtonDefaults.outlinedButtonColors(
+                                                containerColor = Color.Transparent,
+                                                contentColor = SecondaryOutlineButton
+                                            )
                                         ) {
-                                            Text("Hrať od začiatku", color = PrimaryButtonText, fontSize = 16.sp)
+                                            Text("Hrať od začiatku", fontSize = 16.sp)
                                         }
                                     }
                                 }
@@ -653,13 +660,17 @@ private fun GameCard(
                                 ) {
                                     Text("Hrať", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
                                 }
-                                Button(
+                                OutlinedButton(
                                     onClick = onDownload,
-                                    modifier = Modifier.weight(2f).height(48.dp),
+                                    modifier = Modifier.weight(1f).height(48.dp),
                                     shape = RoundedCornerShape(12.dp),
-                                    colors = ButtonDefaults.buttonColors(containerColor = SecondaryButton)
+                                    border = BorderStroke(1.5.dp, SecondaryOutlineButton),
+                                    colors = ButtonDefaults.outlinedButtonColors(
+                                        containerColor = Color.Transparent,
+                                        contentColor = SecondaryOutlineButton
+                                    )
                                 ) {
-                                    Text("Aktualizovať", color = PrimaryButtonText, fontSize = 16.sp)
+                                    Text("Aktualizovať", fontSize = 16.sp)
                                 }
                             }
                         }
