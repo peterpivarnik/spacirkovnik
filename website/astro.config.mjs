@@ -7,6 +7,9 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://spacirkovnik.sk',
+	redirects: {
+		'/blog/vitajte-v-spacirkovniku': '/blog/vitajte-na-spacirkovniku',
+	},
 	integrations: [mdx(), sitemap()],
 	fonts: [
 		{

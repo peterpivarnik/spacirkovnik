@@ -1,5 +1,5 @@
 ---
-title: 'Vitajte v Špacírkovníku!'
+title: 'Vitajte na Špacírkovníku!'
 description: 'Predstavujeme appku, ktorá mení obyčajnú prechádzku na dobrodružstvo pre celú rodinu.'
 pubDate: 'May 18 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media'
