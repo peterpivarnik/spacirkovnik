@@ -1,0 +1,42 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<html lang="sk">
+	<head>
+		<BaseHead title={frontmatter.title} description={frontmatter.description} />
+		<style>
+			main {
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 2rem 1.5rem 4rem;
+				color: rgb(var(--gray-dark));
+			}
+			h1 {
+				font-size: 1.9rem;
+				margin-bottom: 0.25rem;
+				color: #3D2314;
+			}
+			.meta {
+				color: rgb(var(--gray));
+				font-size: 0.9rem;
+				margin-bottom: 2rem;
+				padding-bottom: 1rem;
+				border-bottom: 1px solid #eee;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>{frontmatter.title}</h1>
+			{frontmatter.lastUpdated && <p class="meta">Posledná aktualizácia: {frontmatter.lastUpdated}</p>}
+			<slot />
+		</main>
+		<Footer />
+	</body>
+</html>
