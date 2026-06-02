@@ -8,6 +8,8 @@ enum class GameStatus {
     @SerializedName("coming_soon") COMING_SOON,
     @SerializedName("purchasable") PURCHASABLE,
     @SerializedName("hidden") HIDDEN,
+    @Suppress("unused")
+    @SerializedName("free_with_login") FREE_WITH_LOGIN,
     @Suppress("unused") UNKNOWN
 }
 

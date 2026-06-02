@@ -301,6 +301,7 @@ fun GameListScreen(
                             val isCompleted = progressManager.isCompleted(gameId)
                             GameCard(
                                 gameWithStatus = gameWithStatus,
+                                isSignedIn = authState.isSignedIn,
                                 isActivated = isActivated,
                                 isTestGame = isTestGame,
                                 isExpanded = isExpanded,
@@ -344,6 +345,7 @@ fun GameListScreen(
 @Composable
 private fun GameCard(
     gameWithStatus: GameListViewModel.GameWithStatus,
+    isSignedIn: Boolean,
     isActivated: Boolean,
     isTestGame: Boolean,
     isExpanded: Boolean,
@@ -358,7 +360,10 @@ private fun GameCard(
     onPurchase: () -> Unit
 ) {
     val info = gameWithStatus.info
-    val isUnlocked = info.status == GameStatus.ACTIVE || isActivated || isTestGame
+    val isUnlocked = info.status == GameStatus.ACTIVE
+            || (info.status == GameStatus.FREE_WITH_LOGIN && isSignedIn)
+            || isActivated
+            || isTestGame
     val isLocked = !isUnlocked
     val showPurchaseButton = isLocked && info.status == GameStatus.PURCHASABLE
 
