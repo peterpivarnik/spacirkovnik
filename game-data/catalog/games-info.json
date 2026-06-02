@@ -1,15 +1,15 @@
 [
   {
-    "id": "dni-petrzalky-2026-test",
+    "id": "dni-petrzalky-2026",
     "title": "Dni Petržalky 2026",
-    "description": "Ukážková hra pre Dni Petržalky 2026. Prejdi festivaliskovým areálom a odpovedz na otázky o najväčšej mestskej slávnosti v Petržalke.",
-    "version": 2,
+    "description": "Prejdi festivaliskovým areálom a odpovedz na otázky o najväčšej mestskej slávnosti v Petržalke.",
+    "version": 3,
     "region": "Bratislava - Petržalka",
     "estimatedDurationMinutes": 15,
     "distanceKm": 0.1,
-    "imageUrl": "https://festival.petrzalka.sk/assets/banner_2026-Cmt1mtnv.svg",
+    "imageUrl": "https://www.petrzalka.sk/wp-content/themes/petrzalka/img/logo.png",
     "colorHex": "D4580A",
-    "status": "coming_soon",
+    "status": "hidden",
     "startName": "Priestor festivalu Dni Petržalky",
     "endName": "Priestor festivalu Dni Petržalky"
   },
