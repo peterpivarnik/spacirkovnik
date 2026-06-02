@@ -137,6 +137,10 @@ fun GameListScreen(
         purchaseViewModel.clearError()
     }
 
+    LaunchedEffect(authState.isSignedIn) {
+        gameListViewModel.refresh()
+    }
+
     LaunchedEffect(authState.testGames) {
         gameListViewModel.setTestGames(authState.testGames)
     }

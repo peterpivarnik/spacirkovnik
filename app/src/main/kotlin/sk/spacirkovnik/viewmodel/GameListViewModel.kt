@@ -24,6 +24,10 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
         fetchGameIndex()
     }
 
+    fun refresh() {
+        fetchGameIndex()
+    }
+
     fun setTestGames(games: Set<String>) {
         testGames = games
         if (rawCatalog.isNotEmpty()) {
