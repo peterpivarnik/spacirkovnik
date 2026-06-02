@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Paint
-import android.graphics.RectF
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -115,8 +114,8 @@ fun NavigationDisplay(
     var locationStarted by remember { mutableStateOf(false) }
 
     // Pre-build icon bitmaps once; IconImage wraps them for Mapbox annotations
-    val targetPinIcon = remember { IconImage(bitmap = createPinBitmap(android.graphics.Color.rgb(213, 0, 0))) }
-    val userPinIcon   = remember { IconImage(bitmap = createPinBitmap(android.graphics.Color.rgb(21, 101, 192))) }
+    val targetPinIcon = remember { IconImage(bitmap = createCircleBitmap(android.graphics.Color.rgb(213, 0, 0))) }
+    val userPinIcon   = remember { IconImage(bitmap = createCircleBitmap(android.graphics.Color.rgb(21, 101, 192))) }
     val arrowIcon     = remember { IconImage(bitmap = createArrowBitmap(android.graphics.Color.rgb(21, 101, 192))) }
 
     val scrollState = rememberScrollState()
@@ -148,13 +147,12 @@ fun NavigationDisplay(
     }
 
     val permissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestMultiplePermissions(),
-        onResult = { permissions ->
-            if (permissions[ACCESS_FINE_LOCATION] == true || permissions[ACCESS_COARSE_LOCATION] == true) {
-                startLocationUpdates()
-            }
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        if (permissions[ACCESS_FINE_LOCATION] == true || permissions[ACCESS_COARSE_LOCATION] == true) {
+            startLocationUpdates()
         }
-    )
+    }
 
     LaunchedEffect(Unit) {
         val hasFine =
@@ -233,6 +231,7 @@ fun NavigationDisplay(
     LaunchedEffect(userPoint) {
         val center: Point
         val zoom: Double
+        val bearing: Double
         if (userPoint != null) {
             center = Point.fromLngLat(
                 (userPoint.longitude() + targetLng) / 2,
@@ -245,14 +244,17 @@ fun NavigationDisplay(
                 dist > 200  -> 14.0
                 else        -> 15.0
             }
+            bearing = mapBearing(userPoint, targetPoint)
         } else {
             center = targetPoint
             zoom = 15.0
+            bearing = 0.0
         }
         mapViewportState.easeTo(
             CameraOptions.Builder()
                 .center(center)
                 .zoom(zoom)
+                .bearing(bearing)
                 .build()
         )
     }
@@ -504,22 +506,21 @@ private fun NavigationMap(
     ) {
         PointAnnotation(point = targetPoint) {
             iconImage = targetPinIcon
-            iconAnchor = IconAnchor.BOTTOM
+            iconAnchor = IconAnchor.CENTER
         }
         userPoint?.let { up ->
             PointAnnotation(point = up) {
                 iconImage = userPinIcon
-                iconAnchor = IconAnchor.BOTTOM
+                iconAnchor = IconAnchor.CENTER
             }
             PolylineAnnotation(points = listOf(up, targetPoint)) {
                 lineColor = Color(0xFF1565C0)
                 lineWidth = 3.0
             }
             val midpoint = mapMidpoint(up, targetPoint)
-            val bearing = mapBearing(up, targetPoint)
             PointAnnotation(point = midpoint) {
                 iconImage = arrowIcon
-                iconRotate = bearing
+                iconRotate = 0.0
             }
         }
     }
@@ -548,45 +549,23 @@ private fun DrawScope.drawArrow(center: Offset, length: Float) {
 }
 
 
-/** Teardrop / Google-Maps-style pin bitmap. Anchor at bottom-center. */
-private fun createPinBitmap(colorInt: Int): Bitmap {
-    val w = 80
-    val h = 112   // portrait ratio gives room for the pointed tail
-    val bitmap = createBitmap(w, h)
+/** Filled circle with white outline. Anchor at center. */
+private fun createCircleBitmap(colorInt: Int): Bitmap {
+    val size = 64
+    val bitmap = createBitmap(size, size)
     val canvas = android.graphics.Canvas(bitmap)
+    val cx = size / 2f
+    val r = size * 0.38f
 
-    val cx = w / 2f
-    val r  = w * 0.42f          // circle radius
-    val cy = r + 4f              // circle center Y from top
-
-    // --- teardrop path ---
-    // Start at tip, quad-curve up to left of circle, arc over the top,
-    // quad-curve back down to tip.
-    val path = android.graphics.Path()
-    path.moveTo(cx, h.toFloat())
-    path.quadTo(cx - r, cy + r,       cx - r, cy)
-    path.arcTo(RectF(cx - r, cy - r, cx + r, cy + r), 180f, -180f)
-    path.quadTo(cx + r, cy + r,       cx, h.toFloat())
-    path.close()
-
-    val fill = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    canvas.drawCircle(cx, cx, r, Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = colorInt
         style = Paint.Style.FILL
-    }
-    val stroke = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    })
+    canvas.drawCircle(cx, cx, r, Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = android.graphics.Color.WHITE
         style = Paint.Style.STROKE
-        strokeWidth = 5f
-    }
-    val white = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = android.graphics.Color.WHITE
-        style = Paint.Style.FILL
-    }
-
-    canvas.drawPath(path, fill)
-    canvas.drawPath(path, stroke)
-    canvas.drawCircle(cx, cy, r * 0.38f, white)   // inner white dot
-
+        strokeWidth = 6f
+    })
     return bitmap
 }
 
