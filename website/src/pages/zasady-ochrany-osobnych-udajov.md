@@ -2,7 +2,7 @@
 layout: '../layouts/LegalPage.astro'
 title: 'Zásady ochrany osobných údajov'
 description: 'Zásady ochrany osobných údajov aplikácie Špacírkovník.'
-lastUpdated: '22. apríla 2026'
+lastUpdated: '2. júna 2026'
 ---
 
 ## 1. Prevádzkovateľ
@@ -51,6 +51,8 @@ Aplikácia Špacírkovník spracúva nasledujúce údaje len v rozsahu nevyhnutn
 ## 5. Doba uchovávania
 
 Údaje uchovávame, kým máte aktívny účet. Po vymazaní účtu sú vaše dáta (emailová adresa, UID, aktivácie) odstránené z našich systémov.
+
+Ak chcete vymazať svoj účet, postupujte podľa pokynov na stránke [Vymazanie účtu](/vymazanie-uctu/).
 
 ---
 
