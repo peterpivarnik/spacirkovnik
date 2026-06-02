@@ -1,0 +1,113 @@
+{
+  "id": "dni-petrzalky-2026",
+  "title": "Dni Petržalky 2026",
+  "version": 2,
+  "screens": [
+    {
+      "text": "Vitaj na Dňoch Petržalky 2026! Čaká ťa krátka prechádzka po festivaliskovom areáli. Spoznáš tri miesta a vyskúšaš, ako funguje Špacírkovník. Priprav sa — prvý cieľ ťa čaká hneď za rohom.",
+      "type": "CONTINUE",
+      "buttonText": "Poď na to!",
+      "fontSize": 20,
+      "imageUrl": "https://festival.petrzalka.sk/assets/banner_2026-Cmt1mtnv.svg"
+    },
+    {
+      "text": "Choď na prvú lokáciu.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.111113,
+      "targetLongitude": 17.110984,
+      "imageUrl": "https://www.petrzalka.sk/wp-content/themes/petrzalka/img/logo.png"
+    },
+    {
+      "text": "Ktorý rok sa konali prvé Dni Petržalky?",
+      "type": "QUESTION",
+      "imageUrl": "https://www.petrzalka.sk/wp-content/themes/petrzalka/img/logo.png",
+      "answers": [
+        {
+          "text": "1985",
+          "correct": false
+        },
+        {
+          "text": "1990",
+          "correct": true
+        },
+        {
+          "text": "1998",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Správne! Prvé Dni Petržalky sa konali v roku 1990.",
+      "type": "BROWSE",
+      "imageUrl": "https://www.petrzalka.sk/wp-content/themes/petrzalka/img/logo.png"
+    },
+    {
+      "text": "Pokračuj na druhú lokáciu.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.110933,
+      "targetLongitude": 17.110819,
+      "imageUrl": "https://festival.petrzalka.sk/assets/banner_2026-Cmt1mtnv.svg"
+    },
+    {
+      "text": "V ktorom mesiaci sa každoročne konajú Dni Petržalky?",
+      "type": "QUESTION",
+      "imageUrl": "https://festival.petrzalka.sk/assets/banner_2026-Cmt1mtnv.svg",
+      "answers": [
+        {
+          "text": "máj",
+          "correct": false
+        },
+        {
+          "text": "jún",
+          "correct": true
+        },
+        {
+          "text": "júl",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Výborne! Dni Petržalky sa tradične konajú každý jún.",
+      "type": "BROWSE",
+      "imageUrl": "https://festival.petrzalka.sk/assets/banner_2026-Cmt1mtnv.svg"
+    },
+    {
+      "text": "Vydaj sa na záverečnú lokáciu.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.110933,
+      "targetLongitude": 17.111122,
+      "imageUrl": "https://www.kniznicapetrzalka.sk/wp-content/themes/mkp/img/logo-petrzalka2.svg"
+    },
+    {
+      "text": "Aký ročník Dní Petržalky sa koná v roku 2026?",
+      "type": "QUESTION",
+      "imageUrl": "https://www.kniznicapetrzalka.sk/wp-content/themes/mkp/img/logo-petrzalka2.svg",
+      "answers": [
+        {
+          "text": "30.",
+          "correct": false
+        },
+        {
+          "text": "37.",
+          "correct": true
+        },
+        {
+          "text": "42.",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Skvelé! V roku 2026 sa koná už 37. ročník Dní Petržalky.",
+      "type": "BROWSE",
+      "imageUrl": "https://www.kniznicapetrzalka.sk/wp-content/themes/mkp/img/logo-petrzalka2.svg"
+    },
+    {
+      "text": "Gratulujeme, zdolal si trasu! Toto bol ukážkový výlet po Dňoch Petržalky 2026. Skutočné hry Špacírkovníka ťa zavedú na skryté miesta, lúštenie záhad a objavovanie histórie tvojho mesta. Ďakujeme, že si nás vyskúšal!",
+      "type": "CONTINUE",
+      "buttonText": "Späť na zoznam hier",
+      "imageUrl": "https://festival.petrzalka.sk/assets/banner_2026-Cmt1mtnv.svg"
+    }
+  ]
+}
