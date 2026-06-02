@@ -657,13 +657,13 @@ private fun GameCard(
                             }
                         }
                         DownloadStatus.UPDATE_AVAILABLE -> {
-                            Row(
+                            Column(
                                 modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 Button(
                                     onClick = onPlay,
-                                    modifier = Modifier.weight(1f).height(48.dp),
+                                    modifier = Modifier.fillMaxWidth().height(48.dp),
                                     shape = RoundedCornerShape(12.dp),
                                     colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
                                 ) {
@@ -671,7 +671,7 @@ private fun GameCard(
                                 }
                                 OutlinedButton(
                                     onClick = onDownload,
-                                    modifier = Modifier.weight(1f).height(48.dp),
+                                    modifier = Modifier.fillMaxWidth().height(48.dp),
                                     shape = RoundedCornerShape(12.dp),
                                     border = BorderStroke(1.5.dp, SecondaryOutlineButton),
                                     colors = ButtonDefaults.outlinedButtonColors(
