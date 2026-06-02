@@ -1,10 +1,10 @@
 {
   "id": "dni-petrzalky-2026",
   "title": "Dni Petržalky 2026",
-  "version": 4,
+  "version": 5,
   "screens": [
     {
-      "text": "Vitaj na Dňoch Petržalky 2026! Čaká ťa krátka prechádzka po festivaliskovom areáli. Spoznáš tri miesta a vyskúšaš, ako funguje Špacírkovník. Priprav sa — prvý cieľ ťa čaká hneď za rohom.",
+      "text": "Vitaj na Dňoch Petržalky 2026! Čaká ťa krátka prechádzka po festivalovom areáli. Spoznáš festivalové miesta a vyskúšaš, ako funguje Špacírkovník. Priprav sa — prvý cieľ ťa čaká hneď za rohom.",
       "type": "CONTINUE",
       "buttonText": "Poď na to!",
       "fontSize": 20,
@@ -105,6 +105,12 @@
     },
     {
       "text": "Gratulujeme, zdolal si trasu! Dúfame, že si si užil prechádzku po Dňoch Petržalky 2026. Špacírkovník ťa zavedie na skryté miesta, lúštenie záhad a objavovanie histórie tvojho mesta. Ďakujeme, že si nás vyskúšal!",
+      "type": "CONTINUE",
+      "buttonText": "Ďalej",
+      "imageUrl": "https://www.petrzalka.sk/wp-content/uploads/2012/12/erb-mestskej-%C4%8Dasti.jpg"
+    },
+    {
+      "text": "Vyber si ďalšie dobrodružstvo!",
       "type": "CONTINUE",
       "buttonText": "Späť na zoznam hier",
       "imageUrl": "https://www.petrzalka.sk/wp-content/uploads/2012/12/erb-mestskej-%C4%8Dasti.jpg"
