@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 22,
+  "version": 23,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -165,7 +165,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fbobor.jpeg?alt=media"
     },
     {
-      "text": "„Vidíš tú hrádzu na vode? Tú som postavil celú sám! Staval som ju tri týždne a je z nej najkrajšia hrádza v celom okolí. Ale dosť bolo reči - dokáž mi, že nás bobry poznáš! Vieš, čo máme najradšej na jedenie?”",
+      "text": "„Vidíš tú hrádzu na vode? Tú som postavil celú sám! Staval som ju tri týždne a je z nej najkrajšia hrádza v celom okolí. Ale dosť bolo reči - dokáž mi, že nás bobry poznáš! Vieš, čo najradšej jeme?”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fbobor.jpeg?alt=media",
       "answers": [
