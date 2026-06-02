@@ -41,10 +41,11 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
                 val response = RetrofitInstance.apiService.getGameIndex()
                 cacheManager.saveCatalog(response)
                 rawCatalog = response
-                _state.value = GameListState(
-                    games = buildGameList(response),
-                    loading = false
-                )
+                val gameList = buildGameList(response)
+                _state.value = GameListState(games = gameList, loading = false)
+                gameList
+                    .filter { it.status == DownloadStatus.UPDATE_AVAILABLE }
+                    .forEach { downloadGame(it.info.id) }
             } catch (e: Exception) {
                 val cached = cacheManager.loadCatalog()
                 if (cached != null) {
