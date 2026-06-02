@@ -27,11 +27,13 @@ Aplikácia Špacírkovník spracúva nasledujúce údaje len v rozsahu nevyhnutn
 
 ---
 
-## 3. Účel spracúvania
+## 3. Účel a právny základ spracúvania
 
-- **Email a UID** — na identifikáciu používateľa a prepojenie s aktivovanými hrami.
-- **Aktivácie** — aby ste mali prístup k hrám, ku ktorým máte oprávnenie.
-- **Poloha** — výlučne na zobrazenie mapy a výpočet trasy v rámci hry.
+| Údaj | Účel | Právny základ (čl. 6 GDPR) |
+|---|---|---|
+| Email a UID | Identifikácia používateľa, priradenie aktivovaných hier | Plnenie zmluvy (čl. 6 ods. 1 písm. b) |
+| Aktivácie hier | Poskytnutie prístupu k zakúpeným hrám | Plnenie zmluvy (čl. 6 ods. 1 písm. b) |
+| Poloha zariadenia | Zobrazenie mapy a navigácia počas hry | Oprávnený záujem (čl. 6 ods. 1 písm. f) |
 
 ---
 

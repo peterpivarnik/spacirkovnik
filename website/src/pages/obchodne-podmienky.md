@@ -12,6 +12,7 @@ Prevádzkovateľom aplikácie Špacírkovník je:
 **Ing. Peter Pivarník**  
 Miesto podnikania: Vyšehradská 3014/29, 851 06 Bratislava-Petržalka  
 IČO: 46 361 588  
+DIČ: 1081378485 (nie je platiteľom DPH)  
 Živnostenský register: Okresný úrad Bratislava, č. 110-208640  
 Kontakt: info@spacirkovnik.sk  
 Web: spacirkovnik.sk
@@ -95,6 +96,10 @@ Spracúvanie osobných údajov je upravené v samostatnom dokumente [Zásady och
 
 V prípade sporu má používateľ právo obrátiť sa na subjekt alternatívneho riešenia sporov. Príslušným orgánom je **Slovenská obchodná inšpekcia (SOI)**:
 
+Slovenská obchodná inšpekcia  
+Ústredný inšpektorát, odbor medzinárodných vzťahov a ARS  
+Bajkalská 21/A, P.O.BOX 29  
+827 99 Bratislava  
 Web: [www.soi.sk](https://www.soi.sk)  
 Platforma EÚ pre riešenie sporov online: [https://ec.europa.eu/consumers/odr](https://ec.europa.eu/consumers/odr)
 
