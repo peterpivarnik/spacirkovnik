@@ -103,7 +103,7 @@ fun GameListScreen(
     val state by gameListViewModel.state
     val authState by authViewModel.state
     val purchaseState by purchaseViewModel.state
-    val activity = LocalActivity.current!!
+    val activity = LocalActivity.current
     val context = LocalContext.current
     var showSignOutDialog by remember { mutableStateOf(false) }
     var expandedGameId by remember { mutableStateOf<String?>(null) }
@@ -328,7 +328,7 @@ fun GameListScreen(
                                         scope.launch {
                                             snackbarHostState.showSnackbar("Pre kúpu hry sa najprv prihláste.")
                                         }
-                                    } else {
+                                    } else if (activity != null) {
                                         purchaseViewModel.purchaseGame(gameId, activity)
                                     }
                                 }

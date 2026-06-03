@@ -15,6 +15,10 @@ class SpacirkovnikApp : Application() {
     // no ide o jediné dostupné API na vypnutie zberu dát v Mapbox SDK v11.
     // Verejné alternatívy (MapboxOptions, SettingsService) túto možnosť neponúkajú.
     private fun disableMapboxTelemetry() {
-        TelemetryUtils.setEventsCollectionState(false) { /* ignorujeme výsledok */ }
+        try {
+            TelemetryUtils.setEventsCollectionState(false) { /* ignorujeme výsledok */ }
+        } catch (_: Exception) {
+            // Restricted API — ignorujeme ak nie je dostupné
+        }
     }
 }
