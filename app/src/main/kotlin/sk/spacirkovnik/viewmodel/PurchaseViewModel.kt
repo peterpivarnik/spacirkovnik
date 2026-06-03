@@ -42,6 +42,7 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
     val state: State<PurchaseState> = _state
 
     private var purchasingGameId: String? = null
+    private var purchasingProductId: String? = null
 
     fun loadProductPrices(gameIds: List<String>) {
         viewModelScope.launch {
@@ -64,7 +65,7 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun purchaseGame(gameId: String, activity: Activity) {
+    fun purchaseGame(gameId: String, productId: String, activity: Activity) {
         viewModelScope.launch {
             _state.value = _state.value.copy(purchasingGameId = gameId, error = null)
 
@@ -80,7 +81,7 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
                 QueryProductDetailsParams.newBuilder()
                     .setProductList(listOf(
                         QueryProductDetailsParams.Product.newBuilder()
-                            .setProductId(gameId)
+                            .setProductId(productId)
                             .setProductType(BillingClient.ProductType.INAPP)
                             .build()
                     ))
@@ -107,6 +108,7 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
                 .build()
 
             purchasingGameId = gameId
+            purchasingProductId = productId
             val flowResult = billingClient.launchBillingFlow(activity, billingFlowParams)
             if (flowResult.responseCode != BillingClient.BillingResponseCode.OK) {
                 purchasingGameId = null
@@ -129,27 +131,30 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
             }
             BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> {
                 // Game was bought before but not activated — recover existing purchase
-                val gameId = purchasingGameId ?: return
+                val productId = purchasingProductId ?: return
                 viewModelScope.launch {
                     val result = billingClient.queryPurchasesAsync(
                         QueryPurchasesParams.newBuilder()
                             .setProductType(BillingClient.ProductType.INAPP)
                             .build()
                     )
-                    val purchase = result.purchasesList.find { it.products.contains(gameId) }
+                    val purchase = result.purchasesList.find { it.products.contains(productId) }
                     if (purchase != null) handlePurchase(purchase)
                     else {
                         purchasingGameId = null
+                        purchasingProductId = null
                         _state.value = _state.value.copy(purchasingGameId = null)
                     }
                 }
             }
             BillingClient.BillingResponseCode.USER_CANCELED -> {
                 purchasingGameId = null
+                purchasingProductId = null
                 _state.value = _state.value.copy(purchasingGameId = null)
             }
             else -> {
                 purchasingGameId = null
+                purchasingProductId = null
                 _state.value = _state.value.copy(
                     purchasingGameId = null,
                     error = "Nákup zlyhal (${billingResult.responseCode})."
@@ -187,6 +192,7 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
             }
 
             purchasingGameId = null
+            purchasingProductId = null
             _state.value = _state.value.copy(
                 purchasingGameId = null,
                 justPurchasedGameId = gameId

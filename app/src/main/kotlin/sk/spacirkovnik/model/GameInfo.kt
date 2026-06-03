@@ -25,5 +25,6 @@ data class GameInfo(
     val distanceKm: Double? = null,
     val status: GameStatus? = null,
     val startName: String? = null,
-    val endName: String? = null
+    val endName: String? = null,
+    val googlePlayProductId: String? = null
 )

@@ -38,6 +38,7 @@
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
     "colorHex": "2A1A3E",
     "status": "coming_soon",
+    "googlePlayProductId": "tajomstvo_janka_krala",
     "startName": "Sad Janka Kráľa",
     "endName": "Sad Janka Kráľa"
   },
@@ -52,6 +53,7 @@
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media&v=3",
     "colorHex": "1A3A5C",
     "status": "coming_soon",
+    "googlePlayProductId": "rybar_z_drazdiaka",
     "startName": "Draždiak",
     "endName": "Draždiak"
   },
@@ -66,6 +68,7 @@
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
     "colorHex": "1A3D1A",
     "status": "coming_soon",
+    "googlePlayProductId": "vila_z_pecnianskeho_lesa",
     "startName": "Viedenská cesta oproti Inchebe",
     "endName": "Cyklochodník ku Lanfranconi mostu"
   },
@@ -80,6 +83,7 @@
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
     "colorHex": "0D3040",
     "status": "coming_soon",
+    "googlePlayProductId": "vodnik_z_chorvatskeho_ramena",
     "startName": "Začiatok Chorvátskeho ramena pri Bosákovej",
     "endName": "Koniec Chorvátskeho ramena pri čerpacej stanici"
   }

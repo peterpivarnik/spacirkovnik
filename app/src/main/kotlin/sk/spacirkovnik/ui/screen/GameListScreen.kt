@@ -148,7 +148,7 @@ fun GameListScreen(
     LaunchedEffect(state.games) {
         val purchasableIds = state.games
             .filter { it.info.status == GameStatus.PURCHASABLE }
-            .map { it.info.id }
+            .map { it.info.googlePlayProductId ?: it.info.id }
         if (purchasableIds.isNotEmpty()) purchaseViewModel.loadProductPrices(purchasableIds)
     }
 
@@ -298,6 +298,7 @@ fun GameListScreen(
                     LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         items(state.games) { gameWithStatus ->
                             val gameId = gameWithStatus.info.id
+                            val productId = gameWithStatus.info.googlePlayProductId ?: gameId
                             val isExpanded = expandedGameId == gameId
                             val isActivated = authViewModel.isGameActivated(gameId)
                             val isTestGame = authViewModel.isTestGame(gameId)
@@ -310,7 +311,7 @@ fun GameListScreen(
                                 isTestGame = isTestGame,
                                 isExpanded = isExpanded,
                                 isPurchasing = purchaseState.purchasingGameId == gameId,
-                                price = purchaseState.productPrices[gameId],
+                                price = purchaseState.productPrices[productId],
                                 hasSavedProgress = hasSavedProgress,
                                 isCompleted = isCompleted,
                                 onToggle = {
@@ -329,7 +330,7 @@ fun GameListScreen(
                                             snackbarHostState.showSnackbar("Pre kúpu hry sa najprv prihláste.")
                                         }
                                     } else if (activity != null) {
-                                        purchaseViewModel.purchaseGame(gameId, activity)
+                                        purchaseViewModel.purchaseGame(gameId, productId, activity)
                                     }
                                 }
                             )
