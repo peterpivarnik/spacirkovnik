@@ -99,8 +99,11 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    @Suppress("DEPRECATION")
     fun signOut() {
         auth.signOut()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+        GoogleSignIn.getClient(getApplication(), gso).signOut()
         _state.value = AuthState()
     }
 
