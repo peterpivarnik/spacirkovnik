@@ -556,7 +556,9 @@ private fun GameCard(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                if (showPurchaseButton) {
+                if (isLocked && !isSignedIn) {
+                    // nezobrazuj nič pre neprihlásených
+                } else if (showPurchaseButton) {
                     Button(
                         onClick = onPurchase,
                         enabled = !isPurchasing,
