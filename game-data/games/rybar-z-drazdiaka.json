@@ -1,7 +1,7 @@
 {
   "id": "rybar-z-drazdiaka",
   "title": "Rybár z Draždiaka",
-  "version": 8,
+  "version": 9,
   "screens": [
     {
       "text": "Rybár z Draždiaka",
@@ -59,9 +59,10 @@
     },
     {
       "text": "Vedľa rybára sedia tri vnúčatá — Kubko, Zuzka a Jurko — a netrpezlivo čakajú, čo dedko uloví.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar_vnucata.jpeg?alt=media&v=3",
-      "screenId": 4
+      "screenId": 4,
+      "buttonText": "Ďalej"
     },
     {
       "text": "Zrazu sa udica prudko zachveje! Rybár ju zdvihne a z vody vyletí malá zlatá rybka. Celá žiari ako slnko a na hlave má korunku z drobných perál. Vnúčatá zašepkajú: „Dedko, to je zlatá rybka! Tá plní želania!“",
@@ -147,9 +148,10 @@
     },
     {
       "text": "Rybár zavolá rybku: „Druhé želanie — chceme ihriská pri jazere!“ Rybka sa zamračí, ale prikývne: „Nech sa stane. Ale zostáva ti už len jedno želanie.“ Pri brehu sa zrazu objaví obrovské ihrisko!",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fihrisko.jpeg?alt=media&v=3",
-      "screenId": 12
+      "screenId": 12,
+      "buttonText": "Ďalej"
     },
     {
       "text": "Ihrisko zabralo kus brehu a siaha takmer až k vodnej hladine. Vieš, ako vlastne toto jazero vzniklo — čo sa tu ťažilo, kým tu bola jama, ktorá sa naplnila vodou?",
@@ -317,9 +319,10 @@
     },
     {
       "text": "Draždiak vznikol z obrovskej jamy po ťažbe štrku — a teraz je to najväčšie jazero v Petržalke a domov zlatej rybky.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fjazero_ticho.jpeg?alt=media",
-      "screenId": 25
+      "screenId": 25,
+      "buttonText": "Ďalej"
     },
     {
       "text": "Rybár pokojne sedí pri brehu, kde všetko začalo. „Pozrite sa — krásne jazero, čistá voda, labute, kačky a trstina. To je ten najväčší poklad. Netreba mať vždy viac a viac.“ Deti sa upokojili a začali hádzať kamienky do vody.",

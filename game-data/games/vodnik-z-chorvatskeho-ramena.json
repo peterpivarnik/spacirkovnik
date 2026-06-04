@@ -1,7 +1,7 @@
 {
   "id": "vodnik-z-chorvatskeho-ramena",
   "title": "Vodník z Chorvátského ramena",
-  "version": 4,
+  "version": 5,
   "screens": [
     {
       "text": "Vodník z Chorvátského ramena",
@@ -27,9 +27,10 @@
     },
     {
       "text": "Vitaj pri Chorvátskom ramene! Pozri sa na tú pokojnú vodu. Toto rameno je odnožou Dunaja a preteká cez celú Petržalku. Ale dnes je tu niečo divné — voda je zakalená a z hĺbky stúpajú veľké bubliny.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Frameno.jpeg?alt=media",
-      "screenId": 3
+      "screenId": 3,
+      "buttonText": "Ďalej"
     },
     {
       "text": "Zrazu sa z vody vynorí zelená hlava s veľkými očami a dlhou bradou z rias! Je to vodník! Vyzerá ustarane.",
@@ -90,9 +91,10 @@
     },
     {
       "text": "Pri brehu sa z vody vynorila krásna postava so zelenými vlasmi a perleťovými očami. Je to rusalka! Usmieva sa, ale vyzerá trochu smutne.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Frusalka.jpeg?alt=media",
-      "screenId": 10
+      "screenId": 10,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Ahoj, {mladý priateľ|mladá priateľka}. Viem, prečo si tu. Mrzí ma, že sme sa pohádali. Dám ti svoj kúsok perly, ale najprv mi odpovedz: Ktorý čas dňa je pre rusalku najnebezpečnejší?“",
@@ -134,9 +136,10 @@
     },
     {
       "text": "Pri brehu pri detskom ihrisku sedí na kameni veľký zelený žabiak. Keď ťa zbadá, radostne zakváká: „Kváááá! Návšteva!“",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fzabiak.jpeg?alt=media",
-      "screenId": 14
+      "screenId": 14,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Ja som Kvako a mám rád hádanky! Dám ti svoj kúsok perly, ale najprv mi povedz: Čím sa živia žaby?“",
@@ -178,9 +181,10 @@
     },
     {
       "text": "Medzi leknami sa objaví maličká postavička sediaca na leknovom liste — je to leknička, kúzelná princezná vodných kvetov! Má šaty z lupienkov lekna a korunku z kvapiek rosy.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fleknicka.jpeg?alt=media",
-      "screenId": 18
+      "screenId": 18,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Vitaj v mojom kráľovstve! Ja som leknička a starám sa o všetky lekná v ramene. Vieš, prečo sú lekná také užitočné pre vodu?“",
@@ -222,9 +226,10 @@
     },
     {
       "text": "Voda sa zrazu zvírila a z hĺbky sa vynorila obrovská hlava s dlhými fúzmi. Je to sumec! Najväčšia ryba v celom ramene.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fsumec.jpeg?alt=media",
-      "screenId": 22
+      "screenId": 22,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Hmmm, malý človiečik. Ja som sumec Fúzan, pán týchto hlbín. Tieto moje fúzy toho videli už mnoho — poznám každý kút tohto ramena. Dám ti kúsok perly, ak mi povieš: Na čo slúžia sumcovi jeho dlhé fúzy?”",
@@ -266,9 +271,10 @@
     },
     {
       "text": "Nad hladinou tancujú malé zelenkavé svetielka! Jedno z nich sa zastavilo priamo pred tebou — je to bludička! Malinkatá žiariaca bytosť, čo vyzerá ako plameň sviečky.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fbludicka.jpeg?alt=media",
-      "screenId": 26
+      "screenId": 26,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Chi chi chí! Chytíš ma, nechytíš ma! Dám ti kúsok perly, ale najprv hádaj: Čo podľa povestí robí bludička pocestným?“",
@@ -310,9 +316,10 @@
     },
     {
       "text": "Pri brehu sa líne otáča veľká ryba so zlatistými šupinami. Je to kapor! Vyzerá kráľovsky — veď kapor je kráľ rybníkov.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkapor.jpeg?alt=media",
-      "screenId": 30
+      "screenId": 30,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Vitaj, {mladý priateľ|mladá priateľka}. Ja som kapor Zlatko. Dám ti kúsok perly, ak mi povieš: Čím sa živí kapor na dne rieky?“",
@@ -354,9 +361,10 @@
     },
     {
       "text": "Medzi trstinami sa ozvalo jemné šušťanie a objavila sa drobná postavička s vlasmi z trávy a očami ako kvapky vody. Je to divožienka — strážkyňa brehov!",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fdivozienka.jpeg?alt=media",
-      "screenId": 34
+      "screenId": 34,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Pssst! Ja som divožienka Trstinka a strážim brehy tohto ramena. Dám ti kúsok perly, ale najprv mi povedz: Prečo sú trstiny pri brehu také dôležité?“",
@@ -398,9 +406,10 @@
     },
     {
       "text": "Na kameni pri brehu leží stará korytnačka a vyhrieva si pancier na slnku. Keď ťa zbadá, pomaly otočí hlavu a múdro sa na teba pozrie.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fkorytnacka.jpeg?alt=media",
-      "screenId": 38
+      "screenId": 38,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Zdravím ťa, {mladý priateľ|mladá priateľka}. Ja som korytnačka Korka a som tu najpomalšia, ale aj najtrpezlivejšia. Dám ti posledný kúsok perly, ak mi povieš: Koľko rokov sa môže dožiť korytnačka?“",
@@ -443,9 +452,10 @@
     },
     {
       "text": "Chrčo sa vynoril z vody a keď uvidel všetkých osem kúskov perly, rozžiaril sa: „Máš ich! Teraz musíme povedať kúzelné slová, aby sa perla spojila. Povedz so mnou:",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
-      "screenId": 42
+      "screenId": 42,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Voda spája, voda žije, \nperla mocou svojou bije. \nČo sa kúpe v jase vody, \nkrásou znovu nech sa zrodí.“ \n\nKúsky perly sa rozžiarili, zdvihli sa do vzduchu a spojili sa do jednej dokonalej žiariacej perly! Z vody vyšľahol zelenkavý lúč svetla a voda sa začala okamžite čistiť.",

@@ -38,9 +38,12 @@ Všetky typy majú vždy pole `imageUrl` (môže byť `""`).
 3. **Úvod do príbehu** — 2–4 obrazovky `BROWSE` / `CONTINUE`, predstavenie postavy/sveta, zápletka
 4. **Hlavná slučka** — striedanie:
    - `NAVIGATION` → presun na ďalšie miesto
-   - `BROWSE` → príbeh, kontext, zaujímavosť o mieste
+   - `CONTINUE` → príbeh, kontext, zaujímavosť o mieste (**obrazovka hneď po navigácii musí byť `CONTINUE`**, nie `BROWSE` — viď pravidlo nižšie)
    - `QUESTION` → otázka viažuca sa na miesto alebo príbeh
    - `BROWSE` → reakcia na správnu odpoveď, posun deja
+
+> ⚠️ **Pravidlo: obrazovka hneď po `NAVIGATION` musí byť `CONTINUE`, nikdy nie `BROWSE`.**
+> `BROWSE` zobrazuje tlačidlo „Späť", ktorým by sa hráč vrátil naspäť na navigačnú mapu (ktorú už prešiel) — to je mätúce. `CONTINUE` má len jedno tlačidlo „Ďalej" (bez „Späť"), takže hráč po príchode na miesto plynule pokračuje v príbehu. Ostatné `BROWSE` obrazovky v slučke (napr. pochvala po otázke) môžu zostať `BROWSE`.
 5. **Záver** — rozuzlenie príbehu, poďakovanie hráčovi
 6. **Outro od Špacírkovníka** — typ `CONTINUE`, text o tom, že šípka zhasla, dobrodružstvo splnené, ostatné šípky ešte čakajú
 7. **Posledná obrazovka** — typ `CONTINUE`, `fontSize: 22`, `buttonText: "Späť na zoznam hier"`
@@ -149,3 +152,4 @@ Slovenské úvodzovky v JSON sú najčastejší zdroj chýb. **Povinný postup:*
 - [ ] Otázky sú overiteľné (hráč ich môže zodpovedať na mieste alebo zo znalostí)
 - [ ] Príbeh má jasný začiatok, stred a koniec
 - [ ] Žiadne dva NAVIGATION po sebe bez BROWSE/QUESTION medzi nimi
+- [ ] Obrazovka hneď po každom `NAVIGATION` je `CONTINUE` (nie `BROWSE`) — aby sa hráč nemohol vrátiť na mapu tlačidlom „Späť"

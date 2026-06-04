@@ -1,7 +1,7 @@
 {
   "id": "vila-z-pecnianskeho-lesa",
   "title": "Víla z Pečnianskeho lesa",
-  "version": 7,
+  "version": 8,
   "screens": [
     {
       "text": "Víla z Pečnianskeho lesa",
@@ -27,9 +27,10 @@
     },
     {
       "text": "Vitaj v Pečnianskom lese! Pozri sa okolo seba — vysoké stromy, šumenie lístía, spev vtákov. Tento les je súčasťou chráneného územia a je domovom mnohých zvierat a rastlín.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fles.jpeg?alt=media",
-      "screenId": 3
+      "screenId": 3,
+      "buttonText": "Ďalej"
     },
     {
       "text": "Zrazu sa pred tebou objavil malinký trblietavý záblesk! Je to malá víla, so zelenými krídlami a venčekom z dubového lístia na hlave.",
@@ -244,7 +245,7 @@
       "text": "„Šieste semienko — posledné ihličnaté! Cítim ho tamto. Ešte trochu a máme všetky ihličnaté! Poďme!“",
       "type": "NAVIGATION",
       "targetLatitude": 48.135821,
-      "targetLongitude": 17.082530,
+      "targetLongitude": 17.08253,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media",
       "screenId": 22
     },
@@ -403,9 +404,10 @@
     },
     {
       "text": "Víla Lesnička vytiahla kúzelné vrečúško a vysypala všetkých deväť žiariacich semienok na dlaň. Zdvihla ich vysoko nad hlavu a zašepkala: „Teraz spoločne — fúkni do nich čo najsilnejšie!“",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fsemienka_vietor.jpeg?alt=media",
-      "screenId": 35
+      "screenId": 35,
+      "buttonText": "Ďalej"
     },
     {
       "text": "Fúúúú! Semienka sa rozleteli do vetra ako trblietavý zlatozelený prach. Vietor ich zachytil a odniesol nad koruny stromov — nad celý Pečniansky les! Všade, kam dopadli, sa stromy a kríky jemne zachveli. Kúzelný prach sa usadil na každom liste, každej šiške, každej bobuľke — a ochránil všetky semienka v celom lese pred každou kliatbou.",

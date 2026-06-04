@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 23,
+  "version": 24,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -24,8 +24,9 @@
     },
     {
       "text": "V petržalských lesoch pri Dunaji žije veselý lesník Gejza Dražďák. Má tajný poklad – kúzelnú palicu, vďaka ktorej rozumie reči zvierat! Každé ráno sa jej dotkne, aby vedel, či niektoré zo zvieratiek nepotrebujú jeho pomoc.",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media"
+      "type": "CONTINUE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media",
+      "buttonText": "Ďalej"
     },
     {
       "text": "Dnes sa však stalo niečo hrozné – palica zmizla! Gejza je zúfalý, no máme nádej. Kúzelná palica má zvláštnu moc – každé zvieratko, okolo ktorého palica prejde, získa na chvíľu schopnosť rozprávať sa s ľuďmi. A práve preto nám zvieratká v lese môžu povedať, kadiaľ palica šla!",
@@ -121,8 +122,9 @@
     },
     {
       "text": "„Ahoj, {malý detektív|malá detektívka}! Ja som korytnačka Terka. Viem, že hľadáš lesnícku palicu. Rada ti pomôžem, ale najprv mi dokáž, že sa vyznáš v prírode!”",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fkorytnacka.jpeg?alt=media"
+      "type": "CONTINUE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fkorytnacka.jpeg?alt=media",
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Žijem tu už veľmi dlho a pamätám si časy, keď tu ešte neboli žiadne cesty ani domy. My korytnačky sa totiž dožívame veľmi vysokého veku — niektoré z nás sa dožijú aj 150 rokov! Ale dokáž mi, že sa vyznáš v prírode! Čo chráni korytnačku pred nepriateľmi?”",
@@ -161,8 +163,9 @@
     },
     {
       "text": "„Hm? Čo tu chceš? Nevidíš, že som zaneprázdnený? Staviam tu hrádzu! Aha, ty hľadáš tú palicu... No dobre, ale prečo by som ti mal pomáhať len tak?”",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fbobor.jpeg?alt=media"
+      "type": "CONTINUE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fbobor.jpeg?alt=media",
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Vidíš tú hrádzu na vode? Tú som postavil celú sám! Staval som ju tri týždne a je z nej najkrajšia hrádza v celom okolí. Ale dosť bolo reči - dokáž mi, že nás bobry poznáš! Vieš, čo najradšej jeme?”",
@@ -201,8 +204,9 @@
     },
     {
       "text": "„Auuuuuuuu! Kto sa opovážil vstúpiť na moje územie?! Aha, to si ty - {ten odvážlivec|tá odvážlivkyňa}, čo hľadá lesnícku palicu! O tebe už vie celý les! Videl som toho záhadného chlapíka s palicou. Kým ti pomôžem, musíš mi odpovedať na jednu otázku!”",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fvlk.jpeg?alt=media"
+      "type": "CONTINUE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fvlk.jpeg?alt=media",
+      "buttonText": "Ďalej"
     },
     {
       "text": "„V ktorej rozprávke NIE je vlk v hlavnej úlohe?”",
@@ -276,8 +280,9 @@
     },
     {
       "text": "Pri brehu jazera plávala nádherná biela labuť menom Bianka. Jej perie sa trblietalo v slnečných lúčoch a vyzerala ako kráľovná celého Draždiaka. „Ahoj, Bianka! Nevidela si tu náhodou niekoho s lesníkovou palicou?”",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flabut.jpeg?alt=media"
+      "type": "CONTINUE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flabut.jpeg?alt=media",
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Ale áno, videla! Prešiel tu niekto a mal so sebou čosi dlhé a drevené. Pomôžem ti zistiť, kadiaľ šiel, ale najprv mi musíš odpovedať na jednu otázku.”",
@@ -321,8 +326,9 @@
     },
     {
       "text": "„Počkaj na Kvida... Voda je tu pokojná a krásne sa v nej odrážajú stromy. Ale dokedy tu budem čakať? Hádam sa ukáže čoskoro! Trpezlivosť je vraj cnosť, ale ja som naozaj {zvedavý|zvedavá}, čo mi kapor povie!”",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fkapor.jpeg?alt=media"
+      "type": "CONTINUE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fkapor.jpeg?alt=media",
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Žblnk! Hmm, niekto ma tu volá? Aha, ty si {ten slávny hľadač|tá slávna hľadačka} palice! Ja som kapor Kvido. Pomôžem ti, ale najskôr mi odpovedz!”",
@@ -366,8 +372,9 @@
     },
     {
       "text": "„Kváááá! Kvááá! Vidím ťa, {kamarát|kamarátka}! Ja som žabka Zelinka! Už som o tebe počula! Videla som niekoho v kapucni bežať tadiaľto! Viem, kadiaľ išiel, ale najprv musíš uhádnuť, ako sa volá táto časť Dunaja!”",
-      "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fzaba.jpeg?alt=media"
+      "type": "CONTINUE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fzaba.jpeg?alt=media",
+      "buttonText": "Ďalej"
     },
     {
       "text": "Je to:",

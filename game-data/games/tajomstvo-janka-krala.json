@@ -1,7 +1,7 @@
 {
   "id": "tajomstvo-janka-krala",
   "title": "Tajomstvo Janka Kráľa",
-  "version": 7,
+  "version": 8,
   "screens": [
     {
       "text": "Tajomstvo Janka Kráľa",
@@ -27,9 +27,10 @@
     },
     {
       "text": "Vitaj v Sade Janka Kráľa! Tento krásny park bol založený už v rokoch 1774 až 1776, čo z neho robí jeden z najstarších mestských parkov v celej strednej Európe. Hovorí sa, že duch básnika Janka Kráľa tu blúdi dodnes - veď park nesie práve jeho meno.",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_stary_strom.jpeg?alt=media",
-      "screenId": 2
+      "screenId": 2,
+      "buttonText": "Ďalej"
     },
     {
       "text": "Pozor! Niečo tu dnes nie je v poriadku. Cítiš ten zvláštny vánok? Dnes v noci prišla strašná búrka - a zdá sa, že rozfúkala niečo dôležité.",
@@ -66,9 +67,10 @@
     },
     {
       "text": "„Tu je ten vysoký strom! Pozri, ako má korunu. Keď som bol živý, sedával som pod takýmito stromami a písal som básne. Vedel si, že som sa narodil ďaleko odtiaľto, v krásnom meste pod Tatrami?”",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_vysoky_strom.jpeg?alt=media",
-      "screenId": 8
+      "screenId": 8,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Vieš, kde som sa narodil?”",
@@ -110,9 +112,10 @@
     },
     {
       "text": "„V Bratislave som študoval na slávnej škole, kde sa stretávali najlepší mladí Slováci. Bolo to miesto, kde sa rodili veľké myšlienky o budúcnosti nášho národa. Tu som stretol svojho veľkého učiteľa Ľudovíta Štúra!”",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
-      "screenId": 12
+      "screenId": 12,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Vieš, na ktorej bratislavskej škole som študoval?”",
@@ -192,9 +195,10 @@
     },
     {
       "text": "„My Štúrovci sme urobili niečo, čo zmenilo Slovensko navždy. Stretli sme sa na kopci Devín a prisahali sme, že Slováci budú mať vlastný jazyk. A podarilo sa nám to! Uzákonili sme slovenský spisovný jazyk.”",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media",
-      "screenId": 19
+      "screenId": 19,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Vieš, v ktorom roku sme uzákonili slovenský spisovný jazyk?”",
@@ -312,9 +316,10 @@
     },
     {
       "text": "„Vieš, ja som bol známy tým, že som písal básne plné emócií. Moja najslávnejšia báseň je príbeh o odvážnom mladíkovi, ktorý skočí do rieky, aby zachránil zakliatu pannu. Je to vlastne príbeh o odvahe - aj keď ostatní hovoria, že si blázon, musíš nasledovať svoje srdce!",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fzakliata_panna.jpeg?alt=media",
-      "screenId": 29
+      "screenId": 29,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Do ktorej rieky skočil hrdina mojej najslávnejšej básne?",
@@ -400,9 +405,10 @@
     },
     {
       "text": "„Pozri sa okolo seba - tento park je plný rôznych druhov stromov. Duby, lipy, javory, platany... Ja som prírodu miloval nadovšetko. V mojich básňach sa často objavuje príroda ako symbol slobody a krásy Slovenska.”",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Flipa.jpeg?alt=media",
-      "screenId": 37
+      "screenId": 37,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Jeden strom je symbolom Slovenska a objavuje sa aj na slovenských minciach. Ktorý je to?”",
@@ -444,9 +450,10 @@
     },
     {
       "text": "„Tu stojím - v kameni vytesaný, navždy hľadiac na park, ktorý nesie moje meno. Vieš, ja som zomrel pomerne mladý, mal som len 54 rokov. Celý život som bojoval za slobodu a spravodlivosť.”",
-      "type": "BROWSE",
+      "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fsocha.jpeg?alt=media",
-      "screenId": 41
+      "screenId": 41,
+      "buttonText": "Ďalej"
     },
     {
       "text": "„Posledná otázka! Pozri sa na sochu a podstavec. Čo má moja socha v ľavej ruke?”",
