@@ -75,6 +75,7 @@ import coil3.compose.AsyncImage
 import kotlinx.coroutines.launch
 import sk.spacirkovnik.R
 import sk.spacirkovnik.data.GameProgressManager
+import sk.spacirkovnik.ui.component.AuthBottomSheet
 import sk.spacirkovnik.model.GameStatus
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.AmberLight
@@ -106,6 +107,7 @@ fun GameListScreen(
     val activity = LocalActivity.current
     val context = LocalContext.current
     var showSignOutDialog by remember { mutableStateOf(false) }
+    var showAuthSheet by remember { mutableStateOf(false) }
     var expandedGameId by remember { mutableStateOf<String?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -116,9 +118,10 @@ fun GameListScreen(
         authViewModel.handleSignInResult(result.data)
     }
 
-    LaunchedEffect(authState.error) {
-        val error = authState.error
-        if (error != null) {
+    LaunchedEffect(authState.error, showAuthSheet) {
+        // Keď je prihlasovací panel otvorený, chybu zobrazí samotný panel.
+        // Snackbar použijeme len pre chyby mimo panela (napr. Google flow zvonku).
+        if (authState.error != null && !showAuthSheet) {
             scope.launch { snackbarHostState.showSnackbar("Prihlásenie sa nepodarilo.") }
             authViewModel.clearError()
         }
@@ -139,6 +142,7 @@ fun GameListScreen(
 
     LaunchedEffect(authState.isSignedIn) {
         gameListViewModel.refresh()
+        if (authState.isSignedIn) showAuthSheet = false
     }
 
     LaunchedEffect(authState.testGames) {
@@ -220,7 +224,10 @@ fun GameListScreen(
                             } else {
                                 IconButton(onClick = {
                                     if (authState.isSignedIn) showSignOutDialog = true
-                                    else signInLauncher.launch(authViewModel.getSignInIntent(context))
+                                    else {
+                                        authViewModel.clearError()
+                                        showAuthSheet = true
+                                    }
                                 }) {
                                     Icon(
                                         imageVector = Icons.Default.AccountCircle,
@@ -268,6 +275,28 @@ fun GameListScreen(
                                 color = TextOnBeigeSecondary
                             )
                         }
+                    }
+
+                    if (showAuthSheet) {
+                        AuthBottomSheet(
+                            state = authState,
+                            onDismiss = {
+                                showAuthSheet = false
+                                authViewModel.clearError()
+                            },
+                            onEmailSignIn = { email, password ->
+                                authViewModel.signInWithEmail(email, password)
+                            },
+                            onEmailRegister = { email, password ->
+                                authViewModel.registerWithEmail(email, password)
+                            },
+                            onPasswordReset = { email ->
+                                authViewModel.sendPasswordReset(email)
+                            },
+                            onGoogleSignIn = {
+                                signInLauncher.launch(authViewModel.getSignInIntent(context))
+                            }
+                        )
                     }
 
                     if (showSignOutDialog) {
@@ -677,7 +706,7 @@ private fun GameCard(
 }
 
 @Composable
-private fun AutoSizeText(
+internal fun AutoSizeText(
     text: String,
     color: Color = Color.Unspecified,
     fontWeight: FontWeight? = null,

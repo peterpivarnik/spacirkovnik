@@ -18,7 +18,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.launch
@@ -34,12 +41,17 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     private val _state = mutableStateOf(AuthState())
     val state: State<AuthState> = _state
 
+    // Account linking: keď email koliduje s iným providerom, podržíme credential
+    // a prepojíme ho po prihlásení existujúcim spôsobom (jeden UID = jedny aktivácie).
+    private var pendingEmailCredential: AuthCredential? = null
+    private var pendingGoogleCredential: AuthCredential? = null
+
     init {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             _state.value = AuthState(
                 isSignedIn = true,
-                userName = currentUser.displayName,
+                userName = currentUser.displayName ?: currentUser.email?.substringBefore("@"),
                 userEmail = currentUser.email,
                 loading = true
             )
@@ -47,6 +59,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             loadTestGames()
         }
     }
+
+    // --- Google Sign-In ---
 
     @Suppress("DEPRECATION")
     fun getSignInIntent(context: Context): Intent {
@@ -61,27 +75,31 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     fun handleSignInResult(data: Intent?) {
         viewModelScope.launch {
             try {
-                _state.value = _state.value.copy(loading = true, error = null)
+                _state.value = _state.value.copy(loading = true, error = null, info = null)
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                 val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
                 val idToken = account.idToken
                     ?: throw Exception("ID token je null")
 
-                Log.d("AuthVM", "Mám idToken, prihlasujem do Firebase...")
                 val credential = GoogleAuthProvider.getCredential(idToken, null)
-                val authResult = withTimeout(15_000) {
-                    auth.signInWithCredential(credential).await()
+                try {
+                    val authResult = withTimeout(15_000) {
+                        auth.signInWithCredential(credential).await()
+                    }
+                    // Direction A: po Google prihlásení prepoj čakajúce email/heslo
+                    pendingEmailCredential?.let { cred ->
+                        authResult.user?.linkWithCredential(cred)?.await()
+                        pendingEmailCredential = null
+                    }
+                    finishSignIn(authResult.user)
+                } catch (_: FirebaseAuthUserCollisionException) {
+                    // Direction B: email už existuje s heslom — podrž Google a vyzvi na heslo
+                    pendingGoogleCredential = credential
+                    _state.value = _state.value.copy(
+                        loading = false,
+                        error = "Tento email už používaš s heslom. Prihlás sa emailom a heslom — Google sa potom prepojí."
+                    )
                 }
-                val user = authResult.user
-                Log.d("AuthVM", "Firebase OK: ${user?.email}")
-
-                _state.value = AuthState(
-                    isSignedIn = true,
-                    userName = user?.displayName,
-                    userEmail = user?.email
-                )
-                loadActivations()
-                loadTestGames()
             } catch (e: ApiException) {
                 Log.e("AuthVM", "GoogleSignIn ApiException code=${e.statusCode}: ${e.message}")
                 _state.value = _state.value.copy(
@@ -99,16 +117,106 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    // --- Email / heslo ---
+
+    fun signInWithEmail(email: String, password: String) {
+        if (!validate(email, password)) return
+        viewModelScope.launch {
+            try {
+                _state.value = _state.value.copy(loading = true, error = null, info = null)
+                val result = auth.signInWithEmailAndPassword(email.trim(), password).await()
+                // Direction B: po prihlásení heslom prepoj čakajúci Google credential
+                pendingGoogleCredential?.let { cred ->
+                    result.user?.linkWithCredential(cred)?.await()
+                    pendingGoogleCredential = null
+                }
+                finishSignIn(result.user)
+            } catch (e: Exception) {
+                _state.value = _state.value.copy(loading = false, error = mapError(e))
+            }
+        }
+    }
+
+    fun registerWithEmail(email: String, password: String) {
+        if (!validate(email, password)) return
+        viewModelScope.launch {
+            try {
+                _state.value = _state.value.copy(loading = true, error = null, info = null)
+                val result = auth.createUserWithEmailAndPassword(email.trim(), password).await()
+                result.user?.sendEmailVerification()
+                finishSignIn(result.user)
+            } catch (_: FirebaseAuthUserCollisionException) {
+                // Direction A: email už existuje cez Google — podrž heslo a vyzvi na Google
+                pendingEmailCredential = EmailAuthProvider.getCredential(email.trim(), password)
+                _state.value = _state.value.copy(
+                    loading = false,
+                    error = "Tento email už používaš cez Google. Prihlás sa cez Google a heslo sa prepojí."
+                )
+            } catch (e: Exception) {
+                _state.value = _state.value.copy(loading = false, error = mapError(e))
+            }
+        }
+    }
+
+    fun sendPasswordReset(email: String) {
+        Log.d("AuthVM", "sendPasswordReset spustený, email='${email}'")
+        if (email.isBlank()) {
+            _state.value = _state.value.copy(error = "Zadaj email pre obnovu hesla.")
+            return
+        }
+        viewModelScope.launch {
+            try {
+                auth.sendPasswordResetEmail(email.trim()).await()
+                Log.d("AuthVM", "Reset email odoslaný OK")
+                _state.value = _state.value.copy(
+                    error = null,
+                    info = "Odoslali sme ti email na obnovu hesla. Skontroluj aj spam."
+                )
+            } catch (e: Exception) {
+                Log.e("AuthVM", "Reset zlyhal: ${e::class.simpleName}: ${e.message}")
+                _state.value = _state.value.copy(error = mapError(e))
+            }
+        }
+    }
+
+    private fun validate(email: String, password: String): Boolean {
+        if (email.isBlank() || password.isBlank()) {
+            _state.value = _state.value.copy(error = "Vyplň email aj heslo.")
+            return false
+        }
+        return true
+    }
+
+    private fun finishSignIn(user: FirebaseUser?) {
+        _state.value = AuthState(
+            isSignedIn = true,
+            userName = user?.displayName ?: user?.email?.substringBefore("@"),
+            userEmail = user?.email
+        )
+        loadActivations()
+        loadTestGames()
+    }
+
+    private fun mapError(e: Exception): String = when (e) {
+        is FirebaseAuthWeakPasswordException -> "Heslo musí mať aspoň 6 znakov."
+        is FirebaseAuthInvalidUserException -> "Účet s týmto emailom neexistuje. Zaregistruj sa nižšie."
+        is FirebaseAuthInvalidCredentialsException -> "Nesprávny email alebo heslo. Ak ešte nemáš účet, zaregistruj sa nižšie."
+        is FirebaseAuthUserCollisionException -> "Tento email už je zaregistrovaný."
+        else -> "Prihlásenie zlyhalo: ${e.message}"
+    }
+
     @Suppress("DEPRECATION")
     fun signOut() {
         auth.signOut()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
         GoogleSignIn.getClient(getApplication(), gso).signOut()
+        pendingEmailCredential = null
+        pendingGoogleCredential = null
         _state.value = AuthState()
     }
 
     fun clearError() {
-        _state.value = _state.value.copy(error = null)
+        _state.value = _state.value.copy(error = null, info = null)
     }
 
     private fun loadActivations() {
@@ -182,6 +290,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         val activatedGames: Set<String> = emptySet(),
         val testGames: Set<String> = emptySet(),
         val loading: Boolean = false,
-        val error: String? = null
+        val error: String? = null,
+        val info: String? = null
     )
 }
