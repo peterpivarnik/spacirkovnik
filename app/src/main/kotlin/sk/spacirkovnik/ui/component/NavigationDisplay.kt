@@ -65,6 +65,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.createBitmap
 import coil3.compose.AsyncImage
+import sk.spacirkovnik.R
+import sk.spacirkovnik.data.DirectionsRetrofit
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
@@ -94,6 +96,7 @@ import sk.spacirkovnik.ui.theme.TextOnDark
 import sk.spacirkovnik.viewmodel.LocationViewModel
 import kotlin.math.atan2
 import kotlin.math.cos
+import kotlin.math.log2
 import kotlin.math.sin
 
 @Composable
@@ -227,6 +230,50 @@ fun NavigationDisplay(
 
     val arrowRotation = bearingToTarget - deviceAzimuth
 
+    // Walking route along footpaths (Mapbox Directions). Null until fetched, or when
+    // routing fails / no path exists — in which case we fall back to the straight line.
+    var routePoints by remember { mutableStateOf<List<Point>?>(null) }
+    var routeDistanceMeters by remember { mutableStateOf<Int?>(null) }
+    var lastRouteFetchPoint by remember { mutableStateOf<Point?>(null) }
+    val mapboxToken = remember { context.getString(R.string.mapbox_access_token) }
+
+    // Re-route only when the user has moved a meaningful distance (avoids hammering the
+    // Directions API on every 1 s GPS tick).
+    LaunchedEffect(userPoint) {
+        val up = userPoint ?: return@LaunchedEffect
+        val last = lastRouteFetchPoint
+        val movedEnough = last == null || run {
+            val r = FloatArray(1)
+            Location.distanceBetween(last.latitude(), last.longitude(), up.latitude(), up.longitude(), r)
+            r[0] > 15f
+        }
+        if (!movedEnough) return@LaunchedEffect
+        lastRouteFetchPoint = up
+        try {
+            val response = DirectionsRetrofit.service.getWalkingRoute(
+                coords = "${up.longitude()},${up.latitude()};$targetLng,$targetLat",
+                accessToken = mapboxToken,
+            )
+            val route = response.routes.firstOrNull()
+            val coords = route?.geometry?.coordinates
+            if (route != null && coords != null && coords.size >= 2) {
+                routePoints = coords.map { Point.fromLngLat(it[0], it[1]) }
+                routeDistanceMeters = route.distance.toInt()
+            } else {
+                routePoints = null
+                routeDistanceMeters = null
+            }
+        } catch (_: Exception) {
+            // Offline or routing error — fall back to the straight line.
+            routePoints = null
+            routeDistanceMeters = null
+        }
+    }
+
+    // Distance shown to the player: real walking-route length when available, otherwise
+    // the straight-line distance.
+    val displayDistanceMeters = routeDistanceMeters ?: distanceMeters
+
     // Update map camera when user location changes
     LaunchedEffect(userPoint) {
         val center: Point
@@ -237,13 +284,11 @@ fun NavigationDisplay(
                 (userPoint.longitude() + targetLng) / 2,
                 (userPoint.latitude() + targetLat) / 2
             )
+            // Map is rotated so the user→target line runs vertically through the centre.
+            // Pick the zoom that makes that line fill most of the map height, so the
+            // closer we get the more it zooms in (line spans nearly bottom to top edge).
             val dist = distanceMeters ?: 300
-            zoom = when {
-                dist > 1000 -> 12.0
-                dist > 500  -> 13.0
-                dist > 200  -> 14.0
-                else        -> 15.0
-            }
+            zoom = zoomForLineLength(dist, center.latitude())
             bearing = mapBearing(userPoint, targetPoint)
         } else {
             center = targetPoint
@@ -336,6 +381,7 @@ fun NavigationDisplay(
                 mapViewportState = mapViewportState,
                 targetPoint = targetPoint,
                 userPoint = userPoint,
+                routePoints = routePoints,
                 targetPinIcon = targetPinIcon,
                 userPinIcon = userPinIcon,
                 arrowIcon = arrowIcon
@@ -386,22 +432,17 @@ fun NavigationDisplay(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        if (distanceMeters != null) {
-            val distanceText = if (distanceMeters >= 1000) {
-                String.format(LocalLocale.current.platformLocale, "%.1f km", distanceMeters / 1000f)
+        if (displayDistanceMeters != null) {
+            val distanceText = if (displayDistanceMeters >= 1000) {
+                String.format(LocalLocale.current.platformLocale, "%.1f km", displayDistanceMeters / 1000f)
             } else {
-                "$distanceMeters m"
+                "$displayDistanceMeters m"
             }
             Text(
                 text = distanceText,
                 fontSize = 36.sp,
                 fontWeight = FontWeight.Bold,
                 color = TextOnDark
-            )
-            Text(
-                text = "vzdušnou čiarou",
-                fontSize = 13.sp,
-                color = TextOnDark.copy(alpha = 0.55f)
             )
         }
         else {
@@ -492,6 +533,7 @@ private fun NavigationMap(
     mapViewportState: MapViewportState,
     targetPoint: Point,
     userPoint: Point?,
+    routePoints: List<Point>?,
     targetPinIcon: IconImage,
     userPinIcon: IconImage,
     arrowIcon: IconImage,
@@ -499,7 +541,7 @@ private fun NavigationMap(
     MapboxMap(
         modifier = Modifier
             .fillMaxWidth()
-            .height(280.dp)
+            .height(MAP_HEIGHT_DP.dp)
             .clip(RoundedCornerShape(12.dp)),
         mapViewportState = mapViewportState,
         style = { MapStyle(style = Style.OUTDOORS) }
@@ -513,12 +555,17 @@ private fun NavigationMap(
                 iconImage = userPinIcon
                 iconAnchor = IconAnchor.CENTER
             }
-            PolylineAnnotation(points = listOf(up, targetPoint)) {
+            // Walking route along footpaths when available, else a straight line.
+            val linePoints = routePoints?.takeIf { it.size >= 2 } ?: listOf(up, targetPoint)
+            PolylineAnnotation(points = linePoints) {
                 lineColor = Color(0xFF1565C0)
                 lineWidth = 3.0
             }
-            val midpoint = mapMidpoint(up, targetPoint)
-            PointAnnotation(point = midpoint) {
+            // Place the direction arrow on the drawn line: along the route when we have
+            // one, otherwise at the straight-line midpoint.
+            val arrowPoint = routePoints?.takeIf { it.size >= 2 }?.let { routeMidpoint(it) }
+                ?: mapMidpoint(up, targetPoint)
+            PointAnnotation(point = arrowPoint) {
                 iconImage = arrowIcon
                 iconRotate = 0.0
             }
@@ -597,6 +644,28 @@ private fun createArrowBitmap(colorInt: Int): Bitmap {
     return bitmap
 }
 
+/** Height of the navigation map, shared by the camera math and the composable. */
+private const val MAP_HEIGHT_DP = 280.0
+
+/** Fraction of the map height the user→target line should span (leaves a margin for the pins). */
+private const val LINE_FILL_FRACTION = 0.82
+
+private const val EARTH_CIRCUMFERENCE_M = 40075016.686
+private const val MAPBOX_TILE_SIZE = 512.0
+
+/**
+ * Zoom level at which a line of [distanceMeters], drawn vertically through the map centre,
+ * fills [LINE_FILL_FRACTION] of the [MAP_HEIGHT_DP]-tall map at the given [latitude].
+ * Clamped so very close targets don't over-zoom and far ones don't zoom out too much.
+ */
+private fun zoomForLineLength(distanceMeters: Int, latitude: Double): Double {
+    val dist = distanceMeters.coerceAtLeast(1)
+    val metersPerDpAtZoom0 = EARTH_CIRCUMFERENCE_M * cos(Math.toRadians(latitude)) / MAPBOX_TILE_SIZE
+    val targetMetersPerDp = dist / (LINE_FILL_FRACTION * MAP_HEIGHT_DP)
+    val zoom = log2(metersPerDpAtZoom0 / targetMetersPerDp)
+    return zoom.coerceIn(12.0, 20.0)
+}
+
 /** Compass bearing (degrees, 0 = north, clockwise) from [from] to [to]. */
 private fun mapBearing(from: Point, to: Point): Double {
     val lat1 = Math.toRadians(from.latitude())
@@ -605,6 +674,36 @@ private fun mapBearing(from: Point, to: Point): Double {
     val y = sin(dLng) * cos(lat2)
     val x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLng)
     return (Math.toDegrees(atan2(y, x)) + 360) % 360
+}
+
+/** Point lying at half the total length along [points], so it sits on the drawn line. */
+private fun routeMidpoint(points: List<Point>): Point {
+    if (points.size < 2) return points.first()
+    val segLengths = DoubleArray(points.size - 1)
+    var total = 0.0
+    for (i in 0 until points.size - 1) {
+        val r = FloatArray(1)
+        Location.distanceBetween(
+            points[i].latitude(), points[i].longitude(),
+            points[i + 1].latitude(), points[i + 1].longitude(), r
+        )
+        segLengths[i] = r[0].toDouble()
+        total += segLengths[i]
+    }
+    var remaining = total / 2
+    for (i in segLengths.indices) {
+        if (remaining <= segLengths[i]) {
+            val t = if (segLengths[i] == 0.0) 0.0 else remaining / segLengths[i]
+            val a = points[i]
+            val b = points[i + 1]
+            return Point.fromLngLat(
+                a.longitude() + (b.longitude() - a.longitude()) * t,
+                a.latitude() + (b.latitude() - a.latitude()) * t,
+            )
+        }
+        remaining -= segLengths[i]
+    }
+    return points.last()
 }
 
 /** Geographic midpoint between two map points. */
