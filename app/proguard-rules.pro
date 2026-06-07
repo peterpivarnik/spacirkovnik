@@ -13,6 +13,11 @@
 -keep class sk.spacirkovnik.model.** { *; }
 -keep class sk.spacirkovnik.data.GameIndexResponse { *; }
 
+# Mapbox Directions API response (Gson parses these by field name) ---
+-keep class sk.spacirkovnik.data.DirectionsResponse { *; }
+-keep class sk.spacirkovnik.data.DirectionsRoute { *; }
+-keep class sk.spacirkovnik.data.RouteGeometry { *; }
+
 # --- Gson @SerializedName field annotations ---
 -keepclassmembers,allowobfuscation class * {
     @com.google.gson.annotations.SerializedName <fields>;
