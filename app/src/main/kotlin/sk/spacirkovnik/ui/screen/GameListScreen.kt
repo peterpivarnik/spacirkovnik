@@ -1,5 +1,6 @@
 package sk.spacirkovnik.ui.screen
 
+import android.content.Intent
 import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -70,12 +71,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import kotlinx.coroutines.launch
 import sk.spacirkovnik.R
+import sk.spacirkovnik.data.ConsentManager
 import sk.spacirkovnik.data.GameProgressManager
+import sk.spacirkovnik.model.GameInfo
 import sk.spacirkovnik.ui.component.AuthBottomSheet
+import sk.spacirkovnik.ui.component.GameConsentDialog
 import sk.spacirkovnik.model.GameStatus
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.AmberLight
@@ -111,6 +116,8 @@ fun GameListScreen(
     var expandedGameId by remember { mutableStateOf<String?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    val consentManager = remember { ConsentManager(context) }
+    var consentRequest by remember { mutableStateOf<ConsentRequest?>(null) }
 
     val signInLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -333,6 +340,28 @@ fun GameListScreen(
                             val isTestGame = authViewModel.isTestGame(gameId)
                             val hasSavedProgress = progressManager.hasProgress(gameId)
                             val isCompleted = progressManager.isCompleted(gameId)
+                            val info = gameWithStatus.info
+                            // Consent gate: if the game requires consent and the player hasn't
+                            // accepted the current version yet, show the dialog before starting.
+                            fun gatedStart(proceed: () -> Unit) {
+                                val consent = info.consent
+                                val accepted = consent == null ||
+                                    authViewModel.hasConsent(gameId, consent.version) ||
+                                    consentManager.acceptedVersion(gameId) >= consent.version
+                                if (accepted) {
+                                    proceed()
+                                    return
+                                }
+                                if (!authState.isSignedIn) {
+                                    scope.launch {
+                                        snackbarHostState.showSnackbar(
+                                            "Pre túto hru sa najprv prihlás – zdieľa sa e-mail s organizátorom."
+                                        )
+                                    }
+                                    return
+                                }
+                                consentRequest = ConsentRequest(info, proceed)
+                            }
                             GameCard(
                                 gameWithStatus = gameWithStatus,
                                 isSignedIn = authState.isSignedIn,
@@ -346,11 +375,13 @@ fun GameListScreen(
                                 onToggle = {
                                     expandedGameId = if (isExpanded) null else gameId
                                 },
-                                onPlay = { onGameSelected(gameId, gameWithStatus.info.colorHex) },
+                                onPlay = { gatedStart { onGameSelected(gameId, info.colorHex) } },
                                 onPlayFresh = {
-                                    progressManager.clearProgress(gameId)
-                                    progressManager.clearCompleted(gameId)
-                                    onGameSelected(gameId, gameWithStatus.info.colorHex)
+                                    gatedStart {
+                                        progressManager.clearProgress(gameId)
+                                        progressManager.clearCompleted(gameId)
+                                        onGameSelected(gameId, info.colorHex)
+                                    }
                                 },
                                 onDownload = { gameListViewModel.downloadGame(gameId) },
                                 onPurchase = {
@@ -373,8 +404,45 @@ fun GameListScreen(
             hostState = snackbarHostState,
             modifier = Modifier.align(Alignment.BottomCenter)
         )
+
+        consentRequest?.let { req ->
+            val consent = req.info.consent
+            if (consent == null) {
+                consentRequest = null
+            } else {
+                GameConsentDialog(
+                    consent = consent,
+                    onAccept = {
+                        authViewModel.recordConsent(req.info.id, consent.version) { success ->
+                            if (success) {
+                                consentManager.setAccepted(req.info.id, consent.version)
+                                val proceed = req.proceed
+                                consentRequest = null
+                                proceed()
+                            } else {
+                                // Keep the dialog open so the player can retry.
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        "Súhlas sa nepodarilo uložiť. Skontroluj pripojenie a skús to znova."
+                                    )
+                                }
+                            }
+                        }
+                    },
+                    onDecline = { consentRequest = null },
+                    onOpenUrl = { url ->
+                        runCatching {
+                            context.startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
+                        }
+                    },
+                )
+            }
+        }
     }
 }
+
+/** A pending request to show the consent dialog, plus the action to run once accepted. */
+private class ConsentRequest(val info: GameInfo, val proceed: () -> Unit)
 
 @Composable
 private fun GameCard(

@@ -57,6 +57,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
             )
             loadActivations()
             loadTestGames()
+            loadConsents()
         }
     }
 
@@ -195,6 +196,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         )
         loadActivations()
         loadTestGames()
+        loadConsents()
     }
 
     private fun mapError(e: Exception): String = when (e) {
@@ -270,6 +272,71 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    private fun loadConsents() {
+        val uid = auth.currentUser?.uid ?: return
+        viewModelScope.launch {
+            try {
+                val snapshot = database.reference
+                    .child("consents")
+                    .child(uid)
+                    .get()
+                    .await()
+
+                val consents = mutableMapOf<String, Int>()
+                snapshot.children.forEach { child ->
+                    val key = child.key ?: return@forEach
+                    val version = when (val v = child.child("version").value) {
+                        is Long -> v.toInt()
+                        is Int -> v
+                        else -> return@forEach
+                    }
+                    consents[key] = version
+                }
+                _state.value = _state.value.copy(consents = consents)
+            } catch (_: Exception) {
+                // consents stay empty on error; local ConsentManager cache still applies
+            }
+        }
+    }
+
+    /** True if the user already accepted [gameId] consent at [version] or newer. */
+    fun hasConsent(gameId: String, version: Int): Boolean {
+        return (_state.value.consents[gameId] ?: -1) >= version
+    }
+
+    /**
+     * Records the user's consent for [gameId] at [version] in Firebase, along with the e-mail.
+     * [onResult] is called with true only after the server write succeeds, so the caller can
+     * start the game (and cache locally) only once the consent is safely stored.
+     */
+    fun recordConsent(gameId: String, version: Int, onResult: (Boolean) -> Unit) {
+        val user = auth.currentUser
+        if (user == null) {
+            onResult(false)
+            return
+        }
+        viewModelScope.launch {
+            try {
+                val record = mapOf(
+                    "version" to version,
+                    "acceptedAt" to System.currentTimeMillis(),
+                    "email" to (user.email ?: "")
+                )
+                database.reference
+                    .child("consents")
+                    .child(user.uid)
+                    .child(gameId)
+                    .setValue(record)
+                    .await()
+                val updated = _state.value.consents.toMutableMap().also { it[gameId] = version }
+                _state.value = _state.value.copy(consents = updated)
+                onResult(true)
+            } catch (_: Exception) {
+                onResult(false)
+            }
+        }
+    }
+
     fun isGameActivated(gameId: String): Boolean {
         return _state.value.activatedGames.contains(gameId)
     }
@@ -289,6 +356,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         val userEmail: String? = null,
         val activatedGames: Set<String> = emptySet(),
         val testGames: Set<String> = emptySet(),
+        val consents: Map<String, Int> = emptyMap(),
         val loading: Boolean = false,
         val error: String? = null,
         val info: String? = null

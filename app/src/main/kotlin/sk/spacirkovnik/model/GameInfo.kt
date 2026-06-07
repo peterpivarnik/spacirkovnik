@@ -26,5 +26,6 @@ data class GameInfo(
     val status: GameStatus? = null,
     val startName: String? = null,
     val endName: String? = null,
-    val googlePlayProductId: String? = null
+    val googlePlayProductId: String? = null,
+    val consent: GameConsent? = null
 )
