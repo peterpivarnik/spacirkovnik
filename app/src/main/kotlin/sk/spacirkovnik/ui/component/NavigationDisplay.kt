@@ -188,11 +188,12 @@ fun NavigationDisplay(
             override fun onSensorChanged(event: SensorEvent) {
                 when (event.sensor.type) {
                     Sensor.TYPE_ACCELEROMETER -> {
-                        System.arraycopy(event.values, 0, gravity, 0, 3)
+                        // alpha = 1 on the first sample seeds the value; after that it smooths.
+                        lowPassFilter(event.values, gravity, if (hasGravity) COMPASS_SMOOTHING else 1f)
                         hasGravity = true
                     }
                     Sensor.TYPE_MAGNETIC_FIELD -> {
-                        System.arraycopy(event.values, 0, geomagnetic, 0, 3)
+                        lowPassFilter(event.values, geomagnetic, if (hasMagnetic) COMPASS_SMOOTHING else 1f)
                         hasMagnetic = true
                     }
                 }
@@ -785,6 +786,19 @@ private fun zoomForLineLength(distanceMeters: Int, latitude: Double): Double {
     val targetMetersPerDp = dist / (LINE_FILL_FRACTION * MAP_HEIGHT_DP)
     val zoom = log2(metersPerDpAtZoom0 / targetMetersPerDp)
     return zoom.coerceIn(12.0, 20.0)
+}
+
+/**
+ * Exponential low-pass smoothing factor for the raw compass sensors (accelerometer +
+ * magnetometer). Lower = smoother needle but more lag; ~0.15 is a good balance.
+ */
+private const val COMPASS_SMOOTHING = 0.15f
+
+/** In-place exponential low-pass: output += alpha * (input - output). */
+private fun lowPassFilter(input: FloatArray, output: FloatArray, alpha: Float) {
+    for (i in output.indices) {
+        output[i] += alpha * (input[i] - output[i])
+    }
 }
 
 /** Compass bearing (degrees, 0 = north, clockwise) from [from] to [to]. */
