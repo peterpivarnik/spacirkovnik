@@ -12,10 +12,12 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.location.Location
 import android.os.Looper
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +28,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -51,6 +54,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
@@ -304,6 +308,11 @@ fun NavigationDisplay(
         )
     }
 
+    // Fullscreen toggle for the map.
+    val fullscreenState = remember { mutableStateOf(false) }
+    val navMapState = NavMapState(userPoint, routePoints, deviceAzimuth, arrowRotation)
+
+  Box(modifier = Modifier.fillMaxSize()) {
     Column(
         modifier = Modifier
                 .fillMaxSize()
@@ -372,62 +381,21 @@ fun NavigationDisplay(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(12.dp))
-        ) {
-            NavigationMap(
+        if (!fullscreenState.value) {
+            NavMapContent(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(MAP_HEIGHT_DP.dp)
+                    .clip(RoundedCornerShape(12.dp)),
                 mapViewportState = mapViewportState,
                 targetPoint = targetPoint,
-                userPoint = userPoint,
-                routePoints = routePoints,
+                state = navMapState,
                 targetPinIcon = targetPinIcon,
                 userPinIcon = userPinIcon,
-                arrowIcon = arrowIcon
+                arrowIcon = arrowIcon,
+                fullscreen = false,
+                onToggleFullscreen = { fullscreenState.value = true },
             )
-
-            // Compass overlay — bottom-right corner of the map
-            Canvas(
-                modifier = Modifier
-                    .size(90.dp)
-                    .align(Alignment.BottomEnd)
-                    .padding(10.dp)
-            ) {
-                val center = Offset(size.width / 2, size.height / 2)
-                val radius = size.minDimension / 2
-
-                // semi-transparent dark backdrop so compass is readable on any map tile
-                drawCircle(color = Color(0x99000000), radius = radius, center = center)
-                drawCircle(color = TextOnDark, radius = radius, center = center,
-                    style = Stroke(width = 2f), alpha = 0.5f)
-                drawCircle(color = TextOnDark, radius = radius * 0.82f, center = center,
-                    style = Stroke(width = 1f), alpha = 0.25f)
-
-                // Cardinal labels rotate with actual world orientation
-                rotate(degrees = -deviceAzimuth, pivot = center) {
-                    val nc = drawContext.canvas.nativeCanvas
-                    val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-                        color = android.graphics.Color.WHITE
-                        textSize = radius * 0.40f
-                        textAlign = Paint.Align.CENTER
-                        typeface = android.graphics.Typeface.DEFAULT_BOLD
-                    }
-                    val lr = radius * 0.64f
-                    val dy = textPaint.textSize * 0.36f
-                    nc.drawText("S", center.x,      center.y - lr + dy, textPaint)
-                    nc.drawText("J", center.x,      center.y + lr + dy, textPaint)
-                    nc.drawText("V", center.x + lr, center.y      + dy, textPaint)
-                    nc.drawText("Z", center.x - lr, center.y      + dy, textPaint)
-                }
-
-                // Arrow pointing toward target
-                rotate(degrees = arrowRotation, pivot = center) {
-                    drawArrow(center, radius * 0.7f)
-                }
-
-                drawCircle(color = TextOnDark, radius = 5f, center = center)
-            }
         }
 
         Spacer(modifier = Modifier.height(12.dp))
@@ -523,13 +491,74 @@ fun NavigationDisplay(
 
         Spacer(modifier = Modifier.height(32.dp))
     }
+
+    if (fullscreenState.value) {
+        BackHandler { fullscreenState.value = false }
+        NavMapContent(
+            modifier = Modifier.fillMaxSize(),
+            mapViewportState = mapViewportState,
+            targetPoint = targetPoint,
+            state = navMapState,
+            targetPinIcon = targetPinIcon,
+            userPinIcon = userPinIcon,
+            arrowIcon = arrowIcon,
+            fullscreen = true,
+            onToggleFullscreen = { fullscreenState.value = false },
+        )
+    }
+  }
 }
+
+/** The map plus its compass and fullscreen-toggle overlays, sized via [modifier]. */
+@Composable
+private fun NavMapContent(
+    modifier: Modifier,
+    mapViewportState: MapViewportState,
+    targetPoint: Point,
+    state: NavMapState,
+    targetPinIcon: IconImage,
+    userPinIcon: IconImage,
+    arrowIcon: IconImage,
+    fullscreen: Boolean,
+    onToggleFullscreen: () -> Unit,
+) {
+    Box(modifier = modifier) {
+        NavigationMap(
+            modifier = Modifier.fillMaxSize(),
+            mapViewportState = mapViewportState,
+            targetPoint = targetPoint,
+            userPoint = state.userPoint,
+            routePoints = state.routePoints,
+            targetPinIcon = targetPinIcon,
+            userPinIcon = userPinIcon,
+            arrowIcon = arrowIcon,
+        )
+        CompassOverlay(
+            modifier = Modifier.align(Alignment.BottomStart),
+            deviceAzimuth = state.deviceAzimuth,
+            arrowRotation = state.arrowRotation,
+        )
+        FullscreenToggle(
+            modifier = Modifier.align(Alignment.BottomEnd),
+            fullscreen = fullscreen,
+            onClick = onToggleFullscreen,
+        )
+    }
+}
+
+private class NavMapState(
+    val userPoint: Point?,
+    val routePoints: List<Point>?,
+    val deviceAzimuth: Float,
+    val arrowRotation: Float,
+)
 
 // NavigationMap is isolated here so the Mapbox composable-scope warnings
 // (COMPOSE_APPLIER_CALL_MISMATCH) are suppressed in one small, well-defined place.
 @Suppress("COMPOSE_APPLIER_CALL_MISMATCH")
 @Composable
 private fun NavigationMap(
+    modifier: Modifier,
     mapViewportState: MapViewportState,
     targetPoint: Point,
     userPoint: Point?,
@@ -539,11 +568,10 @@ private fun NavigationMap(
     arrowIcon: IconImage,
 ) {
     MapboxMap(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(MAP_HEIGHT_DP.dp)
-            .clip(RoundedCornerShape(12.dp)),
+        modifier = modifier,
         mapViewportState = mapViewportState,
+        // Hide Mapbox's built-in compass; we draw our own in the bottom-left corner.
+        compass = {},
         style = { MapStyle(style = Style.OUTDOORS) }
     ) {
         PointAnnotation(point = targetPoint) {
@@ -570,6 +598,99 @@ private fun NavigationMap(
                 iconRotate = 0.0
             }
         }
+    }
+}
+
+/** Compass dial with rotating cardinal labels and an arrow pointing at the target. */
+@Composable
+private fun CompassOverlay(
+    modifier: Modifier,
+    deviceAzimuth: Float,
+    arrowRotation: Float,
+) {
+    Canvas(
+        modifier = modifier
+            .size(90.dp)
+            .padding(10.dp)
+    ) {
+        val center = Offset(size.width / 2, size.height / 2)
+        val radius = size.minDimension / 2
+
+        // semi-transparent dark backdrop so compass is readable on any map tile
+        drawCircle(color = Color(0x99000000), radius = radius, center = center)
+        drawCircle(color = TextOnDark, radius = radius, center = center,
+            style = Stroke(width = 2f), alpha = 0.5f)
+        drawCircle(color = TextOnDark, radius = radius * 0.82f, center = center,
+            style = Stroke(width = 1f), alpha = 0.25f)
+
+        // Cardinal labels rotate with actual world orientation
+        rotate(degrees = -deviceAzimuth, pivot = center) {
+            val nc = drawContext.canvas.nativeCanvas
+            val textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                color = android.graphics.Color.WHITE
+                textSize = radius * 0.40f
+                textAlign = Paint.Align.CENTER
+                typeface = android.graphics.Typeface.DEFAULT_BOLD
+            }
+            val lr = radius * 0.64f
+            val dy = textPaint.textSize * 0.36f
+            nc.drawText("S", center.x,      center.y - lr + dy, textPaint)
+            nc.drawText("J", center.x,      center.y + lr + dy, textPaint)
+            nc.drawText("V", center.x + lr, center.y      + dy, textPaint)
+            nc.drawText("Z", center.x - lr, center.y      + dy, textPaint)
+        }
+
+        // Arrow pointing toward target
+        rotate(degrees = arrowRotation, pivot = center) {
+            drawArrow(center, radius * 0.7f)
+        }
+
+        drawCircle(color = TextOnDark, radius = 5f, center = center)
+    }
+}
+
+/** Round button that expands the map to fullscreen, or shrinks it back. */
+@Composable
+private fun FullscreenToggle(
+    modifier: Modifier,
+    fullscreen: Boolean,
+    onClick: () -> Unit,
+) {
+    Canvas(
+        modifier = modifier
+            .size(64.dp)
+            .padding(10.dp)
+            .clip(CircleShape)
+            .clickable(onClick = onClick)
+    ) {
+        val center = Offset(size.width / 2, size.height / 2)
+        val radius = size.minDimension / 2
+        drawCircle(color = Color(0x99000000), radius = radius, center = center)
+        drawCircle(color = TextOnDark, radius = radius, center = center,
+            style = Stroke(width = 2f), alpha = 0.5f)
+        drawFullscreenIcon(expand = !fullscreen)
+    }
+}
+
+/** Four corner brackets: opening inward = "expand", pulled toward centre = "collapse". */
+private fun DrawScope.drawFullscreenIcon(expand: Boolean) {
+    val s = size.minDimension
+    val arm = s * 0.16f
+    val stroke = s * 0.07f
+    val white = Color.White
+    fun l(a: Offset, b: Offset) = drawLine(white, a, b, stroke, StrokeCap.Round)
+    if (expand) {
+        val o = s * 0.30f
+        l(Offset(o, o), Offset(o + arm, o));               l(Offset(o, o), Offset(o, o + arm))
+        l(Offset(s - o, o), Offset(s - o - arm, o));       l(Offset(s - o, o), Offset(s - o, o + arm))
+        l(Offset(o, s - o), Offset(o + arm, s - o));       l(Offset(o, s - o), Offset(o, s - o - arm))
+        l(Offset(s - o, s - o), Offset(s - o - arm, s - o)); l(Offset(s - o, s - o), Offset(s - o, s - o - arm))
+    } else {
+        val v = s * 0.44f
+        l(Offset(v, v), Offset(v - arm, v));               l(Offset(v, v), Offset(v, v - arm))
+        l(Offset(s - v, v), Offset(s - v + arm, v));       l(Offset(s - v, v), Offset(s - v, v - arm))
+        l(Offset(v, s - v), Offset(v - arm, s - v));       l(Offset(v, s - v), Offset(v, s - v + arm))
+        l(Offset(s - v, s - v), Offset(s - v + arm, s - v)); l(Offset(s - v, s - v), Offset(s - v, s - v + arm))
     }
 }
 
