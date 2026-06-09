@@ -1,7 +1,7 @@
 package sk.spacirkovnik.ui.component
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,10 +17,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -68,9 +68,20 @@ fun AuthBottomSheet(
     var mode by remember { mutableStateOf(AuthMode.LOGIN) }
     var showPassword by remember { mutableStateOf(false) }
     var localError by remember { mutableStateOf<String?>(null) }
+    // The sheet opens on a clean two-button choice; the email/password form is revealed only
+    // once the user picks "e-mailom".
+    var emailExpanded by remember { mutableStateOf(false) }
 
     fun switchMode(target: AuthMode) {
         mode = target
+        confirmPassword = ""
+        localError = null
+    }
+
+    fun collapse() {
+        emailExpanded = false
+        mode = AuthMode.LOGIN
+        password = ""
         confirmPassword = ""
         localError = null
     }
@@ -89,10 +100,11 @@ fun AuthBottomSheet(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = when (mode) {
-                    AuthMode.LOGIN -> "Prihlásenie"
-                    AuthMode.REGISTER -> "Registrácia"
-                    AuthMode.RESET -> "Obnova hesla"
+                text = when {
+                    mode == AuthMode.REGISTER -> "Registrácia"
+                    mode == AuthMode.RESET -> "Obnova hesla"
+                    emailExpanded -> "Prihlásenie e-mailom"
+                    else -> "Prihlásenie"
                 },
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
@@ -109,8 +121,8 @@ fun AuthBottomSheet(
                 )
             }
 
-            // --- Google navrchu (mimo režimu obnovy) ---
-            if (mode != AuthMode.RESET) {
+            if (!emailExpanded && mode == AuthMode.LOGIN) {
+                // --- Úvodná voľba: dve tlačidlá ---
                 Spacer(Modifier.height(20.dp))
 
                 Button(
@@ -129,157 +141,167 @@ fun AuthBottomSheet(
 
                 Spacer(Modifier.height(12.dp))
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
+                OutlinedButton(
+                    onClick = { emailExpanded = true; localError = null },
+                    enabled = !state.loading,
+                    modifier = Modifier.fillMaxWidth().height(50.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    border = BorderStroke(1.5.dp, PrimaryButton)
                 ) {
-                    HorizontalDivider(modifier = Modifier.weight(1f), color = TextOnBeigeSecondary.copy(alpha = 0.3f))
-                    Text(
-                        text = "alebo",
-                        fontSize = 13.sp,
-                        color = TextOnBeigeSecondary,
-                        modifier = Modifier.padding(horizontal = 12.dp)
-                    )
-                    HorizontalDivider(modifier = Modifier.weight(1f), color = TextOnBeigeSecondary.copy(alpha = 0.3f))
-                }
-            }
-
-            // --- Email / heslo formulár ---
-            Spacer(Modifier.height(if (mode == AuthMode.RESET) 20.dp else 16.dp))
-
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            if (mode != AuthMode.RESET) {
-                Spacer(Modifier.height(12.dp))
-                OutlinedTextField(
-                    value = password,
-                    onValueChange = { password = it; localError = null },
-                    label = { Text("Heslo") },
-                    singleLine = true,
-                    visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    trailingIcon = {
-                        IconButton(onClick = { showPassword = !showPassword }) {
-                            Icon(
-                                imageVector = if (showPassword) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                                contentDescription = if (showPassword) "Skryť heslo" else "Zobraziť heslo",
-                                tint = TextOnBeigeSecondary
-                            )
-                        }
-                    },
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
-            if (mode == AuthMode.REGISTER) {
-                Spacer(Modifier.height(12.dp))
-                OutlinedTextField(
-                    value = confirmPassword,
-                    onValueChange = { confirmPassword = it; localError = null },
-                    label = { Text("Zopakuj heslo") },
-                    singleLine = true,
-                    visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
-            val shownError = localError ?: state.error
-            if (shownError != null) {
-                Spacer(Modifier.height(12.dp))
-                Text(
-                    text = shownError,
-                    fontSize = 13.sp,
-                    color = Color(0xFFC62828),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-            if (state.info != null) {
-                Spacer(Modifier.height(12.dp))
-                Text(
-                    text = state.info,
-                    fontSize = 13.sp,
-                    color = Color(0xFF2E7D32),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-
-            Spacer(Modifier.height(20.dp))
-
-            Button(
-                onClick = {
-                    when (mode) {
-                        AuthMode.LOGIN -> onEmailSignIn(email, password)
-                        AuthMode.REGISTER ->
-                            if (password != confirmPassword) localError = "Heslá sa nezhodujú."
-                            else onEmailRegister(email, password)
-                        AuthMode.RESET -> onPasswordReset(email)
-                    }
-                },
-                enabled = !state.loading,
-                modifier = Modifier.fillMaxWidth().height(50.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
-            ) {
-                if (state.loading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(22.dp),
-                        color = PrimaryButtonText,
-                        strokeWidth = 2.dp
-                    )
-                } else {
-                    Text(
-                        text = when (mode) {
-                            AuthMode.LOGIN -> "Prihlásiť sa"
-                            AuthMode.REGISTER -> "Zaregistrovať sa"
-                            AuthMode.RESET -> "Poslať email na obnovu"
-                        },
-                        color = PrimaryButtonText,
-                        fontSize = 16.sp,
+                    AutoSizeText(
+                        text = "Prihlásiť sa e-mailom",
+                        color = TextOnBeige,
                         fontWeight = FontWeight.Bold
                     )
                 }
-            }
 
-            when (mode) {
-                AuthMode.LOGIN -> {
-                    TextButton(onClick = { switchMode(AuthMode.RESET) }) {
-                        Text("Zabudnuté heslo?", color = TextOnBeigeSecondary, fontSize = 14.sp)
-                    }
-                    TextButton(onClick = { switchMode(AuthMode.REGISTER) }) {
+                AuthMessages(error = localError ?: state.error, info = state.info)
+            } else {
+                // --- Email / heslo formulár ---
+                Spacer(Modifier.height(if (mode == AuthMode.RESET) 20.dp else 16.dp))
+
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = { Text("Email") },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                if (mode != AuthMode.RESET) {
+                    Spacer(Modifier.height(12.dp))
+                    OutlinedTextField(
+                        value = password,
+                        onValueChange = { password = it; localError = null },
+                        label = { Text("Heslo") },
+                        singleLine = true,
+                        visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                        trailingIcon = {
+                            IconButton(onClick = { showPassword = !showPassword }) {
+                                Icon(
+                                    imageVector = if (showPassword) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                                    contentDescription = if (showPassword) "Skryť heslo" else "Zobraziť heslo",
+                                    tint = TextOnBeigeSecondary
+                                )
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                if (mode == AuthMode.REGISTER) {
+                    Spacer(Modifier.height(12.dp))
+                    OutlinedTextField(
+                        value = confirmPassword,
+                        onValueChange = { confirmPassword = it; localError = null },
+                        label = { Text("Zopakuj heslo") },
+                        singleLine = true,
+                        visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
+                AuthMessages(error = localError ?: state.error, info = state.info)
+
+                Spacer(Modifier.height(20.dp))
+
+                Button(
+                    onClick = {
+                        when (mode) {
+                            AuthMode.LOGIN -> onEmailSignIn(email, password)
+                            AuthMode.REGISTER ->
+                                if (password != confirmPassword) localError = "Heslá sa nezhodujú."
+                                else onEmailRegister(email, password)
+                            AuthMode.RESET -> onPasswordReset(email)
+                        }
+                    },
+                    enabled = !state.loading,
+                    modifier = Modifier.fillMaxWidth().height(50.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                ) {
+                    if (state.loading) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(22.dp),
+                            color = PrimaryButtonText,
+                            strokeWidth = 2.dp
+                        )
+                    } else {
                         Text(
-                            text = "Nemáš účet? Zaregistruj sa",
-                            color = Amber,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold
+                            text = when (mode) {
+                                AuthMode.LOGIN -> "Prihlásiť sa"
+                                AuthMode.REGISTER -> "Zaregistrovať sa"
+                                AuthMode.RESET -> "Poslať email na obnovu"
+                            },
+                            color = PrimaryButtonText,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }
-                AuthMode.REGISTER -> {
-                    TextButton(onClick = { switchMode(AuthMode.LOGIN) }) {
-                        Text(
-                            text = "Máš už účet? Prihlás sa",
-                            color = Amber,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
+
+                when (mode) {
+                    AuthMode.LOGIN -> {
+                        TextButton(onClick = { switchMode(AuthMode.RESET) }) {
+                            Text("Zabudnuté heslo?", color = TextOnBeigeSecondary, fontSize = 14.sp)
+                        }
+                        TextButton(onClick = { switchMode(AuthMode.REGISTER) }) {
+                            Text(
+                                text = "Nemáš účet? Zaregistruj sa",
+                                color = Amber,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
+                        TextButton(onClick = { collapse() }) {
+                            Text("← Späť na možnosti prihlásenia", color = TextOnBeigeSecondary, fontSize = 14.sp)
+                        }
                     }
-                }
-                AuthMode.RESET -> {
-                    TextButton(onClick = { switchMode(AuthMode.LOGIN) }) {
-                        Text("Späť na prihlásenie", color = TextOnBeigeSecondary, fontSize = 14.sp)
+                    AuthMode.REGISTER -> {
+                        TextButton(onClick = { switchMode(AuthMode.LOGIN) }) {
+                            Text(
+                                text = "Máš už účet? Prihlás sa",
+                                color = Amber,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
+                    }
+                    AuthMode.RESET -> {
+                        TextButton(onClick = { switchMode(AuthMode.LOGIN) }) {
+                            Text("Späť na prihlásenie", color = TextOnBeigeSecondary, fontSize = 14.sp)
+                        }
                     }
                 }
             }
         }
+    }
+}
+
+/** Error (red) and info (green) messages shared by both the choice and the form view. */
+@Composable
+private fun AuthMessages(error: String?, info: String?) {
+    if (error != null) {
+        Spacer(Modifier.height(12.dp))
+        Text(
+            text = error,
+            fontSize = 13.sp,
+            color = Color(0xFFC62828),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+    if (info != null) {
+        Spacer(Modifier.height(12.dp))
+        Text(
+            text = info,
+            fontSize = 13.sp,
+            color = Color(0xFF2E7D32),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
