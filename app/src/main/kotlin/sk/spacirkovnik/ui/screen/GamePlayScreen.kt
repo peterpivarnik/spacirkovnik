@@ -1,5 +1,6 @@
 package sk.spacirkovnik.ui.screen
 
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -36,6 +38,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import sk.spacirkovnik.ui.component.QuestionsDisplay
 import sk.spacirkovnik.ui.theme.Amber
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import sk.spacirkovnik.ui.theme.gameGradient
 import sk.spacirkovnik.ui.theme.PrimaryButton
 import sk.spacirkovnik.ui.theme.PrimaryButtonText
@@ -65,6 +68,26 @@ fun GamePlayScreen(
             .fillMaxSize()
             .background(gameGradient(colorHex))
     ) {
+        // Thin full-width progress bar: fills as the player advances through the game's
+        // screens, reaching the end on the last screen. Animated so each step glides.
+        if (!state.loading && state.error == null && state.screens.isNotEmpty()) {
+            val progressTarget = (gameDataViewModel.getCurrentIndex() + 1).toFloat() / state.screens.size
+            val progress by animateFloatAsState(
+                targetValue = progressTarget,
+                label = "gameProgress",
+            )
+            LinearProgressIndicator(
+                progress = { progress },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(4.dp),
+                color = Amber,
+                trackColor = TextOnDark.copy(alpha = 0.25f),
+                strokeCap = StrokeCap.Butt,
+                gapSize = 0.dp,
+                drawStopIndicator = {},
+            )
+        }
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -108,7 +131,7 @@ fun GamePlayScreen(
     if (showExitDialog) {
         AlertDialog(
             onDismissRequest = {
-            @Suppress("UNUSED_VALUE")
+            @Suppress("ASSIGNED_VALUE_IS_NEVER_READ")
             showExitDialog = false
         },
             title = {
@@ -151,7 +174,7 @@ fun GamePlayScreen(
                     Spacer(modifier = Modifier.height(4.dp))
                     TextButton(
                         onClick = {
-                            @Suppress("UNUSED_VALUE")
+                            @Suppress("ASSIGNED_VALUE_IS_NEVER_READ")
                             showExitDialog = false
                         },
                         modifier = Modifier.fillMaxWidth()
