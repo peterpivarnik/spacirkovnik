@@ -20,6 +20,7 @@ import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -60,6 +61,8 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -76,9 +79,12 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.mapbox.android.gestures.MoveGestureDetector
+import com.mapbox.android.gestures.StandardScaleGestureDetector
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.Style
+import com.mapbox.maps.extension.compose.DisposableMapEffect
 import com.mapbox.maps.extension.compose.MapboxMap
 import com.mapbox.maps.extension.compose.animation.viewport.MapViewportState
 import com.mapbox.maps.extension.compose.animation.viewport.rememberMapViewportState
@@ -87,6 +93,9 @@ import com.mapbox.maps.extension.compose.annotation.generated.PointAnnotation
 import com.mapbox.maps.extension.compose.annotation.generated.PolylineAnnotation
 import com.mapbox.maps.extension.compose.style.MapStyle
 import com.mapbox.maps.extension.style.layers.properties.generated.IconAnchor
+import com.mapbox.maps.plugin.gestures.OnMoveListener
+import com.mapbox.maps.plugin.gestures.OnScaleListener
+import com.mapbox.maps.plugin.gestures.gestures
 import sk.spacirkovnik.BuildConfig
 import sk.spacirkovnik.model.GameScreen
 import sk.spacirkovnik.model.LocationData
@@ -279,38 +288,25 @@ fun NavigationDisplay(
     // the straight-line distance.
     val displayDistanceMeters = routeDistanceMeters ?: distanceMeters
 
-    // Update map camera when user location changes
-    LaunchedEffect(userPoint) {
-        val center: Point
-        val zoom: Double
-        val bearing: Double
-        if (userPoint != null) {
-            center = Point.fromLngLat(
-                (userPoint.longitude() + targetLng) / 2,
-                (userPoint.latitude() + targetLat) / 2
-            )
-            // Map is rotated so the user→target line runs vertically through the centre.
-            // Pick the zoom that makes that line fill most of the map height, so the
-            // closer we get the more it zooms in (line spans nearly bottom to top edge).
-            val dist = distanceMeters ?: 300
-            zoom = zoomForLineLength(dist, center.latitude())
-            bearing = mapBearing(userPoint, targetPoint)
-        } else {
-            center = targetPoint
-            zoom = 15.0
-            bearing = 0.0
-        }
-        mapViewportState.easeTo(
-            CameraOptions.Builder()
-                .center(center)
-                .zoom(zoom)
-                .bearing(bearing)
-                .build()
-        )
-    }
-
     // Fullscreen toggle for the map.
     val fullscreenState = remember { mutableStateOf(false) }
+
+    // The expanded map fills the whole screen, the inline one is a fixed height. The camera
+    // zoom is derived from the map height so the user→target line fills the same fraction of
+    // the map in both modes (closer = more zoomed in) — see [zoomForLineLength].
+    val containerHeightPx = LocalWindowInfo.current.containerSize.height
+    val screenHeightDp = with(LocalDensity.current) { containerHeightPx.toDp().value.toDouble() }
+
+    // Keep the inline map's camera following the user, easing smoothly so walking feels fluid —
+    // until the user pans/zooms by hand, after which we stop overriding their chosen view.
+    var inlineUserMoved by remember { mutableStateOf(false) }
+    LaunchedEffect(userPoint) {
+        if (!inlineUserMoved) {
+            mapViewportState.easeTo(
+                navCameraOptions(userPoint, targetPoint, distanceMeters, MAP_HEIGHT_DP)
+            )
+        }
+    }
     val navMapState = NavMapState(userPoint, routePoints, deviceAzimuth, arrowRotation)
 
   Box(modifier = Modifier.fillMaxSize()) {
@@ -395,7 +391,12 @@ fun NavigationDisplay(
                 userPinIcon = userPinIcon,
                 arrowIcon = arrowIcon,
                 fullscreen = false,
+                distanceMeters = distanceMeters,
+                mapHeightDp = MAP_HEIGHT_DP,
+                userMoved = inlineUserMoved,
                 onToggleFullscreen = { fullscreenState.value = true },
+                onUserGesture = { inlineUserMoved = true },
+                onRestoreAutoView = { inlineUserMoved = false },
             )
         }
 
@@ -495,16 +496,37 @@ fun NavigationDisplay(
 
     if (fullscreenState.value) {
         BackHandler { fullscreenState.value = false }
+        // Own viewport, initialised straight to the fullscreen-height camera, so the expanded
+        // map opens already zoomed to the route instead of inheriting the inline zoom and only
+        // correcting on the next location update.
+        val fullscreenViewport = rememberMapViewportState {
+            setCameraOptions(
+                navCameraOptions(userPoint, targetPoint, distanceMeters, screenHeightDp)
+            )
+        }
+        var fullscreenUserMoved by remember { mutableStateOf(false) }
+        LaunchedEffect(userPoint) {
+            if (!fullscreenUserMoved) {
+                fullscreenViewport.easeTo(
+                    navCameraOptions(userPoint, targetPoint, distanceMeters, screenHeightDp)
+                )
+            }
+        }
         NavMapContent(
             modifier = Modifier.fillMaxSize(),
-            mapViewportState = mapViewportState,
+            mapViewportState = fullscreenViewport,
             targetPoint = targetPoint,
             state = navMapState,
             targetPinIcon = targetPinIcon,
             userPinIcon = userPinIcon,
             arrowIcon = arrowIcon,
             fullscreen = true,
+            distanceMeters = distanceMeters,
+            mapHeightDp = screenHeightDp,
+            userMoved = fullscreenUserMoved,
             onToggleFullscreen = { fullscreenState.value = false },
+            onUserGesture = { fullscreenUserMoved = true },
+            onRestoreAutoView = { fullscreenUserMoved = false },
         )
     }
   }
@@ -521,7 +543,12 @@ private fun NavMapContent(
     userPinIcon: IconImage,
     arrowIcon: IconImage,
     fullscreen: Boolean,
+    distanceMeters: Int?,
+    mapHeightDp: Double,
+    userMoved: Boolean,
     onToggleFullscreen: () -> Unit,
+    onUserGesture: () -> Unit,
+    onRestoreAutoView: () -> Unit,
 ) {
     Box(modifier = modifier) {
         NavigationMap(
@@ -533,6 +560,7 @@ private fun NavMapContent(
             targetPinIcon = targetPinIcon,
             userPinIcon = userPinIcon,
             arrowIcon = arrowIcon,
+            onUserGesture = onUserGesture,
         )
         CompassOverlay(
             modifier = Modifier.align(Alignment.BottomStart),
@@ -544,7 +572,128 @@ private fun NavMapContent(
             fullscreen = fullscreen,
             onClick = onToggleFullscreen,
         )
+        RecenterButtons(
+            mapViewportState = mapViewportState,
+            userPoint = state.userPoint,
+            targetPoint = targetPoint,
+            distanceMeters = distanceMeters,
+            mapHeightDp = mapHeightDp,
+            userMoved = userMoved,
+            onRecenterUser = onUserGesture,
+            onRestoreAutoView = onRestoreAutoView,
+        )
     }
+}
+
+/**
+ * The two map-recentering buttons, stacked top-right:
+ *  - "my location": eases to the user's position; shown only while the map isn't already
+ *    centred there. Tapping it also leaves auto-follow (via [onRecenterUser]) so the next
+ *    location update doesn't yank the camera back.
+ *  - "route view": eases back to the framed user→target view the map opens with, and resumes
+ *    auto-follow; shown only once the user has taken manual control ([userMoved]).
+ */
+@Composable
+private fun BoxScope.RecenterButtons(
+    mapViewportState: MapViewportState,
+    userPoint: Point?,
+    targetPoint: Point,
+    distanceMeters: Int?,
+    mapHeightDp: Double,
+    userMoved: Boolean,
+    onRecenterUser: () -> Unit,
+    onRestoreAutoView: () -> Unit,
+) {
+    val camera = mapViewportState.cameraState
+    val centeredOnUser = camera != null && userPoint != null &&
+        metersBetween(camera.center, userPoint) < RECENTER_EPS_M
+
+    Column(
+        // Stacked at the bottom-right, just above the 64dp fullscreen toggle. The buttons carry
+        // 10dp of internal padding each, so a -10dp arrangement leaves a 10dp visible gap between
+        // them — matching the gap to the fullscreen toggle below.
+        modifier = Modifier
+            .align(Alignment.BottomEnd)
+            .padding(bottom = 54.dp),
+        horizontalAlignment = Alignment.End,
+        verticalArrangement = Arrangement.spacedBy((-10).dp),
+    ) {
+        if (userMoved) {
+            MapRoundButton(onClick = {
+                mapViewportState.easeTo(
+                    navCameraOptions(userPoint, targetPoint, distanceMeters, mapHeightDp)
+                )
+                onRestoreAutoView()
+            }) { drawRouteViewIcon() }
+        }
+        if (userPoint != null && !centeredOnUser) {
+            MapRoundButton(onClick = {
+                mapViewportState.easeTo(
+                    CameraOptions.Builder()
+                        .center(userPoint)
+                        .zoom(USER_FOCUS_ZOOM)
+                        .bearing(0.0)
+                        .build()
+                )
+                onRecenterUser()
+            }) { drawMyLocationIcon() }
+        }
+    }
+}
+
+/** Round dark map button matching [FullscreenToggle], with a custom [icon] drawn on top. */
+@Composable
+private fun MapRoundButton(onClick: () -> Unit, icon: DrawScope.() -> Unit) {
+    Canvas(
+        modifier = Modifier
+            .size(64.dp)
+            .padding(10.dp)
+            .clip(CircleShape)
+            .clickable(onClick = onClick)
+    ) {
+        val center = Offset(size.width / 2, size.height / 2)
+        val radius = size.minDimension / 2
+        drawCircle(color = Color(0x99000000), radius = radius, center = center)
+        drawCircle(color = TextOnDark, radius = radius, center = center,
+            style = Stroke(width = 2f), alpha = 0.5f)
+        icon()
+    }
+}
+
+/** Crosshair: a ringed centre dot with four ticks — the "centre on my location" glyph. */
+private fun DrawScope.drawMyLocationIcon() {
+    val s = size.minDimension
+    val c = Offset(size.width / 2, size.height / 2)
+    val white = Color.White
+    val stroke = s * 0.06f
+    val ring = s * 0.20f
+    drawCircle(white, radius = ring, center = c, style = Stroke(width = stroke))
+    drawCircle(white, radius = s * 0.06f, center = c)
+    val inner = ring + stroke
+    val outer = s * 0.34f
+    drawLine(white, Offset(c.x, c.y - inner), Offset(c.x, c.y - outer), stroke, StrokeCap.Round)
+    drawLine(white, Offset(c.x, c.y + inner), Offset(c.x, c.y + outer), stroke, StrokeCap.Round)
+    drawLine(white, Offset(c.x - inner, c.y), Offset(c.x - outer, c.y), stroke, StrokeCap.Round)
+    drawLine(white, Offset(c.x + inner, c.y), Offset(c.x + outer, c.y), stroke, StrokeCap.Round)
+}
+
+/** Vertical line with a dot at each end — the framed user→target "route view" glyph. */
+private fun DrawScope.drawRouteViewIcon() {
+    val s = size.minDimension
+    val c = Offset(size.width / 2, size.height / 2)
+    val white = Color.White
+    val stroke = s * 0.07f
+    val half = s * 0.26f
+    drawLine(white, Offset(c.x, c.y - half), Offset(c.x, c.y + half), stroke, StrokeCap.Round)
+    drawCircle(Color(0xFFD50000), radius = s * 0.11f, center = Offset(c.x, c.y - half))
+    drawCircle(Color(0xFF1565C0), radius = s * 0.11f, center = Offset(c.x, c.y + half))
+}
+
+/** Straight-line distance in metres between two geographic points. */
+private fun metersBetween(a: Point, b: Point): Float {
+    val r = FloatArray(1)
+    Location.distanceBetween(a.latitude(), a.longitude(), b.latitude(), b.longitude(), r)
+    return r[0]
 }
 
 private class NavMapState(
@@ -567,6 +716,7 @@ private fun NavigationMap(
     targetPinIcon: IconImage,
     userPinIcon: IconImage,
     arrowIcon: IconImage,
+    onUserGesture: () -> Unit,
 ) {
     MapboxMap(
         modifier = modifier,
@@ -575,6 +725,26 @@ private fun NavigationMap(
         compass = {},
         style = { MapStyle(style = Style.OUTDOORS) }
     ) {
+        // A hand pan (move) or pinch (scale) means the user is taking control of the camera;
+        // notify the caller so it stops auto-recentering on the next location update.
+        DisposableMapEffect(Unit) { mapView ->
+            val moveListener = object : OnMoveListener {
+                override fun onMoveBegin(detector: MoveGestureDetector) = onUserGesture()
+                override fun onMove(detector: MoveGestureDetector): Boolean = false
+                override fun onMoveEnd(detector: MoveGestureDetector) = Unit
+            }
+            val scaleListener = object : OnScaleListener {
+                override fun onScaleBegin(detector: StandardScaleGestureDetector) = onUserGesture()
+                override fun onScale(detector: StandardScaleGestureDetector) = Unit
+                override fun onScaleEnd(detector: StandardScaleGestureDetector) = Unit
+            }
+            mapView.gestures.addOnMoveListener(moveListener)
+            mapView.gestures.addOnScaleListener(scaleListener)
+            onDispose {
+                mapView.gestures.removeOnMoveListener(moveListener)
+                mapView.gestures.removeOnScaleListener(scaleListener)
+            }
+        }
         PointAnnotation(point = targetPoint) {
             iconImage = targetPinIcon
             iconAnchor = IconAnchor.CENTER
@@ -766,26 +936,58 @@ private fun createArrowBitmap(colorInt: Int): Bitmap {
     return bitmap
 }
 
-/** Height of the navigation map, shared by the camera math and the composable. */
+/** Height of the inline (non-fullscreen) navigation map, shared by the camera math and the composable. */
 private const val MAP_HEIGHT_DP = 280.0
 
 /** Fraction of the map height the user→target line should span (leaves a margin for the pins). */
 private const val LINE_FILL_FRACTION = 0.82
+
+/** Zoom the "centre on my location" button eases to. */
+private const val USER_FOCUS_ZOOM = 17.0
+
+/** The map counts as "centred on the user" once its centre is within this many metres of them. */
+private const val RECENTER_EPS_M = 20f
 
 private const val EARTH_CIRCUMFERENCE_M = 40075016.686
 private const val MAPBOX_TILE_SIZE = 512.0
 
 /**
  * Zoom level at which a line of [distanceMeters], drawn vertically through the map centre,
- * fills [LINE_FILL_FRACTION] of the [MAP_HEIGHT_DP]-tall map at the given [latitude].
+ * fills [LINE_FILL_FRACTION] of a [mapHeightDp]-tall map at the given [latitude].
  * Clamped so very close targets don't over-zoom and far ones don't zoom out too much.
  */
-private fun zoomForLineLength(distanceMeters: Int, latitude: Double): Double {
+private fun zoomForLineLength(distanceMeters: Int, latitude: Double, mapHeightDp: Double): Double {
     val dist = distanceMeters.coerceAtLeast(1)
     val metersPerDpAtZoom0 = EARTH_CIRCUMFERENCE_M * cos(Math.toRadians(latitude)) / MAPBOX_TILE_SIZE
-    val targetMetersPerDp = dist / (LINE_FILL_FRACTION * MAP_HEIGHT_DP)
+    val targetMetersPerDp = dist / (LINE_FILL_FRACTION * mapHeightDp)
     val zoom = log2(metersPerDpAtZoom0 / targetMetersPerDp)
     return zoom.coerceIn(12.0, 20.0)
+}
+
+/**
+ * Camera centred on the midpoint of the user→target line, rotated so that line runs vertically,
+ * zoomed so it fills most of a [mapHeightDp]-tall map. Falls back to the target at a fixed zoom
+ * while the user location is still unknown.
+ */
+private fun navCameraOptions(
+    userPoint: Point?,
+    targetPoint: Point,
+    distanceMeters: Int?,
+    mapHeightDp: Double,
+): CameraOptions {
+    if (userPoint == null) {
+        return CameraOptions.Builder().center(targetPoint).zoom(15.0).bearing(0.0).build()
+    }
+    val center = Point.fromLngLat(
+        (userPoint.longitude() + targetPoint.longitude()) / 2,
+        (userPoint.latitude() + targetPoint.latitude()) / 2,
+    )
+    val dist = distanceMeters ?: 300
+    return CameraOptions.Builder()
+        .center(center)
+        .zoom(zoomForLineLength(dist, center.latitude(), mapHeightDp))
+        .bearing(mapBearing(userPoint, targetPoint))
+        .build()
 }
 
 /**
