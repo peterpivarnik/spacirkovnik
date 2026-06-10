@@ -82,6 +82,11 @@ configure<ApplicationExtension> {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Bundle native debug symbols (e.g. Mapbox NDK libs) into the AAB so Play Console
+            // can symbolicate native crashes/ANRs — removes the "missing debug symbols" warning.
+            ndk {
+                debugSymbolLevel = "FULL"
+            }
         }
     }
 
