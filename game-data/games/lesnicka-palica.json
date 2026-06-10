@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 24,
+  "version": 25,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -162,7 +162,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fkorytnacka.jpeg?alt=media"
     },
     {
-      "text": "„Hm? Čo tu chceš? Nevidíš, že som zaneprázdnený? Staviam tu hrádzu! Aha, ty hľadáš tú palicu... No dobre, ale prečo by som ti mal pomáhať len tak?”",
+      "text": "„Hm? Čo tu chceš? Nevidíš, že som zaneprázdnený? Staviam tu hrádzu! Ahaaa, ty hľadáš tú palicu... No dobre, ale prečo by som ti mal pomáhať len tak?”",
       "type": "CONTINUE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fbobor.jpeg?alt=media",
       "buttonText": "Ďalej"
@@ -237,14 +237,14 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fvlk.jpeg?alt=media"
     },
     {
-      "text": "„Čí-čí-čí! Ahojky! Ja som veverička Viki! Jasné, že ti pomôžem! Ale najprv poď za mnou, musím ti niečo ukázať.”",
+      "text": "„Ahojky! Ja som veverička Viki! Jasné, že ti pomôžem! Ale najprv poď za mnou, musím ti niečo ukázať.”",
       "type": "NAVIGATION",
       "targetLatitude": 48.104488209520696,
       "targetLongitude": 17.115877634133373,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fvevericka.jpeg?alt=media"
     },
     {
-      "text": "„Pozri sa na tú obrovskú vec – ja som si myslela, že je to najväčší strom na svete!”\n„Ach, milá Viki, veď to nie je strom! To je predsa:”",
+      "text": "„Pozri sa na tento zvláštny strom. Nemá listy ani ihličie. Aký je to druh?”\n„Ach, milá Viki, veď to nie je strom! To je predsa:”",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fvevericka.jpeg?alt=media",
       "answers": [
@@ -267,7 +267,7 @@
       ]
     },
     {
-      "text": "A na tom stožiari sú antény na prijímanie a vysielanie signálu. Vďaka nim môžu ľudia telefonovať a pozerať televíziu! Bez nich by sme nemohli ani volať mame, keď sa nám stane niečo v lese. Technika je niekedy naozaj užitočná!",
+      "text": "A na tom stožiari sú antény na prijímanie a vysielanie signálu. Vďaka nim môžu ľudia telefonovať a pozerať televíziu! Bez nich by sme nemohli ani zavolať mame, keď sa nám stane niečo v lese. Technika je niekedy naozaj užitočná!",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fvevericka.jpeg?alt=media"
     },
