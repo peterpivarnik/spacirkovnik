@@ -13,8 +13,7 @@ const hry = [
 		dlzka: '3,0 km',
 		cas: '~2 hod',
 		status: 'active',
-		cena: 'Zadarmo',
-		start: 'Horáreň pri Draždiaku',
+		paid: false,		start: 'Horáreň pri Draždiaku',
 		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media',
 	},
 	{
@@ -24,9 +23,8 @@ const hry = [
 		region: 'Bratislava – Petržalka',
 		dlzka: '2,0 km',
 		cas: '~90 min',
-		status: 'coming_soon',
-		cena: '9,99 €',
-		start: 'Sad Janka Kráľa',
+		status: 'active',
+		paid: true,		start: 'Sad Janka Kráľa',
 		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media',
 	},
 	{
@@ -36,9 +34,7 @@ const hry = [
 		region: 'Bratislava – Petržalka',
 		dlzka: '1,2 km',
 		cas: '~60 min',
-		status: 'coming_soon',
-		cena: '9,99 €',
-		start: 'Draždiak',
+		status: 'coming_soon',		start: 'Draždiak',
 		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media',
 	},
 	{
@@ -48,9 +44,7 @@ const hry = [
 		region: 'Bratislava – Petržalka',
 		dlzka: '3,5 km',
 		cas: '~2 hod',
-		status: 'coming_soon',
-		cena: '9,99 €',
-		start: 'Viedenská cesta oproti Inchebe',
+		status: 'coming_soon',		start: 'Viedenská cesta oproti Inchebe',
 		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media',
 	},
 	{
@@ -60,9 +54,7 @@ const hry = [
 		region: 'Bratislava – Petržalka',
 		dlzka: '5,0 km',
 		cas: '~3 hod',
-		status: 'coming_soon',
-		cena: '9,99 €',
-		start: 'Začiatok Chorvátskeho ramena pri Bosákovej',
+		status: 'coming_soon',		start: 'Začiatok Chorvátskeho ramena pri Bosákovej',
 		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media',
 	},
 ];
@@ -95,8 +87,8 @@ const hry = [
 										<span>⏱️ {hra.cas}</span>
 									</div>
 								</div>
-								<div class={`price-tag ${hra.status === 'active' ? 'free' : hra.status === 'coming_soon' ? 'soon' : ''}`}>
-									{hra.status === 'coming_soon' ? 'Čoskoro' : hra.cena}
+								<div class={`price-tag ${hra.status === 'coming_soon' ? 'soon' : hra.paid ? 'paid' : 'available'}`}>
+									{hra.status === 'coming_soon' ? 'Čoskoro' : hra.paid ? 'K zakúpeniu' : 'Dostupné'}
 								</div>
 							</div>
 							<p class="game-desc">{hra.popis}</p>
@@ -194,7 +186,8 @@ const hry = [
 		font-size: 0.9rem;
 		flex-shrink: 0;
 	}
-	.price-tag.free { background: #52A47A; }
+	.price-tag.available { background: #52A47A; }
+	.price-tag.paid { background: #C9761B; }
 	.price-tag.soon { background: #A09080; }
 
 	.game-desc {
