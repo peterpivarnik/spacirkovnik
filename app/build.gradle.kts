@@ -23,13 +23,27 @@ val keystoreProperties: Properties? = if (keystorePropertiesFile.exists()) {
 val versionPropertiesFile = file("version.properties")
 val versionProperties = Properties().apply { load(versionPropertiesFile.inputStream()) }
 
+// Maven-style -SNAPSHOT versioning. version.properties holds e.g. "9-SNAPSHOT", meaning
+// "the next release will be 9, currently in development". The -SNAPSHOT lives only here as a
+// marker — Android's versionCode must be an integer, so it is stripped for the actual build.
+val rawVersion = versionProperties["versionCode"].toString().trim()
+val isSnapshot = rawVersion.endsWith("-SNAPSHOT")
+val releaseVersionCode = rawVersion.removeSuffix("-SNAPSHOT").toInt()
+
+val buildingRelease = gradle.startParameter.taskNames.any {
+    val t = it.substringAfterLast(':')
+    t.equals("releaseBundle", ignoreCase = true) || t.equals("bundleRelease", ignoreCase = true)
+}
+
+// A release build "consumes" the -SNAPSHOT (ships the clean number) and advances
+// version.properties to the next -SNAPSHOT for ongoing development.
+if (buildingRelease && isSnapshot) {
+    versionProperties["versionCode"] = "${releaseVersionCode + 1}-SNAPSHOT"
+    versionProperties.store(versionPropertiesFile.outputStream(), null)
+    println("Release versionCode = $releaseVersionCode  →  next dev version ${releaseVersionCode + 1}-SNAPSHOT")
+}
+
 tasks.register("releaseBundle") {
-    doFirst {
-        val newVersionCode = versionProperties["versionCode"].toString().toInt() + 1
-        versionProperties["versionCode"] = newVersionCode.toString()
-        versionProperties.store(versionPropertiesFile.outputStream(), null)
-        println("versionCode → $newVersionCode")
-    }
     finalizedBy("bundleRelease")
 }
 
@@ -41,8 +55,8 @@ configure<ApplicationExtension> {
         applicationId = "sk.spacirkovnik"
         minSdk = 24
         targetSdk = 37
-        versionCode = versionProperties["versionCode"].toString().toInt()
-        versionName = versionProperties["versionCode"].toString()
+        versionCode = releaseVersionCode
+        versionName = if (buildingRelease) releaseVersionCode.toString() else rawVersion
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["MAPBOX_PUBLIC_TOKEN"] = mapboxPublicToken
         resValue("string", "mapbox_access_token", mapboxPublicToken)
