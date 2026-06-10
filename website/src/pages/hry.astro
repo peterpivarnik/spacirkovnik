@@ -145,10 +145,12 @@ const hry = [
 
 	.game-image {
 		width: 160px;
-		min-height: 160px;
+		height: 160px;
 		object-fit: cover;
-		border-radius: 0;
+		border-radius: 12px;
+		align-self: center;
 		flex-shrink: 0;
+		margin-left: 1rem;
 	}
 
 	.game-content {
@@ -232,7 +234,7 @@ const hry = [
 
 	@media (max-width: 600px) {
 		.game-item { flex-direction: column; }
-		.game-image { width: 100%; height: 180px; }
+		.game-image { width: 100%; height: 180px; margin-left: 0; }
 		.game-content { padding: 1.25rem; }
 	}
 </style>
