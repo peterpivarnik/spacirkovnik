@@ -1,14 +1,14 @@
 {
   "id": "vodnik-z-chorvatskeho-ramena",
   "title": "Vodník z Chorvátského ramena",
-  "version": 5,
+  "version": 6,
   "screens": [
     {
       "text": "Vodník z Chorvátského ramena",
       "type": "CONTINUE",
       "buttonText": "Poď na dobrodružstvo!",
       "fontSize": 26,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 0
     },
     {
@@ -35,26 +35,26 @@
     {
       "text": "Zrazu sa z vody vynorí zelená hlava s veľkými očami a dlhou bradou z rias! Je to vodník! Vyzerá ustarane.",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 4
     },
     {
       "text": "„Ahoj, {mladý priateľ|mladá priateľka}! Ja som vodník Chrčo a žijem v tomto ramene už tristopäťdesiat rokov. Strážim kúzelnu perlu, ktorá udržiava vodu čistú a všetky zvieratká zdravé. Ale včera v noci sa vodné bytosti — rusalka, žabiak, leknička, sumec, bludička, kapor, divožienka a korytnačka — pohádali o to, kto z nich perlu najlepšie stráži. Pri hádke sa perla rozbila na osem kúskov a každý si jeden vzal!“",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 5
     },
     {
       "text": "„Odkedy sa perla rozbila, voda sa kalí, ryby sú nervózne a žabky prestali spievať. Ak nepozbierame všetkých osem kúskov a nezložíme perlu späť, rameno sa zakalí úplne! Každá bytosť ti dá svoj kúsok, ale najskôr ťa vyskúša. Pomôžeš mi?“",
       "type": "CONTINUE",
       "buttonText": "Jasné, Chrčo, poďme na to!",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 6
     },
     {
       "text": "„Výborne! Najprv mi ale dokáž, že poznáš toto miesto. Chorvátske rameno sa volá Chorvátske, pretože tu kedysi žili osadníci z jednej krajiny. Vieš, z ktorej?“",
       "type": "QUESTION",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "answers": [
         {
           "text": "Srbsko",
@@ -78,7 +78,7 @@
     {
       "text": "„Správne! Chorvátski osadníci tu žili už od 16. storočia. Boli to šikovní roľníci a rybári — a boli to aj moji prví ľudskí susedia! Teraz choď za rusalkou. Býva kúsok ďalej.“",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 8
     },
     {
@@ -447,39 +447,39 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.099354,
       "targetLongitude": 17.131454,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 41
     },
     {
       "text": "Chrčo sa vynoril z vody a keď uvidel všetkých osem kúskov perly, rozžiaril sa: „Máš ich! Teraz musíme povedať kúzelné slová, aby sa perla spojila. Povedz so mnou:",
       "type": "CONTINUE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 42,
       "buttonText": "Ďalej"
     },
     {
       "text": "„Voda spája, voda žije, \nperla mocou svojou bije. \nČo sa kúpe v jase vody, \nkrásou znovu nech sa zrodí.“ \n\nKúsky perly sa rozžiarili, zdvihli sa do vzduchu a spojili sa do jednej dokonalej žiariacej perly! Z vody vyšľahol zelenkavý lúč svetla a voda sa začala okamžite čistiť.",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 43
     },
     {
       "text": "A potom to začuješ — kváááá! Kváááá! Žabky začali spievať! Všetky vodné bytosti sa zjavili okolo — rusalka, Kvako, leknička, sumec Fúzan, bludička, kapor Zlatko, divožienka Trstinka aj korytnačka Múdra. Všetci sa usmievajú.",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 44
     },
     {
       "text": "Chrčo sa usmial: „{Bol|Bola} si {úžasný|úžasná}! Bez teba by sme sa nikdy nezmierili. Teraz už vieme, že perlu musíme strážiť spolu — nie sa o ňu hádať.",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 45
     },
     {
       "text": "„Zapamätaj si, {mladý priateľ|mladá priateľka} — voda je život. Bez čistej vody by tu neboli žiadne ryby, žiadne žabky, žiadne kačky, ani žiadny vodník. Staraj sa o prírodu a ona sa postará o teba. A keď niekedy pôjdeš okolo Chorvátského ramena a uvidíš zelenkavé bubliny pod hladinou... to som ja!“",
       "type": "CONTINUE",
       "buttonText": "Ďakujem, Chrčo!",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
       "screenId": 46
     },
     {
