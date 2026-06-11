@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-deploy.py — Aktualizuje verzie zmenených hier a nahrá ich na Firebase RTDB.
+deploy-games.py — Aktualizuje verzie zmenených hier a nahrá ich na Firebase RTDB.
 
-Použitie:
-  python3 deploy.py                     # automaticky zistí zmenené hry (git diff HEAD)
-  python3 deploy.py --all               # nahrá všetky hry + katalóg
-  python3 deploy.py --catalog-only      # nahrá len katalóg bez zmeny verzií
-  python3 deploy.py lesnicka-palica     # konkrétna hra (môžeš zadať viac naraz)
+Použitie (spúšťať z koreňa projektu):
+  python3 scripts/deploy-games.py                 # automaticky zistí zmenené hry (git diff HEAD)
+  python3 scripts/deploy-games.py --all           # nahrá všetky hry + katalóg
+  python3 scripts/deploy-games.py --catalog-only  # nahrá len katalóg bez zmeny verzií
+  python3 scripts/deploy-games.py lesnicka-palica # konkrétna hra (môžeš zadať viac naraz)
 """
 
 import json
@@ -16,8 +16,8 @@ import os
 
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
-GAMES_DIR   = os.path.join(SCRIPT_DIR, "games")
-CATALOG     = os.path.join(SCRIPT_DIR, "catalog", "games-info.json")
+GAMES_DIR   = os.path.join(PROJECT_DIR, "game-data", "games")
+CATALOG     = os.path.join(PROJECT_DIR, "game-data", "catalog", "games-info.json")
 
 # --- Firebase config ---
 with open(os.path.join(SCRIPT_DIR, "http-client.env.json")) as f:
@@ -65,7 +65,7 @@ game_ids = [g for g in game_ids if g]  # odfiltruj prázdne reťazce
 
 if not game_ids:
     print("Žiadne zmeny v hrách oproti poslednému commitu.")
-    print("Tip: ak chceš nahrať všetko, použi: python3 deploy.py --all")
+    print("Tip: ak chceš nahrať všetko, použi: python3 scripts/deploy-games.py --all")
     sys.exit(0)
 
 print(f"Hry na deploy: {', '.join(game_ids)}\n")

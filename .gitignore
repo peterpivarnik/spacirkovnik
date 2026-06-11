@@ -3,7 +3,10 @@
 /.kotlin/
 /build/
 http-client.private.env.json
+serviceAccountKey.json
 keystore.properties
 local.properties
 *.jks
 *.keystore
+__pycache__/
+node_modules/

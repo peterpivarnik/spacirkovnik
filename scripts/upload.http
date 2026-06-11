@@ -2,7 +2,7 @@
 PUT {{dbUrl}}/catalog/games-info.json?auth={{dbSecret}}
 Content-Type: application/json
 
-< catalog/games-info.json
+< ../game-data/catalog/games-info.json
 
 ###
 
@@ -10,7 +10,7 @@ Content-Type: application/json
 PUT {{dbUrl}}/games/lesnicka-palica.json?auth={{dbSecret}}
 Content-Type: application/json
 
-< games/lesnicka-palica.json
+< ../game-data/games/lesnicka-palica.json
 
 ###
 
@@ -18,7 +18,7 @@ Content-Type: application/json
 PUT {{dbUrl}}/games/rybar-z-drazdiaka.json?auth={{dbSecret}}
 Content-Type: application/json
 
-< games/rybar-z-drazdiaka.json
+< ../game-data/games/rybar-z-drazdiaka.json
 
 ###
 
@@ -26,7 +26,7 @@ Content-Type: application/json
 PUT {{dbUrl}}/games/tajomstvo-janka-krala.json?auth={{dbSecret}}
 Content-Type: application/json
 
-< games/tajomstvo-janka-krala.json
+< ../game-data/games/tajomstvo-janka-krala.json
 
 ###
 
@@ -34,7 +34,7 @@ Content-Type: application/json
 PUT {{dbUrl}}/games/vila-z-pecnianskeho-lesa.json?auth={{dbSecret}}
 Content-Type: application/json
 
-< games/vila-z-pecnianskeho-lesa.json
+< ../game-data/games/vila-z-pecnianskeho-lesa.json
 
 ###
 
@@ -42,4 +42,4 @@ Content-Type: application/json
 PUT {{dbUrl}}/games/vodnik-z-chorvatskeho-ramena.json?auth={{dbSecret}}
 Content-Type: application/json
 
-< games/vodnik-z-chorvatskeho-ramena.json
+< ../game-data/games/vodnik-z-chorvatskeho-ramena.json

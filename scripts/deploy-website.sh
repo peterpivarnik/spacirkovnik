@@ -2,21 +2,28 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ENV_FILE="$SCRIPT_DIR/website/.env"
+PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
+PRIVATE_ENV="$SCRIPT_DIR/http-client.private.env.json"
 
-# ── Kontrola .env ────────────────────────────────────────────────────────────
-if [[ ! -f "$ENV_FILE" ]]; then
-    echo "❌  Chýba súbor website/.env"
-    echo "    Vytvor ho podľa website/.env.example"
+# ── FTP údaje z JSON env (tajný súbor, nie je v gite) ─────────────────────────
+if [[ ! -f "$PRIVATE_ENV" ]]; then
+    echo "❌  Chýba $PRIVATE_ENV"
+    echo "    Doplň doň FTP údaje pod \"dev\": ftpHost, ftpUser, ftpPass, ftpRemoteDir."
     exit 1
 fi
 
-# shellcheck source=/dev/null
-source "$ENV_FILE"
+read_env() {  # $1 = kľúč v dev.* ; vráti hodnotu alebo prázdno
+    python3 -c "import json; print(json.load(open('$PRIVATE_ENV')).get('dev',{}).get('$1',''))"
+}
+
+FTP_HOST="$(read_env ftpHost)"
+FTP_USER="$(read_env ftpUser)"
+FTP_PASS="$(read_env ftpPass)"
+FTP_REMOTE_DIR="$(read_env ftpRemoteDir)"
 
 for var in FTP_HOST FTP_USER FTP_PASS FTP_REMOTE_DIR; do
     if [[ -z "${!var:-}" ]]; then
-        echo "❌  Chýba premenná $var v website/.env"
+        echo "❌  Chýba FTP údaj $var v $PRIVATE_ENV"
         exit 1
     fi
 done
@@ -24,7 +31,7 @@ done
 # ── Build ─────────────────────────────────────────────────────────────────────
 echo ""
 echo "🔨  Buildovanie stránky..."
-cd "$SCRIPT_DIR/website"
+cd "$PROJECT_DIR/website"
 npm run build
 echo "✅  Build hotový"
 
@@ -33,7 +40,7 @@ echo ""
 echo "📤  Nahrávanie na $FTP_HOST/$FTP_REMOTE_DIR ..."
 echo ""
 
-python3 - "$FTP_HOST" "$FTP_USER" "$FTP_PASS" "$FTP_REMOTE_DIR" "$SCRIPT_DIR/website/dist" <<'PYEOF'
+python3 - "$FTP_HOST" "$FTP_USER" "$FTP_PASS" "$FTP_REMOTE_DIR" "$PROJECT_DIR/website/dist" <<'PYEOF'
 import ftplib, os, sys
 
 host, user, passwd, remote_dir, local_dir = sys.argv[1:]
