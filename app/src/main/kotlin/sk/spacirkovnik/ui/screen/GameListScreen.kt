@@ -35,6 +35,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.SportsScore
 import androidx.compose.material.icons.filled.WifiOff
 import androidx.compose.material3.AlertDialog
@@ -469,6 +470,18 @@ private fun GameCard(
     val isLocked = !isUnlocked
     val showPurchaseButton = isLocked && info.status == GameStatus.PURCHASABLE
 
+    // Auto-download unlocked games in the background (just the small game JSON; images stream
+    // on demand during play), so the player sees "Hrať" directly without a manual "Stiahnuť"
+    // step. If it fails (e.g. offline) the status falls back to NOT_DOWNLOADED and a
+    // "Skúsiť znova" button is shown instead.
+    var autoDownloadTried by remember(info.id) { mutableStateOf(false) }
+    LaunchedEffect(info.id, isUnlocked) {
+        if (isUnlocked && gameWithStatus.status == DownloadStatus.NOT_DOWNLOADED) {
+            autoDownloadTried = true
+            onDownload()
+        }
+    }
+
     Card(
         onClick = onToggle,
         modifier = Modifier
@@ -543,20 +556,41 @@ private fun GameCard(
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            if (isLocked) {
-                Icon(
-                    imageVector = Icons.Default.Lock,
-                    contentDescription = null,
-                    tint = TextMedium,
-                    modifier = Modifier.size(18.dp)
-                )
-            } else {
-                Icon(
-                    imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                    contentDescription = null,
-                    tint = TextMedium,
-                    modifier = Modifier.size(24.dp)
-                )
+            when {
+                // Purchasable → shopping cart (you can buy it now); coming soon → clock;
+                // any other locked state → padlock. Lets the two be told apart when collapsed.
+                showPurchaseButton -> {
+                    Icon(
+                        imageVector = Icons.Default.ShoppingCart,
+                        contentDescription = "Dá sa kúpiť",
+                        tint = Amber,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+                isLocked && info.status == GameStatus.COMING_SOON -> {
+                    Icon(
+                        imageVector = Icons.Default.AccessTime,
+                        contentDescription = "Čoskoro k dispozícii",
+                        tint = TextMedium,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+                isLocked -> {
+                    Icon(
+                        imageVector = Icons.Default.Lock,
+                        contentDescription = null,
+                        tint = TextMedium,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+                else -> {
+                    Icon(
+                        imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                        contentDescription = null,
+                        tint = TextMedium,
+                        modifier = Modifier.size(24.dp)
+                    )
+                }
             }
         }
 
@@ -689,13 +723,26 @@ private fun GameCard(
                 } else {
                     when (gameWithStatus.status) {
                         DownloadStatus.NOT_DOWNLOADED -> {
-                            Button(
-                                onClick = onDownload,
-                                modifier = Modifier.fillMaxWidth().height(48.dp),
-                                shape = RoundedCornerShape(12.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
-                            ) {
-                                Text("Stiahnuť", color = PrimaryButtonText, fontSize = 16.sp)
+                            if (autoDownloadTried) {
+                                // Auto-download failed (e.g. offline) — let the user retry.
+                                Button(
+                                    onClick = onDownload,
+                                    modifier = Modifier.fillMaxWidth().height(48.dp),
+                                    shape = RoundedCornerShape(12.dp),
+                                    colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                                ) {
+                                    Text("Skúsiť znova", color = PrimaryButtonText, fontSize = 16.sp)
+                                }
+                            } else {
+                                // Auto-download is about to start in the background.
+                                Button(
+                                    onClick = {},
+                                    enabled = false,
+                                    modifier = Modifier.fillMaxWidth().height(48.dp),
+                                    shape = RoundedCornerShape(12.dp)
+                                ) {
+                                    Text("Sťahujem...", fontSize = 16.sp)
+                                }
                             }
                         }
                         DownloadStatus.DOWNLOADING -> {
