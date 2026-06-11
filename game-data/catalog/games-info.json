@@ -49,10 +49,10 @@
     "version": 9,
     "region": "Bratislava - Petržalka",
     "estimatedDurationMinutes": 60,
-    "distanceKm": 1.2,
+    "distanceKm": 2.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media&v=3",
     "colorHex": "1A3A5C",
-    "status": "coming_soon",
+    "status": "purchasable",
     "googlePlayProductId": "rybar_z_drazdiaka",
     "startName": "Draždiak",
     "endName": "Draždiak"

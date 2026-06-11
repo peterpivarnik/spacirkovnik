@@ -30,6 +30,12 @@ const posts = (await getCollection('blog')).sort(
 			ul li {
 				width: calc(50% - 1rem);
 			}
+			/* Lone last article on its own row (even position because the full-width
+			   featured item takes slot 1) → centre it instead of leaving it left-aligned. */
+			ul li:last-child:nth-child(even) {
+				margin-left: auto;
+				margin-right: auto;
+			}
 			ul li * {
 				text-decoration: none;
 				transition: 0.2s ease;
