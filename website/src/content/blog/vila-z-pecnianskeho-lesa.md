@@ -1,6 +1,6 @@
 ---
 title: 'Víla z Pečnianskeho lesa – zachráň les pred zlomyseľným škriatkom'
-description: 'Pripravujeme novú hru – lesná víla Lesnička potrebuje pomoc. Zlomyseľný škriatok zaklial jej kúzelné semienka a Pečniansky les je v ohrození.'
+description: 'Nová hra je vonku! Lesná víla Lesnička potrebuje pomoc – zlomyseľný škriatok zaklial jej kúzelné semienka a Pečniansky les je v ohrození.'
 pubDate: 'Jun 12 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media'
 ---
