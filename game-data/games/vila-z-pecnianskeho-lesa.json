@@ -1,7 +1,7 @@
 {
   "id": "vila-z-pecnianskeho-lesa",
   "title": "Víla z Pečnianskeho lesa",
-  "version": 8,
+  "version": 9,
   "screens": [
     {
       "text": "Víla z Pečnianskeho lesa",
@@ -136,7 +136,7 @@
       "screenId": 13
     },
     {
-      "text": "„Toto semienko pochádza zo stromu, ktorého listy majú tvar ľudskej dlane — päť prstov. A jeho semienka majú krídielka a keď spadnú, točia sa ako vrtuľky! Vieš, aký je to strom?“",
+      "text": "„Toto semienko pochádza zo stromu, ktorého listy majú tvar ľudskej dlane. A jeho semienka majú krídielka a keď spadnú, točia sa ako vrtuľky! Vieš, aký je to strom?“",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Fjavor.jpeg?alt=media",
       "answers": [

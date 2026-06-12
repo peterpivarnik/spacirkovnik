@@ -61,6 +61,17 @@ Alternatíva k `deploy-games.py`, keď chceš nahrať ručne jednotlivé súbory
 
 ---
 
+## `dev-website.sh` — lokálny náhľad webu
+
+Spustí Astro dev server (na pozeranie blogu/stránok pri úprave). Pri prvom spustení doinštaluje závislosti.
+
+```bash
+./scripts/dev-website.sh
+```
+Beží na **http://localhost:4321** (blog: `/blog`), ukončíš cez `Ctrl+C`. Bez prepínačov.
+
+---
+
 ## `deploy-website.sh` — build a nasadenie webu (spacirkovnik.sk)
 
 Zbuilduje Astro stránku (`npm run build`) a nahrá `website/dist` na server (Websupport) cez FTPS.
