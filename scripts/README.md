@@ -156,3 +156,31 @@ python3 scripts/pick-winners.py rybar-z-drazdiaka > winners.txt
 | `[počet]` | koľko výhercov (default `3`); ak je hráčov menej, vyberie všetkých |
 
 Rovnaké požiadavky ako export (`serviceAccountKey.json` + `pip install`). Spoločnú logiku majú v `lib/completed_emails.py`.
+
+---
+
+## `list-products.py` — prehľad in-app produktov (ceny + zľavy)
+
+Vypíše všetky jednorazové (in-app) produkty appky aj s cenami a aktívnymi/neaktívnymi zľavami. Dáta ťahá z **Google Play Developer API** (`monetization.onetimeproducts`).
+
+Príprava (raz):
+```bash
+# 1) Google Cloud Console (projekt prepojený s Play Console) → Service accounts
+#    → vytvor service account + JSON kľúč → ulož ako scripts/play-service-account.json
+# 2) Play Console → Používatelia a povolenia → pozvi tento service account (email z JSON)
+#    s prístupom „Zobraziť informácie o aplikácii a stiahnuť hromadné prehľady"
+# 3) inštalácia závislostí
+python3 -m pip install -r scripts/requirements.txt
+```
+
+Spustenie:
+```bash
+python3 scripts/list-products.py              # ceny pre región SK
+python3 scripts/list-products.py --region DE  # ceny pre iný región
+```
+
+| Argument | Význam |
+|---|---|
+| `--region <kód>` | región pre ceny (default `SK`) |
+
+> ⚠️ `play-service-account.json` je **iný** kľúč než `serviceAccountKey.json` (ten je pre Firebase). Tento potrebuje prístup k **Play Console**, nie k Firebase. Je gitignored.
