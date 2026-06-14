@@ -1,6 +1,7 @@
 package sk.spacirkovnik.ui.screen
 
 import android.content.Intent
+import android.net.Uri
 import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -10,6 +11,7 @@ import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -48,6 +50,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -115,6 +118,7 @@ fun GameListScreen(
     val context = LocalContext.current
     var showSignOutDialog by remember { mutableStateOf(false) }
     var showAuthSheet by remember { mutableStateOf(false) }
+    var marketingPromptDismissed by remember { mutableStateOf(false) }
     var expandedGameId by remember { mutableStateOf<String?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -240,7 +244,7 @@ fun GameListScreen(
                                 }) {
                                     Icon(
                                         imageVector = Icons.Default.AccountCircle,
-                                        contentDescription = if (authState.isSignedIn) "Odhlásiť sa" else "Prihlásiť sa",
+                                        contentDescription = if (authState.isSignedIn) "Účet" else "Prihlásiť sa",
                                         tint = if (authState.isSignedIn) Amber else TextOnBeigeSecondary.copy(alpha = 0.5f),
                                         modifier = Modifier.size(36.dp)
                                     )
@@ -296,8 +300,8 @@ fun GameListScreen(
                             onEmailSignIn = { email, password ->
                                 authViewModel.signInWithEmail(email, password)
                             },
-                            onEmailRegister = { email, password ->
-                                authViewModel.registerWithEmail(email, password)
+                            onEmailRegister = { email, password, marketingOptIn ->
+                                authViewModel.registerWithEmail(email, password, marketingOptIn)
                             },
                             onPasswordReset = { email ->
                                 authViewModel.sendPasswordReset(email)
@@ -311,8 +315,61 @@ fun GameListScreen(
                     if (showSignOutDialog) {
                         AlertDialog(
                             onDismissRequest = { showSignOutDialog = false },
-                            title = { Text("Odhlásiť sa") },
-                            text = { Text("Naozaj sa chceš odhlásiť?") },
+                            title = { Text("Účet") },
+                            text = {
+                                Column {
+                                    authState.userEmail?.let { email ->
+                                        Text(email, fontSize = 14.sp, color = TextMedium)
+                                        Spacer(Modifier.height(16.dp))
+                                    }
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Text(
+                                            text = "Dostávať novinky a akcie e-mailom",
+                                            fontSize = 14.sp,
+                                            color = TextDark,
+                                            modifier = Modifier.weight(1f)
+                                        )
+                                        Switch(
+                                            checked = authState.marketingConsent,
+                                            onCheckedChange = { authViewModel.setMarketingConsent(it) }
+                                        )
+                                    }
+
+                                    Spacer(Modifier.height(16.dp))
+                                    Text(
+                                        text = "Obchodné podmienky",
+                                        fontSize = 13.sp,
+                                        color = Amber,
+                                        textDecoration = TextDecoration.Underline,
+                                        modifier = Modifier.clickable {
+                                            context.startActivity(
+                                                Intent(
+                                                    Intent.ACTION_VIEW,
+                                                    Uri.parse("https://spacirkovnik.sk/obchodne-podmienky/")
+                                                )
+                                            )
+                                        }
+                                    )
+                                    Spacer(Modifier.height(8.dp))
+                                    Text(
+                                        text = "Zásady ochrany osobných údajov",
+                                        fontSize = 13.sp,
+                                        color = Amber,
+                                        textDecoration = TextDecoration.Underline,
+                                        modifier = Modifier.clickable {
+                                            context.startActivity(
+                                                Intent(
+                                                    Intent.ACTION_VIEW,
+                                                    Uri.parse("https://spacirkovnik.sk/zasady-ochrany-osobnych-udajov/")
+                                                )
+                                            )
+                                        }
+                                    )
+                                }
+                            },
                             confirmButton = {
                                 TextButton(onClick = {
                                     showSignOutDialog = false
@@ -323,7 +380,50 @@ fun GameListScreen(
                             },
                             dismissButton = {
                                 TextButton(onClick = { showSignOutDialog = false }) {
-                                    Text("Zrušiť")
+                                    Text("Zavrieť")
+                                }
+                            }
+                        )
+                    }
+
+                    // Nudge po prihlásení pre používateľov, ktorí marketing nemajú zapnutý. Pýta sa,
+                    // ak ešte nerozhodli (žiadny záznam) alebo ak odmietli pred viac než 30 dňami
+                    // (cooldown – druhá šanca bez otravovania). Po „Áno" sa už nepýta.
+                    val marketingCooldownMs = 30L * 24 * 60 * 60 * 1000
+                    val marketingTs = authState.marketingConsentTimestamp
+                    val askMarketingAgain = !authState.marketingConsent &&
+                        (marketingTs == null ||
+                            System.currentTimeMillis() - marketingTs > marketingCooldownMs)
+                    if (authState.isSignedIn &&
+                        authState.marketingConsentLoaded &&
+                        askMarketingAgain &&
+                        !marketingPromptDismissed &&
+                        !showAuthSheet &&
+                        !showSignOutDialog
+                    ) {
+                        AlertDialog(
+                            onDismissRequest = { marketingPromptDismissed = true },
+                            title = { Text("Novinky a akcie") },
+                            text = {
+                                Text(
+                                    "Chceš dostávať e-maily o nových hrách a akciách? " +
+                                        "Súhlas môžeš kedykoľvek odvolať v nastaveniach účtu."
+                                )
+                            },
+                            confirmButton = {
+                                TextButton(onClick = {
+                                    authViewModel.setMarketingConsent(true)
+                                    marketingPromptDismissed = true
+                                }) {
+                                    Text("Áno, chcem")
+                                }
+                            },
+                            dismissButton = {
+                                TextButton(onClick = {
+                                    authViewModel.setMarketingConsent(false)
+                                    marketingPromptDismissed = true
+                                }) {
+                                    Text("Nie, ďakujem")
                                 }
                             }
                         )

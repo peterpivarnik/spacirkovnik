@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ServerValue
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeout
@@ -138,13 +139,19 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun registerWithEmail(email: String, password: String) {
+    fun registerWithEmail(email: String, password: String, marketingOptIn: Boolean) {
         if (!validate(email, password)) return
         viewModelScope.launch {
             try {
                 _state.value = _state.value.copy(loading = true, error = null, info = null)
                 val result = auth.createUserWithEmailAndPassword(email.trim(), password).await()
                 result.user?.sendEmailVerification()
+                // Zaznamenáme rozhodnutie o marketingu (áno/nie) s časovou pečiatkou – aby sa
+                // používateľa, ktorý už pri registrácii rozhodol, nepýtalo znova cez popup.
+                result.user?.uid?.let { uid ->
+                    database.reference.child("marketingConsent").child(uid)
+                        .setValue(mapOf("granted" to marketingOptIn, "timestamp" to ServerValue.TIMESTAMP))
+                }
                 finishSignIn(result.user)
             } catch (_: FirebaseAuthUserCollisionException) {
                 // Direction A: email už existuje cez Google — podrž heslo a vyzvi na Google
@@ -197,6 +204,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         loadActivations()
         loadTestGames()
         loadConsents()
+        loadMarketingConsent()
     }
 
     private fun mapError(e: Exception): String = when (e) {
@@ -299,6 +307,46 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    private fun loadMarketingConsent() {
+        val uid = auth.currentUser?.uid ?: return
+        viewModelScope.launch {
+            try {
+                val snapshot = database.reference
+                    .child("marketingConsent")
+                    .child(uid)
+                    .get()
+                    .await()
+                val granted = snapshot.child("granted").getValue(Boolean::class.java) ?: false
+                val ts = snapshot.child("timestamp").getValue(Long::class.java)
+                _state.value = _state.value.copy(
+                    marketingConsent = granted,
+                    marketingConsentTimestamp = ts,
+                    marketingConsentLoaded = true
+                )
+            } catch (_: Exception) {
+                // On error (e.g. offline) don't prompt — pretend we just asked (cooldown suppresses it).
+                _state.value = _state.value.copy(
+                    marketingConsentTimestamp = System.currentTimeMillis(),
+                    marketingConsentLoaded = true
+                )
+            }
+        }
+    }
+
+    /** Sets (or withdraws) the marketing e-mail consent and stores it with a timestamp. */
+    fun setMarketingConsent(granted: Boolean) {
+        val uid = auth.currentUser?.uid ?: return
+        _state.value = _state.value.copy(
+            marketingConsent = granted,
+            marketingConsentTimestamp = System.currentTimeMillis(),
+            marketingConsentLoaded = true
+        )
+        database.reference
+            .child("marketingConsent")
+            .child(uid)
+            .setValue(mapOf("granted" to granted, "timestamp" to ServerValue.TIMESTAMP))
+    }
+
     /** True if the user already accepted [gameId] consent at [version] or newer. */
     fun hasConsent(gameId: String, version: Int): Boolean {
         return (_state.value.consents[gameId] ?: -1) >= version
@@ -357,6 +405,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         val activatedGames: Set<String> = emptySet(),
         val testGames: Set<String> = emptySet(),
         val consents: Map<String, Int> = emptyMap(),
+        val marketingConsent: Boolean = false,
+        val marketingConsentTimestamp: Long? = null,
+        val marketingConsentLoaded: Boolean = false,
         val loading: Boolean = false,
         val error: String? = null,
         val info: String? = null

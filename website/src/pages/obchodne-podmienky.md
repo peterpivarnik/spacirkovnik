@@ -2,7 +2,7 @@
 layout: '../layouts/LegalPage.astro'
 title: 'Obchodné podmienky'
 description: 'Obchodné podmienky aplikácie Špacírkovník.'
-lastUpdated: '1. júna 2026'
+lastUpdated: '14. júna 2026'
 ---
 
 ## 1. Prevádzkovateľ
@@ -26,6 +26,7 @@ Web: spacirkovnik.sk
 - **Aplikácia** – mobilná aplikácia Špacírkovník dostupná na platforme Google Play (identifikátor: sk.spacirkovnik)
 - **Hra** – digitálny obsah v rámci aplikácie v podobe interaktívnej turistickej hry na konkrétnej trase
 - **Používateľ** – fyzická osoba, ktorá si nainštalovala aplikáciu a používa jej funkcie
+- **Účet** – prihlásenie používateľa v aplikácii prostredníctvom Google účtu alebo e-mailu a hesla
 - **In-app nákup** – platená transakcia uskutočnená priamo v aplikácii prostredníctvom platformy Google Play
 
 ---
@@ -49,7 +50,7 @@ Zmluva medzi prevádzkovateľom a používateľom vzniká momentom dokončenia i
 
 ## 5. Dodanie digitálneho obsahu
 
-Zakúpená hra je sprístupnená okamžite po úspešnom dokončení platby, a to prostredníctvom aplikácie. Prístup k hre je viazaný na Google účet používateľa a je dostupný na všetkých zariadeniach, kde je používateľ prihlásený.
+Zakúpená hra je sprístupnená okamžite po úspešnom dokončení platby, a to prostredníctvom aplikácie. Prístup k hre je viazaný na **účet používateľa v aplikácii** (prihlásenie cez Google alebo e-mail) a je dostupný na všetkých zariadeniach, kde je používateľ prihlásený tým istým účtom.
 
 ---
 
@@ -57,7 +58,7 @@ Zakúpená hra je sprístupnená okamžite po úspešnom dokončení platby, a t
 
 V súlade s § 7 ods. 6 písm. l) zákona č. 102/2014 Z. z. o ochrane spotrebiteľa pri predaji tovaru alebo poskytovaní služieb na základe zmluvy uzavretej na diaľku **používateľ stráca právo na odstúpenie od zmluvy**, ak bol digitálny obsah (hra) sprístupnený okamžite po nákupe a používateľ s tým výslovne súhlasil.
 
-Súhlas so začatím poskytovania digitálneho obsahu pred uplynutím lehoty na odstúpenie od zmluvy je súčasťou procesu nákupu v aplikácii.
+Tento súhlas (so začatím poskytovania digitálneho obsahu pred uplynutím lehoty na odstúpenie a s tým súvisiacou stratou práva na odstúpenie) vyjadruje používateľ prijatím týchto obchodných podmienok pri prihlásení a následným zakúpením a okamžitým sprístupnením hry.
 
 **Reklamácie a výnimky:**  
 Ak zakúpená hra nefunguje správne (technická chyba), kontaktujte nás na info@spacirkovnik.sk. Oprávnené reklamácie riešime vrátením platby prostredníctvom Google Play alebo iným primeraným spôsobom, a to do 30 dní od doručenia reklamácie.

@@ -1,7 +1,9 @@
 package sk.spacirkovnik.ui.component
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -15,6 +17,7 @@ import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -35,6 +38,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
@@ -57,7 +66,7 @@ fun AuthBottomSheet(
     state: AuthViewModel.AuthState,
     onDismiss: () -> Unit,
     onEmailSignIn: (String, String) -> Unit,
-    onEmailRegister: (String, String) -> Unit,
+    onEmailRegister: (String, String, Boolean) -> Unit,
     onPasswordReset: (String) -> Unit,
     onGoogleSignIn: () -> Unit,
 ) {
@@ -68,6 +77,7 @@ fun AuthBottomSheet(
     var mode by remember { mutableStateOf(AuthMode.LOGIN) }
     var showPassword by remember { mutableStateOf(false) }
     var localError by remember { mutableStateOf<String?>(null) }
+    var marketingOptIn by remember { mutableStateOf(false) }
     // The sheet opens on a clean two-button choice; the email/password form is revealed only
     // once the user picks "e-mailom".
     var emailExpanded by remember { mutableStateOf(false) }
@@ -202,6 +212,24 @@ fun AuthBottomSheet(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                         modifier = Modifier.fillMaxWidth()
                     )
+
+                    Spacer(Modifier.height(8.dp))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { marketingOptIn = !marketingOptIn }
+                    ) {
+                        Checkbox(
+                            checked = marketingOptIn,
+                            onCheckedChange = { marketingOptIn = it }
+                        )
+                        Text(
+                            text = "Chcem dostávať novinky a akcie e-mailom (nepovinné)",
+                            fontSize = 13.sp,
+                            color = TextOnBeigeSecondary
+                        )
+                    }
                 }
 
                 AuthMessages(error = localError ?: state.error, info = state.info)
@@ -214,7 +242,7 @@ fun AuthBottomSheet(
                             AuthMode.LOGIN -> onEmailSignIn(email, password)
                             AuthMode.REGISTER ->
                                 if (password != confirmPassword) localError = "Heslá sa nezhodujú."
-                                else onEmailRegister(email, password)
+                                else onEmailRegister(email, password, marketingOptIn)
                             AuthMode.RESET -> onPasswordReset(email)
                         }
                     },
@@ -277,8 +305,38 @@ fun AuthBottomSheet(
                     }
                 }
             }
+
+            Spacer(Modifier.height(12.dp))
+            LegalNotice()
         }
     }
+}
+
+/** Notice that using the app means accepting the terms, with links to the legal pages. */
+@Composable
+private fun LegalNotice() {
+    val linkStyle = TextLinkStyles(
+        style = SpanStyle(color = Amber, textDecoration = TextDecoration.Underline)
+    )
+    val notice = buildAnnotatedString {
+        append("Pokračovaním súhlasíš s ")
+        withLink(LinkAnnotation.Url("https://spacirkovnik.sk/obchodne-podmienky/", linkStyle)) {
+            append("Obchodnými podmienkami")
+        }
+        append(" a berieš na vedomie ")
+        withLink(LinkAnnotation.Url("https://spacirkovnik.sk/zasady-ochrany-osobnych-udajov/", linkStyle)) {
+            append("Zásady ochrany osobných údajov")
+        }
+        append(".")
+    }
+    Text(
+        text = notice,
+        fontSize = 11.sp,
+        lineHeight = 15.sp,
+        color = TextOnBeigeSecondary,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.fillMaxWidth()
+    )
 }
 
 /** Error (red) and info (green) messages shared by both the choice and the form view. */

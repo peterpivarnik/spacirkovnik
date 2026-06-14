@@ -2,7 +2,7 @@
 layout: '../layouts/LegalPage.astro'
 title: 'Zásady ochrany osobných údajov'
 description: 'Zásady ochrany osobných údajov aplikácie Špacírkovník.'
-lastUpdated: '2. júna 2026'
+lastUpdated: '14. júna 2026'
 ---
 
 ## 1. Prevádzkovateľ
@@ -20,7 +20,7 @@ Prevádzkovateľom aplikácie a spracúvania osobných údajov je:
 
 Aplikácia Špacírkovník spracúva nasledujúce údaje len v rozsahu nevyhnutnom na fungovanie aplikácie:
 
-- **Emailová adresa** — získaná pri prihlásení cez váš Google účet.
+- **Emailová adresa** — získaná pri prihlásení alebo registrácii (cez Google účet alebo e-mailom a heslom).
 - **Identifikátor používateľa (UID)** — anonymné ID generované službou Firebase.
 - **Zoznam aktivovaných hier** — informácia o tom, ku ktorým hrám máte prístup.
 - **Poloha zariadenia** — používa sa *len počas používania aplikácie* na zobrazenie mapy a navigáciu po trase. Poloha sa **neukladá** na server.
@@ -34,6 +34,9 @@ Aplikácia Špacírkovník spracúva nasledujúce údaje len v rozsahu nevyhnutn
 | Email a UID | Identifikácia používateľa, priradenie aktivovaných hier | Plnenie zmluvy (čl. 6 ods. 1 písm. b) |
 | Aktivácie hier | Poskytnutie prístupu k zakúpeným hrám | Plnenie zmluvy (čl. 6 ods. 1 písm. b) |
 | Poloha zariadenia | Zobrazenie mapy a navigácia počas hry | Oprávnený záujem (čl. 6 ods. 1 písm. f) |
+| Email (marketing) | Zasielanie noviniek a akcií (nové hry, zľavy) — **len ak udelíte súhlas** | Súhlas (čl. 6 ods. 1 písm. a) |
+
+> **Marketingová komunikácia je dobrovoľná.** Novinky a informácie o akciách posielame **iba** používateľom, ktorí na to dali výslovný súhlas (napríklad zaškrtnutím políčka pri registrácii). Súhlas môžete **kedykoľvek odvolať** — odhlasovacím odkazom v každom e-maile alebo napísaním na info@spacirkovnik.sk. Odvolanie súhlasu nemá vplyv na používanie aplikácie ani na zakúpené hry.
 
 ---
 
