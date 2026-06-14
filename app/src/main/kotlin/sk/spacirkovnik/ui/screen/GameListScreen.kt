@@ -68,6 +68,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -371,6 +372,7 @@ fun GameListScreen(
                                 isExpanded = isExpanded,
                                 isPurchasing = purchaseState.purchasingGameId == gameId,
                                 price = purchaseState.productPrices[productId],
+                                originalPrice = purchaseState.productOriginalPrices[productId],
                                 hasSavedProgress = hasSavedProgress,
                                 isCompleted = isCompleted,
                                 onToggle = {
@@ -454,6 +456,7 @@ private fun GameCard(
     isExpanded: Boolean,
     isPurchasing: Boolean,
     price: String?,
+    originalPrice: String?,
     hasSavedProgress: Boolean,
     isCompleted: Boolean,
     onToggle: () -> Unit,
@@ -703,6 +706,33 @@ private fun GameCard(
                                 color = PrimaryButtonText,
                                 strokeWidth = 2.dp
                             )
+                        } else if (!price.isNullOrEmpty() && originalPrice != null) {
+                            // Zľava: pôvodná cena preškrtnutá + zľavnená cena
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(6.dp)
+                            ) {
+                                Text(
+                                    text = "Kúpiť hru ·",
+                                    modifier = Modifier.alignByBaseline(),
+                                    color = PrimaryButtonText,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                                Text(
+                                    text = originalPrice,
+                                    modifier = Modifier.alignByBaseline(),
+                                    color = PrimaryButtonText.copy(alpha = 0.7f),
+                                    fontSize = 14.sp,
+                                    textDecoration = TextDecoration.LineThrough
+                                )
+                                Text(
+                                    text = price,
+                                    modifier = Modifier.alignByBaseline(),
+                                    color = PrimaryButtonText,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                         } else {
                             Text(
                                 text = if (!price.isNullOrEmpty()) "Kúpiť hru · $price" else "Kúpiť hru",
