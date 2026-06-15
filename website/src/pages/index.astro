@@ -1,8 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const latestPosts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 ---
 
 <!doctype html>
@@ -21,7 +27,6 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 				<a class="btn-primary" href="https://play.google.com/store/apps/details?id=sk.spacirkovnik" target="_blank" rel="noopener">
 					▶ Stiahnuť na Google Play
 				</a>
-				<a class="btn-secondary" href="/spacirky">Pozrieť špacírky →</a>
 			</div>
 		</section>
 
@@ -63,23 +68,40 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			<h2>Dostupné špacírky</h2>
 			<p class="games-sub">Každá špacírka je jedinečný príbeh na skutočnom mieste.</p>
 			<div class="games-grid">
-				<div class="game-card free">
-					<div class="game-badge">Zadarmo</div>
+				<div class="game-card">
 					<h3>Lesnícka palica Gejzu Dražďáka</h3>
 					<p>Pomôž Gejzovi nájsť stratenú lesnícku palicu v petržalských lesoch. Dostupná teraz!</p>
 				</div>
 				<div class="game-card">
-					<div class="game-badge soon">Čoskoro</div>
 					<h3>Tajomstvo Janka Kráľa</h3>
 					<p>Pomôž duchovi básnika nájsť stratené básne v najstaršom parku v Európe.</p>
 				</div>
 				<div class="game-card">
-					<div class="game-badge soon">Čoskoro</div>
 					<h3>Víla z Pečnianskeho lesa</h3>
 					<p>Zachráň Pečniansky les pred zlomyseľným škriatkom Pŕhľavníkom.</p>
 				</div>
 			</div>
 			<a class="btn-secondary" href="/spacirky">Všetky špacírky →</a>
+		</section>
+
+		<!-- BLOG -->
+		<section class="blog-preview">
+			<h2>Blog</h2>
+			<p class="games-sub">Novinky, nové špacírky a tipy na výlety.</p>
+			<div class="blog-grid">
+				{latestPosts.map((post) => (
+					<a class="blog-card" href={`/blog/${post.id}/`}>
+						{post.data.heroImage && (
+							<div class="blog-card-img"><img src={post.data.heroImage} alt="" loading="lazy" /></div>
+						)}
+						<div class="blog-card-body">
+							<p class="blog-card-date"><FormattedDate date={post.data.pubDate} /></p>
+							<h3 class="blog-card-title">{post.data.title}</h3>
+						</div>
+					</a>
+				))}
+			</div>
+			<a class="btn-secondary" href="/blog">Prejsť na blog →</a>
 		</section>
 
 		<!-- ZÁVEREČNÁ CTA -->
@@ -161,7 +183,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	.how {
 		padding: 4rem 1rem;
 		text-align: center;
-		background: #fff;
+		background: linear-gradient(180deg, #F0E9DF 0%, #ffffff 100%);
 	}
 	.how h2 {
 		margin-bottom: 2.5rem;
@@ -198,7 +220,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	.screenshots {
 		padding: 4rem 1rem;
 		text-align: center;
-		background: #FAF6F1;
+		background: linear-gradient(180deg, #F0E9DF 0%, #ffffff 100%);
 	}
 	.screenshots h2 {
 		margin-bottom: 2rem;
@@ -221,7 +243,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	.games-preview {
 		padding: 4rem 1rem;
 		text-align: center;
-		background: #fff;
+		background: linear-gradient(180deg, #F0E9DF 0%, #ffffff 100%);
 	}
 	.games-preview h2 {
 		margin-bottom: 0.5rem;
@@ -230,6 +252,56 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	.games-sub {
 		color: #6B4C35;
 		margin-bottom: 2.5rem;
+	}
+	.blog-preview {
+		padding: 4rem 1rem;
+		text-align: center;
+		background: linear-gradient(180deg, #F0E9DF 0%, #ffffff 100%);
+	}
+	.blog-preview h2 {
+		margin-bottom: 0.5rem;
+		color: #3D2314;
+	}
+	.blog-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 1.5rem;
+		max-width: 960px;
+		margin: 0 auto 2rem;
+		text-align: left;
+	}
+	.blog-card {
+		background: #FAF6F1;
+		border-radius: 16px;
+		overflow: hidden;
+		border: 2px solid transparent;
+		transition: border-color 0.2s;
+		text-decoration: none;
+		display: flex;
+		flex-direction: column;
+	}
+	.blog-card:hover { border-color: #7A4F2E; }
+	.blog-card-img {
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+	}
+	.blog-card-img img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+	.blog-card-body { padding: 1.25rem; }
+	.blog-card-date {
+		font-size: 0.8rem;
+		color: #8B6043;
+		margin: 0 0 0.4rem;
+	}
+	.blog-card-title {
+		font-size: 1rem;
+		color: #3D2314;
+		margin: 0;
+		line-height: 1.35;
 	}
 	.games-grid {
 		display: grid;
@@ -260,27 +332,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		color: #6B4C35;
 		margin: 0;
 	}
-	.game-badge {
-		display: inline-block;
-		font-size: 0.8rem;
-		font-weight: 700;
-		padding: 0.25rem 0.75rem;
-		border-radius: 50px;
-		background: #52A47A;
-		color: #fff;
-	}
-	.game-badge.paid {
-		background: #7A4F2E;
-	}
-	.game-badge.soon {
-		background: #A09080;
-	}
 
 	/* FINAL CTA */
 	.cta-final {
 		padding: 5rem 1rem;
 		text-align: center;
-		background: linear-gradient(135deg, #F0E9DF 0%, #E8D9C8 100%);
+		background: linear-gradient(180deg, #E8D9C8 0%, #F6EFE6 100%);
 	}
 	.cta-logo {
 		width: 120px;
