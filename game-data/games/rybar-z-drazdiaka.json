@@ -1,7 +1,7 @@
 {
   "id": "rybar-z-drazdiaka",
   "title": "Rybár z Draždiaka",
-  "version": 10,
+  "version": 11,
   "screens": [
     {
       "text": "Rybár z Draždiaka",
@@ -109,7 +109,7 @@
       "screenId": 8
     },
     {
-      "text": "Kým sa deti hrajú, rozhliadneš sa okolo. Po hladine plávajú rôzne vodné vtáky. Ktorý vták je známy tým, že je celoživotné verný svojmu partnerovi?",
+      "text": "Kým sa deti hrajú, rozhliadneš sa okolo. Po hladine plávajú rôzne vodné vtáky. Ktorý vták je známy tým, že je celoživotne verný svojmu partnerovi?",
       "type": "QUESTION",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Fhracky.jpeg?alt=media",
       "answers": [
@@ -212,8 +212,8 @@
     {
       "text": "Ihrisko zničilo trstinu a vtáky vyplašene odletovali. Ale deťom to bolo jedno — Jurko kričí: „Dedko, ihriská sú nuda! Chceme zábavný park s horskými dráhami!\" Rybár sa zdvihne a ide za rybkou — musí ju nájsť na druhej strane jazera. Poď za ním!",
       "type": "NAVIGATION",
-      "targetLatitude": 48.10096,
-      "targetLongitude": 17.114183,
+      "targetLatitude": 48.100908,
+      "targetLongitude": 17.114128,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Ftrstina.jpeg?alt=media",
       "screenId": 16
     },
