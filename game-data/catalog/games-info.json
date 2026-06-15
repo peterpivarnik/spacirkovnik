@@ -82,7 +82,7 @@
     "distanceKm": 6.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2",
     "colorHex": "0D3040",
-    "status": "coming_soon",
+    "status": "purchasable",
     "googlePlayProductId": "vodnik_z_chorvatskeho_ramena",
     "startName": "Začiatok Chorvátskeho ramena pri Bosákovej",
     "endName": "Koniec Chorvátskeho ramena pri čerpacej stanici"
