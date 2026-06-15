@@ -20,7 +20,7 @@ Vašu žiadosť spracujeme do **7 pracovných dní**.
 ## Aké údaje budú odstránené
 
 - Váš používateľský účet (Google UID)
-- Zoznam aktivovaných hier priradených k vášmu účtu
+- Zoznam aktivovaných špacírok priradených k vášmu účtu
 
 ---
 

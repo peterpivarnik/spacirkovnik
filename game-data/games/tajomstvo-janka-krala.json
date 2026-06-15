@@ -1,7 +1,7 @@
 {
   "id": "tajomstvo-janka-krala",
   "title": "Tajomstvo Janka Kráľa",
-  "version": 8,
+  "version": 9,
   "screens": [
     {
       "text": "Tajomstvo Janka Kráľa",
@@ -494,7 +494,7 @@
       "screenId": 44
     },
     {
-      "text": "Ak sa ti táto hra páčila, vyskúšaj aj ďalšie hry! Každá ťa zavedie na iné miesto a čaká ťa nový príbeh plný zábavy a zaujímavostí.",
+      "text": "Ak sa ti táto špacírka páčila, vyskúšaj aj ďalšie špacírky! Každá ťa zavedie na iné miesto a čaká ťa nový príbeh plný zábavy a zaujímavostí.",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fpark_pokojny.jpeg?alt=media",
       "screenId": 45
@@ -502,7 +502,7 @@
     {
       "text": "Fialové svetlo na šípke pohaslo a Špacírkovník sa spokojne zastavil. Básne sú zachránené a duch básnika môže pokojne strážiť svoj park. Na rozcestníku však svietia ďalšie šípky — každá skrýva nový príbeh!",
       "type": "CONTINUE",
-      "buttonText": "Späť na zoznam hier",
+      "buttonText": "Späť na zoznam špacírok",
       "fontSize": 22,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
       "screenId": 46

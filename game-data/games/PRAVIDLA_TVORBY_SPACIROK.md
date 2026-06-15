@@ -1,11 +1,11 @@
-# Pravidlá tvorby hier pre Špacírkovník
+# Pravidlá tvorby špacírok pre Špacírkovník
 
 ## 1. Štruktúra JSON súboru
 
 ```json
 {
   "id": "kebab-case-nazov",
-  "title": "Názov hry",
+  "title": "Názov špacírky",
   "version": 1,
   "screens": []
 }
@@ -13,7 +13,7 @@
 
 - `id` — kebab-case, bez diakritiky
 - `version` — celé číslo, zvyšuje sa pri úpravách
-- `screens` — pole obrazoviek, poradie = poradie v hre
+- `screens` — pole obrazoviek, poradie = poradie v špacírke
 
 ---
 
@@ -30,7 +30,7 @@ Všetky typy majú vždy pole `imageUrl` (môže byť `""`).
 
 ---
 
-## 3. Priebeh hry – povinná kostra
+## 3. Priebeh špacírky – povinná kostra
 
 1. **Úvodná obrazovka** — typ `CONTINUE`, `fontSize: 26`, `buttonText: "Poď na dobrodružstvo!"`
 2. **Intro od Špacírkovníka** — typ `BROWSE`, text o tom, že magický rozcestník sa roztočil a šípka ukazuje smerom k miestu dobrodružstva
@@ -46,7 +46,7 @@ Všetky typy majú vždy pole `imageUrl` (môže byť `""`).
 > `BROWSE` zobrazuje tlačidlo „Späť", ktorým by sa hráč vrátil naspäť na navigačnú mapu (ktorú už prešiel) — to je mätúce. `CONTINUE` má len jedno tlačidlo „Ďalej" (bez „Späť"), takže hráč po príchode na miesto plynule pokračuje v príbehu. Ostatné `BROWSE` obrazovky v slučke (napr. pochvala po otázke) môžu zostať `BROWSE`.
 5. **Záver** — rozuzlenie príbehu, poďakovanie hráčovi
 6. **Outro od Špacírkovníka** — typ `CONTINUE`, text o tom, že šípka zhasla, dobrodružstvo splnené, ostatné šípky ešte čakajú
-7. **Posledná obrazovka** — typ `CONTINUE`, `fontSize: 22`, `buttonText: "Späť na zoznam hier"`
+7. **Posledná obrazovka** — typ `CONTINUE`, `fontSize: 22`, `buttonText: "Späť na zoznam špacírok"`
 
 ---
 
@@ -80,13 +80,13 @@ Používa sa formát `{mužský tvar|ženský tvar}` — aplikácia zobrazí spr
 
 ## 6. Príbeh – pravidlá
 
-- **Rozprávkový prvok**: každá hra musí obsahovať aspoň jeden magický/rozprávkový element — napr. kúzelná palička, hovoriaci duch, zlatá rybka, čarovný zvonček, enchanted mapa, rozprávková bytosť a pod. Hra má mať rozprávkový nádych, nie byť suchá prechádzka s kvízom.
+- **Rozprávkový prvok**: každá špacírka musí obsahovať aspoň jeden magický/rozprávkový element — napr. kúzelná palička, hovoriaci duch, zlatá rybka, čarovný zvonček, enchanted mapa, rozprávková bytosť a pod. Špacírka má mať rozprávkový nádych, nie byť suchá prechádzka s kvízom.
 - **Cieľová skupina**: deti cca 6–12 rokov
 - **Jazyk**: slovenčina, jednoduchá, priateľská, nadšená
 - **Príbeh má jasný oblúk**: zápletka → hľadanie/plnenie úloh → rozuzlenie
 - **Hlavná postava / sprievodca** priamo oslovuje hráča (dialóg v úvodzovkách)
-- **Sprievodca je vždy lokálna postava viazaná na miesto** — duch, kúzelné zviera, ožívajúci objekt a pod. Každá hra má svojho unikátneho sprievodcu, nie univerzálnu maskotku.
-- **Špacírkovník ako rámec**: Špacírkovník je magický rozcestník, ktorý vysiela deti na dobrodružstvá. Každá hra začína krátkym úvodom od Špacírkovníka ("šípka sa rozžiarila, ukazuje smerom k...") a končí outro ("šípka zhasla, dobrodružstvo splnené"). Lokálny sprievodca potom preberá vedenie počas celej hry.
+- **Sprievodca je vždy lokálna postava viazaná na miesto** — duch, kúzelné zviera, ožívajúci objekt a pod. Každá špacírka má svojho unikátneho sprievodcu, nie univerzálnu maskotku.
+- **Špacírkovník ako rámec**: Špacírkovník je magický rozcestník, ktorý vysiela deti na dobrodružstvá. Každá špacírka začína krátkym úvodom od Špacírkovníka ("šípka sa rozžiarila, ukazuje smerom k...") a končí outro ("šípka zhasla, dobrodružstvo splnené"). Lokálny sprievodca potom preberá vedenie počas celej špacírky.
 - **Edukatívny obsah** je vplietaný do príbehu prirodzene (nie ako prednáška)
 - **Reálne miesta** — súradnice musia zodpovedať skutočným bodom na mape
 - Vzdialenosti medzi bodmi by mali byť **pešo zvládnuteľné** (max ~500 m medzi bodmi)
@@ -116,7 +116,7 @@ Používa sa formát `{mužský tvar|ženský tvar}` — aplikácia zobrazí spr
 | Pole | Typ | Kedy použiť |
 |------|-----|-------------|
 | `fontSize` | number | Len na úvodnej (26) a záverečnej (22) obrazovke |
-| `screenId` | number | Sekvenčné číslovanie od 0 — nepovinné, niektoré hry ho nemajú |
+| `screenId` | number | Sekvenčné číslovanie od 0 — nepovinné, niektoré špacírky ho nemajú |
 
 ---
 
@@ -144,8 +144,8 @@ Slovenské úvodzovky v JSON sú najčastejší zdroj chýb. **Povinný postup:*
 ## 11. Kontrolný zoznam pred odovzdaním
 
 - [ ] JSON je validný (žiadne trailing čiarky, správne úvodzovky)
-- [ ] Prvá obrazovka je CONTINUE s názvom hry
-- [ ] Posledná obrazovka je CONTINUE s "Späť na zoznam hier"
+- [ ] Prvá obrazovka je CONTINUE s názvom špacírky
+- [ ] Posledná obrazovka je CONTINUE s "Späť na zoznam špacírok"
 - [ ] Každá QUESTION má presne 1 správnu odpoveď
 - [ ] Všetky GPS súradnice sú reálne a v rozumnej pešej vzdialenosti
 - [ ] Gender formy `{m|ž}` sú konzistentné a kompletné

@@ -209,7 +209,7 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
                 purchasingProductId = null
                 _state.value = _state.value.copy(
                     purchasingGameId = null,
-                    error = "Pre aktiváciu hry sa musíš prihlásiť."
+                    error = "Pre aktiváciu špacírky sa musíš prihlásiť."
                 )
                 return@launch
             }
@@ -234,7 +234,7 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
                     purchasingProductId = null
                     _state.value = _state.value.copy(
                         purchasingGameId = null,
-                        error = "Túto hru zakúpil iný účet na tomto zariadení. Ak je tvoja, prihlás sa účtom, ktorým bola kúpená."
+                        error = "Túto špacírku zakúpil iný účet na tomto zariadení. Ak je tvoja, prihlás sa účtom, ktorým bola kúpená."
                     )
                     return@launch
                 }

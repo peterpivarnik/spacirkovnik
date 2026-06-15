@@ -99,7 +99,7 @@ fun GamePlayScreen(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ExitToApp,
-                    contentDescription = "Ukončiť hru",
+                    contentDescription = "Ukončiť špacírku",
                     tint = TextOnDark
                 )
             }
@@ -135,7 +135,7 @@ fun GamePlayScreen(
             showExitDialog = false
         },
             title = {
-                Text("Ukončiť hru", fontWeight = FontWeight.Bold, color = TextDark)
+                Text("Ukončiť špacírku", fontWeight = FontWeight.Bold, color = TextDark)
             },
             text = {
                 Text("Chceš si uložiť postup a pokračovať neskôr, alebo začať odznova?", color = TextMedium)
@@ -165,7 +165,7 @@ fun GamePlayScreen(
                         Text("Ukončiť a vymazať postup", color = Color.White, fontSize = 14.sp)
                     }
                     Text(
-                        "Pri vymazaní postupu budete musieť začať hrať hru odznova!",
+                        "Pri vymazaní postupu budete musieť prejsť špacírku odznova!",
                         fontSize = 12.sp,
                         color = Color(0xFFC62828),
                         textAlign = TextAlign.Center,

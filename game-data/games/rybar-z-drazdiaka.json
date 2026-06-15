@@ -1,7 +1,7 @@
 {
   "id": "rybar-z-drazdiaka",
   "title": "Rybár z Draždiaka",
-  "version": 9,
+  "version": 10,
   "screens": [
     {
       "text": "Rybár z Draždiaka",
@@ -370,7 +370,7 @@
     {
       "text": "Modré iskričky na šípke zhasli a Špacírkovník spokojne stíchol. Jazero je v pokoji a zlatá rybka stráži jeho hladinu. Ale rozcestník má ešte veľa šípok — kam pôjdeš nabudúce?",
       "type": "CONTINUE",
-      "buttonText": "Späť na zoznam hier",
+      "buttonText": "Späť na zoznam špacírok",
       "fontSize": 22,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
       "screenId": 30

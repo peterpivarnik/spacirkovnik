@@ -9,6 +9,7 @@ export default defineConfig({
 	site: 'https://spacirkovnik.sk',
 	redirects: {
 		'/blog/vitajte-v-spacirkovniku': '/blog/vitajte-na-spacirkovniku',
+		'/hry': '/spacirky',
 	},
 	integrations: [mdx(), sitemap()],
 	fonts: [

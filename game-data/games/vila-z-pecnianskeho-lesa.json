@@ -1,7 +1,7 @@
 {
   "id": "vila-z-pecnianskeho-lesa",
   "title": "Víla z Pečnianskeho lesa",
-  "version": 9,
+  "version": 10,
   "screens": [
     {
       "text": "Víla z Pečnianskeho lesa",
@@ -444,7 +444,7 @@
     {
       "text": "Vyber si ďalšie dobrodružstvo!",
       "type": "CONTINUE",
-      "buttonText": "Späť na zoznam hier",
+      "buttonText": "Späť na zoznam špacírok",
       "fontSize": 22,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
       "screenId": 41

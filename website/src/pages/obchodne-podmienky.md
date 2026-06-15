@@ -24,7 +24,7 @@ Web: spacirkovnik.sk
 ## 2. Vymedzenie pojmov
 
 - **Aplikácia** – mobilná aplikácia Špacírkovník dostupná na platforme Google Play (identifikátor: sk.spacirkovnik)
-- **Hra** – digitálny obsah v rámci aplikácie v podobe interaktívnej turistickej hry na konkrétnej trase
+- **Špacírka** – digitálny obsah v rámci aplikácie v podobe interaktívnej turistickej trasy
 - **Používateľ** – fyzická osoba, ktorá si nainštalovala aplikáciu a používa jej funkcie
 - **Účet** – prihlásenie používateľa v aplikácii prostredníctvom Google účtu alebo e-mailu a hesla
 - **In-app nákup** – platená transakcia uskutočnená priamo v aplikácii prostredníctvom platformy Google Play
@@ -33,15 +33,15 @@ Web: spacirkovnik.sk
 
 ## 3. Predmet zmluvy
 
-Prevádzkovateľ poskytuje používateľom prístup k digitálnemu obsahu – hrám v aplikácii Špacírkovník. Niektoré hry sú dostupné bezplatne, iné sú spoplatnené jednorazovým poplatkom (in-app nákup).
+Prevádzkovateľ poskytuje používateľom prístup k digitálnemu obsahu – špacírkam v aplikácii Špacírkovník. Niektoré špacírky sú dostupné bezplatne, iné sú spoplatnené jednorazovým poplatkom (in-app nákup).
 
-Zmluva medzi prevádzkovateľom a používateľom vzniká momentom dokončenia in-app nákupu alebo spustením bezplatnej hry.
+Zmluva medzi prevádzkovateľom a používateľom vzniká momentom dokončenia in-app nákupu alebo spustením bezplatnej špacírky.
 
 ---
 
 ## 4. Ceny a platby
 
-- Ceny platených hier sú uvedené priamo v aplikácii v čase nákupu.
+- Ceny platených špacírok sú uvedené priamo v aplikácii v čase nákupu.
 - Platba prebieha výlučne prostredníctvom platformy **Google Play** a riadi sa jej platobnými podmienkami.
 - Prevádzkovateľ neprichádza do kontaktu s platobnými údajmi používateľa – tieto spravuje výhradne spoločnosť Google.
 - Ceny sú uvádzané vrátane DPH (ak sa uplatňuje).
@@ -50,18 +50,18 @@ Zmluva medzi prevádzkovateľom a používateľom vzniká momentom dokončenia i
 
 ## 5. Dodanie digitálneho obsahu
 
-Zakúpená hra je sprístupnená okamžite po úspešnom dokončení platby, a to prostredníctvom aplikácie. Prístup k hre je viazaný na **účet používateľa v aplikácii** (prihlásenie cez Google alebo e-mail) a je dostupný na všetkých zariadeniach, kde je používateľ prihlásený tým istým účtom.
+Zakúpená špacírka je sprístupnená okamžite po úspešnom dokončení platby, a to prostredníctvom aplikácie. Prístup k špacírke je viazaný na **účet používateľa v aplikácii** (prihlásenie cez Google alebo e-mail) a je dostupný na všetkých zariadeniach, kde je používateľ prihlásený tým istým účtom.
 
 ---
 
 ## 6. Odstúpenie od zmluvy a vrátenie peňazí
 
-V súlade s § 7 ods. 6 písm. l) zákona č. 102/2014 Z. z. o ochrane spotrebiteľa pri predaji tovaru alebo poskytovaní služieb na základe zmluvy uzavretej na diaľku **používateľ stráca právo na odstúpenie od zmluvy**, ak bol digitálny obsah (hra) sprístupnený okamžite po nákupe a používateľ s tým výslovne súhlasil.
+V súlade s § 7 ods. 6 písm. l) zákona č. 102/2014 Z. z. o ochrane spotrebiteľa pri predaji tovaru alebo poskytovaní služieb na základe zmluvy uzavretej na diaľku **používateľ stráca právo na odstúpenie od zmluvy**, ak bol digitálny obsah (špacírka) sprístupnený okamžite po nákupe a používateľ s tým výslovne súhlasil.
 
-Tento súhlas (so začatím poskytovania digitálneho obsahu pred uplynutím lehoty na odstúpenie a s tým súvisiacou stratou práva na odstúpenie) vyjadruje používateľ prijatím týchto obchodných podmienok pri prihlásení a následným zakúpením a okamžitým sprístupnením hry.
+Tento súhlas (so začatím poskytovania digitálneho obsahu pred uplynutím lehoty na odstúpenie a s tým súvisiacou stratou práva na odstúpenie) vyjadruje používateľ prijatím týchto obchodných podmienok pri prihlásení a následným zakúpením a okamžitým sprístupnením špacírky.
 
 **Reklamácie a výnimky:**  
-Ak zakúpená hra nefunguje správne (technická chyba), kontaktujte nás na info@spacirkovnik.sk. Oprávnené reklamácie riešime vrátením platby prostredníctvom Google Play alebo iným primeraným spôsobom, a to do 30 dní od doručenia reklamácie.
+Ak zakúpená špacírka nefunguje správne (technická chyba), kontaktujte nás na info@spacirkovnik.sk. Oprávnené reklamácie riešime vrátením platby prostredníctvom Google Play alebo iným primeraným spôsobom, a to do 30 dní od doručenia reklamácie.
 
 Vrátenie platby cez Google Play je možné tiež priamo prostredníctvom obchodu Google Play v súlade s ich pravidlami (zvyčajne do 48 hodín od nákupu).
 

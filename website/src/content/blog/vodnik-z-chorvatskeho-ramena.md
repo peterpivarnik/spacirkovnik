@@ -1,11 +1,11 @@
 ---
 title: 'Vodník z Chorvátského ramena – poskladaj rozbitú kúzelnú perlu'
-description: 'Nová hra je vonku! Vodníkovi Chrčovi sa rozbila kúzelná perla, ktorá udržiava vodu v Chorvátskom ramene čistú. Pomôž mu pozbierať jej kúsky od vodných bytostí.'
+description: 'Nová špacírka je vonku! Vodníkovi Chrčovi sa rozbila kúzelná perla, ktorá udržiava vodu v Chorvátskom ramene čistú. Pomôž mu pozbierať jej kúsky od vodných bytostí.'
 pubDate: 'Jun 15 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2'
 ---
 
-**Nová hra** pre Špacírkovník je tu – a tentokrát sa poberieme k vode! 🌊🐸
+**Nová špacírka** pre Špacírkovník je tu – a tentokrát sa poberieme k vode! 🌊🐸
 
 ## Príbeh
 
@@ -15,7 +15,7 @@ Pomôžeš Chrčovi pozbierať všetkých **osem kúskov perly** a poskladať ju
 
 ## Kde sa hrá?
 
-Hra ťa vedie pozdĺž **Chorvátskeho ramena** – odnože Dunaja, ktorá preteká cez celú Petržalku. Je to obľúbené miesto na prechádzky, korčuľovanie aj bicyklovanie.
+Špacírka ťa vedie pozdĺž **Chorvátskeho ramena** – odnože Dunaja, ktorá preteká cez celú Petržalku. Je to obľúbené miesto na prechádzky, korčuľovanie aj bicyklovanie.
 
 ## Trasa
 
@@ -31,12 +31,12 @@ Hra ťa vedie pozdĺž **Chorvátskeho ramena** – odnože Dunaja, ktorá prete
 - **9 hádaniek a otázok** o rybách, žabách, leknách a živote pri vode
 - Rozprávkový príbeh s vodníkom Chrčom a kúzelnou perlou, ktorú treba poskladať
 
-Je to zatiaľ naša **najdlhšia hra** – pripravená na poriadnu prechádzku popri vode. 💧
+Je to zatiaľ naša **najdlhšia špacírka** – pripravená na poriadnu prechádzku popri vode. 💧
 
 ## Ako začať?
 
 1. Stiahni si appku **Špacírkovník** z Google Play
-2. Otvor hru **„Vodník z Chorvátského ramena"** a odomkni si ju priamo v appke
+2. Otvor špacírku **„Vodník z Chorvátského ramena"** a odomkni si ju priamo v appke
 3. Vyber sa k **Chorvátskemu ramenu** a nechaj sa naviesť na štart
 
 Tak šup k vode – Chrčo a jeho priatelia ťa potrebujú! 🧜‍♂️🐢

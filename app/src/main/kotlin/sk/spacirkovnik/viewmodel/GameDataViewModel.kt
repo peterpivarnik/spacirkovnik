@@ -39,7 +39,7 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
         } else {
             _state.value = GameState(
                 loading = false,
-                error = "Hra nebola nájdená alebo je prázdna. game=${game != null}, screens=${game?.screens?.size}"
+                error = "Špacírka nebola nájdená alebo je prázdna. game=${game != null}, screens=${game?.screens?.size}"
             )
         }
     }

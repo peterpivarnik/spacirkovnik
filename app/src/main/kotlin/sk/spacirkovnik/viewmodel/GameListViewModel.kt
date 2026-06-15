@@ -64,7 +64,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
                         error = if (isNetworkError)
                             "Nie je dostupné internetové pripojenie."
                         else
-                            "Nepodarilo sa načítať zoznam hier."
+                            "Nepodarilo sa načítať zoznam špacírok."
                     )
                 }
             }
@@ -94,7 +94,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
             } catch (e: Exception) {
                 updateGameStatus(gameId, DownloadStatus.NOT_DOWNLOADED)
                 _state.value = _state.value.copy(
-                    error = "Nepodarilo sa stiahnuť hru: ${e.message}"
+                    error = "Nepodarilo sa stiahnuť špacírku: ${e.message}"
                 )
             }
         }

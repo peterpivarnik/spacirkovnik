@@ -8,7 +8,7 @@
 
     <!-- Vyžaduje touchscreen — zámerne vylúči Android TV, wearables a iné zariadenia bez dotykovej obrazovky -->
     <uses-feature android:name="android.hardware.touchscreen" android:required="true" tools:ignore="TouchscreenHardwareFeature" />
-    <!-- GPS je nevyhnutné — celá hra je navigácia na reálne GPS body. Vylúči TV, Chromebooky a XR bez GPS. -->
+    <!-- GPS je nevyhnutné — celá špacírka je navigácia na reálne GPS body. Vylúči TV, Chromebooky a XR bez GPS. -->
     <uses-feature android:name="android.hardware.location.gps" android:required="true" />
     <!-- Kompas (magnetometer) — používa ho navigačná strelka, ale NIE je povinný: niektoré lacnejšie
          telefóny ho nemajú a tých nechceme vylúčiť. Appka beh bez kompasu zvládne (strelka sa len neotáča). -->

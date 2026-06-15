@@ -1,7 +1,7 @@
 {
   "id": "vodnik-z-chorvatskeho-ramena",
   "title": "Vodník z Chorvátského ramena",
-  "version": 6,
+  "version": 7,
   "screens": [
     {
       "text": "Vodník z Chorvátského ramena",
@@ -485,7 +485,7 @@
     {
       "text": "Zelenkavé svetlo na šípke Špacírkovníka pomaly pohaslo a rozcestník spokojne zamrmlal. Chorvátske rameno je zasa čisté a vodník Chrčo so svojimi priateľmi stráži perlu spoločne. Ale na Špacírkovníku sa trblietajú ďalšie šípky — každá ukrýva nové dobrodružstvo!",
       "type": "CONTINUE",
-      "buttonText": "Späť na zoznam hier",
+      "buttonText": "Späť na zoznam špacírok",
       "fontSize": 22,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
       "screenId": 47

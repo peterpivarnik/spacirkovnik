@@ -1,7 +1,6 @@
 package sk.spacirkovnik.ui.screen
 
 import android.content.Intent
-import android.net.Uri
 import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -144,7 +143,7 @@ fun GameListScreen(
         val gameId = purchaseState.justPurchasedGameId ?: return@LaunchedEffect
         authViewModel.grantActivation(gameId)
         purchaseViewModel.clearPurchased()
-        snackbarHostState.showSnackbar("Hra bola úspešne zakúpená!")
+        snackbarHostState.showSnackbar("Špacírka bola úspešne zakúpená!")
     }
 
     LaunchedEffect(purchaseState.error) {
@@ -283,7 +282,7 @@ fun GameListScreen(
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Text(
-                                text = "Offline režim — zobrazujú sa uložené hry",
+                                text = "Offline režim — zobrazujú sa uložené špacírky",
                                 fontSize = 12.sp,
                                 color = TextOnBeigeSecondary
                             )
@@ -348,7 +347,7 @@ fun GameListScreen(
                                             context.startActivity(
                                                 Intent(
                                                     Intent.ACTION_VIEW,
-                                                    Uri.parse("https://spacirkovnik.sk/obchodne-podmienky/")
+                                                    "https://spacirkovnik.sk/obchodne-podmienky/".toUri()
                                                 )
                                             )
                                         }
@@ -363,7 +362,7 @@ fun GameListScreen(
                                             context.startActivity(
                                                 Intent(
                                                     Intent.ACTION_VIEW,
-                                                    Uri.parse("https://spacirkovnik.sk/zasady-ochrany-osobnych-udajov/")
+                                                    "https://spacirkovnik.sk/zasady-ochrany-osobnych-udajov/".toUri()
                                                 )
                                             )
                                         }
@@ -406,7 +405,7 @@ fun GameListScreen(
                             title = { Text("Novinky a akcie") },
                             text = {
                                 Text(
-                                    "Chceš dostávať e-maily o nových hrách a akciách? " +
+                                    "Chceš dostávať e-maily o nových špacírkach a akciách? " +
                                         "Súhlas môžeš kedykoľvek odvolať v nastaveniach účtu."
                                 )
                             },
@@ -457,7 +456,7 @@ fun GameListScreen(
                                 if (!authState.isSignedIn) {
                                     scope.launch {
                                         snackbarHostState.showSnackbar(
-                                            "Pre túto hru sa najprv prihlás – zdieľa sa e-mail s organizátorom."
+                                            "Pre túto špacírku sa najprv prihlás – zdieľa sa e-mail s organizátorom."
                                         )
                                     }
                                     return
@@ -490,7 +489,7 @@ fun GameListScreen(
                                 onPurchase = {
                                     if (!authState.isSignedIn) {
                                         scope.launch {
-                                            snackbarHostState.showSnackbar("Pre kúpu hry sa najprv prihláste.")
+                                            snackbarHostState.showSnackbar("Pre kúpu špacírky sa najprv prihláste.")
                                         }
                                     } else if (activity != null) {
                                         purchaseViewModel.purchaseGame(gameId, productId, activity)
@@ -574,7 +573,7 @@ private fun GameCard(
     val showPurchaseButton = isLocked && info.status == GameStatus.PURCHASABLE
 
     // Auto-download unlocked games in the background (just the small game JSON; images stream
-    // on demand during play), so the player sees "Hrať" directly without a manual "Stiahnuť"
+    // on demand during play), so the player sees "Prejsť" directly without a manual "Stiahnuť"
     // step. If it fails (e.g. offline) the status falls back to NOT_DOWNLOADED and a
     // "Skúsiť znova" button is shown instead.
     var autoDownloadTried by remember(info.id) { mutableStateOf(false) }
@@ -812,7 +811,7 @@ private fun GameCard(
                                 horizontalArrangement = Arrangement.spacedBy(6.dp)
                             ) {
                                 Text(
-                                    text = "Kúpiť hru ·",
+                                    text = "Kúpiť špacírku ·",
                                     modifier = Modifier.alignByBaseline(),
                                     color = PrimaryButtonText,
                                     fontSize = 16.sp,
@@ -835,7 +834,7 @@ private fun GameCard(
                             }
                         } else {
                             Text(
-                                text = if (!price.isNullOrEmpty()) "Kúpiť hru · $price" else "Kúpiť hru",
+                                text = if (!price.isNullOrEmpty()) "Kúpiť špacírku · $price" else "Kúpiť špacírku",
                                 color = PrimaryButtonText,
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold
@@ -894,7 +893,7 @@ private fun GameCard(
                                         shape = RoundedCornerShape(12.dp),
                                         colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
                                     ) {
-                                        Text("Hrať znova", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                                        Text("Prejsť znova", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
                                     }
                                 }
                                 hasSavedProgress -> {
@@ -917,7 +916,7 @@ private fun GameCard(
                                                 contentColor = SecondaryOutlineButton
                                             )
                                         ) {
-                                            Text("Hrať od začiatku", fontSize = 16.sp)
+                                            Text("Prejsť od začiatku", fontSize = 16.sp)
                                         }
                                     }
                                 }
@@ -928,7 +927,7 @@ private fun GameCard(
                                         shape = RoundedCornerShape(12.dp),
                                         colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
                                     ) {
-                                        AutoSizeText("Hrať", color = PrimaryButtonText, fontWeight = FontWeight.Bold)
+                                        AutoSizeText("Prejsť", color = PrimaryButtonText, fontWeight = FontWeight.Bold)
                                     }
                                 }
                             }
@@ -940,7 +939,7 @@ private fun GameCard(
                                 shape = RoundedCornerShape(12.dp),
                                 colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
                             ) {
-                                Text("Hrať", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                                Text("Prejsť", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                     }

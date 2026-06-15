@@ -16,9 +16,9 @@ val TextOnDark = Color(0xFFF5F9F7)
 
 val CardBg = Color(0xFFFAF6F1)
 
-val PrimaryButton = Color(0xFFC9761B)       // primárne tlačidlo (Hrať, Stiahnuť...)
+val PrimaryButton = Color(0xFFC9761B)       // primárne tlačidlo (Prejsť, Stiahnuť...)
 val PrimaryButtonText = Color(0xFFFFFFFF)
-val SecondaryButton = Color(0xFF3A6B5A)     // sekundárne plné tlačidlo (kvízové odpovede v hre)
+val SecondaryButton = Color(0xFF3A6B5A)     // sekundárne plné tlačidlo (kvízové odpovede v špacírke)
 val SecondaryOutlineButton = Color(0xFF7A4A22) // sekundárne obrysové tlačidlo (Aktualizovať)
 val PurchaseButton = Color(0xFF4E8E7A)
 val SecondaryButtonText = Color(0xFFFFFFFF)
@@ -43,7 +43,7 @@ val MainBackground = Brush.verticalGradient(
     )
 )
 
-// Text farby pre svetlé pozadie (zoznam hier)
+// Text farby pre svetlé pozadie (zoznam špacírok)
 val TextOnBeige = Color(0xFF3D2314)
 val TextOnBeigeSecondary = Color(0xFF6B4C35)
 

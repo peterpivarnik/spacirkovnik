@@ -1,7 +1,7 @@
 {
   "id": "lesnicka-palica",
   "title": "Lesnícka palica Gejzu Dražďáka",
-  "version": 25,
+  "version": 26,
   "screens": [
     {
       "text": "Lesnícka palica Gejzu Dražďáka",
@@ -453,7 +453,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Fzahrada.jpeg?alt=media"
     },
     {
-      "text": "Gratulujeme, {dokončil|dokončila} si dobrodružstvo! {Bol|Bola} si {úžasný pomocník|úžasná pomocníčka} - vďaka tebe sa lesníkova kúzelná palica našla a všetky zvieratká v lese sú šťastné. Gejza Dražďák ti ďakuje za celý les! A malý Janko sľúbil, že nabudúce tatkovi nechá odkaz, keď si palicu požičia.\n Ak sa ti dobrodružstvo páčilo, určite vyskúšaj aj naše ďalšie hry, čaká ťa ešte viac záhad, zvieratiek a objavovania!",
+      "text": "Gratulujeme, {dokončil|dokončila} si dobrodružstvo! {Bol|Bola} si {úžasný pomocník|úžasná pomocníčka} - vďaka tebe sa lesníkova kúzelná palica našla a všetky zvieratká v lese sú šťastné. Gejza Dražďák ti ďakuje za celý les! A malý Janko sľúbil, že nabudúce tatkovi nechá odkaz, keď si palicu požičia.\n Ak sa ti dobrodružstvo páčilo, určite vyskúšaj aj naše ďalšie špacírky, čaká ťa ešte viac záhad, zvieratiek a objavovania!",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media"
     },
@@ -466,7 +466,7 @@
     {
       "text": "Vyber si ďalšie dobrodružstvo!",
       "type": "CONTINUE",
-      "buttonText": "Späť na zoznam hier",
+      "buttonText": "Späť na zoznam špacírok",
       "fontSize": 22,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media"
     }

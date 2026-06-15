@@ -22,7 +22,7 @@ Aplikácia Špacírkovník spracúva nasledujúce údaje len v rozsahu nevyhnutn
 
 - **Emailová adresa** — získaná pri prihlásení alebo registrácii (cez Google účet alebo e-mailom a heslom).
 - **Identifikátor používateľa (UID)** — anonymné ID generované službou Firebase.
-- **Zoznam aktivovaných hier** — informácia o tom, ku ktorým hrám máte prístup.
+- **Zoznam aktivovaných špacírok** — informácia o tom, ku ktorým špacírkam máte prístup.
 - **Poloha zariadenia** — používa sa *len počas používania aplikácie* na zobrazenie mapy a navigáciu po trase. Poloha sa **neukladá** na server.
 
 ---
@@ -31,12 +31,12 @@ Aplikácia Špacírkovník spracúva nasledujúce údaje len v rozsahu nevyhnutn
 
 | Údaj | Účel | Právny základ (čl. 6 GDPR) |
 |---|---|---|
-| Email a UID | Identifikácia používateľa, priradenie aktivovaných hier | Plnenie zmluvy (čl. 6 ods. 1 písm. b) |
-| Aktivácie hier | Poskytnutie prístupu k zakúpeným hrám | Plnenie zmluvy (čl. 6 ods. 1 písm. b) |
-| Poloha zariadenia | Zobrazenie mapy a navigácia počas hry | Oprávnený záujem (čl. 6 ods. 1 písm. f) |
-| Email (marketing) | Zasielanie noviniek a akcií (nové hry, zľavy) — **len ak udelíte súhlas** | Súhlas (čl. 6 ods. 1 písm. a) |
+| Email a UID | Identifikácia používateľa, priradenie aktivovaných špacírok | Plnenie zmluvy (čl. 6 ods. 1 písm. b) |
+| Aktivácie špacírok | Poskytnutie prístupu k zakúpeným špacírkam | Plnenie zmluvy (čl. 6 ods. 1 písm. b) |
+| Poloha zariadenia | Zobrazenie mapy a navigácia počas špacírky | Oprávnený záujem (čl. 6 ods. 1 písm. f) |
+| Email (marketing) | Zasielanie noviniek a akcií (nové špacírky, zľavy) — **len ak udelíte súhlas** | Súhlas (čl. 6 ods. 1 písm. a) |
 
-> **Marketingová komunikácia je dobrovoľná.** Novinky a informácie o akciách posielame **iba** používateľom, ktorí na to dali výslovný súhlas (napríklad zaškrtnutím políčka pri registrácii). Súhlas môžete **kedykoľvek odvolať** — odhlasovacím odkazom v každom e-maile alebo napísaním na info@spacirkovnik.sk. Odvolanie súhlasu nemá vplyv na používanie aplikácie ani na zakúpené hry.
+> **Marketingová komunikácia je dobrovoľná.** Novinky a informácie o akciách posielame **iba** používateľom, ktorí na to dali výslovný súhlas (napríklad zaškrtnutím políčka pri registrácii). Súhlas môžete **kedykoľvek odvolať** — odhlasovacím odkazom v každom e-maile alebo napísaním na info@spacirkovnik.sk. Odvolanie súhlasu nemá vplyv na používanie aplikácie ani na zakúpené špacírky.
 
 ---
 
@@ -44,7 +44,7 @@ Aplikácia Špacírkovník spracúva nasledujúce údaje len v rozsahu nevyhnutn
 
 Údaje spracúvame prostredníctvom týchto poskytovateľov služieb:
 
-- **Google Firebase** (Google Ireland Limited) — autentifikácia, databáza aktivácií a úložisko obrázkov hier.
+- **Google Firebase** (Google Ireland Limited) — autentifikácia, databáza aktivácií a úložisko obrázkov špacírok.
 - **Mapbox** (Mapbox, Inc.) — zobrazenie mapy a výpočet trasy.
 
 Údaje **nepredávame** tretím stranám a **nepoužívame** žiadne reklamné ani analytické SDK.
