@@ -754,16 +754,19 @@ private fun NavigationMap(
                 iconImage = userPinIcon
                 iconAnchor = IconAnchor.CENTER
             }
-            // Walking route along footpaths when available, else a straight line.
-            val linePoints = routePoints?.takeIf { it.size >= 2 } ?: listOf(up, targetPoint)
+            // Walking route along footpaths when available, else a straight line. The
+            // Directions API snaps both ends to the nearest path, so the route can stop
+            // short of the actual user/target points. Bridge those gaps with straight
+            // segments so the line always runs from the user dot to the target dot.
+            val linePoints = routePoints?.takeIf { it.size >= 2 }
+                ?.let { listOf(up) + it + targetPoint }
+                ?: listOf(up, targetPoint)
             PolylineAnnotation(points = linePoints) {
                 lineColor = Color(0xFF1565C0)
                 lineWidth = 3.0
             }
-            // Place the direction arrow on the drawn line: along the route when we have
-            // one, otherwise at the straight-line midpoint.
-            val arrowPoint = routePoints?.takeIf { it.size >= 2 }?.let { routeMidpoint(it) }
-                ?: mapMidpoint(up, targetPoint)
+            // Place the direction arrow at the midpoint of the drawn line.
+            val arrowPoint = routeMidpoint(linePoints)
             PointAnnotation(point = arrowPoint) {
                 iconImage = arrowIcon
                 iconRotate = 0.0
@@ -1042,13 +1045,6 @@ private fun routeMidpoint(points: List<Point>): Point {
     }
     return points.last()
 }
-
-/** Geographic midpoint between two map points. */
-private fun mapMidpoint(p1: Point, p2: Point): Point =
-    Point.fromLngLat(
-        (p1.longitude() + p2.longitude()) / 2,
-        (p1.latitude()  + p2.latitude())  / 2
-    )
 
 fun Modifier.verticalScrollbar(
         state: ScrollState,
