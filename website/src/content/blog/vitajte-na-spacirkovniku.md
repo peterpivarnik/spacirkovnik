@@ -9,7 +9,7 @@ Sme radi, že ste tu! Špacírkovník je appka, ktorá mení obyčajnú prechád
 
 ## Čo je Špacírkovník?
 
-Špacírkovník kombinuje turistiku s interaktívnym príbehom. Stiahneš si špacírku, vyrazíš na skutočnú trasu a postupne odhaľuješ príbeh – pomáhaš postavám, lúštiš hádanky a spoznávaš okolie novým pohľadom.
+Špacírkovník kombinuje turistiku s interaktívnym príbehom. Stiahneš si špacírku, vyrazíš na skutočnú trasu a postupne odhaľuješ príbeh – pomáhaš postavám, riešiš hádanky a spoznávaš okolie novým pohľadom.
 
 Nie je to geocaching, nie je to klasická turistika. Je to niečo medzi – zážitok, ktorý si celá rodina bude pamätať.
 
