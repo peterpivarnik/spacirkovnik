@@ -254,6 +254,7 @@ fun NavigationDisplay(
     // Re-route only when the user has moved a meaningful distance (avoids hammering the
     // Directions API on every 1 s GPS tick).
     LaunchedEffect(userPoint) {
+        if (!USE_WALKING_ROUTE) return@LaunchedEffect
         val up = userPoint ?: return@LaunchedEffect
         val last = lastRouteFetchPoint
         val movedEnough = last == null || run {
@@ -941,6 +942,13 @@ private fun createArrowBitmap(colorInt: Int): Bitmap {
 
 /** Height of the inline (non-fullscreen) navigation map, shared by the camera math and the composable. */
 private const val MAP_HEIGHT_DP = 280.0
+
+/**
+ * When true, navigation draws the real walking route along footpaths (Mapbox Directions).
+ * Currently OFF: for demo games the footpath route loops around and looks worse than a
+ * simple straight line from start to target. Flip back to true to re-enable routing.
+ */
+private const val USE_WALKING_ROUTE = false
 
 /** Fraction of the map height the user→target line should span (leaves a margin for the pins). */
 private const val LINE_FILL_FRACTION = 0.82
