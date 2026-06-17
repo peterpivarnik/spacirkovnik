@@ -1,0 +1,243 @@
+{
+  "id": "strieborna-podkova-stastia",
+  "title": "Strieborná podkova šťastia",
+  "version": 2,
+  "screens": [
+    {
+      "text": "Strieborná podkova šťastia",
+      "type": "CONTINUE",
+      "buttonText": "Poď na dobrodružstvo!",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FkonPodkova.jpeg?alt=media",
+      "fontSize": 26,
+      "screenId": 0
+    },
+    {
+      "text": "„Ahoj, {malý dobrodruh|malá dobrodružka}! Som Špacírkovník, magický rozcestník. Práve teraz sa jedna z mojich šípok rozžiarila striebrom a točila sa, točila… až zastala. Ukazuje rovno na dostihovú dráhu v Petržalke, kde dnes vrcholia Dni Petržalky! Niekto tam potrebuje tvoju pomoc.\n{Pripravený|Pripravená}? Tak poď za dobrodružstvom!“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
+      "screenId": 1
+    },
+    {
+      "text": "Sleduj šípku na mape a presuň sa doprostred dostihovej dráhy. Tam sa začína naše dobrodružstvo.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.1205,
+      "targetLongitude": 17.1076,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fdraha.jpeg?alt=media",
+      "screenId": 2
+    },
+    {
+      "text": "Len čo si {dorazil|dorazila} na miesto, zem sa zaligotala a pricválal trblietavý strieborný koník. „Zdravím ťa, {malý dobrodruh|malá dobrodružka}! Volám sa Sivko, lebo sa lesknem ako mesačné striebro. Som čarovný kôň – strážca celej tejto dostihovej dráhy a jej čara.“",
+      "type": "CONTINUE",
+      "buttonText": "Ďalej",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
+      "screenId": 3
+    },
+    {
+      "text": "„A čaro tejto dráhy drží pohromade moja strieborná podkova šťastia,“ hovorí Sivko. „Vďaka nej je tu každý rok veľa radosti, najmä počas akcie Dni Petržalky! Lenže dnes ráno sa rozsypala na štyri kúsky, ktoré sa rozkotúľali po celom areáli.\nBez nej dráha bledne a ja slabnem. To striebro cítim – ťahá ma k sebe, takže viem, ktorým smerom hľadať – no ukázať sa môže len tomu, kto má dobré srdce a dokáže, že toto miesto pozná. Mne, čarovnému koňovi, ostáva skryté. Preto ťa sem priviedla strieborná šípka: ja ťa navediem na správne miesto a ty kúsky svojou bystrosťou privoláš na svetlo. Pomôžeš mi?“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FrozbitaPodkova.jpeg?alt=media",
+      "screenId": 4
+    },
+    {
+      "text": "„Prvý kúsok sa blyští priamo tu, kde stojíš!“ raduje sa Sivko. „Ale odhalí sa len {šikovnému|šikovnej} bádateľovi. Pozri sa okolo – stojíš uprostred obrovskej oválnej dráhy. Vieš, na čo slúži?“",
+      "type": "QUESTION",
+      "answers": [
+        {
+          "text": "Na konské dostihy – preteky koní",
+          "correct": true
+        },
+        {
+          "text": "Na bicyklové preteky",
+          "correct": false
+        },
+        {
+          "text": "Na lietanie teplovzdušných balónov",
+          "correct": false
+        },
+        {
+          "text": "V zime ako klzisko",
+          "correct": false
+        }
+      ],
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fdraha.jpeg?alt=media",
+      "screenId": 5
+    },
+    {
+      "text": "„Správne!“ zaerdžal Sivko a v tráve sa strieborne zaligotalo. Máš prvý kúsok podkovy! „Poďme za ďalším – cítim ho tam, kde hrá hudba a voňajú stánky.“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
+      "screenId": 6
+    },
+    {
+      "text": "Nasleduj šípku k festivalovému pódiu, kde to počas Dní Petržalky žije najviac.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.1218,
+      "targetLongitude": 17.1088,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodium.jpeg?alt=media",
+      "screenId": 7
+    },
+    {
+      "text": "Pri pódiu to hučí veselosťou – hudba, smiech, vôňa langošov. Sivko sa prizerá: „Toľko radosti! Druhý kúsok sa tu určite niekde skrýva.“",
+      "type": "CONTINUE",
+      "buttonText": "Ďalej",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodium.jpeg?alt=media",
+      "screenId": 8
+    },
+    {
+      "text": "Sivko zafrkal: „Mám pre teba hádanku o koňoch. Koľko podkov nosí kôň, keď je podkutý na všetky kopytá?“",
+      "type": "QUESTION",
+      "answers": [
+        {
+          "text": "4",
+          "correct": true
+        },
+        {
+          "text": "2",
+          "correct": false
+        },
+        {
+          "text": "6",
+          "correct": false
+        },
+        {
+          "text": "Len 1",
+          "correct": false
+        }
+      ],
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
+      "screenId": 9
+    },
+    {
+      "text": "„Presne tak – štyri!“ Medzi stánkami sa strieborne zaiskrilo. Máš druhý kúsok podkovy – ide ti to skvelo! Sivko mávol hrivou: „Ďalší kúsok sa dokotúľal k cieľovej rovinke – na poslednú rovnú časť dráhy tesne pred cieľom.“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
+      "screenId": 10
+    },
+    {
+      "text": "Choď za šípkou k cieľovej rovinke – poslednej rovnej časti dráhy pred cieľom.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.1198,
+      "targetLongitude": 17.1098,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fciel.jpeg?alt=media",
+      "screenId": 11
+    },
+    {
+      "text": "Stojíš pri cieľovej rovinke. „Toto je posledná rovinka pred cieľom – práve tu kone vydajú zo seba všetko a uháňajú, čo im sily stačia!“ hovorí Sivko s iskrou v oku.",
+      "type": "CONTINUE",
+      "buttonText": "Ďalej",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fciel.jpeg?alt=media",
+      "screenId": 12
+    },
+    {
+      "text": "„Otázka pre teba,“ hovorí Sivko. „Ako voláme jazdca, ktorý sedí na koni počas dostihov a vedie ho do cieľa?“",
+      "type": "QUESTION",
+      "answers": [
+        {
+          "text": "Žokej",
+          "correct": true
+        },
+        {
+          "text": "Kapitán",
+          "correct": false
+        },
+        {
+          "text": "Pilot",
+          "correct": false
+        },
+        {
+          "text": "Záhradník",
+          "correct": false
+        }
+      ],
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fciel.jpeg?alt=media",
+      "screenId": 13
+    },
+    {
+      "text": "„Žokej – výborne!“ Na cieľovej rovinke sa strieborne zaligotalo. Máš tretí kúsok podkovy! Ostáva posledný. „Ten cítim pri veľkej tribúne, kde sedia diváci.“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
+      "screenId": 14
+    },
+    {
+      "text": "Vydaj sa za šípkou k hlavnej tribúne dostihovej dráhy.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.1212,
+      "targetLongitude": 17.1094,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.jpeg?alt=media",
+      "screenId": 15
+    },
+    {
+      "text": "Pred tebou sa týči veľká tribúna – miesto, odkiaľ diváci sledujú dostihy. Sivko sa postaví vedľa teba: „Posledný kúsok cítim práve tu, celkom blízko. Sústreď sa!“",
+      "type": "CONTINUE",
+      "buttonText": "Ďalej",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.jpeg?alt=media",
+      "screenId": 16
+    },
+    {
+      "text": "Sivko ti dá poslednú hádanku: „Pozri sa na znak Závodiska na budove tribúny. Čo je na ňom vyobrazené?“",
+      "type": "QUESTION",
+      "answers": [
+        {
+          "text": "Kôň so žokejom",
+          "correct": true
+        },
+        {
+          "text": "Loď na mori",
+          "correct": false
+        },
+        {
+          "text": "Lietadlo",
+          "correct": false
+        },
+        {
+          "text": "Hrad",
+          "correct": false
+        }
+      ],
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.jpeg?alt=media",
+      "screenId": 17
+    },
+    {
+      "text": "„Áno!“ Pred tebou sa strieborne rozžiarilo. Máš všetky štyri kúsky podkovy! Sivko sa zatočil od radosti: „Teraz poď za mnou k soche koňa neďaleko tribúny – tam podkovu vrátime na miesto!“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
+      "screenId": 18
+    },
+    {
+      "text": "Choď za šípkou k soche koňa neďaleko tribúny, kde na teba Sivko čaká.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.1209,
+      "targetLongitude": 17.1089,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
+      "screenId": 19
+    },
+    {
+      "text": "Keď prídeš na miesto, stojí pred tebou krásna socha koňa – pamätník dostihovej dráhy. „Sem patrí strieborná podkova šťastia,“ hovorí Sivko. „Postav sa pred sochu a kúzlo povedz pekne nahlas – nech ho počuje celá dráha. Opakuj po mne!“",
+      "type": "CONTINUE",
+      "buttonText": "Ďalej",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
+      "screenId": 20
+    },
+    {
+      "text": "Zhlboka sa nadýchneš a nahlas povieš:\n\n„Kúsok ku kúsku priložím,\nstriebornú podkovu zložím.\nNech zas svieti, nech zas hreje,\nnech sa celá Petržalka smeje.\nNech sú Dni Petržalky plné jasu,\nšťastia, smiechu a krásneho času!“",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
+      "screenId": 21
+    },
+    {
+      "text": "Len čo dopovieš posledné slovo, štyri kúsky sa zliali dokopy a pred tebou zažiarila celá strieborná podkova! Pomaly sa vzniesla k soche koňa – a tá sa rozžiarila striebrom. Sivko nadšene zaerdžal: „{Dokázal|Dokázala} si to! Vrátil{|a} si Petržalke jej šťastie a Dni Petržalky môžu žiariť ďalej. Ďakujem ti, {odvážny priateľ|odvážna priateľka}!“ (Tip: odfoť sa pri soche – nech máš pamiatku na dobrodružstvo!)",
+      "type": "CONTINUE",
+      "buttonText": "Ďakujem, Sivko!",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FkonPodkova.jpeg?alt=media",
+      "screenId": 22
+    },
+    {
+      "text": "Socha koňa žiari a moja strieborná šípka pomaly zhasla – tvoje dobrodružstvo je splnené! {Bol|Bola} si naozaj {šikovný|šikovná}. Ďalšie šípky na rozcestníku sa už netrpezlivo trasú… a možno čoskoro ukážu smer zase pre teba.",
+      "type": "CONTINUE",
+      "buttonText": "Späť na zoznam špacírok",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
+      "fontSize": 22,
+      "screenId": 23
+    }
+  ]
+}
