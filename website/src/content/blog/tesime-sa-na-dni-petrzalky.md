@@ -2,7 +2,7 @@
 title: 'Tešíme sa na Dni Petržalky!'
 description: 'Špacírkovník mieri na Dni Petržalky – a nepríde s prázdnymi rukami. Čaká tam na vás malé čarovné prekvapenie!'
 pubDate: 'Jun 16 2026'
-heroImage: '/dni-petrzalky-2026.svg'
+heroImage: '/dni-petrzalky-2026-hero.png'
 ---
 
 Máme to spočítané na dni – **Dni Petržalky sa blížia** a my zo Špacírkovníka sa na ne tešíme ako malé deti! 🎉

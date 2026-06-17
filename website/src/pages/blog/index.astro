@@ -48,6 +48,9 @@ const posts = (await getCollection('blog')).sort(
 			ul li:first-child img {
 				width: 100%;
 			}
+			ul li:first-child .img-wrapper {
+				max-width: 50%;
+			}
 			ul li:first-child .title {
 				font-size: 2.369rem;
 			}
@@ -56,13 +59,10 @@ const posts = (await getCollection('blog')).sort(
 				border-radius: 12px;
 				margin: 0 auto 0.5rem;
 				max-width: 50%;
-				background: #FAF6F1;
 			}
 			.img-wrapper img {
 				width: 100%;
 				height: auto;
-				max-height: 280px;
-				object-fit: contain;
 				margin: 0;
 				border-radius: 0;
 			}
