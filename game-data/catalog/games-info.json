@@ -11,7 +11,15 @@
     "colorHex": "565B61",
     "status": "hidden",
     "startName": "Závodisko – dostihová dráha",
-    "endName": "Závodisko – pri tribúne"
+    "endName": "Závodisko – pri tribúne",
+    "consent": {
+      "version": 1,
+      "title": "Súťaž o ceny",
+      "summary": "Prejdením celej tejto špacírky a udelením tohto súhlasu sa zapájaš do súťaže, v ktorej môžeš vyhrať všetky špacírky od Špacírkovníka. Súhlasíš, že tvoju e-mailovú adresu (z prihlásenia) použijeme na zaradenie do súťaže a kontaktovanie výhercu, a že v prípade výhry zverejníme meno výhercu na našich sociálnych sieťach. Súhlas je dobrovoľný a môžeš ho kedykoľvek odvolať na info@spacirkovnik.sk.",
+      "organizer": "Špacírkovník (Ing. Peter Pivarník)",
+      "url": "https://spacirkovnik.sk/sutaz-strieborna-podkova/",
+      "required": true
+    }
   },
   {
     "id": "dni-petrzalky-2026",
