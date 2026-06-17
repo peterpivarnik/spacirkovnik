@@ -1,7 +1,7 @@
 {
   "id": "strieborna-podkova-stastia",
   "title": "Strieborná podkova šťastia",
-  "version": 2,
+  "version": 3,
   "screens": [
     {
       "text": "Strieborná podkova šťastia",
@@ -20,8 +20,8 @@
     {
       "text": "Sleduj šípku na mape a presuň sa doprostred dostihovej dráhy. Tam sa začína naše dobrodružstvo.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.1205,
-      "targetLongitude": 17.1076,
+      "targetLatitude": 48.116668,
+      "targetLongitude": 17.124732,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fdraha.jpeg?alt=media",
       "screenId": 2
     },
@@ -71,8 +71,8 @@
     {
       "text": "Nasleduj šípku k festivalovému pódiu, kde to počas Dní Petržalky žije najviac.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.1218,
-      "targetLongitude": 17.1088,
+      "targetLatitude": 48.114432,
+      "targetLongitude": 17.124412,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodium.jpeg?alt=media",
       "screenId": 7
     },
@@ -116,8 +116,8 @@
     {
       "text": "Choď za šípkou k cieľovej rovinke – poslednej rovnej časti dráhy pred cieľom.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.1198,
-      "targetLongitude": 17.1098,
+      "targetLatitude": 48.116612,
+      "targetLongitude": 17.121932,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fciel.jpeg?alt=media",
       "screenId": 11
     },
@@ -161,8 +161,8 @@
     {
       "text": "Vydaj sa za šípkou k hlavnej tribúne dostihovej dráhy.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.1212,
-      "targetLongitude": 17.1094,
+      "targetLatitude": 48.115837,
+      "targetLongitude": 17.122776,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.jpeg?alt=media",
       "screenId": 15
     },
@@ -206,8 +206,8 @@
     {
       "text": "Choď za šípkou k soche koňa neďaleko tribúny, kde na teba Sivko čaká.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.1209,
-      "targetLongitude": 17.1089,
+      "targetLatitude": 48.115698,
+      "targetLongitude": 17.122623,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
       "screenId": 19
     },
