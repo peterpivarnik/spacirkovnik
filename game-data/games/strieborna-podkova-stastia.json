@@ -1,7 +1,7 @@
 {
   "id": "strieborna-podkova-stastia",
   "title": "Strieborná podkova šťastia",
-  "version": 6,
+  "version": 7,
   "screens": [
     {
       "text": "Strieborná podkova šťastia",
@@ -76,7 +76,7 @@
       "screenId": 7
     },
     {
-      "text": "„Správne!“ zaerdžala Perlička a v tráve sa zaligotala prvá kúsok podkovy! „Poďme za ďalším – cítim ho tam, kde hrá hudba a voňajú stánky.“",
+      "text": "„Správne!“ zaerdžala Perlička a v tráve sa zaligotala prvý kúsok podkovy! „Poďme za ďalším – cítim ho tam, kde hrá hudba a voňajú stánky s občerstvením.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 8
@@ -90,7 +90,7 @@
       "screenId": 9
     },
     {
-      "text": "Pri pódiu to hučí veselosťou – hudba, smiech, vôňa langošov. Perlička sa prizerá: „Toľko radosti! Druhý kúsok sa tu určite niekde skrýva.“",
+      "text": "Pri pódiu to veselo žije – hudba, smiech, vôňa cigánskej. Perlička sa prizerá: „Toľko radosti! Druhý kúsok sa tu určite niekde skrýva.“",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodium.jpeg?alt=media",
@@ -121,13 +121,13 @@
       "screenId": 11
     },
     {
-      "text": "„Presne tak – štyri!“ Medzi stánkami sa strieborne zaiskrilo. Máš druhý kúsok podkovy – ide ti to skvelo! Perlička mávla hrivou: „Ďalší kúsok odletel až k cieľovej rovinke – na poslednú rovnú časť dráhy tesne pred cieľom.“",
+      "text": "„Presne tak – štyri!“ Medzi stánkami sa zaiskrilo. Máš druhý kúsok podkovy. Ide ti to skvelo! Perlička mávla hrivou: „Ďalší kúsok odletel až k cieľovej rovinke – na poslednú rovnú časť dráhy tesne pred cieľom.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 12
     },
     {
-      "text": "Choď za šípkou k cieľovej rovinke – poslednej rovnej časti dráhy pred cieľom.",
+      "text": "Choď k cieľovej rovinke.",
       "type": "NAVIGATION",
       "targetLatitude": 48.116612,
       "targetLongitude": 17.121932,
@@ -166,13 +166,13 @@
       "screenId": 15
     },
     {
-      "text": "„Žokej – výborne!“ Na cieľovej rovinke sa strieborne zaligotalo. Máš tretí kúsok podkovy! Ostáva posledný. „Ten cítim pri veľkej tribúne, kde sedia diváci.“",
+      "text": "„Žokej – výborne!“ Na cieľovej rovinke sa zaligotala tretia časť podkovy! Ostáva posledný. „Ten cítim pri veľkej tribúne, kde sedia diváci.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 16
     },
     {
-      "text": "Vydaj sa za šípkou k hlavnej tribúne dostihovej dráhy.",
+      "text": "Vydaj sa k hlavnej tribúne dostihovej dráhy.",
       "type": "NAVIGATION",
       "targetLatitude": 48.115837,
       "targetLongitude": 17.122776,
@@ -180,7 +180,7 @@
       "screenId": 17
     },
     {
-      "text": "Pred tebou sa týči veľká tribúna – miesto, odkiaľ diváci sledujú dostihy. Perlička sa postaví vedľa teba: „Posledný kúsok cítim práve tu, celkom blízko. Sústreď sa!“",
+      "text": "Pred tebou sa týči veľká tribúna. Je to miesto, odkiaľ diváci sledujú dostihy. Perlička sa postaví vedľa teba: „Posledný kúsok cítim práve tu, celkom blízko. Sústreď sa!“",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.jpeg?alt=media",
@@ -211,7 +211,7 @@
       "screenId": 19
     },
     {
-      "text": "„Áno!“ Pred tebou sa strieborne rozžiarilo. Máš všetky štyri kúsky podkovy! Perlička sa zatočila od radosti: „Teraz poď za mnou k soche koňa neďaleko tribúny – tam podkovu vrátime na miesto!“",
+      "text": "„Áno!“ Pred tebou sa rozžiaril posledný kúsok podkovy. Máš všetky štyri časti! Perlička sa zatočila od radosti: „Teraz poď za mnou k soche koňa neďaleko tribúny. Tam podkovu vrátime na miesto!“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 20
@@ -221,31 +221,31 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.115698,
       "targetLongitude": 17.122623,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 21
     },
     {
-      "text": "Keď prídeš na miesto, stojí pred tebou krásna socha koňa – pamätník dostihovej dráhy. „Sem patrí strieborná podkova šťastia,“ hovorí Perlička. „Postav sa pred sochu a kúzlo povedz pekne nahlas – nech ho počuje celá dráha. Opakuj po mne!“",
+      "text": "Tu pred tebou krásna socha koňa – pamätník dostihovej dráhy. „Sem patrí strieborná podkova šťastia,“ hovorí Perlička. „Postav sa pred sochu a nahlas povedz kúzlo – nech ho počuje celé závodisko. Zhlboka sa nadýchni a opakuj po mne!“",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 22
     },
     {
-      "text": "Zhlboka sa nadýchneš a nahlas povieš:\n\n„Kúsok ku kúsku priložím,\nstriebornú podkovu zložím.\nNech zas svieti, nech zas hreje,\nnech sa celá Petržalka smeje.\nNech sú Dni Petržalky plné jasu,\nšťastia, smiechu a krásneho času!“",
+      "text": "„Kúsok ku kúsku priložím,\nstriebornú podkovu zložím.\nNech zas svieti, nech zas hreje,\nnech sa celá Petržalka smeje.\nNech sú Dni Petržalky plné jasu,\nšťastia, smiechu a krásneho času!“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
       "screenId": 23
     },
     {
-      "text": "Len čo dopovieš posledné slovo, štyri kúsky sa zliali dokopy a pred tebou zažiarila celá strieborná podkova! Pomaly sa vzniesla k soche koňa – a tá sa rozžiarila striebrom. Perlička nadšene zaerdžala: „{Dokázal|Dokázala} si to! Vrátil{|a} si Petržalke jej šťastie a Dni Petržalky môžu žiariť ďalej. Ďakujem ti, {odvážny priateľ|odvážna priateľka}!“ (Tip: odfoť sa pri soche – nech máš pamiatku na dobrodružstvo!)",
+      "text": "Len čo dopovieš posledné slovo, štyri kúsky sa zlejú dokopy a pred tebou zažiari celá strieborná podkova! Pomaly sa vzniesie k soche koňa – a tá sa rozžiari striebrom. Perlička nadšene zaerdží: „{Dokázal|Dokázala} si to! Vrátil{|a} si Petržalke jej šťastie a Dni Petržalky môžu žiariť ďalej. Ďakujem ti, {odvážny priateľ|odvážna priateľka}!“ (Tip: odfoť sa pri soche – nech máš pamiatku na dobrodružstvo!)",
       "type": "CONTINUE",
-      "buttonText": "Ďakujem, Perlička!",
+      "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FkonPodkova.jpeg?alt=media",
       "screenId": 24
     },
     {
-      "text": "Socha koňa žiari a moja strieborná šípka pomaly zhasla – tvoje dobrodružstvo je splnené! {Bol|Bola} si naozaj {šikovný|šikovná}. Ďalšie šípky na rozcestníku sa už netrpezlivo trasú… a možno čoskoro ukážu smer zase pre teba.",
+      "text": "Socha koňa žiari a moja strieborná šípka pomaly zhasla – tvoje dobrodružstvo je splnené! {Bol|Bola} si naozaj {šikovný|šikovná}. Ďalšie šípky na rozcestníku sa už netrpezlivo trasú… a možno ti čoskoro ukážu ďalší smer.",
       "type": "CONTINUE",
       "buttonText": "Späť na zoznam špacírok",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
