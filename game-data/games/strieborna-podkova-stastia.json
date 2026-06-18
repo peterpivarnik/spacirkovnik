@@ -1,7 +1,7 @@
 {
   "id": "strieborna-podkova-stastia",
   "title": "Strieborná podkova šťastia",
-  "version": 8,
+  "version": 9,
   "screens": [
     {
       "text": "Strieborná podkova šťastia",
@@ -76,13 +76,13 @@
       "screenId": 7
     },
     {
-      "text": "„Správne!“ zaerdžala Perlička a v tráve sa zaligotala prvý kúsok podkovy! „Poďme za ďalším – cítim ho tam, kde hrá hudba a voňajú stánky s občerstvením.“",
+      "text": "„Správne!“ zaerdžala Perlička a v tráve sa zaligotal prvý kúsok podkovy! „Poďme za ďalším – cítim ho tam, kde hrá hudba a voňajú stánky s občerstvením.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 8
     },
     {
-      "text": "Nasleduj šípku k festivalovému pódiu, kde to počas Dní Petržalky žije najviac.",
+      "text": "Presuň sa khlavnému pódiu, kde to počas Dní Petržalky žije najviac.",
       "type": "NAVIGATION",
       "targetLatitude": 48.114432,
       "targetLongitude": 17.124412,
@@ -166,7 +166,7 @@
       "screenId": 15
     },
     {
-      "text": "„Žokej – výborne!“ Na cieľovej rovinke sa zaligotala tretia časť podkovy! Ostáva posledný. „Ten cítim pri veľkej tribúne, kde sedia diváci.“",
+      "text": "„Žokej – výborne!“ Na cieľovej rovinke sa zaligotala tretia časť podkovy! Ostáva posledná. „Tú cítim pri veľkej tribúne, kde sedia diváci.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 16
@@ -225,7 +225,7 @@
       "screenId": 21
     },
     {
-      "text": "Tu pred tebou krásna socha koňa – pamätník dostihovej dráhy. „Sem patrí strieborná podkova šťastia,“ hovorí Perlička. „Postav sa pred sochu a nahlas povedz kúzlo – nech ho počuje celé závodisko. Zhlboka sa nadýchni a opakuj po mne!“",
+      "text": "Tu pred tebou stojí krásna socha koňa – pamätník dostihovej dráhy. „Sem patrí strieborná podkova šťastia,“ hovorí Perlička. „Postav sa pred sochu a nahlas povedz kúzlo – nech ho počuje celé závodisko. Zhlboka sa nadýchni a opakuj po mne!“",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
