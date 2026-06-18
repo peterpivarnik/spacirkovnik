@@ -27,7 +27,7 @@ Web: spacirkovnik.sk
 
 Hráč, ktorý počas Dní Petržalky (sobota 20. júna 2026) absolvuje špacírku „Strieborná podkova šťastia" v aplikácii Špacírkovník a udelí súhlas podľa týchto podmienok, je zaradený do súťaže.
 
-**Výhra:** výherca získa **všetky špacírky od Špacírkovníka** – teda odomknutie všetkých platených špacírok, ktoré sú v aplikácii dostupné v čase výhry.
+**Výhra:** výherca získa **balík špacírok od Špacírkovníka** – teda odomknutie všetkých platených špacírok, ktoré sú v aplikácii dostupné v čase výhry.
 
 ---
 
@@ -57,7 +57,7 @@ Na základe tvojho **súhlasu** (čl. 6 ods. 1 písm. a) GDPR) spracúvame tvoju
 
 ## 5. Zverejnenie na sociálnych sieťach
 
-Udelením súhlasu súhlasíš s tým, že v prípade výhry organizátor **zverejní meno výhercu na svojich profiloch na sociálnych sieťach** (napríklad Facebook a Instagram) za účelom oznámenia výsledkov súťaže.
+Udelením súhlasu súhlasíš s tým, že v prípade výhry organizátor **zverejní meno výhercu na svojich profiloch na sociálnych sieťach** (Facebook a Instagram) za účelom oznámenia výsledkov súťaže.
 
 ---
 

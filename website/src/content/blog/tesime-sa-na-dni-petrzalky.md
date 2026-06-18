@@ -7,7 +7,7 @@ heroImage: '/dni-petrzalky-2026-hero.png'
 
 Máme to spočítané na dni – **Dni Petržalky sa blížia** a my zo Špacírkovníka sa na ne tešíme ako malé deti! 🎉
 
-Festival sa koná **od 19. do 21. júna 2026**. Je to jedna z najväčších a najveselších mestských slávností u nás – hudba, stánky, vôňa langošov, smiech a dobrá nálada na každom kroku. A presne tam, uprostred toho všetkého, sa rozhodol objaviť aj náš magický rozcestník.
+[Festival Dni Petržalky](https://festival.petrzalka.sk/) sa koná **od 19. do 21. júna 2026**. Je to jedna z najväčších a najveselších mestských slávností u nás – hudba, stánky, vôňa langošov, smiech a dobrá nálada na každom kroku. A presne tam, uprostred toho všetkého, sa rozhodol objaviť aj náš magický rozcestník.
 
 📅 **Pozor:** so Špacírkovníkom tam budeme len **v sobotu 20. júna** – tak si ten deň poznačte!
 
