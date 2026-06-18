@@ -1,7 +1,7 @@
 {
   "id": "strieborna-podkova-stastia",
   "title": "Strieborná podkova šťastia",
-  "version": 7,
+  "version": 8,
   "screens": [
     {
       "text": "Strieborná podkova šťastia",
@@ -18,7 +18,7 @@
       "screenId": 1
     },
     {
-      "text": "Sleduj šípku na mape a presuň sa doprostred dostihovej dráhy. Tam sa začína naše dobrodružstvo.",
+      "text": "Sleduj mapu a presuň sa doprostred dostihovej dráhy. Tam sa začína naše dobrodružstvo.",
       "type": "NAVIGATION",
       "targetLatitude": 48.116668,
       "targetLongitude": 17.124732,
