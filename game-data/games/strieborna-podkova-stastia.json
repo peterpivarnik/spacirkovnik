@@ -1,7 +1,7 @@
 {
   "id": "strieborna-podkova-stastia",
   "title": "Strieborná podkova šťastia",
-  "version": 12,
+  "version": 13,
   "screens": [
     {
       "text": "Strieborná podkova šťastia",
@@ -35,7 +35,7 @@
     {
       "text": "„Čaro tejto dráhy drží pohromade moja strieborná podkova šťastia,“ hovorí Perlička. „Vďaka nej je tu každý rok veľa radosti, najmä počas akcie Dni Petržalky! “",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodkova.png?alt=media",
       "screenId": 4
     },
     {
