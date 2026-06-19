@@ -1,7 +1,7 @@
 {
   "id": "strieborna-podkova-stastia",
   "title": "Strieborná podkova šťastia",
-  "version": 9,
+  "version": 10,
   "screens": [
     {
       "text": "Strieborná podkova šťastia",
@@ -20,8 +20,8 @@
     {
       "text": "Sleduj mapu a presuň sa doprostred dostihovej dráhy. Tam sa začína naše dobrodružstvo.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.116668,
-      "targetLongitude": 17.124732,
+      "targetLatitude": 48.116781,
+      "targetLongitude": 17.12513,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fdraha.jpeg?alt=media",
       "screenId": 2
     },
@@ -82,18 +82,18 @@
       "screenId": 8
     },
     {
-      "text": "Presuň sa khlavnému pódiu, kde to počas Dní Petržalky žije najviac.",
+      "text": "Presuň sa ku stánkom s občerstvením, kde to počas Dní Petržalky žije najviac.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.114432,
-      "targetLongitude": 17.124412,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodium.jpeg?alt=media",
+      "targetLatitude": 48.114238,
+      "targetLongitude": 17.124495,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodium.png?alt=media",
       "screenId": 9
     },
     {
       "text": "Pri pódiu to veselo žije – hudba, smiech, vôňa cigánskej. Perlička sa prizerá: „Toľko radosti! Druhý kúsok sa tu určite niekde skrýva.“",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodium.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodium.png?alt=media",
       "screenId": 10
     },
     {
@@ -129,8 +129,8 @@
     {
       "text": "Choď k cieľovej rovinke.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.116612,
-      "targetLongitude": 17.121932,
+      "targetLatitude": 48.116706,
+      "targetLongitude": 17.121821,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fciel.jpeg?alt=media",
       "screenId": 13
     },
@@ -166,48 +166,48 @@
       "screenId": 15
     },
     {
-      "text": "„Žokej – výborne!“ Na cieľovej rovinke sa zaligotala tretia časť podkovy! Ostáva posledná. „Tú cítim pri veľkej tribúne, kde sedia diváci.“",
+      "text": "„Žokej – výborne!“ Na cieľovej rovinke sa zaligotala tretia časť podkovy! Ostáva posledná. „Tú cítim pri tribúnach, kde sedia diváci.“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 16
     },
     {
-      "text": "Vydaj sa k hlavnej tribúne dostihovej dráhy.",
+      "text": "Vydaj sa k tribúnam dostihovej dráhy.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.115837,
-      "targetLongitude": 17.122776,
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.jpeg?alt=media",
+      "targetLatitude": 48.115628,
+      "targetLongitude": 17.123161,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.png?alt=media",
       "screenId": 17
     },
     {
-      "text": "Pred tebou sa týči veľká tribúna. Je to miesto, odkiaľ diváci sledujú dostihy. Perlička sa postaví vedľa teba: „Posledný kúsok cítim práve tu, celkom blízko. Sústreď sa!“",
+      "text": "Pred tebou sa stoja tribúny. Sú to miesta, odkiaľ diváci sledujú dostihy. Perlička sa postaví vedľa teba: „Posledný kúsok cítim práve tu, celkom blízko. Sústreď sa!“",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.png?alt=media",
       "screenId": 18
     },
     {
-      "text": "Perlička ti dá poslednú hádanku: „Pozri sa na znak Závodiska na budove tribúny. Čo je na ňom vyobrazené?“",
+      "text": "Perlička ti dá poslednú hádanku: „Ktorý je najrýchlejší pohyb koňa?“",
       "type": "QUESTION",
       "answers": [
         {
-          "text": "Kôň so žokejom",
+          "text": "Cval",
           "correct": true
         },
         {
-          "text": "Loď na mori",
+          "text": "Krok",
           "correct": false
         },
         {
-          "text": "Lietadlo",
+          "text": "Klus",
           "correct": false
         },
         {
-          "text": "Hrad",
+          "text": "Státie",
           "correct": false
         }
       ],
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.png?alt=media",
       "screenId": 19
     },
     {
@@ -219,8 +219,8 @@
     {
       "text": "Choď smerom k soche koňa neďaleko tribúny, kde na teba Perlička čaká.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.115698,
-      "targetLongitude": 17.122623,
+      "targetLatitude": 48.115745,
+      "targetLongitude": 17.122598,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 21
     },

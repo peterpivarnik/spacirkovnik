@@ -3,13 +3,13 @@
     "id": "strieborna-podkova-stastia",
     "title": "Strieborná podkova šťastia",
     "description": "Čarovnej kobylke Perličke sa na dostihovej dráhe rozsypala strieborná podkova šťastia. Pomôž jej pozbierať kúsky a vráť Dňom Petržalky ich čaro! Krátka bezplatná špacírka pre celú rodinu – hrateľná len v sobotu 20. 6. 2026 počas Dní Petržalky.",
-    "version": 9,
+    "version": 10,
     "region": "Bratislava - Petržalka",
     "estimatedDurationMinutes": 30,
     "distanceKm": 1.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FkonPodkova.jpeg?alt=media",
     "colorHex": "565B61",
-    "status": "hidden",
+    "status": "free_with_login",
     "startName": "Závodisko – dostihová dráha",
     "endName": "Závodisko – pri tribúne",
     "consent": {
@@ -20,20 +20,6 @@
       "url": "https://spacirkovnik.sk/sutaz-strieborna-podkova/",
       "required": true
     }
-  },
-  {
-    "id": "dni-petrzalky-2026",
-    "title": "Dni Petržalky 2026",
-    "description": "Prejdi festivaliskovým areálom a odpovedz na otázky o najväčšej mestskej slávnosti v Petržalke.",
-    "version": 6,
-    "region": "Bratislava - Petržalka",
-    "estimatedDurationMinutes": 15,
-    "distanceKm": 0.1,
-    "imageUrl": "https://www.petrzalka.sk/wp-content/uploads/2012/12/erb-mestskej-%C4%8Dasti.jpg",
-    "colorHex": "2A5C2A",
-    "status": "hidden",
-    "startName": "Priestor festivalu Dni Petržalky",
-    "endName": "Priestor festivalu Dni Petržalky"
   },
   {
     "id": "lesnicka-palica",
