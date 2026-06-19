@@ -1,7 +1,7 @@
 {
   "id": "strieborna-podkova-stastia",
   "title": "Strieborná podkova šťastia",
-  "version": 11,
+  "version": 12,
   "screens": [
     {
       "text": "Strieborná podkova šťastia",
@@ -12,7 +12,7 @@
       "screenId": 0
     },
     {
-      "text": "„Ahoj, {malý dobrodruh|malá dobrodružka}! Som Špacírkovník, magický rozcestník. Práve teraz sa jedna z mojich šípok rozžiarila striebrom a točila sa, točila… až zastala. Ukazuje rovno na dostihovú dráhu v Petržalke, kde dnes vrcholia Dni Petržalky! Lenže z tej radosti sa stalo aj čosi nečakané – a niekto tam súrne potrebuje tvoju pomoc.\n{Pripravený|Pripravená}? Tak poď za dobrodružstvom!“",
+      "text": "„Ahoj, {milý dobrodruh|milá dobrodružka}! Som Špacírkovník, magický rozcestník. Práve teraz sa jedna z mojich šípok rozžiarila striebrom a točila sa, točila… až zastala. Ukazuje rovno na dostihovú dráhu v Petržalke, kde dnes vrcholia Dni Petržalky! Lenže z tej radosti sa stalo aj čosi nečakané – a niekto tam súrne potrebuje tvoju pomoc.\n{Pripravený|Pripravená}? Tak poď za dobrodružstvom!“",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media",
       "screenId": 1
@@ -26,7 +26,7 @@
       "screenId": 2
     },
     {
-      "text": "Len čo si {dorazil|dorazila} na miesto, zem sa zaligotala a pricválala trblietavá strieborná kobylka. „Zdravím ťa, {malý dobrodruh|malá dobrodružka}! Volám sa Perlička, lebo sa lesknem ako perla v mesačnom svetle. Som čarovná kobylka – strážkyňa celej tejto dostihovej dráhy a jej čara.“",
+      "text": "Len čo si {dorazil|dorazila} na miesto, zem sa zaligotala a pricválala trblietavá strieborná kobylka. „Zdravím ťa, {milý dobrodruh|milá dobrodružka}! Volám sa Perlička, lebo sa lesknem ako perla v mesačnom svetle. Som čarovná kobylka – strážkyňa celej tejto dostihovej dráhy a jej čara.“",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
@@ -35,7 +35,7 @@
     {
       "text": "„Čaro tejto dráhy drží pohromade moja strieborná podkova šťastia,“ hovorí Perlička. „Vďaka nej je tu každý rok veľa radosti, najmä počas akcie Dni Petržalky! “",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FrozbitaPodkova.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 4
     },
     {
@@ -45,7 +45,7 @@
       "screenId": 5
     },
     {
-      "text": "„Bez nej dráha bledne a ja slabnem. To striebro cítim – ťahá ma k sebe, takže viem, ktorým smerom hľadať – no ukázať sa môže len tomu, kto má dobré srdce a dokáže, že toto miesto pozná. Mne, čarovnej kobylke, ostáva skryté. No ja ťa navediem na správne miesto a ty kúsky svojou bystrosťou privoláš na svetlo. Pomôžeš mi?“",
+      "text": "„Bez nej dráha bledne a ja slabnem. To striebro stále cítim – ťahá ma k sebe, takže viem, kde hľadať. No ukáže sa len tomu, kto má dobré srdce a dokáže, že toto miesto pozná. Mne, čarovnej kobylke, ostáva skryté. No ja ťa navediem na správne miesto a ty kúsky svojou bystrosťou privoláš na svetlo. Pomôžeš mi?“",
       "type": "CONTINUE",
       "buttonText": "Áno Perlička. Pomôžem!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FrozbitaPodkova.jpeg?alt=media",
@@ -101,12 +101,12 @@
       "type": "QUESTION",
       "answers": [
         {
-          "text": "4",
-          "correct": true
-        },
-        {
           "text": "2",
           "correct": false
+        },
+        {
+          "text": "4",
+          "correct": true
         },
         {
           "text": "6",
@@ -146,16 +146,16 @@
       "type": "QUESTION",
       "answers": [
         {
-          "text": "Žokej",
-          "correct": true
-        },
-        {
           "text": "Kapitán",
           "correct": false
         },
         {
           "text": "Pilot",
           "correct": false
+        },
+        {
+          "text": "Žokej",
+          "correct": true
         },
         {
           "text": "Záhradník",
@@ -191,10 +191,6 @@
       "type": "QUESTION",
       "answers": [
         {
-          "text": "Cval",
-          "correct": true
-        },
-        {
           "text": "Krok",
           "correct": false
         },
@@ -203,8 +199,12 @@
           "correct": false
         },
         {
-          "text": "Státie",
+          "text": "Skok",
           "correct": false
+        },
+        {
+          "text": "Cval",
+          "correct": true
         }
       ],
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.png?alt=media",
@@ -238,7 +238,7 @@
       "screenId": 23
     },
     {
-      "text": "Len čo dopovieš posledné slovo, štyri kúsky sa zlejú dokopy a pred tebou zažiari celá strieborná podkova! Pomaly sa vzniesie k soche koňa – a tá sa rozžiari striebrom. Perlička nadšene zaerdží: „{Dokázal|Dokázala} si to! Vrátil{|a} si Petržalke jej šťastie a Dni Petržalky môžu žiariť ďalej. Ďakujem ti, {odvážny priateľ|odvážna priateľka}!“ (Tip: odfoť sa pri soche – nech máš pamiatku na dobrodružstvo!)",
+      "text": "Len čo dopovieš posledné slovo, štyri kúsky sa zlejú dokopy a pred tebou zažiari celá strieborná podkova! Pomaly sa vzniesie k soche koňa – a tá sa rozžiari striebrom. Perlička nadšene zaerdží: „{Dokázal|Dokázala} si to! Vrátil{|a} si Petržalke jej šťastie a Dni Petržalky môžu žiariť ďalej. Ďakujem ti, {odvážny priateľ|odvážna priateľka}!“ \n\n(Tip: odfoť sa pri soche – nech máš pamiatku na dobrodružstvo!)",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
