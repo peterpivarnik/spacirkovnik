@@ -1,7 +1,7 @@
 {
   "id": "strieborna-podkova-stastia",
   "title": "Strieborná podkova šťastia",
-  "version": 10,
+  "version": 11,
   "screens": [
     {
       "text": "Strieborná podkova šťastia",
@@ -187,7 +187,7 @@
       "screenId": 18
     },
     {
-      "text": "Perlička ti dá poslednú hádanku: „Ktorý je najrýchlejší pohyb koňa?“",
+      "text": "Perlička ti dá poslednú hádanku: „Ktorý pohyb koňa je najrýchlejší?“",
       "type": "QUESTION",
       "answers": [
         {
@@ -234,14 +234,14 @@
     {
       "text": "„Kúsok ku kúsku priložím,\nstriebornú podkovu zložím.\nNech zas svieti, nech zas hreje,\nnech sa celá Petržalka smeje.\nNech sú Dni Petržalky plné jasu,\nšťastia, smiechu a krásneho času!“",
       "type": "BROWSE",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 23
     },
     {
       "text": "Len čo dopovieš posledné slovo, štyri kúsky sa zlejú dokopy a pred tebou zažiari celá strieborná podkova! Pomaly sa vzniesie k soche koňa – a tá sa rozžiari striebrom. Perlička nadšene zaerdží: „{Dokázal|Dokázala} si to! Vrátil{|a} si Petržalke jej šťastie a Dni Petržalky môžu žiariť ďalej. Ďakujem ti, {odvážny priateľ|odvážna priateľka}!“ (Tip: odfoť sa pri soche – nech máš pamiatku na dobrodružstvo!)",
       "type": "CONTINUE",
       "buttonText": "Ďalej",
-      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FkonPodkova.jpeg?alt=media",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fsocha.jpeg?alt=media",
       "screenId": 24
     },
     {
