@@ -9,7 +9,7 @@
     "distanceKm": 1.0,
     "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FkonPodkova.jpeg?alt=media",
     "colorHex": "565B61",
-    "status": "free_with_login",
+    "status": "hidden",
     "startName": "Závodisko – dostihová dráha",
     "endName": "Závodisko – pri tribúne",
     "consent": {
