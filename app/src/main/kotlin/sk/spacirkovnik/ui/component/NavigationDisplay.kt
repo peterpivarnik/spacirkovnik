@@ -246,15 +246,17 @@ fun NavigationDisplay(
 
     // Walking route along footpaths (Mapbox Directions). Null until fetched, or when
     // routing fails / no path exists — in which case we fall back to the straight line.
-    var routePoints by remember { mutableStateOf<List<Point>?>(null) }
-    var routeDistanceMeters by remember { mutableStateOf<Int?>(null) }
-    var lastRouteFetchPoint by remember { mutableStateOf<Point?>(null) }
+    // Kľúčované cieľom: každá navigačná obrazovka sa vykresľuje tým istým composable, takže bez
+    // toho by si ďalšia obrazovka odniesla trasu z predchádzajúcej.
+    var routePoints by remember(targetLat, targetLng) { mutableStateOf<List<Point>?>(null) }
+    var routeDistanceMeters by remember(targetLat, targetLng) { mutableStateOf<Int?>(null) }
+    var lastRouteFetchPoint by remember(targetLat, targetLng) { mutableStateOf<Point?>(null) }
     val mapboxToken = remember { context.getString(R.string.mapbox_access_token) }
 
     // Re-route only when the user has moved a meaningful distance (avoids hammering the
     // Directions API on every 1 s GPS tick).
-    LaunchedEffect(userPoint) {
-        if (!USE_WALKING_ROUTE) return@LaunchedEffect
+    LaunchedEffect(userPoint, gameScreen.directRoute) {
+        if (gameScreen.directRoute) return@LaunchedEffect
         val up = userPoint ?: return@LaunchedEffect
         val last = lastRouteFetchPoint
         val movedEnough = last == null || run {
@@ -942,13 +944,6 @@ private fun createArrowBitmap(colorInt: Int): Bitmap {
 
 /** Height of the inline (non-fullscreen) navigation map, shared by the camera math and the composable. */
 private const val MAP_HEIGHT_DP = 280.0
-
-/**
- * When true, navigation draws the real walking route along footpaths (Mapbox Directions).
- * Currently OFF: for demo games the footpath route loops around and looks worse than a
- * simple straight line from start to target. Flip back to true to re-enable routing.
- */
-private const val USE_WALKING_ROUTE = false
 
 /** Fraction of the map height the user→target line should span (leaves a margin for the pins). */
 private const val LINE_FILL_FRACTION = 0.82

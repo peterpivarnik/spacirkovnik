@@ -28,6 +28,13 @@
 
 Všetky typy majú vždy pole `imageUrl` (môže byť `""`).
 
+`NAVIGATION` má navyše voliteľné pole `directRoute` (`true`/`false`, predvolene `false`):
+
+- **`false`** — mapa vykreslí skutočnú trasu po chodníkoch a vzdialenosť podľa nej. Toto je predvolené správanie a hodí sa pre mesto.
+- **`true`** — mapa vykreslí priamku od hráča k cieľu a ukáže vzdušnú vzdialenosť. Používaj tam, kde chodníky v mapových podkladoch nie sú alebo vedú okľukou — napríklad areál dostihovej dráhy, park bez vyznačených chodníkov, lúka.
+
+Nastavuje sa pre každú navigačnú obrazovku zvlášť, takže jedna špacírka môže časť trasy viesť po chodníkoch a časť napriamo.
+
 ---
 
 ## 3. Priebeh špacírky – povinná kostra

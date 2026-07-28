@@ -1,7 +1,7 @@
 {
   "id": "strieborna-podkova-stastia",
   "title": "Strieborná podkova šťastia",
-  "version": 13,
+  "version": 14,
   "screens": [
     {
       "text": "Strieborná podkova šťastia",
@@ -22,6 +22,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.116781,
       "targetLongitude": 17.12513,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fdraha.jpeg?alt=media",
       "screenId": 2
     },
@@ -86,6 +87,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.114238,
       "targetLongitude": 17.124495,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fpodium.png?alt=media",
       "screenId": 9
     },
@@ -131,6 +133,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.116706,
       "targetLongitude": 17.121821,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fciel.jpeg?alt=media",
       "screenId": 13
     },
@@ -176,6 +179,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.115628,
       "targetLongitude": 17.123161,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Ftribuna.png?alt=media",
       "screenId": 17
     },
@@ -221,6 +225,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.115745,
       "targetLongitude": 17.122598,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2Fkon.jpeg?alt=media",
       "screenId": 21
     },
