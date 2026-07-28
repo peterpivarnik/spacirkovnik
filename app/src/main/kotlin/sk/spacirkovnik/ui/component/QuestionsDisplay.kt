@@ -317,6 +317,10 @@ private fun QuestionWithAnswers(answers: List<GameAnswer>, onCorrectChoice: () -
 private fun MyAlertDialog(showAlertMessage: MutableState<Boolean>) {
     AlertDialog(
         onDismissRequest = { showAlertMessage.value = false },
+        // Bez toho by podklad prišiel z témy (systémový tmavý režim) a tmavé texty by zmizli.
+        containerColor = CardBg,
+        titleContentColor = TextDark,
+        textContentColor = TextMedium,
         icon = {
             Icon(
                 Icons.Default.Warning,

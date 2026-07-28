@@ -39,6 +39,7 @@ import sk.spacirkovnik.ui.component.QuestionsDisplay
 import sk.spacirkovnik.ui.theme.Amber
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import sk.spacirkovnik.ui.theme.CardBg
 import sk.spacirkovnik.ui.theme.gameGradient
 import sk.spacirkovnik.ui.theme.PrimaryButton
 import sk.spacirkovnik.ui.theme.PrimaryButtonText
@@ -134,6 +135,10 @@ fun GamePlayScreen(
             @Suppress("ASSIGNED_VALUE_IS_NEVER_READ")
             showExitDialog = false
         },
+            // Bez toho by podklad prišiel z témy (systémový tmavý režim) a tmavé texty by zmizli.
+            containerColor = CardBg,
+            titleContentColor = TextDark,
+            textContentColor = TextMedium,
             title = {
                 Text("Ukončiť špacírku", fontWeight = FontWeight.Bold, color = TextDark)
             },

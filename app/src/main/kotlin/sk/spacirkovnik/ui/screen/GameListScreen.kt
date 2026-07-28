@@ -53,6 +53,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
@@ -388,6 +389,11 @@ fun GameListScreen(
                     if (showSignOutDialog) {
                         AlertDialog(
                             onDismissRequest = { showSignOutDialog = false },
+                            // AlertDialog si podklad inak berie z témy, ktorá sleduje systémový
+                            // tmavý režim — a natvrdo tmavé texty appky by na ňom zmizli.
+                            containerColor = CardBg,
+                            titleContentColor = TextDark,
+                            textContentColor = TextMedium,
                             title = { Text("Účet") },
                             text = {
                                 Column {
@@ -407,7 +413,14 @@ fun GameListScreen(
                                         )
                                         Switch(
                                             checked = authState.marketingConsent,
-                                            onCheckedChange = { authViewModel.setMarketingConsent(it) }
+                                            onCheckedChange = { authViewModel.setMarketingConsent(it) },
+                                            colors = SwitchDefaults.colors(
+                                                checkedThumbColor = PrimaryButtonText,
+                                                checkedTrackColor = PrimaryButton,
+                                                uncheckedThumbColor = TextMedium,
+                                                uncheckedTrackColor = CardBg,
+                                                uncheckedBorderColor = TextMedium,
+                                            )
                                         )
                                     }
 
@@ -448,12 +461,12 @@ fun GameListScreen(
                                     showSignOutDialog = false
                                     authViewModel.signOut()
                                 }) {
-                                    Text("Odhlásiť sa")
+                                    Text("Odhlásiť sa", color = PrimaryButton)
                                 }
                             },
                             dismissButton = {
                                 TextButton(onClick = { showSignOutDialog = false }) {
-                                    Text("Zavrieť")
+                                    Text("Zavrieť", color = TextMedium)
                                 }
                             }
                         )
@@ -476,6 +489,9 @@ fun GameListScreen(
                     ) {
                         AlertDialog(
                             onDismissRequest = { marketingPromptDismissed = true },
+                            containerColor = CardBg,
+                            titleContentColor = TextDark,
+                            textContentColor = TextMedium,
                             title = { Text("Novinky a akcie") },
                             text = {
                                 Text(
@@ -488,7 +504,7 @@ fun GameListScreen(
                                     authViewModel.setMarketingConsent(true)
                                     marketingPromptDismissed = true
                                 }) {
-                                    Text("Áno, chcem")
+                                    Text("Áno, chcem", color = PrimaryButton)
                                 }
                             },
                             dismissButton = {
@@ -496,7 +512,7 @@ fun GameListScreen(
                                     authViewModel.setMarketingConsent(false)
                                     marketingPromptDismissed = true
                                 }) {
-                                    Text("Nie, ďakujem")
+                                    Text("Nie, ďakujem", color = TextMedium)
                                 }
                             }
                         )
