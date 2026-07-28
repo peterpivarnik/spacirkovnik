@@ -11,7 +11,6 @@
 
 # --- App data classes (Gson serialization via Retrofit) ---
 -keep class sk.spacirkovnik.model.** { *; }
--keep class sk.spacirkovnik.data.GameIndexResponse { *; }
 
 # Mapbox Directions API response (Gson parses these by field name) ---
 -keep class sk.spacirkovnik.data.DirectionsResponse { *; }

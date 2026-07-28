@@ -44,6 +44,9 @@ if (buildingRelease && isSnapshot) {
 }
 
 tasks.register("releaseBundle") {
+    group = "publishing"
+    description = "Zostaví release AAB a spotrebuje -SNAPSHOT: vydá čisté číslo verzie " +
+        "a version.properties posunie na ďalší vývojový -SNAPSHOT."
     finalizedBy("bundleRelease")
 }
 
@@ -140,6 +143,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    // IDE hlási „Dependency is declared multiple times" — je to falošný poplach, BOM sem patrí.
+    // debugAndroidTestRuntimeClasspath ho z implementation nededí a bez tohto riadku padne
+    // mergeDebugAndroidTestManifest na „Could not find androidx.compose.ui:ui-test-junit4:".
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 
