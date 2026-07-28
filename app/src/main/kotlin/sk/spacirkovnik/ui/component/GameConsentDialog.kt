@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
@@ -46,21 +48,32 @@ fun GameConsentDialog(
                 modifier = Modifier.padding(24.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
-                Text(
-                    text = consent.title ?: "Podmienky účasti",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = TextDark,
-                )
-                consent.summary?.let {
-                    Text(text = it, fontSize = 15.sp, lineHeight = 21.sp, color = TextDark)
-                }
-                consent.organizer?.let {
+                // Text scrolluje, tlačidlá zostávajú dole. Váha sa v Column prideľuje až po
+                // zmeraní nezaťažených detí, takže tlačidlá si miesto vezmú vždy a na text
+                // zvyšok; fill = false necháva krátky súhlas vykresliť sa nízko, bez
+                // roztiahnutia dialógu na celú obrazovku.
+                Column(
+                    modifier = Modifier
+                        .weight(1f, fill = false)
+                        .verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
                     Text(
-                        text = "Organizátor: $it",
-                        fontSize = 13.sp,
-                        color = TextDark.copy(alpha = 0.7f),
+                        text = consent.title ?: "Podmienky účasti",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = TextDark,
                     )
+                    consent.summary?.let {
+                        Text(text = it, fontSize = 15.sp, lineHeight = 21.sp, color = TextDark)
+                    }
+                    consent.organizer?.let {
+                        Text(
+                            text = "Organizátor: $it",
+                            fontSize = 13.sp,
+                            color = TextDark.copy(alpha = 0.7f),
+                        )
+                    }
                 }
 
                 // The three actions, grouped tightly together.
