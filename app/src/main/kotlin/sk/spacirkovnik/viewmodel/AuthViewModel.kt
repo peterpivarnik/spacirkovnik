@@ -33,6 +33,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeout
 import sk.spacirkovnik.data.FIREBASE_DATABASE_URL
+import kotlin.time.Duration.Companion.seconds
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -85,7 +86,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
                 val credential = GoogleAuthProvider.getCredential(idToken, null)
                 try {
-                    val authResult = withTimeout(15_000) {
+                    val authResult = withTimeout(15.seconds) {
                         auth.signInWithCredential(credential).await()
                     }
                     // Direction A: po Google prihlásení prepoj čakajúce email/heslo
@@ -199,7 +200,10 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         _state.value = AuthState(
             isSignedIn = true,
             userName = user?.displayName ?: user?.email?.substringBefore("@"),
-            userEmail = user?.email
+            userEmail = user?.email,
+            // Aktivácie sa ešte len sťahujú — dovtedy nevieme, ktoré špacírky hráč vlastní, a
+            // zobrazili by sme mu ich ako zamknuté. Rovnako to robí init pri obnovenej relácii.
+            loading = auth.currentUser != null
         )
         loadActivations()
         loadTestGames()
@@ -233,7 +237,7 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         val uid = auth.currentUser?.uid ?: return
         viewModelScope.launch {
             try {
-                val snapshot = withTimeout(10_000) {
+                val snapshot = withTimeout(10.seconds) {
                     database.reference
                         .child("activations")
                         .child(uid)

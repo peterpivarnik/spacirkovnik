@@ -15,6 +15,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
@@ -24,6 +25,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,6 +37,7 @@ import androidx.compose.material.icons.filled.Flag
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.LockOpen
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.SportsScore
@@ -117,6 +120,9 @@ fun GameListScreen(
     val context = LocalContext.current
     var showSignOutDialog by remember { mutableStateOf(false) }
     var showAuthSheet by remember { mutableStateOf(false) }
+    // Špacírka, ktorú chcel hráč odomknúť prihlásením — po úspešnom prihlásení v nej pokračujeme,
+    // nech sa nemusí preklikávať späť na kartu.
+    var pendingUnlockGameId by remember { mutableStateOf<String?>(null) }
     var marketingPromptDismissed by remember { mutableStateOf(false) }
     var expandedGameId by remember { mutableStateOf<String?>(null) }
     val snackbarHostState = remember { SnackbarHostState() }
@@ -161,7 +167,21 @@ fun GameListScreen(
         gameListViewModel.setTestGames(authState.testGames)
     }
 
-    LaunchedEffect(state.games) {
+    // Po prihlásení sa vráť k špacírke, kvôli ktorej hráč prihlásenie otvoril — rozbalí sa mu tá
+    // istá karta, už s cenou a tlačidlom na kúpu. Nákup nespúšťame sami, ten si potvrdí hráč.
+    // Čakáme na dotiahnuté aktivácie (authState.loading), inak by sa karta rozbalila ešte
+    // v zamknutom stave.
+    LaunchedEffect(authState.isSignedIn, authState.loading, state.games) {
+        if (!authState.isSignedIn || authState.loading) return@LaunchedEffect
+        val gameId = pendingUnlockGameId ?: return@LaunchedEffect
+        if (state.games.none { it.info.id == gameId }) return@LaunchedEffect
+        pendingUnlockGameId = null
+        expandedGameId = gameId
+    }
+
+    // Ceny ukazujeme až prihlásenému hráčovi, tak ich dovtedy ani nesťahujeme.
+    LaunchedEffect(state.games, authState.isSignedIn) {
+        if (!authState.isSignedIn) return@LaunchedEffect
         val purchasableIds = state.games
             .filter { it.info.status == GameStatus.PURCHASABLE }
             .map { it.info.googlePlayProductId ?: it.info.id }
@@ -225,30 +245,25 @@ fun GameListScreen(
                         }
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.width(56.dp)
+                            modifier = Modifier.widthIn(min = 56.dp)
                         ) {
-                            if (authState.loading) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.size(24.dp),
-                                    color = Amber,
-                                    strokeWidth = 2.dp
-                                )
-                            } else {
-                                IconButton(onClick = {
-                                    if (authState.isSignedIn) showSignOutDialog = true
-                                    else {
-                                        authViewModel.clearError()
-                                        showAuthSheet = true
-                                    }
-                                }) {
-                                    Icon(
-                                        imageVector = Icons.Default.AccountCircle,
-                                        contentDescription = if (authState.isSignedIn) "Účet" else "Prihlásiť sa",
-                                        tint = if (authState.isSignedIn) Amber else TextOnBeigeSecondary.copy(alpha = 0.5f),
-                                        modifier = Modifier.size(36.dp)
+                            when {
+                                authState.loading -> {
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.size(24.dp),
+                                        color = Amber,
+                                        strokeWidth = 2.dp
                                     )
                                 }
-                                if (authState.isSignedIn) {
+                                authState.isSignedIn -> {
+                                    IconButton(onClick = { showSignOutDialog = true }) {
+                                        Icon(
+                                            imageVector = Icons.Default.AccountCircle,
+                                            contentDescription = "Účet",
+                                            tint = Amber,
+                                            modifier = Modifier.size(36.dp)
+                                        )
+                                    }
                                     val firstName = authState.userName?.substringBefore(" ") ?: ""
                                     if (firstName.isNotEmpty()) {
                                         Text(
@@ -257,6 +272,27 @@ fun GameListScreen(
                                             color = TextOnBeigeSecondary,
                                             maxLines = 1,
                                             overflow = TextOverflow.Ellipsis
+                                        )
+                                    }
+                                }
+                                else -> {
+                                    // Pre neprihláseného je prihlásenie hlavná akcia — nie zašedená
+                                    // ikonka bez popisu, ale viditeľné tlačidlo.
+                                    Button(
+                                        onClick = {
+                                            authViewModel.clearError()
+                                            showAuthSheet = true
+                                        },
+                                        shape = RoundedCornerShape(10.dp),
+                                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 6.dp),
+                                        colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                                    ) {
+                                        Text(
+                                            text = "Prihlásiť",
+                                            color = PrimaryButtonText,
+                                            fontSize = 13.sp,
+                                            fontWeight = FontWeight.SemiBold,
+                                            maxLines = 1
                                         )
                                     }
                                 }
@@ -289,11 +325,49 @@ fun GameListScreen(
                         }
                     }
 
+                    // Bez prihlásenia nie je z ničoho zrejmé, že ostatné špacírky sa dajú získať —
+                    // pruh to povie skôr, než hráč začne klikať po kartách.
+                    val hasUnlockableGames = state.games.any {
+                        it.info.status == GameStatus.PURCHASABLE ||
+                            it.info.status == GameStatus.FREE_WITH_LOGIN
+                    }
+                    if (!authState.isSignedIn && hasUnlockableGames) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(Amber.copy(alpha = 0.18f))
+                                .clickable {
+                                    authViewModel.clearError()
+                                    showAuthSheet = true
+                                }
+                                .padding(horizontal = 12.dp, vertical = 10.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.LockOpen,
+                                contentDescription = null,
+                                tint = TextOnBeige,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "Prihlás sa a odomkni ďalšie špacírky",
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = TextOnBeige,
+                                modifier = Modifier.weight(1f)
+                            )
+                        }
+                    }
+
                     if (showAuthSheet) {
                         AuthBottomSheet(
                             state = authState,
                             onDismiss = {
                                 showAuthSheet = false
+                                pendingUnlockGameId = null
                                 authViewModel.clearError()
                             },
                             onEmailSignIn = { email, password ->
@@ -487,13 +561,14 @@ fun GameListScreen(
                                 },
                                 onDownload = { gameListViewModel.downloadGame(gameId) },
                                 onPurchase = {
-                                    if (!authState.isSignedIn) {
-                                        scope.launch {
-                                            snackbarHostState.showSnackbar("Pre kúpu špacírky sa najprv prihláste.")
-                                        }
-                                    } else if (activity != null) {
+                                    if (activity != null) {
                                         purchaseViewModel.purchaseGame(gameId, productId, activity)
                                     }
+                                },
+                                onSignInRequest = {
+                                    pendingUnlockGameId = gameId
+                                    authViewModel.clearError()
+                                    showAuthSheet = true
                                 }
                             )
                         }
@@ -562,7 +637,8 @@ private fun GameCard(
     onPlay: () -> Unit,
     onPlayFresh: () -> Unit,
     onDownload: () -> Unit,
-    onPurchase: () -> Unit
+    onPurchase: () -> Unit,
+    onSignInRequest: () -> Unit
 ) {
     val info = gameWithStatus.info
     val isUnlocked = info.status == GameStatus.ACTIVE
@@ -570,7 +646,16 @@ private fun GameCard(
             || isActivated
             || isTestGame
     val isLocked = !isUnlocked
-    val showPurchaseButton = isLocked && info.status == GameStatus.PURCHASABLE
+    // Stmavenie je hlavný signál „túto špacírku ešte nemáš" — drží sa preto obsahu karty
+    // (obrázok, názov, popis) pri každej zamknutej špacírke. Prvky, ktoré nesú ponuku — cena,
+    // košík, štítok ZADARMO, tlačidlá — ostávajú v plnej sýtosti, nech je vidieť, čo sa s tým dá
+    // spraviť. Pri „ide sa získať hneď" (kúpa / prihlásenie) to navyše podčiarkne jantárový rám.
+    val isOffer = isLocked &&
+        (info.status == GameStatus.PURCHASABLE || info.status == GameStatus.FREE_WITH_LOGIN)
+    val dimmed = isLocked
+    val dimModifier = if (dimmed) Modifier.alpha(0.5f) else Modifier
+    val showSignInGate = isOffer && !isSignedIn
+    val showPurchaseButton = isLocked && info.status == GameStatus.PURCHASABLE && isSignedIn
 
     // Auto-download unlocked games in the background (just the small game JSON; images stream
     // on demand during play), so the player sees "Prejsť" directly without a manual "Stiahnuť"
@@ -592,13 +677,13 @@ private fun GameCard(
             .then(
                 if (isLocked) Modifier.border(
                     width = 1.dp,
-                    color = TextMedium.copy(alpha = 0.2f),
+                    color = if (isOffer) Amber.copy(alpha = 0.45f) else TextMedium.copy(alpha = 0.2f),
                     shape = RoundedCornerShape(16.dp)
                 ) else Modifier
             ),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = if (isLocked) CardBg.copy(alpha = 0.5f) else CardBg
+            containerColor = if (dimmed) CardBg.copy(alpha = 0.5f) else CardBg
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
@@ -606,8 +691,7 @@ private fun GameCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp, vertical = 10.dp)
-                .then(if (isLocked) Modifier.alpha(0.5f) else Modifier),
+                .padding(horizontal = 12.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (!info.imageUrl.isNullOrEmpty()) {
@@ -618,13 +702,15 @@ private fun GameCard(
                     modifier = Modifier
                         .size(44.dp)
                         .clip(RoundedCornerShape(8.dp))
+                        .then(dimModifier)
                 )
             } else {
                 Box(
                     modifier = Modifier
                         .size(44.dp)
                         .clip(RoundedCornerShape(8.dp))
-                        .background(Amber.copy(alpha = 0.2f)),
+                        .background(Amber.copy(alpha = 0.2f))
+                        .then(dimModifier),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
@@ -641,7 +727,8 @@ private fun GameCard(
             Box(
                 modifier = Modifier
                     .weight(1f)
-                    .defaultMinSize(minHeight = 48.dp),
+                    .defaultMinSize(minHeight = 48.dp)
+                    .then(dimModifier),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
@@ -659,14 +746,39 @@ private fun GameCard(
             Spacer(modifier = Modifier.width(8.dp))
 
             when {
-                // Purchasable → shopping cart (you can buy it now); coming soon → clock;
-                // any other locked state → padlock. Lets the two be told apart when collapsed.
-                showPurchaseButton -> {
-                    Icon(
-                        imageVector = Icons.Default.ShoppingCart,
-                        contentDescription = "Dá sa kúpiť",
-                        tint = Amber,
-                        modifier = Modifier.size(18.dp)
+                // Purchasable → price + shopping cart (you can buy it now); free after sign-in →
+                // "ZADARMO" badge; coming soon → clock; any other locked state → padlock. The
+                // collapsed row alone should say what it would take to unlock the špacírka.
+                isLocked && info.status == GameStatus.PURCHASABLE -> {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        if (isSignedIn && !price.isNullOrEmpty()) {
+                            Text(
+                                text = price,
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                color = Amber,
+                                maxLines = 1
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                        }
+                        Icon(
+                            imageVector = Icons.Default.ShoppingCart,
+                            contentDescription = "Dá sa kúpiť",
+                            tint = Amber,
+                            modifier = Modifier.size(18.dp)
+                        )
+                    }
+                }
+                isLocked && info.status == GameStatus.FREE_WITH_LOGIN -> {
+                    Text(
+                        text = "ZADARMO",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = PurchaseButton,
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(6.dp))
+                            .background(PurchaseButton.copy(alpha = 0.15f))
+                            .padding(horizontal = 6.dp, vertical = 3.dp)
                     )
                 }
                 isLocked && info.status == GameStatus.COMING_SOON -> {
@@ -708,7 +820,7 @@ private fun GameCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .then(if (isLocked) Modifier.alpha(0.5f) else Modifier),
+                        .then(dimModifier),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -741,7 +853,7 @@ private fun GameCard(
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .then(if (isLocked) Modifier.alpha(0.5f) else Modifier),
+                        .then(dimModifier),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
@@ -789,8 +901,38 @@ private fun GameCard(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                if (isLocked && !isSignedIn) {
-                    // nezobrazuj nič pre neprihlásených
+                if (showSignInGate) {
+                    // Bez tohto bloku bola rozbalená karta pre neprihláseného prázdna — nedozvedel
+                    // sa, že špacírku odomkne prihlásenie.
+                    val isFree = info.status == GameStatus.FREE_WITH_LOGIN
+                    Button(
+                        onClick = onSignInRequest,
+                        modifier = Modifier.fillMaxWidth().height(48.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        // Zelená ostáva vyhradená pre skutočnú kúpu, toto tlačidlo len prihlasuje.
+                        colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
+                    ) {
+                        AutoSizeText(
+                            text = if (isFree) "Prihlásiť sa a hrať zadarmo" else "Prihlásiť sa",
+                            color = PrimaryButtonText,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        // Bez prihlásenia nevieme, či špacírku hráč náhodou už nekúpil (nový telefón,
+                        // reinštalácia), takže tlačidlo nič netvrdí o kúpe a text pokrýva oba prípady.
+                        text = if (isFree)
+                            "Táto špacírka je zadarmo — stačí sa prihlásiť."
+                        else
+                            "Zakúpené špacírky sa ti po prihlásení odomknú. " +
+                                "Ak ju ešte nemáš, budeš si ju môcť kúpiť.",
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                        fontSize = 13.sp,
+                        lineHeight = 17.sp,
+                        color = TextMedium
+                    )
                 } else if (showPurchaseButton) {
                     Button(
                         onClick = onPurchase,
@@ -805,40 +947,8 @@ private fun GameCard(
                                 color = PrimaryButtonText,
                                 strokeWidth = 2.dp
                             )
-                        } else if (!price.isNullOrEmpty() && originalPrice != null) {
-                            // Zľava: pôvodná cena preškrtnutá + zľavnená cena
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(6.dp)
-                            ) {
-                                Text(
-                                    text = "Kúpiť špacírku ·",
-                                    modifier = Modifier.alignByBaseline(),
-                                    color = PrimaryButtonText,
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Text(
-                                    text = originalPrice,
-                                    modifier = Modifier.alignByBaseline(),
-                                    color = PrimaryButtonText.copy(alpha = 0.7f),
-                                    fontSize = 14.sp,
-                                    textDecoration = TextDecoration.LineThrough
-                                )
-                                Text(
-                                    text = price,
-                                    modifier = Modifier.alignByBaseline(),
-                                    color = PrimaryButtonText,
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
                         } else {
-                            Text(
-                                text = if (!price.isNullOrEmpty()) "Kúpiť špacírku · $price" else "Kúpiť špacírku",
-                                color = PrimaryButtonText,
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
+                            PurchaseButtonLabel(price = price, originalPrice = originalPrice)
                         }
                     }
                 } else if (isLocked) {
@@ -949,9 +1059,49 @@ private fun GameCard(
     }
 }
 
+/**
+ * Popis tlačidla na kúpu — „Kúpiť špacírku · 4,99 €", pri zľave s preškrtnutou pôvodnou cenou.
+ * Text sa v prípade potreby zmenší, aby sa dlhšie sumy zmestili na jeden riadok.
+ */
+@Composable
+private fun PurchaseButtonLabel(price: String?, originalPrice: String?) {
+    val prefix = "Kúpiť špacírku"
+    if (!price.isNullOrEmpty() && originalPrice != null) {
+        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+            AutoSizeText(
+                text = "$prefix ·",
+                modifier = Modifier.alignByBaseline().weight(1f, fill = false),
+                color = PrimaryButtonText,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = originalPrice,
+                modifier = Modifier.alignByBaseline(),
+                color = PrimaryButtonText.copy(alpha = 0.7f),
+                fontSize = 14.sp,
+                textDecoration = TextDecoration.LineThrough
+            )
+            Text(
+                text = price,
+                modifier = Modifier.alignByBaseline(),
+                color = PrimaryButtonText,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    } else {
+        AutoSizeText(
+            text = if (!price.isNullOrEmpty()) "$prefix · $price" else prefix,
+            color = PrimaryButtonText,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
 @Composable
 internal fun AutoSizeText(
     text: String,
+    modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
     fontWeight: FontWeight? = null,
     maxFontSize: TextUnit = 16.sp,
@@ -960,6 +1110,7 @@ internal fun AutoSizeText(
     var fontSize by remember(text) { mutableStateOf(maxFontSize) }
     Text(
         text = text,
+        modifier = modifier,
         fontSize = fontSize,
         color = color,
         fontWeight = fontWeight,
