@@ -1,5 +1,19 @@
 [
   {
+    "id": "prespavacka",
+    "title": "Zuzkina prespávačka",
+    "description": "Špacírka na Zuzkinu prespávačku. Prejdi celú prespávačku a získaj sladkú odmenu1",
+    "version": 2,
+    "region": "Bratislava - Petržalka",
+    "estimatedDurationMinutes": 30,
+    "distanceKm": 1.0,
+    "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media",
+    "colorHex": "565B61",
+    "status": "hidden",
+    "startName": "Detské ihrisko Jama",
+    "endName": "Detské ihrisko Jama"
+  },
+  {
     "id": "strieborna-podkova-stastia",
     "title": "Strieborná podkova šťastia",
     "description": "Čarovnej kobylke Perličke sa na dostihovej dráhe rozsypala strieborná podkova šťastia. Pomôž jej pozbierať kúsky a vráť Dňom Petržalky ich čaro!",

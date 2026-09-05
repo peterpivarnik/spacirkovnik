@@ -1,0 +1,231 @@
+{
+  "id": "prespavacka",
+  "title": "Párty Výzva: Prespávačka",
+  "version": 2,
+  "screens": [
+    {
+      "text": "Párty Výzva: Prespávačka!",
+      "type": "CONTINUE",
+      "buttonText": "Ideme na to!",
+      "fontSize": 26,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Ahoj dievčatá! Vitajte na dnešnej prespávačkovej misii. Na konci tejto cesty vás čaká sladká odmena! Aby ste ju však získali, musíte prejsť 5 stanovíšť, splniť výzvy a získať všetky písmená do tajného hesla. Ste pripravené?",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Super! Oblečte si tenisky a vydajte sa na prvú zastávku podľa mapy!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.108843,
+      "targetLongitude": 17.116646,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "1. STANOVIŠTE: Všeobecná otázka\nDorazili ste na prvé miesto! Dajte si rýchlu tímovú poradu a odpovedzte na otázku pre získanie prvého písmena.",
+      "type": "CONTINUE",
+      "buttonText": "Zobraziť otázku",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Aká je najpopulárnejšia príchuť zmrzliny na celom svete?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Čokoládová",
+          "correct": false
+        },
+        {
+          "text": "Vanilková",
+          "correct": true
+        },
+        {
+          "text": "Jahodová",
+          "correct": false
+        },
+        {
+          "text": "Pistáciová",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Správne! Prvá časť tajného párty-kódu je písmeno „N”. Pokračujte na ďalšie stanovisko!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Presuňte sa na stanovisko č. 2.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.110302,
+      "targetLongitude": 17.115855,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "2. STANOVIŠTE: Hudobná výzva\nPredtým ako odpoviete na otázku, každá z vás musí zaspievať alebo zarapovať jeden verš z vašej obľúbenej pesničky! Až potom ťuknite ďalej.",
+      "type": "CONTINUE",
+      "buttonText": "Odspievané, ideme na otázku!",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Z čoho sa tradične vyrába chrumkavý kornútok na zmrzlinu?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Z oblátky / vafľového cesta",
+          "correct": true
+        },
+        {
+          "text": "Z papiera",
+          "correct": false
+        },
+        {
+          "text": "Z plastu",
+          "correct": false
+        },
+        {
+          "text": "Z perníka",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Paráda! Druhá časť kódu je písmeno „A”. Vydajte sa na tretie miesto.",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Sledujte mapu a choďte na stanovisko č. 3.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.110881,
+      "targetLongitude": 17.119511,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "3. STANOVIŠTE: Pohybová pauza\nNež získate ďalšie písmeno – spravte celá skupina naraz 5 výskokov a bláznivú pózu na skupinovú fotku!",
+      "type": "CONTINUE",
+      "buttonText": "Hotovo! Zobraziť otázku",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Čo držíte v ruke, keď jete klasický nanuk, aby ste sa neušpinili?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Drevenú paličku",
+          "correct": true
+        },
+        {
+          "text": "Vidličku",
+          "correct": false
+        },
+        {
+          "text": "Slamku",
+          "correct": false
+        },
+        {
+          "text": "Kovovú lyžičku",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Tretie písmeno do tajného kódu je opäť „N”. Už ste za polovicou!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Pokračujte na štvrté stanovisko.",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.108218,
+      "targetLongitude": 17.121343,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "4. STANOVIŠTE: Tímový kvíz\nUž len kúsok a odmena je vaša! Dajte si rýchlu hádanku.",
+      "type": "CONTINUE",
+      "buttonText": "Zobraziť otázku",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Ktorá z týchto vecí NESMIE chýbať na poriadnej dievčenskej prespávačke?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Smiech a dobrá nálada",
+          "correct": true
+        },
+        {
+          "text": "Učebnica matematiky",
+          "correct": false
+        },
+        {
+          "text": "Budík na 5:00 ráno",
+          "correct": false
+        },
+        {
+          "text": "Hrable na lístie",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "Štvrtá časť kódu je písmeno „U”. Teraz vás čaká finálny presun do cieľa!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Vydajte sa na finálne miesto – cieľ misie!",
+      "type": "NAVIGATION",
+      "targetLatitude": 48.106708,
+      "targetLongitude": 17.119778,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "5. STANOVIŠTE: FINÁLE!\nDorazili ste do cieľa! Aby ste získali posledné písmeno, musíte správne odpovedať na záverečnú otázku.",
+      "type": "CONTINUE",
+      "buttonText": "Ideme na finálovú otázku!",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Kde v domove alebo v obchode musíme odložiť zmrzlinu, aby sa neroztopila?",
+      "type": "QUESTION",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media",
+      "answers": [
+        {
+          "text": "Do rúry",
+          "correct": false
+        },
+        {
+          "text": "Do mrazničky",
+          "correct": true
+        },
+        {
+          "text": "Na slnko",
+          "correct": false
+        },
+        {
+          "text": "Do špajze",
+          "correct": false
+        }
+      ]
+    },
+    {
+      "text": "GRATULUJEME! Posledné písmeno je „K” a tajné heslo ste určite zistili! Zvládli ste celú misiu, splnili výzvy a dokázali, že ste super tím. Teraz bežte priamo do MRAZNIČKY a vyzdvihnite si svoju zaslúženú odmenu!",
+      "type": "BROWSE",
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    },
+    {
+      "text": "Misia úspešne dokončená. Dobrú chuť!",
+      "type": "CONTINUE",
+      "buttonText": "Ukončiť výzvu",
+      "fontSize": 22,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
+    }
+  ]
+}
