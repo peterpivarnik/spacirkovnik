@@ -1,7 +1,7 @@
 {
   "id": "prespavacka",
   "title": "Párty Výzva: Prespávačka",
-  "version": 4,
+  "version": 5,
   "screens": [
     {
       "text": "Párty Výzva: Prespávačka!",
@@ -11,7 +11,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
-      "text": "Ahoj dievčatá! Vitajte na dnešnej prespávačkovej misii. Na konci tejto cesty vás čaká sladká odmena! Aby ste ju však získali, musíte prejsť 5 stanovíšť, splniť výzvy a získať všetky písmená do tajného hesla. Ste pripravené?",
+      "text": "Ahoj dievčatá! Vitajte na dnešnej prespávačkovej misii. Na konci tejto cesty vás čaká sladká odmena! Aby ste ju však získali, musíte prejsť 5 stanovísk, splniť výzvy a získať všetky písmená do tajného hesla. Ste pripravené?",
       "type": "BROWSE",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
@@ -24,7 +24,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
-      "text": "1. STANOVIŠTE: Všeobecná otázka\nDorazili ste na prvé miesto! Dajte si rýchlu tímovú poradu a odpovedzte na otázku pre získanie prvého písmena.",
+      "text": "1. STANOVISKO: Všeobecná otázka\nDorazili ste na prvé miesto! Dajte si rýchlu tímovú poradu a odpovedzte na otázku pre získanie prvého písmena.",
       "type": "CONTINUE",
       "buttonText": "Zobraziť otázku",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
@@ -66,7 +66,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
-      "text": "2. STANOVIŠTE: Hudobná výzva\nPredtým ako odpoviete na otázku, každá z vás musí zaspievať alebo zarapovať jeden verš z vašej obľúbenej pesničky! Až potom ťuknite ďalej.",
+      "text": "2. STANOVISKO: Hudobná výzva\nPredtým ako odpoviete na otázku, každá z vás musí zaspievať alebo zarapovať jeden verš z vašej obľúbenej pesničky! Až potom ťuknite ďalej.",
       "type": "CONTINUE",
       "buttonText": "Odspievané, ideme na otázku!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
@@ -108,7 +108,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
-      "text": "3. STANOVIŠTE: Pohybová pauza\nNež získate ďalšie písmeno – spravte celá skupina naraz 5 výskokov a bláznivú pózu na skupinovú fotku!",
+      "text": "3. STANOVISKO: Pohybová pauza\nNež získate ďalšie písmeno – spravte celá skupina naraz 5 výskokov a bláznivú pózu na skupinovú fotku!",
       "type": "CONTINUE",
       "buttonText": "Hotovo! Zobraziť otázku",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
@@ -150,7 +150,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
-      "text": "4. STANOVIŠTE: Tímový kvíz\nUž len kúsok a odmena je vaša! Dajte si rýchlu hádanku.",
+      "text": "4. STANOVISKO: Tímový kvíz\nUž len kúsok a odmena je vaša! Dajte si rýchlu hádanku.",
       "type": "CONTINUE",
       "buttonText": "Zobraziť otázku",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
@@ -192,7 +192,7 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
-      "text": "5. STANOVIŠTE: FINÁLE!\nDorazili ste do cieľa! Aby ste získali posledné písmeno, musíte správne odpovedať na záverečnú otázku.",
+      "text": "5. STANOVISKO: FINÁLE!\nDorazili ste do cieľa! Aby ste získali posledné písmeno, musíte správne odpovedať na záverečnú otázku.",
       "type": "CONTINUE",
       "buttonText": "Ideme na finálovú otázku!",
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
