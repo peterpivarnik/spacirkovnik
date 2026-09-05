@@ -1,7 +1,7 @@
 {
   "id": "prespavacka",
   "title": "Párty Výzva: Prespávačka",
-  "version": 2,
+  "version": 3,
   "screens": [
     {
       "text": "Párty Výzva: Prespávačka!",
@@ -16,10 +16,10 @@
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
-      "text": "Super! Oblečte si tenisky a vydajte sa na prvú zastávku podľa mapy!",
+      "text": "Super! Obujte si tenisky a vydajte sa na prvú zastávku podľa mapy!",
       "type": "NAVIGATION",
-      "targetLatitude": 48.108843,
-      "targetLongitude": 17.116646,
+      "targetLatitude": 48.095674,
+      "targetLongitude": 17.104762,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
@@ -59,8 +59,8 @@
     {
       "text": "Presuňte sa na stanovisko č. 2.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.110302,
-      "targetLongitude": 17.115855,
+      "targetLatitude": 48.097456,
+      "targetLongitude": 17.105665,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
@@ -100,8 +100,8 @@
     {
       "text": "Sledujte mapu a choďte na stanovisko č. 3.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.110881,
-      "targetLongitude": 17.119511,
+      "targetLatitude": 48.096058,
+      "targetLongitude": 17.106618,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
@@ -141,8 +141,8 @@
     {
       "text": "Pokračujte na štvrté stanovisko.",
       "type": "NAVIGATION",
-      "targetLatitude": 48.108218,
-      "targetLongitude": 17.121343,
+      "targetLatitude": 48.096288,
+      "targetLongitude": 17.104724,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
@@ -182,8 +182,8 @@
     {
       "text": "Vydajte sa na finálne miesto – cieľ misie!",
       "type": "NAVIGATION",
-      "targetLatitude": 48.106708,
-      "targetLongitude": 17.119778,
+      "targetLatitude": 48.097072,
+      "targetLongitude": 17.106502,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
