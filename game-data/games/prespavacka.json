@@ -1,7 +1,7 @@
 {
   "id": "prespavacka",
   "title": "Párty Výzva: Prespávačka",
-  "version": 3,
+  "version": 4,
   "screens": [
     {
       "text": "Párty Výzva: Prespávačka!",
@@ -20,6 +20,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.095674,
       "targetLongitude": 17.104762,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
@@ -61,6 +62,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.097456,
       "targetLongitude": 17.105665,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
@@ -102,6 +104,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.096058,
       "targetLongitude": 17.106618,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
@@ -143,6 +146,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.096288,
       "targetLongitude": 17.104724,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
@@ -184,6 +188,7 @@
       "type": "NAVIGATION",
       "targetLatitude": 48.097072,
       "targetLongitude": 17.106502,
+      "directRoute": true,
       "imageUrl": "https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/prespavacka%2Fprespavacka.jpeg?alt=media"
     },
     {
