@@ -13,6 +13,22 @@ const blog = defineCollection({
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
+		// Present only on posts that describe a špacírka. Such a post doubles as
+		// the game's landing page: it renders the route info box, the download CTA
+		// and TouristAttraction structured data, and it feeds the /spacirky list.
+		spacirka: z
+			.object({
+				nazov: z.string(),
+				poradie: z.number(),
+				region: z.string(),
+				dlzka: z.string(),
+				cas: z.string(),
+				start: z.string(),
+				lat: z.number(),
+				lng: z.number(),
+				paid: z.boolean(),
+			})
+			.optional(),
 	}),
 });
 

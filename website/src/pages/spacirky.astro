@@ -1,126 +1,81 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../consts';
+import { PLAY_STORE_URL, SITE_TITLE } from '../consts';
 
-const hry = [
-	{
-		id: 'strieborna-podkova-stastia',
-		nazov: 'Strieborná podkova šťastia',
-		popis: 'Pomôž čarovnej kobylke Perličke pozbierať kúsky striebornej podkovy šťastia. Špeciálna bezplatná špacírka – len počas Dní Petržalky!',
-		region: 'Bratislava – Petržalka',
-		dlzka: '1,0 km',
-		cas: '~30 min',
-		status: 'active',
-		paid: false,
-		start: 'Závodisko – dostihová dráha',
-		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FkonPodkova.jpeg?alt=media',
-	},
-	{
-		id: 'lesnicka-palica',
-		nazov: 'Lesnícka palica Gejzu Dražďáka',
-		popis: 'Pomôž Gejzovi nájsť stratenú lesnícku palicu v petržalských lesoch.',
-		region: 'Bratislava – Petržalka',
-		dlzka: '3,0 km',
-		cas: '~2 hod',
-		status: 'active',
-		paid: false,
-		start: 'Horáreň pri Draždiaku',
-		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media',
-	},
-	{
-		id: 'tajomstvo-janka-krala',
-		nazov: 'Tajomstvo Janka Kráľa',
-		popis: 'Pomôž duchovi básnika Janka Kráľa nájsť stratené básne v najstaršom parku v Európe.',
-		region: 'Bratislava – Petržalka',
-		dlzka: '2,0 km',
-		cas: '~90 min',
-		status: 'active',
-		paid: true,
-		start: 'Sad Janka Kráľa',
-		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media',
-	},
-	{
-		id: 'rybar-z-drazdiaka',
-		nazov: 'Rybár z Draždiaka',
-		popis: 'Starý rybár ti prezradí tajomstvá najväčšieho jazera v Petržalke.',
-		region: 'Bratislava – Petržalka',
-		dlzka: '1,2 km',
-		cas: '~60 min',
-		status: 'active',
-		paid: true,
-		start: 'Draždiak',
-		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media',
-	},
-	{
-		id: 'vila-z-pecnianskeho-lesa',
-		nazov: 'Víla z Pečnianskeho lesa',
-		popis: 'Pomôž víle Lesničke odklíať deväť kúzelných semienok a zachráň Pečniansky les pred zlomyseľným škriatkom Pŕhľavníkom.',
-		region: 'Bratislava – Petržalka',
-		dlzka: '3,5 km',
-		cas: '~2 hod',
-		status: 'active',
-		paid: true,
-		start: 'Viedenská cesta oproti Inchebe',
-		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media',
-	},
-	{
-		id: 'vodnik-z-chorvatskeho-ramena',
-		nazov: 'Vodník z Chorvátského ramena',
-		popis: 'Pomôž vodníkovi Chrčovi pozbierať kúsky rozbitej kúzelnej perly od vodných bytostí pozdĺž Chorvátského ramena.',
-		region: 'Bratislava – Petržalka',
-		dlzka: '5,0 km',
-		cas: '~3 hod',
-		status: 'active',
-		paid: true,
-		start: 'Začiatok Chorvátskeho ramena pri Bosákovej',
-		imageUrl: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media',
-	},
-];
+// Each špacírka lives in its own blog post, which doubles as the game's landing
+// page. This overview reads them straight from the collection so the route data
+// is never duplicated.
+const hry = (await getCollection('blog'))
+	.filter((post) => post.data.spacirka)
+	.sort((a, b) => a.data.spacirka!.poradie - b.data.spacirka!.poradie)
+	.map((post) => ({
+		...post.data.spacirka!,
+		popis: post.data.description,
+		image: post.data.heroImage,
+		url: `/blog/${post.id}/`,
+	}));
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'ItemList',
+	name: 'Geolokačné hry Špacírkovníka v Bratislave',
+	itemListElement: hry.map((hra, i) => ({
+		'@type': 'ListItem',
+		position: i + 1,
+		name: hra.nazov,
+		url: new URL(hra.url, Astro.site).href,
+	})),
+};
 ---
 
 <!doctype html>
 <html lang="sk">
 	<head>
-		<BaseHead title={`Špacírky a trasy | ${SITE_TITLE}`} description="Zoznam všetkých dostupných špacírok a trás v Špacírkovníku." />
+		<BaseHead
+			title={`Geolokačné hry a trasy v Bratislave | ${SITE_TITLE}`}
+			description="Prehľad všetkých geolokačných hier Špacírkovníka – trasy pre rodiny s deťmi v Bratislave a Petržalke, s dĺžkou, časom aj miestom štartu."
+			jsonLd={jsonLd}
+		/>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<div class="page-hero">
-				<h1>🗺️ Špacírky a trasy</h1>
-				<p>Každá špacírka je skutočná trasa na skutočnom mieste – s príbehom, hádankami a zážitkami pre celú rodinu.</p>
+				<h1>🗺️ Geolokačné hry a trasy v Bratislave</h1>
+				<p>Každá špacírka je skutočná trasa na skutočnom mieste – s príbehom, hádankami a zážitkami pre celú rodinu. Ideálny tip, kam s deťmi v Bratislave a Petržalke.</p>
 			</div>
 
 			<div class="games-list">
 				{hry.map((hra) => (
-					<div class={`game-item ${hra.status === 'active' ? 'active' : 'soon'}`}>
-						<img src={hra.imageUrl} alt={hra.nazov} class="game-image" loading="lazy" />
+					<a class="game-item" href={hra.url}>
+						<img src={hra.image} alt={hra.nazov} class="game-image" loading="lazy" />
 						<div class="game-content">
 							<div class="game-header">
 								<div>
 									<h2>{hra.nazov}</h2>
 									<div class="game-meta">
 										<span>📍 {hra.region}</span>
-										<span>🚶 {hra.dlzka}</span>
+										<span>🚶 {hra.   dlzka}</span>
 										<span>⏱️ {hra.cas}</span>
 									</div>
 								</div>
-								<div class={`price-tag ${hra.status === 'coming_soon' ? 'soon' : hra.paid ? 'paid' : 'available'}`}>
-									{hra.status === 'coming_soon' ? 'Čoskoro' : hra.paid ? 'K zakúpeniu' : 'Dostupné'}
+								<div class={`price-tag ${hra.paid ? 'paid' : 'available'}`}>
+									{hra.paid ? 'K zakúpeniu' : 'Zadarmo'}
 								</div>
 							</div>
 							<p class="game-desc">{hra.popis}</p>
 							<p class="game-start">🏁 Štart: <strong>{hra.start}</strong></p>
 						</div>
-					</div>
+					</a>
 				))}
 			</div>
 
 			<div class="download-cta">
-				<p>Všetky špacírky sú dostupné v appke Špacírkovník.</p>
-				<a class="btn-primary" href="https://play.google.com/store/apps/details?id=sk.spacirkovnik" target="_blank" rel="noopener">
+				<p>Všetky špacírky sú dostupné v bezplatnej appke Špacírkovník.</p>
+				<a class="btn-primary" href={PLAY_STORE_URL} target="_blank" rel="noopener">
 					▶ Stiahnuť na Google Play
 				</a>
 			</div>
@@ -159,9 +114,10 @@ const hry = [
 		overflow: hidden;
 		border: 2px solid transparent;
 		transition: border-color 0.2s;
+		text-decoration: none;
+		color: inherit;
 	}
 	.game-item:hover { border-color: #7A4F2E; }
-	.game-item.soon { opacity: 0.85; }
 
 	.game-image {
 		width: 160px;
@@ -210,7 +166,6 @@ const hry = [
 	}
 	.price-tag.available { background: #52A47A; }
 	.price-tag.paid { background: #C9761B; }
-	.price-tag.soon { background: #A09080; }
 
 	.game-desc {
 		color: #6B4C35;

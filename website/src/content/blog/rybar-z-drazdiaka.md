@@ -1,8 +1,18 @@
 ---
-title: 'Rybár z Draždiaka – keď sa želania plnia'
-description: 'Nová špacírka je vonku! Starý rybár pri Draždiaku ulovil niečo výnimočné – niečo, čo plní želania. Ale pozor, nie každé želanie by malo byť splnené.'
+title: 'Rybár z Draždiaka – geolokačná hra pre deti pri jazere'
+description: 'Geolokačná hra pre rodiny s deťmi pri jazere Draždiak v Bratislave-Petržalke. Starý rybár ulovil rybku, ktorá plní želania – ale nie každé želanie by malo byť splnené.'
 pubDate: 'Jun 11 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/rybar-z-drazdiaka%2Frybar.jpeg?alt=media&v=3'
+spacirka:
+  nazov: 'Rybár z Draždiaka'
+  poradie: 4
+  region: 'Bratislava – Petržalka'
+  dlzka: '2,0 km'
+  cas: '~60 min'
+  start: 'Draždiak'
+  lat: 48.106358
+  lng: 17.110395
+  paid: true
 ---
 
 Máme pre teba **novú špacírku** – a tentoraz je to o želaniach. **Rybár z Draždiaka je práve vonku!** 🎣✨

@@ -1,8 +1,18 @@
 ---
-title: 'Nová špacírka: Strieborná podkova šťastia'
-description: 'Špeciálna bezplatná špacírka na Dni Petržalky! Pomôž čarovnej kobylke Perličke pozbierať kúsky striebornej podkovy šťastia na dostihovej dráhe.'
+title: 'Strieborná podkova šťastia – geolokačná hra na Dňoch Petržalky'
+description: 'Bezplatná geolokačná hra pre deti na Závodisku v Bratislave-Petržalke. Pomôž čarovnej kobylke Perličke pozbierať kúsky striebornej podkovy šťastia.'
 pubDate: 'Jun 17 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FkonPodkova.jpeg?alt=media'
+spacirka:
+  nazov: 'Strieborná podkova šťastia'
+  poradie: 1
+  region: 'Bratislava – Petržalka'
+  dlzka: '1,0 km'
+  cas: '~30 min'
+  start: 'Závodisko – dostihová dráha'
+  lat: 48.116781
+  lng: 17.125130
+  paid: false
 ---
 
 Na **Dni Petržalky** sme pripravili niečo extra – úplne **novú špacírku**, ktorú si priamo na festivale zahráte **zadarmo**. Ale pozor – dá sa zahrať **len jeden jediný deň**, v sobotu na Dňoch Petržalky! 🐴✨

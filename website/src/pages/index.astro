@@ -4,17 +4,81 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { PLAY_STORE_URL, SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-const latestPosts = (await getCollection('blog'))
+const allPosts = await getCollection('blog');
+
+const latestPosts = [...allPosts]
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 3);
+
+const topSpacirky = allPosts
+	.filter((post) => post.data.spacirka)
+	.sort((a, b) => a.data.spacirka!.poradie - b.data.spacirka!.poradie)
+	.slice(0, 3);
+
+const faq = [
+	{
+		otazka: 'Čo je geolokačná hra?',
+		odpoved:
+			'Geolokačná hra je hra, ktorá sa hrá vonku v skutočnom priestore. Appka sleduje tvoju polohu a vedie ťa po trase – keď dôjdeš na zastávku, odomkne sa ďalší kúsok príbehu a hádanka. V Špacírkovníku je každá trasa skutočná prechádzka v Bratislave.',
+	},
+	{
+		otazka: 'Kam s deťmi v Bratislave, keď neviem, čo vymyslieť?',
+		odpoved:
+			'Špacírkovník ponúka geolokačné hry v Petržalke – v Sade Janka Kráľa, pri jazere Draždiak, v Pečnianskom lese, popri Chorvátskom ramene a na Závodisku. Vyberieš si trasu podľa dĺžky a času a vyrazíš.',
+	},
+	{
+		otazka: 'Ako dlho trvá jedna špacírka?',
+		odpoved:
+			'Od 30 minút po 3 hodiny, podľa toho, ktorú si vyberieš. Trasy majú od 1 do 6 kilometrov a pri každej nájdeš presnú dĺžku aj odhadovaný čas.',
+	},
+	{
+		otazka: 'Koľko to stojí?',
+		odpoved:
+			'Appka je zadarmo a jedna špacírka je vždy bezplatná – môžeš si to teda vyskúšať bez záväzkov. Ostatné špacírky si odomkneš priamo v appke.',
+	},
+	{
+		otazka: 'Pre koho sú špacírky vhodné?',
+		odpoved:
+			'Pre celé rodiny s deťmi. Príbehy sú rozprávkové, hádanky sa točia okolo prírody a histórie daného miesta a trasy vedú po pohodlných chodníkoch.',
+	},
+];
+
+const jsonLd = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'MobileApplication',
+		name: SITE_TITLE,
+		description: SITE_DESCRIPTION,
+		applicationCategory: 'GameApplication',
+		operatingSystem: 'Android',
+		url: 'https://spacirkovnik.sk/',
+		installUrl: PLAY_STORE_URL,
+		inLanguage: 'sk',
+		offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+		areaServed: { '@type': 'City', name: 'Bratislava', addressCountry: 'SK' },
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		mainEntity: faq.map((item) => ({
+			'@type': 'Question',
+			name: item.otazka,
+			acceptedAnswer: { '@type': 'Answer', text: item.odpoved },
+		})),
+	},
+];
 ---
 
 <!doctype html>
 <html lang="sk">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead
+			title="Geolokačné hry pre deti a rodiny v Bratislave | Špacírkovník"
+			description={SITE_DESCRIPTION}
+			jsonLd={jsonLd}
+		/>
 	</head>
 	<body>
 		<Header />
@@ -22,9 +86,10 @@ const latestPosts = (await getCollection('blog'))
 		<!-- HERO -->
 		<section class="hero">
 			<img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/banner.png?alt=media" alt="Špacírkovník – Sleduj mapu, rieš hádanky, objavuj mesto!" class="hero-banner" />
-			<p class="hero-sub">Špacírkovník – mení rodinnú prechádzku na malé dobrodružstvo</p>
+			<h1>Špacírkovník – geolokačné hry pre rodiny v Bratislave</h1>
+			<p class="hero-sub">Mení rodinnú prechádzku na malé dobrodružstvo. Sleduj mapu, lúšti hádanky, objavuj mesto!</p>
 			<div class="hero-ctas">
-				<a class="btn-primary" href="https://play.google.com/store/apps/details?id=sk.spacirkovnik" target="_blank" rel="noopener">
+				<a class="btn-primary" href={PLAY_STORE_URL} target="_blank" rel="noopener">
 					▶ Stiahnuť na Google Play
 				</a>
 			</div>
@@ -32,7 +97,12 @@ const latestPosts = (await getCollection('blog'))
 
 		<!-- AKO TO FUNGUJE -->
 		<section class="how">
-			<h2>Ako to funguje?</h2>
+			<h2>Ako funguje geolokačná hra?</h2>
+			<p class="section-lead">
+				Špacírkovník je mestská hra, ktorá sa hrá vonku. Appka pozná tvoju polohu a vedie ťa po skutočnej
+				trase – zatiaľ po Bratislave a Petržalke. Keď hľadáš, kam s deťmi cez víkend, stačí si vybrať trasu
+				a vyraziť.
+			</p>
 			<div class="steps">
 				<div class="step">
 					<div class="step-icon">📱</div>
@@ -65,21 +135,16 @@ const latestPosts = (await getCollection('blog'))
 
 		<!-- DOSTUPNÉ ŠPACÍRKY PREVIEW -->
 		<section class="games-preview">
-			<h2>Dostupné špacírky</h2>
-			<p class="games-sub">Každá špacírka je jedinečný príbeh na skutočnom mieste.</p>
+			<h2>Dostupné špacírky v Bratislave</h2>
+			<p class="games-sub">Každá špacírka je jedinečný príbeh na skutočnom mieste – v parku, v lese alebo pri vode.</p>
 			<div class="games-grid">
-				<div class="game-card">
-					<h3>Lesnícka palica Gejzu Dražďáka</h3>
-					<p>Pomôž Gejzovi nájsť stratenú lesnícku palicu v petržalských lesoch. Dostupná teraz!</p>
-				</div>
-				<div class="game-card">
-					<h3>Tajomstvo Janka Kráľa</h3>
-					<p>Pomôž duchovi básnika nájsť stratené básne v najstaršom parku v Európe.</p>
-				</div>
-				<div class="game-card">
-					<h3>Víla z Pečnianskeho lesa</h3>
-					<p>Zachráň Pečniansky les pred zlomyseľným škriatkom Pŕhľavníkom.</p>
-				</div>
+				{topSpacirky.map((post) => (
+					<a class="game-card" href={`/blog/${post.id}/`}>
+						<h3>{post.data.spacirka!.nazov}</h3>
+						<p>{post.data.description}</p>
+						<p class="game-card-meta">📍 {post.data.spacirka!.region} · 🚶 {post.data.spacirka!.dlzka} · ⏱️ {post.data.spacirka!.cas}</p>
+					</a>
+				))}
 			</div>
 			<a class="btn-secondary" href="/spacirky">Všetky špacírky →</a>
 		</section>
@@ -104,12 +169,25 @@ const latestPosts = (await getCollection('blog'))
 			<a class="btn-secondary" href="/blog">Prejsť na blog →</a>
 		</section>
 
+		<!-- FAQ -->
+		<section class="faq">
+			<h2>Časté otázky</h2>
+			<div class="faq-list">
+				{faq.map((item) => (
+					<details class="faq-item">
+						<summary>{item.otazka}</summary>
+						<p>{item.odpoved}</p>
+					</details>
+				))}
+			</div>
+		</section>
+
 		<!-- ZÁVEREČNÁ CTA -->
 		<section class="cta-final">
 			<img src="https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/logoNoBackground.png?alt=media" alt="Špacírkovník logo" class="cta-logo" />
 			<h2>Vyraz na dobrodružstvo</h2>
 			<p>Stačí appka, pohodlná obuv a chuť objavovať.</p>
-			<a class="btn-primary" href="https://play.google.com/store/apps/details?id=sk.spacirkovnik" target="_blank" rel="noopener">
+			<a class="btn-primary" href={PLAY_STORE_URL} target="_blank" rel="noopener">
 				▶ Stiahnuť zadarmo
 			</a>
 		</section>
@@ -132,10 +210,21 @@ const latestPosts = (await getCollection('blog'))
 		box-shadow: 0 8px 32px rgba(61,35,20,0.12);
 		margin-bottom: 1.5rem;
 	}
+	.hero h1 {
+		font-size: 1.6rem;
+		color: #3D2314;
+		margin-bottom: 0.75rem;
+	}
 	.hero-sub {
 		font-size: 1.15rem;
 		color: #6B4C35;
 		margin-bottom: 2rem;
+	}
+	.section-lead {
+		max-width: 700px;
+		margin: -1.5rem auto 2.5rem;
+		color: #6B4C35;
+		font-size: 1rem;
 	}
 	.hero-ctas {
 		display: flex;
@@ -318,6 +407,9 @@ const latestPosts = (await getCollection('blog'))
 		border: 2px solid transparent;
 		transition: border-color 0.2s;
 		position: relative;
+		text-decoration: none;
+		color: inherit;
+		display: block;
 	}
 	.game-card:hover {
 		border-color: #7A4F2E;
@@ -325,12 +417,50 @@ const latestPosts = (await getCollection('blog'))
 	.game-card h3 {
 		font-size: 1rem;
 		color: #3D2314;
-		margin: 0.75rem 0 0.5rem;
+		margin: 0 0 0.5rem;
 	}
 	.game-card p {
 		font-size: 0.9rem;
 		color: #6B4C35;
 		margin: 0;
+	}
+	.game-card-meta {
+		margin-top: 0.75rem !important;
+		font-size: 0.8rem !important;
+		color: #8B6043 !important;
+	}
+
+	/* FAQ */
+	.faq {
+		padding: 4rem 1rem;
+		background: linear-gradient(180deg, #F0E9DF 0%, #ffffff 100%);
+	}
+	.faq h2 {
+		text-align: center;
+		margin-bottom: 2.5rem;
+		color: #3D2314;
+	}
+	.faq-list {
+		max-width: 720px;
+		margin: 0 auto;
+	}
+	.faq-item {
+		background: #FAF6F1;
+		border-radius: 12px;
+		padding: 1rem 1.25rem;
+		margin-bottom: 0.75rem;
+	}
+	.faq-item summary {
+		cursor: pointer;
+		font-weight: 700;
+		color: #3D2314;
+		font-size: 1rem;
+	}
+	.faq-item p {
+		margin: 0.75rem 0 0;
+		color: #6B4C35;
+		font-size: 0.95rem;
+		line-height: 1.6;
 	}
 
 	/* FINAL CTA */

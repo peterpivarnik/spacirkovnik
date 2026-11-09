@@ -1,8 +1,18 @@
 ---
-title: 'Lesnícka palica Gejzu Dražďáka – prvá špacírka je tu!'
-description: 'Predstavujeme prvú špacírku Špacírkovníka – prechádzku petržalskými lesmi s lesníkom Gejzom.'
+title: 'Lesnícka palica Gejzu Dražďáka – geolokačná hra v Petržalke'
+description: 'Bezplatná geolokačná hra pre deti a rodiny v Bratislave-Petržalke. Pomôž lesníkovi Gejzovi nájsť stratenú palicu na 3 km trase petržalskými lesmi pri Draždiaku.'
 pubDate: 'May 18 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/lesnicka-palica%2Flesnik.jpeg?alt=media'
+spacirka:
+  nazov: 'Lesnícka palica Gejzu Dražďáka'
+  poradie: 2
+  region: 'Bratislava – Petržalka'
+  dlzka: '3,0 km'
+  cas: '~2 hod'
+  start: 'Horáreň pri Draždiaku'
+  lat: 48.108843
+  lng: 17.116646
+  paid: false
 ---
 
 Prvá špacírka Špacírkovníka je vonku – a je **zadarmo**!

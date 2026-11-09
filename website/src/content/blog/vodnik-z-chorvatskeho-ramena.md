@@ -1,8 +1,18 @@
 ---
-title: 'Vodník z Chorvátského ramena – poskladaj rozbitú kúzelnú perlu'
-description: 'Nová špacírka je vonku! Vodníkovi Chrčovi sa rozbila kúzelná perla, ktorá udržiava vodu v Chorvátskom ramene čistú. Pomôž mu pozbierať jej kúsky od vodných bytostí.'
+title: 'Vodník z Chorvátskeho ramena – geolokačná hra v Petržalke'
+description: 'Najdlhšia geolokačná hra Špacírkovníka – 6 km popri Chorvátskom ramene v Bratislave-Petržalke. Pomôž vodníkovi Chrčovi poskladať rozbitú kúzelnú perlu.'
 pubDate: 'Jun 15 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vodnik-z-chorvatskeho-ramena%2Fchrco.jpeg?alt=media&v=2'
+spacirka:
+  nazov: 'Vodník z Chorvátskeho ramena'
+  poradie: 6
+  region: 'Bratislava – Petržalka'
+  dlzka: '6,0 km'
+  cas: '~3 hod'
+  start: 'Začiatok Chorvátskeho ramena pri Bosákovej'
+  lat: 48.127300
+  lng: 17.119013
+  paid: true
 ---
 
 **Nová špacírka** pre Špacírkovník je tu – a tentokrát sa poberieme k vode! 🌊🐸

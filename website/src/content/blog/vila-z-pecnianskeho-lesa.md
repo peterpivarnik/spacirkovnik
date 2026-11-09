@@ -1,8 +1,18 @@
 ---
-title: 'Víla z Pečnianskeho lesa – zachráň les pred zlomyseľným škriatkom'
-description: 'Nová špacírka je vonku! Lesná víla Lesnička potrebuje pomoc – zlomyseľný škriatok zaklial jej kúzelné semienka a Pečniansky les je v ohrození.'
+title: 'Víla z Pečnianskeho lesa – geolokačná hra pre rodiny s deťmi'
+description: 'Geolokačná hra v Pečnianskom lese v Bratislave-Petržalke. Pomôž víle Lesničke odkliať deväť kúzelných semienok na 3,5 km trase chráneným územím popri Dunaji.'
 pubDate: 'Jun 12 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/vila-z-pecnianskeho-lesa%2Flesnicka.jpeg?alt=media'
+spacirka:
+  nazov: 'Víla z Pečnianskeho lesa'
+  poradie: 5
+  region: 'Bratislava – Petržalka'
+  dlzka: '3,5 km'
+  cas: '~2 hod'
+  start: 'Viedenská cesta oproti Inchebe'
+  lat: 48.135098
+  lng: 17.099228
+  paid: true
 ---
 
 **Nová špacírka** pre Špacírkovník je tu – a tentoraz to bude poriadne čarovné. 🧚‍♀️🌳

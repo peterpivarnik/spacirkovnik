@@ -4,15 +4,57 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import { PLAY_STORE_URL, SITE_TITLE } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, spacirka } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+// heroImage may be a site-relative path; og:image has to be absolute.
+const ogImage = heroImage ? new URL(heroImage, Astro.site).href : undefined;
+
+// A post describing a špacírka doubles as that game's landing page, so it gets
+// TouristAttraction data pinned to the real starting point of the route.
+const jsonLd = spacirka
+	? [
+			{
+				'@context': 'https://schema.org',
+				'@type': 'TouristAttraction',
+				name: spacirka.nazov,
+				description,
+				url: canonicalURL,
+				...(ogImage ? { image: ogImage } : {}),
+				touristType: 'Rodiny s deťmi',
+				isAccessibleForFree: !spacirka.paid,
+				address: {
+					'@type': 'PostalAddress',
+					addressLocality: 'Bratislava',
+					addressRegion: 'Petržalka',
+					addressCountry: 'SK',
+				},
+				geo: {
+					'@type': 'GeoCoordinates',
+					latitude: spacirka.lat,
+					longitude: spacirka.lng,
+				},
+			},
+			{
+				'@context': 'https://schema.org',
+				'@type': 'BreadcrumbList',
+				itemListElement: [
+					{ '@type': 'ListItem', position: 1, name: SITE_TITLE, item: 'https://spacirkovnik.sk/' },
+					{ '@type': 'ListItem', position: 2, name: 'Špacírky', item: 'https://spacirkovnik.sk/spacirky/' },
+					{ '@type': 'ListItem', position: 3, name: spacirka.nazov, item: canonicalURL },
+				],
+			},
+		]
+	: undefined;
 ---
 
-<html lang="en">
+<html lang="sk">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={ogImage} jsonLd={jsonLd} />
 		<style>
 			main {
 				width: calc(100% - 2em);
@@ -59,6 +101,66 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+
+			/* Route facts shown at the top of a špacírka post. */
+			.spacirka-box {
+				background: #FAF6F1;
+				border-radius: 16px;
+				padding: 1.5rem;
+				margin-bottom: 2rem;
+				text-align: center;
+			}
+			.spacirka-box dl {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+				gap: 1rem;
+				margin: 0 0 1.5rem;
+			}
+			.spacirka-box dt {
+				font-size: 0.8rem;
+				color: #8B6043;
+				margin-bottom: 0.25rem;
+			}
+			.spacirka-box dd {
+				margin: 0;
+				font-weight: 700;
+				font-size: 0.95rem;
+				color: #3D2314;
+			}
+
+			.spacirka-cta {
+				margin-top: 3rem;
+				padding-top: 2rem;
+				border-top: 1px solid rgb(var(--gray-light));
+				text-align: center;
+			}
+			.spacirka-cta p {
+				color: #6B4C35;
+				margin-bottom: 1.5rem;
+			}
+			.spacirka-cta-more {
+				margin-top: 1.5rem;
+				margin-bottom: 0;
+				font-size: 0.95rem;
+			}
+
+			.btn-primary {
+				display: inline-block;
+				background: #7A4F2E;
+				color: #fff;
+				text-decoration: none;
+				padding: 0.85rem 1.75rem;
+				border-radius: 50px;
+				font-weight: 600;
+				font-size: 1rem;
+				transition: background 0.2s, transform 0.15s;
+				box-shadow: 0 4px 16px rgba(122,79,46,0.3);
+			}
+			.btn-primary:hover {
+				background: #3D2314;
+				transform: translateY(-2px);
+				color: #fff;
+			}
 		</style>
 	</head>
 
@@ -80,7 +182,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							{
 								updatedDate && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
+										Aktualizované <FormattedDate date={updatedDate} />
 									</div>
 								)
 							}
@@ -88,7 +190,38 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						<h1>{title}</h1>
 						<hr />
 					</div>
+					{spacirka && (
+						<aside class="spacirka-box">
+							<dl>
+								<div><dt>📍 Kde</dt><dd>{spacirka.region}</dd></div>
+								<div><dt>🏁 Štart</dt><dd>{spacirka.start}</dd></div>
+								<div><dt>🚶 Dĺžka</dt><dd>{spacirka.dlzka}</dd></div>
+								<div><dt>⏱️ Čas</dt><dd>{spacirka.cas}</dd></div>
+								<div><dt>🎟️ Cena</dt><dd>{spacirka.paid ? 'K zakúpeniu v appke' : 'Zadarmo'}</dd></div>
+							</dl>
+							<a
+								class="btn-primary"
+								href={`https://www.google.com/maps/search/?api=1&query=${spacirka.lat},${spacirka.lng}`}
+								target="_blank"
+								rel="noopener"
+							>
+								🗺️ Zobraziť štart na mape
+							</a>
+						</aside>
+					)}
 					<slot />
+					{spacirka && (
+						<aside class="spacirka-cta">
+							<p>
+								Špacírku <strong>{spacirka.nazov}</strong> si zahráš v bezplatnej appke Špacírkovník –
+								geolokačné hry pre rodiny s deťmi v Bratislave.
+							</p>
+							<a class="btn-primary" href={PLAY_STORE_URL} target="_blank" rel="noopener">
+								▶ Stiahnuť na Google Play
+							</a>
+							<p class="spacirka-cta-more"><a href="/spacirky">Pozri všetky špacírky a trasy →</a></p>
+						</aside>
+					)}
 				</div>
 			</article>
 		</main>

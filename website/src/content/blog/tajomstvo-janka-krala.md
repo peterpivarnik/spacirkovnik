@@ -1,8 +1,18 @@
 ---
-title: 'Tajomstvo Janka Kráľa – duch básnika v najstaršom parku'
-description: 'Nová špacírka je vonku! Pomôž duchovi básnika Janka Kráľa nájsť stratené básne v jednom z najstarších parkov v Európe.'
+title: 'Tajomstvo Janka Kráľa – mestská hra v Sade Janka Kráľa'
+description: 'Geolokačná hra pre deti a rodiny v Sade Janka Kráľa v Bratislave. Pomôž duchovi básnika nájsť stratené básne v jednom z najstarších mestských parkov v Európe.'
 pubDate: 'Jun 10 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/tajomstvo-janka-krala%2Fjanko_kral_duch.jpeg?alt=media'
+spacirka:
+  nazov: 'Tajomstvo Janka Kráľa'
+  poradie: 3
+  region: 'Bratislava – Petržalka'
+  dlzka: '2,0 km'
+  cas: '~90 min'
+  start: 'Sad Janka Kráľa'
+  lat: 48.133890
+  lng: 17.108970
+  paid: true
 ---
 
 Máme pre teba **novú špacírku** – a tentoraz je to poriadne tajomné. **Tajomstvo Janka Kráľa je práve vonku!** 👻
