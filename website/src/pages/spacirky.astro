@@ -58,12 +58,12 @@ const jsonLd = {
 									<h2>{hra.nazov}</h2>
 									<div class="game-meta">
 										<span>📍 {hra.region}</span>
-										<span>🚶 {hra.   dlzka}</span>
+										<span>🚶 {hra.dlzka}</span>
 										<span>⏱️ {hra.cas}</span>
 									</div>
 								</div>
-								<div class={`price-tag ${hra.paid ? 'paid' : 'available'}`}>
-									{hra.paid ? 'K zakúpeniu' : 'Zadarmo'}
+								<div class={`price-tag ${hra.nedostupna ? 'unavailable' : hra.paid ? 'paid' : 'available'}`}>
+									{hra.nedostupna ? 'Nedostupná' : hra.paid ? 'K zakúpeniu' : 'Zadarmo'}
 								</div>
 							</div>
 							<p class="game-desc">{hra.popis}</p>
@@ -166,6 +166,7 @@ const jsonLd = {
 	}
 	.price-tag.available { background: #52A47A; }
 	.price-tag.paid { background: #C9761B; }
+	.price-tag.unavailable { background: #8E8A86; }
 
 	.game-desc {
 		color: #6B4C35;

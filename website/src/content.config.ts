@@ -27,6 +27,9 @@ const blog = defineCollection({
 				lat: z.number(),
 				lng: z.number(),
 				paid: z.boolean(),
+				// The game is no longer playable in the app (e.g. a one-day event game).
+				// It stays listed, marked as unavailable, but is not offered for download.
+				nedostupna: z.boolean().default(false),
 			})
 			.optional(),
 	}),

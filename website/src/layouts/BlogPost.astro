@@ -26,7 +26,7 @@ const jsonLd = spacirka
 				url: canonicalURL,
 				...(ogImage ? { image: ogImage } : {}),
 				touristType: 'Rodiny s deťmi',
-				isAccessibleForFree: !spacirka.paid,
+				...(spacirka.nedostupna ? {} : { isAccessibleForFree: !spacirka.paid }),
 				address: {
 					'@type': 'PostalAddress',
 					addressLocality: 'Bratislava',
@@ -197,7 +197,7 @@ const jsonLd = spacirka
 								<div><dt>🏁 Štart</dt><dd>{spacirka.start}</dd></div>
 								<div><dt>🚶 Dĺžka</dt><dd>{spacirka.dlzka}</dd></div>
 								<div><dt>⏱️ Čas</dt><dd>{spacirka.cas}</dd></div>
-								<div><dt>🎟️ Cena</dt><dd>{spacirka.paid ? 'K zakúpeniu v appke' : 'Zadarmo'}</dd></div>
+								<div><dt>🎟️ Cena</dt><dd>{spacirka.nedostupna ? 'Nedostupná' : spacirka.paid ? 'K zakúpeniu v appke' : 'Zadarmo'}</dd></div>
 							</dl>
 							<a
 								class="btn-primary"
@@ -210,7 +210,7 @@ const jsonLd = spacirka
 						</aside>
 					)}
 					<slot />
-					{spacirka && (
+					{spacirka && !spacirka.nedostupna && (
 						<aside class="spacirka-cta">
 							<p>
 								Špacírku <strong>{spacirka.nazov}</strong> si zahráš v bezplatnej appke Špacírkovník –

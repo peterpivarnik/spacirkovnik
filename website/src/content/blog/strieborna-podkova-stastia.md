@@ -5,7 +5,7 @@ pubDate: 'Jun 17 2026'
 heroImage: 'https://firebasestorage.googleapis.com/v0/b/spacirkovnik-app.firebasestorage.app/o/strieborna-podkova-stastia%2FkonPodkova.jpeg?alt=media'
 spacirka:
   nazov: 'Strieborná podkova šťastia'
-  poradie: 1
+  poradie: 7
   region: 'Bratislava – Petržalka'
   dlzka: '1,0 km'
   cas: '~30 min'
@@ -13,6 +13,7 @@ spacirka:
   lat: 48.116781
   lng: 17.125130
   paid: false
+  nedostupna: true
 ---
 
 Na **Dni Petržalky** sme pripravili niečo extra – úplne **novú špacírku**, ktorú si priamo na festivale zahráte **zadarmo**. Ale pozor – dá sa zahrať **len jeden jediný deň**, v sobotu na Dňoch Petržalky! 🐴✨
