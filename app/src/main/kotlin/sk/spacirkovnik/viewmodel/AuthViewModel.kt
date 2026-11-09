@@ -252,7 +252,9 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 }
                 _state.value = _state.value.copy(
-                    activatedGames = activatedGames,
+                    // Zlúčiť, nie prepísať: nákup obnovený serverom (grantActivation) mohol doraziť
+                    // skôr, než sa toto čítanie vrátilo. Pri odhlásení sa stav aj tak celý vynuluje.
+                    activatedGames = _state.value.activatedGames + activatedGames,
                     loading = false
                 )
             } catch (_: Exception) {

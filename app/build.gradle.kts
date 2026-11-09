@@ -122,6 +122,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.material.icons.extended)
 
     implementation(libs.retrofit)
@@ -137,6 +138,7 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.functions)
     implementation(libs.play.services.auth)
     implementation(libs.billing.ktx)
 

@@ -80,6 +80,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import kotlinx.coroutines.launch
@@ -146,11 +148,24 @@ fun GameListScreen(
         }
     }
 
+    // Aktivácie zapísané serverom (nákup aj nákupy obnovené na pozadí) prenesieme do stavu
+    // prihlásenia, aby sa karta hneď odomkla bez opätovného načítania z Firebase.
+    LaunchedEffect(purchaseState.activatedGameIds) {
+        if (purchaseState.activatedGameIds.isEmpty()) return@LaunchedEffect
+        purchaseState.activatedGameIds.forEach { authViewModel.grantActivation(it) }
+        purchaseViewModel.clearActivated()
+    }
+
     LaunchedEffect(purchaseState.justPurchasedGameId) {
-        val gameId = purchaseState.justPurchasedGameId ?: return@LaunchedEffect
-        authViewModel.grantActivation(gameId)
+        if (purchaseState.justPurchasedGameId == null) return@LaunchedEffect
         purchaseViewModel.clearPurchased()
         snackbarHostState.showSnackbar("Špacírka bola úspešne zakúpená!")
+    }
+
+    // Pri každom návrate do appky dohľadáme nepotvrdené nákupy (napr. odložená platba, ktorá
+    // sa medzitým dokončila) — Google ich inak po 3 dňoch automaticky vráti.
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) {
+        purchaseViewModel.syncPurchases()
     }
 
     LaunchedEffect(purchaseState.error) {
