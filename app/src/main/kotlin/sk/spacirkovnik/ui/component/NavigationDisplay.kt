@@ -47,6 +47,9 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -143,23 +146,38 @@ fun NavigationDisplay(
         }
     }
 
-    fun startLocationUpdates() {
-        if (locationStarted) return
-        val fusedClient = LocationServices.getFusedLocationProviderClient(context)
-        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000).build()
-        val callback = object : LocationCallback() {
+    // Klient aj callback držíme cez rekompozície — rovnaký callback treba pri vypnutí odovzdať
+    // do removeLocationUpdates, inak sa GPS nevypne.
+    val fusedClient = remember { LocationServices.getFusedLocationProviderClient(context) }
+    val locationCallback = remember(locationViewModel) {
+        object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 locationResult.lastLocation?.let {
                     locationViewModel.updateLocation(LocationData(it.latitude, it.longitude))
                 }
             }
         }
+    }
+
+    fun hasLocationPermission(): Boolean =
+        ContextCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            || ContextCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+
+    fun startLocationUpdates() {
+        if (locationStarted) return
+        val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 1000).build()
         try {
-            fusedClient.requestLocationUpdates(locationRequest, callback, Looper.getMainLooper())
+            fusedClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
             locationStarted = true
         }
         catch (_: SecurityException) {
         }
+    }
+
+    fun stopLocationUpdates() {
+        if (!locationStarted) return
+        fusedClient.removeLocationUpdates(locationCallback)
+        locationStarted = false
     }
 
     val permissionLauncher = rememberLauncherForActivityResult(
@@ -171,15 +189,28 @@ fun NavigationDisplay(
     }
 
     LaunchedEffect(Unit) {
-        val hasFine =
-                ContextCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-        val hasCoarse =
-                ContextCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-        if (hasFine || hasCoarse) {
-            startLocationUpdates()
-        }
-        else {
+        if (!hasLocationPermission()) {
             permissionLauncher.launch(arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION))
+        }
+    }
+
+    // GPS beží len vtedy, keď je navigácia na obrazovke: vypne sa pri odchode z navigačnej
+    // obrazovky (otázka, koniec hry, ukončenie) aj keď appka odíde do pozadia / zhasne displej,
+    // a znova sa zapne po návrate. Pridanie observera do už spustenej lifecycle doručí ON_START
+    // hneď, takže toto zapne GPS aj pri prvom zobrazení.
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_START -> if (hasLocationPermission()) startLocationUpdates()
+                Lifecycle.Event.ON_STOP -> stopLocationUpdates()
+                else -> {}
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+            stopLocationUpdates()
         }
     }
 
