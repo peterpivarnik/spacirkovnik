@@ -14,6 +14,9 @@ import androidx.lifecycle.viewModelScope
 // Legacy GoogleSignIn otvára klasický plnohodnotný dialóg výberu účtu, ktorý funguje spoľahlivo.
 // Odstrániť keď: Google opraví UX CredentialManager-a (viditeľný bottom sheet / plnohodnotný dialóg)
 // alebo keď play-services-auth prestane byť súčasťou Play Services (nepravdepodobné v blízkej budúcnosti).
+// POZOR: play-services-auth nedvíhať nad 21.x (gradle/libs.versions.toml, playServicesAuth) —
+// verzia 22.0.0 už triedu GoogleSignIn neobsahuje a build padne na „Unresolved reference 'GoogleSignIn'".
+// Dvihnúť ju pôjde až po prechode na CredentialManager.
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
