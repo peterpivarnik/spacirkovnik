@@ -5,11 +5,14 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import sk.spacirkovnik.data.GameCacheManager
 import sk.spacirkovnik.data.RetrofitInstance
+import sk.spacirkovnik.data.reportNonFatal
 import sk.spacirkovnik.model.GameInfo
 import sk.spacirkovnik.model.GameStatus
+import java.io.IOException
 
 class GameListViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -88,18 +91,33 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
 
     fun downloadGame(gameId: String) {
         viewModelScope.launch {
+            val previousStatus = _state.value.games.find { it.info.id == gameId }?.status
             updateGameStatus(gameId, DownloadStatus.DOWNLOADING)
             try {
                 val game = RetrofitInstance.apiService.getGame(gameId)
                 cacheManager.saveGame(game)
                 updateGameStatus(gameId, DownloadStatus.DOWNLOADED)
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
-                updateGameStatus(gameId, DownloadStatus.NOT_DOWNLOADED)
-                _state.value = _state.value.copy(
-                    error = "Nepodarilo sa stiahnuť špacírku: ${e.message}"
-                )
+                // Bez siete je to bežná vec; inak (odpoveď servera, poškodené dáta) chceme vedieť.
+                if (e !is IOException) reportNonFatal(TAG, "Stiahnutie špacírky $gameId zlyhalo", e)
+                if (previousStatus == DownloadStatus.UPDATE_AVAILABLE) {
+                    // Nepodarila sa len aktualizácia — stará verzia ostáva v telefóne a dá sa hrať.
+                    updateGameStatus(gameId, DownloadStatus.UPDATE_AVAILABLE)
+                } else {
+                    // Karta ukáže „Skúsiť znova"; zoznam ostáva, chyba ide len do krátkej hlášky.
+                    updateGameStatus(gameId, DownloadStatus.NOT_DOWNLOADED)
+                    _state.value = _state.value.copy(
+                        downloadError = "Špacírku sa nepodarilo stiahnuť. Skontroluj pripojenie a skús to znova."
+                    )
+                }
             }
         }
+    }
+
+    fun clearDownloadError() {
+        _state.value = _state.value.copy(downloadError = null)
     }
 
     private fun updateGameStatus(gameId: String, status: DownloadStatus) {
@@ -114,13 +132,20 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
         val games: List<GameWithStatus> = emptyList(),
         val loading: Boolean = true,
         val offline: Boolean = false,
-        val error: String? = null
+        /** Zoznam sa nenačítal vôbec — obrazovka ukáže len túto hlášku. */
+        val error: String? = null,
+        /** Nepodarilo sa stiahnuť jednu špacírku — krátka hláška nad zoznamom, zoznam ostáva. */
+        val downloadError: String? = null
     )
 
     data class GameWithStatus(
         val info: GameInfo,
         val status: DownloadStatus
     )
+
+    private companion object {
+        const val TAG = "GameListVM"
+    }
 
     enum class DownloadStatus {
         NOT_DOWNLOADED, DOWNLOADING, DOWNLOADED, UPDATE_AVAILABLE

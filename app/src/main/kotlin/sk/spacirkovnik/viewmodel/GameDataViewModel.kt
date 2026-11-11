@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import sk.spacirkovnik.data.GameCacheManager
 import sk.spacirkovnik.data.GameCompletionManager
 import sk.spacirkovnik.data.GameProgressManager
+import sk.spacirkovnik.data.reportNonFatal
 import sk.spacirkovnik.model.GameDefinition
 import sk.spacirkovnik.model.Gender
 import sk.spacirkovnik.model.GameScreen
@@ -37,6 +38,14 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
             val game = cacheManager.loadGame(gameId)
             // Hráč medzitým otvoril inú hru — tento výsledok už nepatrí na obrazovku.
             if (currentGameId != gameId) return@launch
+            if (game == null || game.screens.isEmpty()) {
+                // Súbor chýba alebo je poškodený: zabudneme ho, po návrate do zoznamu sa hra
+                // stiahne znova (zoznam sa pri návrate obnoví).
+                reportNonFatal(TAG, "Špacírku $gameId sa nepodarilo otvoriť", IllegalStateException(
+                    "Cached game unusable: game=${game != null}, screens=${game?.screens?.size}"
+                ))
+                cacheManager.forgetGame(gameId)
+            }
             showGame(gameId, game)
         }
     }
@@ -53,7 +62,7 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
         } else {
             _state.value = GameState(
                 loading = false,
-                error = "Špacírka nebola nájdená alebo je prázdna. game=${game != null}, screens=${game?.screens?.size}"
+                error = "Špacírku sa nepodarilo otvoriť. Vráť sa do zoznamu, stiahne sa znova."
             )
         }
     }
@@ -108,6 +117,10 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
 
     fun setGender(gender: Gender) {
         _gender.value = gender
+    }
+
+    private companion object {
+        const val TAG = "GameDataVM"
     }
 
     data class GameState(

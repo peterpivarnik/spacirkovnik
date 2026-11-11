@@ -49,6 +49,15 @@ class GameCacheManager(context: Context) {
         }
     }
 
+    /**
+     * Zabudne stiahnutú hru — zmaže jej súbor aj záznam o verzii. Zoznam ju potom ukáže ako
+     * nestiahnutú a stiahne ju znova.
+     */
+    suspend fun forgetGame(gameId: String) = withContext(Dispatchers.IO) {
+        versions.remove(gameId)
+        File(cacheDir, "$gameId.json").delete()
+    }
+
     /** Načíta zoznam verzií stiahnutých hier; volaj pred [getCachedVersion]. */
     suspend fun loadVersions() = withContext(Dispatchers.IO) {
         versions.load()

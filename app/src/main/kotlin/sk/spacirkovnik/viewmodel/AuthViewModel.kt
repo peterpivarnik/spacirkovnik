@@ -18,6 +18,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.firebase.FirebaseNetworkException
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +36,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeout
 import sk.spacirkovnik.data.FIREBASE_DATABASE_URL
+import sk.spacirkovnik.data.reportNonFatal
 import kotlin.time.Duration.Companion.seconds
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
@@ -107,15 +111,14 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
                 Log.e("AuthVM", "GoogleSignIn ApiException code=${e.statusCode}: ${e.message}")
                 _state.value = _state.value.copy(
                     loading = false,
-                    error = if (e.statusCode == 12501) null // user cancelled
-                    else "Prihlásenie zlyhalo (${e.statusCode})"
+                    error = when (e.statusCode) {
+                        12501 -> null // user cancelled
+                        CommonStatusCodes.NETWORK_ERROR -> NETWORK_ERROR_MESSAGE
+                        else -> GENERIC_ERROR_MESSAGE
+                    }
                 )
             } catch (e: Exception) {
-                Log.e("AuthVM", "Chyba prihlásenia: ${e::class.simpleName}: ${e.message}", e)
-                _state.value = _state.value.copy(
-                    loading = false,
-                    error = "Prihlásenie zlyhalo: ${e.message}"
-                )
+                _state.value = _state.value.copy(loading = false, error = mapError(e))
             }
         }
     }
@@ -211,12 +214,24 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         loadMarketingConsent()
     }
 
-    private fun mapError(e: Exception): String = when (e) {
-        is FirebaseAuthWeakPasswordException -> "Heslo musí mať aspoň 6 znakov."
-        is FirebaseAuthInvalidUserException -> "Účet s týmto emailom neexistuje. Zaregistruj sa nižšie."
-        is FirebaseAuthInvalidCredentialsException -> "Nesprávny email alebo heslo. Ak ešte nemáš účet, zaregistruj sa nižšie."
-        is FirebaseAuthUserCollisionException -> "Tento email už je zaregistrovaný."
-        else -> "Prihlásenie zlyhalo: ${e.message}"
+    /** Hláška pre používateľa; technický detail ide len do logu a pri neznámej chybe do Crashlytics. */
+    private fun mapError(e: Exception): String {
+        Log.w(TAG, "Prihlásenie zlyhalo: ${e::class.simpleName}: ${e.message}")
+        return when (e) {
+            is FirebaseAuthWeakPasswordException -> "Heslo musí mať aspoň 6 znakov."
+            is FirebaseAuthInvalidUserException ->
+                if (e.errorCode == "ERROR_USER_DISABLED")
+                    "Tento účet je zablokovaný. Ak ide o omyl, napíš nám na info@spacirkovnik.sk."
+                else "Účet s týmto emailom neexistuje. Zaregistruj sa nižšie."
+            is FirebaseAuthInvalidCredentialsException -> "Nesprávny email alebo heslo. Ak ešte nemáš účet, zaregistruj sa nižšie."
+            is FirebaseAuthUserCollisionException -> "Tento email už je zaregistrovaný."
+            is FirebaseNetworkException -> NETWORK_ERROR_MESSAGE
+            is FirebaseTooManyRequestsException -> "Priveľa pokusov. Počkaj chvíľu a skús to znova."
+            else -> {
+                reportNonFatal(TAG, "Neočakávaná chyba prihlásenia", e)
+                GENERIC_ERROR_MESSAGE
+            }
+        }
     }
 
     @Suppress("DEPRECATION")
@@ -394,6 +409,12 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
     fun grantActivation(gameId: String) {
         val updated = _state.value.activatedGames.toMutableSet().also { it.add(gameId) }
         _state.value = _state.value.copy(activatedGames = updated)
+    }
+
+    private companion object {
+        const val TAG = "AuthVM"
+        const val NETWORK_ERROR_MESSAGE = "Prihlásenie sa nepodarilo. Skontroluj pripojenie na internet."
+        const val GENERIC_ERROR_MESSAGE = "Prihlásenie sa nepodarilo. Skús to znova."
     }
 
     data class AuthState(

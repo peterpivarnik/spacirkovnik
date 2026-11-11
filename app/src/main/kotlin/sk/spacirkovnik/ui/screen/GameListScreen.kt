@@ -139,6 +139,13 @@ fun GameListScreen(
         purchaseViewModel.syncPurchases()
     }
 
+    // Zlyhané stiahnutie jednej špacírky: krátka hláška, zoznam ostáva a karta ponúkne „Skúsiť znova".
+    LaunchedEffect(state.downloadError) {
+        val error = state.downloadError ?: return@LaunchedEffect
+        gameListViewModel.clearDownloadError()
+        snackbarHostState.showSnackbar(error)
+    }
+
     LaunchedEffect(purchaseState.error) {
         val error = purchaseState.error ?: return@LaunchedEffect
         snackbarHostState.showSnackbar(error)

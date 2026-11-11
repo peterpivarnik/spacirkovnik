@@ -174,7 +174,10 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
                 }
             }
             BillingClient.BillingResponseCode.USER_CANCELED -> failPurchase(null)
-            else -> failPurchase("Nákup zlyhal (${billingResult.responseCode}).")
+            else -> {
+                Log.w(TAG, "Nákup zlyhal: ${billingResult.responseCode} ${billingResult.debugMessage}")
+                failPurchase(billingErrorMessage(billingResult.responseCode))
+            }
         }
     }
 
@@ -294,6 +297,19 @@ class PurchaseViewModel(application: Application) : AndroidViewModel(application
     }
 
     /** Ukončí rozbehnutý nákup; [message] = null pre zrušenie bez hlášky. */
+    /** Hláška pre používateľa podľa kódu z Google Play (kód samotný ide len do logu). */
+    private fun billingErrorMessage(responseCode: Int): String = when (responseCode) {
+        BillingClient.BillingResponseCode.SERVICE_UNAVAILABLE,
+        BillingClient.BillingResponseCode.SERVICE_DISCONNECTED,
+        BillingClient.BillingResponseCode.NETWORK_ERROR ->
+            "Obchod Google Play je teraz nedostupný. Skontroluj pripojenie a skús to znova."
+        BillingClient.BillingResponseCode.BILLING_UNAVAILABLE ->
+            "Nákupy nie sú v tomto zariadení dostupné. Skontroluj, či si prihlásený v Obchode Play."
+        BillingClient.BillingResponseCode.ITEM_UNAVAILABLE ->
+            "Túto špacírku sa teraz nedá kúpiť. Skús to neskôr."
+        else -> "Nákup sa nepodarilo dokončiť. Skús to znova."
+    }
+
     private fun failPurchase(message: String?) {
         purchasingProductId = null
         _state.value = _state.value.copy(purchasingGameId = null, error = message)

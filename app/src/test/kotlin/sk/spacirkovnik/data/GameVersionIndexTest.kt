@@ -73,6 +73,19 @@ class GameVersionIndexTest {
     }
 
     @Test
+    fun removeForgetsGameInMemoryAndFile() {
+        val (indexFile, gamesDir) = setup()
+        writeGame(gamesDir, "rybar", 3)
+        val index = GameVersionIndex(indexFile, gamesDir).apply { load() }
+
+        index.remove("rybar")
+        assertNull(index.get("rybar"))
+
+        val reloaded = GameVersionIndex(indexFile, gamesDir).apply { load() }
+        assertNull(reloaded.get("rybar"))
+    }
+
+    @Test
     fun corruptIndexFileIsRebuilt() {
         val (indexFile, gamesDir) = setup()
         writeGame(gamesDir, "vila", 2)

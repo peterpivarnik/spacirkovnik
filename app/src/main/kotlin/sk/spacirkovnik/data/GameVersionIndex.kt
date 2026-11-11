@@ -38,6 +38,15 @@ internal class GameVersionIndex(private val indexFile: File, private val gamesDi
         }
     }
 
+    /** Zabudne stiahnutú hru (napr. poškodený súbor), aby sa stiahla znova. Siaha na disk. */
+    fun remove(gameId: String) {
+        synchronized(lock) {
+            load()
+            val map = versions!!
+            if (map.remove(gameId) != null) write(map)
+        }
+    }
+
     private fun readIndex(): MutableMap<String, Int>? {
         if (!indexFile.exists()) return null
         return try {
