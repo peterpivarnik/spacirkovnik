@@ -2,7 +2,7 @@
 layout: '../layouts/LegalPage.astro'
 title: 'Obchodné podmienky'
 description: 'Obchodné podmienky aplikácie Špacírkovník.'
-lastUpdated: '14. júna 2026'
+lastUpdated: '11. novembra 2026'
 ---
 
 ## 1. Prevádzkovateľ
@@ -36,6 +36,8 @@ Web: spacirkovnik.sk
 Prevádzkovateľ poskytuje používateľom prístup k digitálnemu obsahu – špacírkam v aplikácii Špacírkovník. Niektoré špacírky sú dostupné bezplatne, iné sú spoplatnené jednorazovým poplatkom (in-app nákup).
 
 Zmluva medzi prevádzkovateľom a používateľom vzniká momentom dokončenia in-app nákupu alebo spustením bezplatnej špacírky.
+
+Príbehy a ilustrácie špacírok vznikajú s pomocou umelej inteligencie. Všetky trasy a úlohy pripravuje prevádzkovateľ a pred vydaním ich overuje v teréne.
 
 ---
 

@@ -107,6 +107,14 @@ internal fun AccountDialog(
                 )
                 Spacer(Modifier.height(16.dp))
                 Text(
+                    text = "Príbehy a ilustrácie špacírok vznikajú s pomocou umelej inteligencie. " +
+                        "Všetky trasy a úlohy pripravujeme a pred vydaním overujeme v teréne my.",
+                    fontSize = 12.sp,
+                    lineHeight = 16.sp,
+                    color = TextMedium.copy(alpha = 0.7f)
+                )
+                Spacer(Modifier.height(8.dp))
+                Text(
                     text = appVersionLabel(),
                     fontSize = 12.sp,
                     color = TextMedium.copy(alpha = 0.7f)
