@@ -1,5 +1,7 @@
 import org.gradle.api.JavaVersion.VERSION_17
 import com.android.build.api.dsl.ApplicationExtension
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Properties
 
 plugins {
@@ -60,6 +62,11 @@ configure<ApplicationExtension> {
         targetSdk = 37
         versionCode = releaseVersionCode
         versionName = if (buildingRelease) releaseVersionCode.toString() else rawVersion
+        // Dátum zostavenia vydania pre menu „Účet". Len pri releaseBundle — vo vývojových
+        // buildoch by sa inak BuildConfig menil každý deň a appka by sa zbytočne celá prekompilovala.
+        val buildDate = if (buildingRelease)
+            LocalDate.now().format(DateTimeFormatter.ofPattern("d. M. yyyy")) else ""
+        buildConfigField("String", "BUILD_DATE", "\"$buildDate\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["MAPBOX_PUBLIC_TOKEN"] = mapboxPublicToken
         resValue("string", "mapbox_access_token", mapboxPublicToken)

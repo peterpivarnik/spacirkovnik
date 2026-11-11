@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
+import sk.spacirkovnik.BuildConfig
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.CardBg
 import sk.spacirkovnik.ui.theme.PrimaryButton
@@ -104,6 +105,12 @@ internal fun AccountDialog(
                         )
                     }
                 )
+                Spacer(Modifier.height(16.dp))
+                Text(
+                    text = appVersionLabel(),
+                    fontSize = 12.sp,
+                    color = TextMedium.copy(alpha = 0.7f)
+                )
             }
         },
         confirmButton = {
@@ -117,6 +124,12 @@ internal fun AccountDialog(
             }
         }
     )
+}
+
+/** „Verzia 13 · 9. 11. 2026" vo vydaní; vo vývojovom builde „Verzia 14-SNAPSHOT · vývojová". */
+private fun appVersionLabel(): String {
+    val date = BuildConfig.BUILD_DATE.ifEmpty { "vývojová" }
+    return "Verzia ${BuildConfig.VERSION_NAME} · $date"
 }
 
 /**
