@@ -155,7 +155,6 @@ dependencies {
     // IDE hlási „Dependency is declared multiple times" — je to falošný poplach, BOM sem patrí.
     // debugAndroidTestRuntimeClasspath ho z implementation nededí a bez tohto riadku padne
     // mergeDebugAndroidTestManifest na „Could not find androidx.compose.ui:ui-test-junit4:".
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
