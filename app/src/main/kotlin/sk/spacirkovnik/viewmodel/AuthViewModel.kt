@@ -391,14 +391,6 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun isGameActivated(gameId: String): Boolean {
-        return _state.value.activatedGames.contains(gameId)
-    }
-
-    fun isTestGame(gameId: String): Boolean {
-        return _state.value.testGames.contains(gameId)
-    }
-
     fun grantActivation(gameId: String) {
         val updated = _state.value.activatedGames.toMutableSet().also { it.add(gameId) }
         _state.value = _state.value.copy(activatedGames = updated)

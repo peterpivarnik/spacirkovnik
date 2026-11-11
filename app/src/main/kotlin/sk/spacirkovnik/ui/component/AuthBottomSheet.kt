@@ -49,7 +49,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import sk.spacirkovnik.ui.screen.AutoSizeText
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.CardBg
 import sk.spacirkovnik.ui.theme.PrimaryButton
