@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -62,6 +63,7 @@ internal fun AccountDialog(
                         color = TextDark,
                         modifier = Modifier.weight(1f)
                     )
+                    Spacer(Modifier.width(12.dp))
                     Switch(
                         checked = marketingConsent,
                         onCheckedChange = onMarketingConsentChange,
