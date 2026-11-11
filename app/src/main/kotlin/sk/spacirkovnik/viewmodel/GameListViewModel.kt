@@ -37,6 +37,8 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
 
     private fun fetchGameIndex() {
         viewModelScope.launch {
+            // Verzie stiahnutých hier treba mať v pamäti skôr, než sa zostaví zoznam.
+            cacheManager.loadVersions()
             try {
                 val response = RetrofitInstance.apiService.getGameIndex()
                 cacheManager.saveCatalog(response)

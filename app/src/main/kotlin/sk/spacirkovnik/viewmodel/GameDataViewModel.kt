@@ -5,9 +5,12 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import sk.spacirkovnik.data.GameCacheManager
 import sk.spacirkovnik.data.GameCompletionManager
 import sk.spacirkovnik.data.GameProgressManager
+import sk.spacirkovnik.model.GameDefinition
 import sk.spacirkovnik.model.Gender
 import sk.spacirkovnik.model.GameScreen
 
@@ -27,7 +30,18 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
         if (currentGameId == gameId && _state.value.screens.isNotEmpty()) return
 
         currentGameId = gameId
-        val game = cacheManager.loadGame(gameId)
+        // Kým sa hra načíta z telefónu (na pozadí), ukáže sa načítavanie — nie obrazovky
+        // predchádzajúcej hry.
+        _state.value = GameState()
+        viewModelScope.launch {
+            val game = cacheManager.loadGame(gameId)
+            // Hráč medzitým otvoril inú hru — tento výsledok už nepatrí na obrazovku.
+            if (currentGameId != gameId) return@launch
+            showGame(gameId, game)
+        }
+    }
+
+    private fun showGame(gameId: String, game: GameDefinition?) {
         if (game != null && game.screens.isNotEmpty()) {
             val savedProgress = progressManager.getProgress(gameId)
             _index.intValue = savedProgress.coerceAtMost(game.screens.size - 1)
