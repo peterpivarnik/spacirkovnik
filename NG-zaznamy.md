@@ -2,8 +2,8 @@
 
 Jeden riadok = jeden záznam. Formát: dátum · kto · veta · kde platí.
 
-| kľúč | typ | dátum | kto | pôvod | veta | kde platí | stav | adresát | termín | dispozícia | dosah | dôkaz | publikum | meno |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| kľúč | typ | dátum | kto | pôvod | veta | kde platí | stav | adresát | termín | dispozícia | dosah | dôkaz | publikum | meno | odišlo/čaká |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | `SPA-Z261110-53c636` | priebeh/stav | 2026-11-10 | PS | povedal | NG: prepni spacirkovnik (pokyn PS 10. 11. 2026: „Keď sa vytvárajú nové projekty tak už majú byť NG všetky. Takisto by som chcel aby v tejto chvíli už všetky projekty boli typu NG. Zabezpeč to teraz“) — vypnutá trieda A (0 skriptov v settings), staré CLAUDE.md v archive/v1/CLAUDE-v1-jadro.md, pilotný text partnera vložený; kroky riešiteľa: 0 | pilot | platí |  |  |  | malý |  | interné | X: prepni spacirkovnik pokyn 2026 vytvárajú |
 | `SPA-Z261111-8929ad` | priebeh/stav | 2026-11-11 | partner | partnerov poznatok | NG: hlásenie odovzdané Peter Pivarník 2026-11-11 | projekt | platí |  |  |  | malý |  | interné | X: hlásenie odovzdané Peter Pivarník 2026-11-11 |
 | `SPA-R261111-3b4c80` | rozhodnutie | 2026-11-11 | Peter Pivarník | povedal | Hranica 10 m pri príchode do cieľa ostáva, nemení sa. | Android aplikácia – navigácia | platí |  |  |  | malý |  | interné | R: Hranica príchode cieľa ostáva nemení |
@@ -14,3 +14,4 @@ Jeden riadok = jeden záznam. Formát: dátum · kto · veta · kde platí.
 | `SPA-R261111-aa827e` | rozhodnutie | 2026-11-11 | Peter Pivarník | povedal | Prestavbu obrazoviek komitnúť do main bez predchádzajúceho zostavenia v Android Studiu. | Android aplikácia | platí | Peter Pivarník | 2026-11-25 | po termíne ostáva návrhom a pri návrate témy sa ponúkne znova | malý |  | interné | R: Prestavbu obrazoviek komitnúť main predchádzajúceho |
 | `SPA-P261111-98174a` | poznatok | 2026-11-11 | Peter Pivarník | povedal | Prestavba obrazoviek (bod 5) funguje – Peter ju vyskúšal. | Android aplikácia | platí |  |  |  | malý |  | interné | P: Prestavba obrazoviek bod funguje Peter |
 | `SPA-P261111-7165b6` | poznatok | 2026-11-11 | Peter Pivarník | povedal | Aplikácia Špacírkovník je vyvíjaná pomocou AI a texty aj obrázky špacírok sú generované pomocou AI; zatiaľ to nikde nie je uvedené. | Android aplikácia, web, špacírky | platí |  |  |  | malý |  | interné | P: Aplikácia Špacírkovník vyvíjaná pomocou texty |
+| `SPA-P261111-90449f` | poznatok | 2026-11-11 | Peter Pivarník | povedal | Všetky trasy špacírok overujeme v teréne, aj niekoľkokrát, predtým než novú špacírku vydáme. | špacírky, web, aplikácia | platí |  |  |  | malý |  | interné | P: Všetky trasy špacírok overujeme teréne | ide do výstupu: verejnosť – veta o AI na webe, v obchodných podmienkach a v aplikácii |
