@@ -1844,6 +1844,44 @@ KOD_HTTP_KONCEPT = re.compile(r'(?:^|graph\.microsoft\.com/(?:v1\.0|beta))/?(?:m
 # KOTF (23. 10.): vyhľadávanie v Jire (POST …/search, …/search/jql, …/search/approximate-count) je čítanie — v Jire nič
 # nemení; meranie KOTW: podagent v ADM sa pýtal na počet úloh s výkazom práce. Cesta doslova, koniec cesty pevný.
 JIRA_HLADANIE = re.compile(r'/rest/api/(?:2|3|latest)/search(?:/jql|/approximate-count)?/?(?:[?#]|$)')
+# KOTJ (10. 11.): to isté vyhľadávanie cez curl v príkaze stráž zastavovala aj po rozvoze — adresa Jiry je v .env
+# ($JIRA_SITE_URL), host je teda nečitateľný (adresa-necitatelna), a pri doslovnom *.atlassian.net zastavilo staršie
+# pravidlo známych služieb (CURL_CIEL). Týždeň po 1. 11.: PS (podagent), Marián Lacena, Soňa Saturyová Habrmanová.
+# Čítanie je to len vtedy, keď v príkaze niet nič, čo by z neho urobilo zápis: metóda doslova POST (alebo z tela),
+# jediné telo doslova v príkaze (nie zo súboru, zo vstupu ani z premennej), JSON s kľúčom jql a len s kľúčmi
+# vyhľadávania, žiadny formulár, nahrávanie, súbor s nastaveniami, --next ani adresa z xargs, a KAŽDÁ adresa je
+# presná cesta vyhľadávania. Host smie byť nečitateľný (ako v kóde, KOTF) alebo doslova *.atlassian.net cez https;
+# iný doslovný host výnimkou nie je. Hlavičky (prihlásenie) odídu na ten istý host aj pri čítaní cez GET, ktoré stráž
+# púšťa — navyše odíde len telo, ktoré je celé napísané v príkaze.
+JIRA_HLADANIE_KLUCE = frozenset(('jql', 'maxResults', 'fields', 'nextPageToken', 'expand', 'properties', 'fieldsByKeys',
+                                 'reconcileIssues', 'startAt', 'validateQuery'))
+
+
+def jira_hladanie_adresa(x):
+    """Adresa (po rozvinutí, neznáma časť = NEZNAME) je vyhľadávanie v Jire: cesta doslova JIRA_HLADANIE hneď za
+    hostom; host nečitateľný alebo doslova https://….atlassian.net (KOTJ)."""
+    x = x or ''
+    hc = adr_host_cast(x)
+    if not JIRA_HLADANIE.match(x[len(hc):]):
+        return False
+    if NEZNAME in hc or '$' in hc or '`' in hc:
+        return True
+    m = re.match(r'(?:([A-Za-z][A-Za-z0-9+.-]*)://)?(?:[^/?#@\s]*@)?([^/?#:\s]*)', hc)
+    return bool(m) and (m.group(1) or 'https').lower() == 'https' \
+        and m.group(2).lower().rstrip('.').endswith('.atlassian.net')
+
+
+def jira_hladanie_telo(x):
+    """Telo vyhľadávania v Jire celé doslova: JSON objekt s jql (text) a len s kľúčmi vyhľadávania (KOTJ)."""
+    if not x or NEZNAME in x or x.lstrip().startswith('@'):
+        return False
+    try:
+        d = json.loads(x)
+    except ValueError:
+        return False
+    return isinstance(d, dict) and isinstance(d.get('jql'), str) and set(d) <= JIRA_HLADANIE_KLUCE
+
+
 KOD_HTTP_CITA_POST = re.compile(r'/\$batch\b|/search/query\b|/getSchedule\b|/findMeetingTimes\b|/reports/|/getByIds\b'
                                 r'|/checkMember\w*|/getMember\w*|/delta\b|' + JIRA_HLADANIE.pattern, re.I)
 KOD_EXO_ZAPIS = re.compile(r'''['"](?:New|Add|Set|Remove|Enable|Disable|Update|Grant|Revoke|Import|Start|Stop|Clear|Restore'''
@@ -1978,13 +2016,31 @@ def skript_jazyk(p, obs):
     return None
 
 
+# SKG 4: výstup skript_kod pythonu po tokenizéri je stály — skript_kod ho nemení (8 219 textov: súbory pythonu projektov
+# PS, skripty stroja, texty rozboru ng-stav.py — 0 rozdielov). Rozbor skriptu ho dostane znova (skript_kod_rozbor nad
+# textom z posud), preto ho druhýkrát nečíta (pri ng-stav.py 48 zo 172 čítaní). Keby stály nebol, druhé čítanie by mohlo
+# len ubrať komentár či popis — vynechané čítanie necháva kotve viac textu, nie menej.
+_PY_KOD_HOTOVY = set()
+
+
 def skript_kod(obs, jazyk):
     """Kód skriptu bez komentárov a popisu (voľba či vzor v komentári nič nerozlišuje ani nespúšťa): js /* … */, python
-    docstring (reťazec v trojitých úvodzovkách na začiatku riadku — nie priradený do premennej)."""
+    docstring (reťazec v trojitých úvodzovkách na začiatku riadku — nie priradený do premennej) a komentáre podľa
+    tokenizéra (SKG 4)."""
     if jazyk == 'js':
         obs = re.sub(r'/\*[\s\S]*?\*/', '', obs)
     elif jazyk == 'py':
-        obs = py_popisy(obs)             # SKG 2 (6. 11.): páry úvodzoviek podľa stromu, keď vzor pokazí platný kód
+        if obs in _PY_KOD_HOTOVY:
+            return obs
+        if '\r' in obs:
+            obs = obs.replace('\r\n', '\n').replace('\r', '\n')     # SKG 4: python berie \r\n aj \r za koniec riadku
+        bez = _py_kod_tok(obs)           # SKG 2, SKG 3: popisy podľa tokenizéra; SKG 4: komentáre tiež
+        if bez is not None:
+            if len(_PY_KOD_HOTOVY) >= 512:
+                _PY_KOD_HOTOVY.clear()
+            _PY_KOD_HOTOVY.add(bez)
+            return bez
+        obs = py_popisy(obs)
     von = []
     for r in obs.split('\n'):
         s = r.lstrip()
@@ -2946,8 +3002,9 @@ PY_POPIS_RIADOK = re.compile(r'''(?m)^[ \t]*(?:[rRuU]|[bB][rR]?)?(?:"""|\'\'\')'
 # skupine reťazcov (s None vracia vždy True). Výsledok rovnaký (súbory pythonu projektov PS, skripty stroja, 70 textov
 # rozboru `ng-stav.py`: 0 rozdielov); iná verzia pythonu alebo chýbajúci TokenizerIter → generate_tokens ako doteraz.
 # Pri `ng-stav.py` s celým textom 0,64 → 0,40 s.
-def _py_popisy_tok(obs):
-    """Popisy pythonu → None s pármi úvodzoviek podľa tokenizéra (SKG 3 b3, vyššie). None → nevie (strom)."""
+def _py_popisy_tok(obs, komentare=False):
+    """Popisy pythonu → None s pármi úvodzoviek podľa tokenizéra (SKG 3 b3, vyššie). None → nevie (strom). S komentare
+    zmaže v tom istom čítaní aj komentáre ako _py_bez_komentarov (SKG 4, _py_kod_tok)."""
     if '\r' in obs or sys.version_info < (3, 12):
         return None
     import tokenize
@@ -2957,6 +3014,7 @@ def _py_popisy_tok(obs):
     STR, FS, FE = tokenize.STRING, tokenize.FSTRING_START, tokenize.FSTRING_END
     PRIEHLADNE = (tokenize.NL, tokenize.COMMENT)
     nahrady, zasobnik, sk = [], [], None      # sk = [r0, c0, r1, c1, je_f, prvý token] — skupina susedných reťazcov
+    KOM, kom = tokenize.COMMENT, []
 
     def uzavri(s):
         if s is None or s[4] or s[0] not in kandidati:
@@ -2998,6 +3056,9 @@ def _py_popisy_tok(obs):
                     return None
                 sk = zasobnik.pop()
                 sk[2], sk[3] = x[3]
+            elif typ == KOM:
+                if komentare:
+                    kom.append((x[2][0], x[2][1], x[1]))
             elif sk is not None and typ not in PRIEHLADNE:
                 if not uzavri(sk):
                     return None
@@ -3010,9 +3071,14 @@ def _py_popisy_tok(obs):
     for i in range(1, len(nahrady)):
         if nahrady[i][:2] < nahrady[i - 1][2:]:
             return None
+    zmaz = _py_komentare_von(riadky, kom) if kom else ()
+    if zmaz is None or (zmaz and nahrady and zmaz & {r for r0, _, r1, _ in nahrady for r in range(r0, r1 + 1)}):
+        return None
+    for r in zmaz:
+        riadky[r - 1] = None                # riadok so samotným komentárom nie je v rozsahu žiadneho popisu
     for r0, c0, r1, c1 in reversed(nahrady):
         riadky[r0 - 1:r1] = [riadky[r0 - 1][:c0] + 'None' + riadky[r1 - 1][c1:]]
-    return '\n'.join(riadky)
+    return '\n'.join(r for r in riadky if r is not None) if zmaz else '\n'.join(riadky)
 
 
 @_pamat
@@ -3102,6 +3168,71 @@ def py_popisy(obs):
         return stare
     nove = py_bez_popisov(obs)
     return stare if nove is None else nove
+
+
+# SKG 4 (10. 11.): skript_kod mazal v pythone každý riadok, ktorý po medzerách začína `#`, aj keď ležal vnútri
+# viacriadkového reťazca. Keď na takom riadku reťazec končil (`x = """` … `# a """`), po zmazaní sa zvyšok súboru stal
+# reťazcom a rozbor v ňom kód nevidel — poštu cez smtplib za takým reťazcom kotva pustila, bez `#` ju zastavila (v projektoch
+# PS tak kotva čítala naopak text a kód v troch skriptoch cp-controlling s nadpismi „#“ v reťazcoch). Komentáre teraz určí
+# tokenizér pythonu v tom istom čítaní, ktoré páruje popisy (_py_popisy_tok s komentare): riadok so samotným komentárom
+# zmizne ako doteraz, komentár za kódom sa odreže, riadky vnútri reťazca ostanú celé. Keď tokenizér nevie (chyba
+# tokenizéra, python pred 3.12 pri popisoch, poloha, ktorá nesedí s textom), ostáva mazanie podľa začiatku riadku ako
+# doteraz. Konce riadkov \r\n a samotné \r berie python ako koniec riadku; kotva delila text len podľa \n, takže súbor
+# s koncami \r, ktorý začína komentárom (#!), zmizol pred rozborom celý a python ho spustil — text sa preto zjednotí na \n.
+def _py_komentare_von(riadky, kom):
+    """Komentáre [(riadok, stĺpec, text)] z tokenizéra: komentár za kódom odreže v riadky (aj s medzerou pred ním ako
+    doteraz), vráti čísla riadkov so samotným komentárom (zmažú sa). Poloha, ktorá nesedí s textom → None."""
+    zmaz = set()
+    for r, c, t in kom:
+        if not (1 <= r <= len(riadky)) or not t.startswith('#') or not riadky[r - 1].startswith(t, c):
+            return None
+        pred = riadky[r - 1][:c]
+        if not pred.strip():
+            zmaz.add(r)
+        else:
+            riadky[r - 1] = pred[:-1] if pred[-1:].isspace() else pred
+    return zmaz
+
+
+def _py_bez_komentarov(obs):
+    """Python bez komentárov podľa tokenizéra (SKG 4, vyššie). None → tokenizér nevie."""
+    if '#' not in obs:
+        return obs
+    import tokenize
+    riadky = obs.split('\n')
+    vstup = iter([r + '\n' for r in riadky[:-1]] + ([riadky[-1]] if riadky[-1] else []))
+    citac = None
+    if sys.version_info[:2] == (3, 12):
+        try:
+            citac = tokenize._tokenize.TokenizerIter
+        except AttributeError:
+            pass
+    KOM, kom = tokenize.COMMENT, []
+    try:
+        if citac is not None:
+            tokeny = citac(lambda: next(vstup, ''), extra_tokens=True)
+        else:
+            tokeny = (tuple(x) for x in tokenize.generate_tokens(lambda: next(vstup, '')))
+        for x in tokeny:
+            if x[0] == KOM:
+                kom.append((x[2][0], x[2][1], x[1]))
+    except (SyntaxError, ValueError, RecursionError, MemoryError, tokenize.TokenError):
+        return None
+    zmaz = _py_komentare_von(riadky, kom)
+    if zmaz is None:
+        return None
+    return '\n'.join(x for i, x in enumerate(riadky, 1) if i not in zmaz) if zmaz else '\n'.join(riadky)
+
+
+def _py_kod_tok(obs):
+    """skript_kod pythonu (SKG 4): popisy (py_popisy) a komentáre podľa tokenizéra; keď text má popis, jedným čítaním.
+    None → tokenizér komentáre nevie (skript_kod zmaže riadky podľa začiatku ako doteraz)."""
+    if PY_POPIS_STROM and '#' in obs and PY_POPIS_RIADOK.search(obs):
+        bez = _py_popisy_tok(obs, komentare=True)
+        if bez is not None:
+            return bez
+    return _py_bez_komentarov(py_popisy(obs))
+
 
 
 _PY_SITE = {}
@@ -11592,7 +11723,9 @@ class Rozbor:
         rura_extra = list(self.rura_ciele(pred, ctx)) if xargs and cmd.rura else []
         # vstup, ktorý xargs/parallel privedie klientovi, sa nedá prečítať (zoznam v súbore `xargs -a`, rúra z cat …):
         # adresa odoslania môže byť v ňom (nezávislý beh 10. 10.) — pri -I/--replace len tam, kde je náhradný znak
-        xg = (bool(xargs) and not rura_extra, xargs_nahrada)
+        # KOTX (10. 11.): tretí člen — slová z echo/printf s neznámou časťou (adresa v premennej), posúdi ich cudzia_adresa
+        xg = (bool(xargs) and not rura_extra, xargs_nahrada,
+              list(self.rura_nezname(pred, ctx)) if xargs and cmd.rura and rura_extra else [])
         if pb == 'curl':
             self.curl(t, args, ctx, rura_extra, cmd, xg)
         if pb == 'wget':
@@ -15773,6 +15906,27 @@ class Rozbor:
                 return False
         return True
 
+    def curl_jira_cita(self, met, m_adr, m_telo, ine, args, ctx):
+        """Príkaz curl je vyhľadávanie v Jire celé doslova (KOTJ, 10. 11.): metóda doslova POST (alebo z tela), jediné
+        telo, ktoré je JSON vyhľadávania napísaný v príkaze, a každá adresa je presná cesta vyhľadávania
+        (jira_hladanie_adresa). ine = formulár, nahrávanie, -G, --next, súbor s nastaveniami alebo adresa z xargs."""
+        if ine or args is None or ctx is None or not met or met.upper() != 'POST' or not m_adr or len(m_telo) != 1:
+            return False
+        try:
+            adresy = []
+            for i, p in m_adr:
+                if i >= len(args):
+                    return False
+                adresy += [c[p:] for c, _ in self.rozvin(args[i], ctx)]
+            i, p, _ = m_telo[0]
+            if i >= len(args):
+                return False
+            telo = [c[p:] for c, _ in self.rozvin(args[i], ctx)]
+        except (RecursionError, ValueError, IndexError, KeyError, AttributeError, TypeError):
+            return False
+        return bool(adresy) and bool(telo) and all(jira_hladanie_adresa(a) for a in adresy) \
+            and all(jira_hladanie_telo(x) for x in telo)
+
     def curl(self, t, args=None, ctx=None, extra=(), cmd=None, xg=None):
         """Zápis (-X POST/PUT/PATCH/DELETE) na adresu cudzieho systému; adresa je pozičný argument alebo --url,
         nie obsah -d/-H (žiadosť o token s scope=https://graph… nie je zápis — prehrávka kolegov 24. 9.).
@@ -15785,6 +15939,7 @@ class Rozbor:
         m_met = None    # (index slova, dĺžka predpony) — metóda pre marketingové služby (-X "$M")
         m_kfg = []      # (index slova, dĺžka predpony, druh) — súbor s nastaveniami (-K, --config): adresa aj metóda v ňom
         soket = proxy = dalsi = False   # miestny soket s hodnotou · proxy · --next alebo -: (K88, 18. 10.)
+        telo_ine = False   # formulár alebo --data-urlencode — vyhľadávanie v Jire to nie je (KOTJ, 10. 11.)
         j = 0
         while j < len(t):
             x = t[j]
@@ -15818,6 +15973,7 @@ class Rozbor:
                          '--form-string'):
                     subor = n in ('--data', '--data-binary', '--data-ascii', '--json')
                     m_telo.append((j, len(n) + 1, subor) if '=' in x else (j + 1, 0, subor))
+                    telo_ine |= n in ('--data-urlencode', '--form', '--form-string')
                 get |= n == '--get'
                 upload |= n == '--upload-file'
                 soket |= n in CURL_SOKET and ('=' in x or j + 1 < len(t))
@@ -15830,6 +15986,7 @@ class Rozbor:
             elif x.startswith('-') and len(x) > 1:
                 for q, ch in enumerate(x[1:]):
                     data |= ch in 'dF'
+                    telo_ine |= ch == 'F'
                     get |= ch == 'G'
                     upload |= ch == 'T'
                     proxy |= ch == 'x'
@@ -15853,13 +16010,18 @@ class Rozbor:
         if not met and not get:
             met = 'PUT' if upload else ('POST' if data else None)
         met_mkt = met
+        # KOTJ (10. 11.): vyhľadávanie v Jire celé doslova v príkaze je čítanie — nezastaví ho ani pravidlo známych
+        # služieb (CURL_CIEL, atlassian), ani pravidlo o cudzej adrese
+        jira = self.curl_jira_cita(met, m_adr, m_telo, telo_ine or upload or get or dalsi or bool(m_kfg) or bool(extra)
+                                   or bool(xg and xg[0]), args, ctx)
         if met and '$' in met:      # metóda v premennej (-X "$M"): neznámu ber k cudziemu cieľu ako zápis (ako az rest);
             met = self.metoda_lit(m_met, met, args, ctx) or 'POST'   # istú hodnotu z toho istého príkazu dosaď (K88Z)
-        if met and met.upper() in ('POST', 'PUT', 'PATCH', 'DELETE') and any(CURL_CIEL.search(a) for a in adresy + list(extra)):
+        if met and met.upper() in ('POST', 'PUT', 'PATCH', 'DELETE') and not jira \
+                and any(CURL_CIEL.search(a) for a in adresy + list(extra)):
             self.kanal(P_CURL, K_CURL)
         self.externe_zmazanie(met, adresy + list(extra), t, args, ctx)
         kfg = self.klient_konfig(m_kfg, t, args, ctx) if m_kfg and not get and self.cudzia_rezim != 'vypnute' else None
-        if not (soket and not proxy and not dalsi and not m_kfg):   # cez miestny soket nejde nič na sieť (K88, 18. 10.)
+        if not jira and not (soket and not proxy and not dalsi and not m_kfg):   # cez miestny soket nejde nič na sieť (K88, 18. 10.)
             self.cudzia_adresa(met, m_adr, t, args, ctx, extra, kfg=kfg, xg=xg)
         if self.mkt_rezim != 'vypnute' and args is not None and ctx is not None:
             adr = [c[p:] for i, p in m_adr if i < len(args) for c in self.mkt_slovo(args[i], ctx)[0]] + list(extra)
@@ -15969,6 +16131,19 @@ class Rozbor:
             druhy.add('necitatelna')              # súbor s nastaveniami alebo so zoznamom adries sa nedá prečítať
         if xg and xg[0] and (xg[1] is None or not texty or any(xg[1] in adr_host_cast(x) for x in texty)):
             druhy.add('necitatelna')              # adresa môže prísť zo vstupu xargs, ktorý kotva nevidí
+        if xg and len(xg) > 2 and xg[2]:
+            # KOTX (10. 11.): echo/printf "$U/v1/x" | xargs curl -X POST … — slovo vstupu má neznámu časť. Bez -I ho
+            # xargs pripojí ako ďalšie argumenty a delí ho podľa medzier bez ohľadu na úvodzovky v echo, takže aj
+            # "https://ai.gr8it.cloud/api/$ID" môže priniesť druhú adresu a slovo za adresou ("$ID" | xargs curl … /api/)
+            # je pre curl ďalšia adresa: nečitateľné vždy (prehrávka 30 dní: 53 príkazov ľudí s xargs a HTTP klientom,
+            # žiadna nová otázka). S -I sa vstup vloží celý na miesto náhradného znaku: nečitateľné, keď je ten znak
+            # v hoste niektorej adresy alebo adresa v príkaze nie je (logika xg[1] vyššie).
+            if xg[1] is None:
+                druhy.add('necitatelna')
+                if len(CUDZIE_NALEZY) < 20:
+                    CUDZIE_NALEZY.append(('necitatelna', xg[2][0].replace(NEZNAME, '$?')[:120]))
+            elif not any(x for x in texty) or any(xg[1] in adr_host_cast(x) for x in texty):
+                druhy.add('necitatelna')
         if 'cudzia' in druhy:
             self.priznaky.add('cudzia-adresa')
             self.kanal(P_CURL, K_CURL)
@@ -16028,6 +16203,15 @@ class Rozbor:
         for w in self.zdroj_xargs(pred, ctx) or []:
             for c, u in self.rozvin(w, ctx):
                 yield c if u is None else c[:u]
+
+    def rura_nezname(self, pred, ctx):
+        """KOTX (10. 11.): slová z echo/printf pred xargs, v ktorých je neznáma časť — celé, s NEZNAME na jej mieste.
+        rura_ciele z nich dá len známy začiatok (z "$U/v1/x" prázdny reťazec), takže pravidlo o cudzej adrese dostalo
+        prázdnu adresu a zápis pustilo; ten istý zápis bez xargs (curl -X POST "$U/v1/x") zastaví ako nečitateľný."""
+        for w in self.zdroj_xargs(pred, ctx) or []:
+            for c, u in self.rozvin(w, ctx):
+                if u is not None:
+                    yield c
 
     def args_lit(self, args, ctx):
         """Známy text všetkých slov po rozvinutí doslovne priradených premenných (cudzí cieľ v premennej sa neschová)."""

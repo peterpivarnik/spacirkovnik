@@ -421,6 +421,68 @@ def nasadenie_zadane(v, spravy, teraz, okno=OKNO_OSTRA_S):
     return najdeny
 
 
+# 10. 11. 2026 (PS v sedení ODOLNOSŤ, AIG-Z261110-7ebb23: „Stále dookola ma šikanuješ, aby som potvrdil odoslanie mailu …
+# keď raz poviem pošli … aby ten email priamo išiel … relatívne bezpečne, aby neodišiel mail, ktorý nemá“; povolenie
+# upraviť stráž: „Povolujem ti to“ 20:50). Pri kanáli pošty platí aj veta človeka bez zastavenia — no len jeho POSLEDNÁ
+# správa v tomto sedení (každá neskoršia, aj „nie“, pokyn ruší tým, že je posledná ona), najviac 30 min stará, nie pri
+# skúške stroja, a len keď je v nej kladný rozkaz poslať (pošli / odošli / pošlite / odošlite). V správe nesmie byť
+# otáznik ani prosba o koncept, ukážku, odklad či „najprv“; pred rozkazom vo vete zápor, podmienka ani cudzia reč;
+# v „hlave“ rozkazu (po prvú čiarku, dvojbodku, „že“, „aby“) ani odklad (zajtra, o 10, potom …); za vetou s rozkazom
+# nijaké odvolanie. Veta v dodatku musí byť zo správy a niesť samotné „pošli“. Mail spolu s iným kanálom v jednom
+# príkaze výnimku nemá. Platí len pre ľudí v POSLI_LUDIA — PS ju chcel pre seba; kolegom ostáva otázka po zastavení,
+# kým PS nepovie inak. Čo tento zoznam nepozná, neprejde — zlyhanie je na strane otázky, nie odoslania.
+KANAL_POSTA = ('odoslanie mailu alebo správy',)
+POSLI_LUDIA = ('pstrocka',)
+POSLI_TVAR = re.compile(r'\b(?:posli|poslite|odosli|odoslite)\b')
+# koniec „hlavy“ rozkazu — za ním je už obsah mailu (komu a čo), nie okolnosti odoslania
+POSLI_ZA = re.compile(r'[:,;–—(]|\s(?:ze|aby|o tom|ako|kde|co|kedy|ktor\w*)\b')
+POSLI_INE = re.compile(r'\b(?:koncept\w*|draft\w*|priprav\w*|ukaz\w*|pozriem|pozrem|skontrolujem|precitam|zatial|najprv'
+                       r'|najskor|potom|nechaj\w*|pockaj\w*|pockat|zrus\w*|stoj|stop|odloz\w*|neskor\w*)\b')
+
+
+def posli_clovek():
+    """Sedí v tomto okne človek, ktorému výnimka „pošli“ platí (POSLI_LUDIA)?"""
+    try:
+        import pwd
+        return pwd.getpwuid(os.getuid()).pw_name in POSLI_LUDIA
+    except Exception:
+        return False
+
+
+def posli_pokyn(v, txt):
+    """Správa txt je jednoznačný pokyn poslať a veta v z nej nesie samotné „pošli“. Pochybnosť = False."""
+    s = bez_diakritiky(str(txt))
+    vb = bez_diakritiky(v or '')
+    if not vb or '?' in s or not POSLI_TVAR.search(vb) or POSLI_INE.search(s):
+        return False
+    vety = [x.strip(' ,;:-—–') for x in re.split(r'[.!…¶]+', s)]
+    i = next((k for k, x in enumerate(vety) if POSLI_TVAR.search(x)), None)
+    if i is None:
+        return False
+    m = POSLI_TVAR.search(vety[i])
+    pred, po = vety[i][:m.start()], vety[i][m.end():]
+    k = POSLI_ZA.search(po)
+    hlava = po[:k.start()] if k else ' '.join(po.split()[:6])
+    if ZAPOR_SIROKO.search(pred) or PODMIENKA.search(pred) or CUDZIA_REC.search(pred) or MINULOST.search(pred):
+        return False
+    if (ZAPOR_SIROKO.search(hlava) or PODMIENKA.search(hlava) or ODKLAD_VETA.search(hlava)
+            or ODKLAD_SPRAVA.search(hlava)):
+        return False
+    return not any(odvolanie(x) for x in vety[i + 1:] if x)     # „Pošli to. Vlastne nie.“
+
+
+def posli_zadane(v, spravy, teraz, okno=OKNO_S):
+    """Pokyn „pošli“ v POSLEDNEJ správe človeka do okna → (čas, text) alebo None. spravy = [(čas, text)]."""
+    v = norm(v).rstrip()
+    pred = [(t, x) for t, x in spravy if t <= teraz]
+    if not pred:
+        return None
+    t, txt = max(pred, key=lambda z: z[0])
+    if teraz - t > okno or not zhoda(v, txt) or not posli_pokyn(v, txt):
+        return None
+    return t, txt
+
+
 def main():
     try:
         stopa, veta, kanal, pod = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
@@ -456,6 +518,11 @@ def main():
         # NVY: skoršia veta napísaná pri skúšobnej správe stroja výnimku neotvára — platí bežné pravidlo nižšie
         if zadane and pri_skuske(zadane[0], skusky) is None:
             print('ok\nčlovek v tomto sedení nasadenie sám zadal (4.35) — jeho skoršia veta platí'); return
+    if kanal in KANAL_POSTA and 'viac-kanalov' not in priznaky and posli_clovek():
+        spravy, skusky = citana()
+        poslat = posli_zadane(v, spravy, datetime.datetime.now().timestamp())
+        if poslat and pri_skuske(poslat[0], skusky) is None:
+            print('ok\nčlovek v poslednej správe sám povedal „pošli“ (PS 10. 11. 2026) — bez ďalšej otázky'); return
     posl_zast = 0.0
     for l in riadky:
         if 'vysledok' not in l:
