@@ -3,6 +3,8 @@ package sk.spacirkovnik.model
 /** Čo ukáže obrazovka na konci špacírky. [durationMinutes] je null, keď čas nedáva zmysel. */
 data class FinishSummary(
     val title: String,
+    /** Úvodný obrázok špacírky (prvý obrázok v hre), alebo null, ak žiadny nemá. */
+    val imageUrl: String?,
     val stops: Int,
     val questions: Int,
     val durationMinutes: Int?,
@@ -16,6 +18,7 @@ fun finishSummary(title: String, screens: List<GameScreen>, startedAtMs: Long?, 
         ?.takeIf { it in 1..MAX_SHOWN_DURATION_MINUTES }
     return FinishSummary(
         title = title,
+        imageUrl = screens.firstNotNullOfOrNull { it.imageUrl?.takeIf(String::isNotBlank) },
         stops = screens.count { it.type == ScreenType.NAVIGATION },
         questions = screens.count { it.type == ScreenType.QUESTION },
         durationMinutes = minutes,

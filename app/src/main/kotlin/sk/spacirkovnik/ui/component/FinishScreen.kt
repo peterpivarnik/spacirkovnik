@@ -3,7 +3,9 @@ package sk.spacirkovnik.ui.component
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -24,11 +28,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
+import sk.spacirkovnik.R
 import sk.spacirkovnik.model.FinishSummary
 import sk.spacirkovnik.model.formatDuration
 import sk.spacirkovnik.model.slovakPlural
@@ -39,7 +49,10 @@ import sk.spacirkovnik.ui.theme.TextDark
 import sk.spacirkovnik.ui.theme.TextMedium
 import sk.spacirkovnik.ui.theme.TextOnDark
 
-/** Záverečná obrazovka po dohraní špacírky: pochvala a čo všetko hráči zvládli. */
+/**
+ * Záverečná obrazovka po dohraní špacírky: úvodný obrázok špacírky s pohárom, pochvala, čo všetko
+ * hráči zvládli, a malé logo ako podpis (keď si to niekto odfotí a pošle ďalej).
+ */
 @Composable
 internal fun FinishScreen(summary: FinishSummary, onDone: () -> Unit) {
     // Pohár „vyskočí" — krátka pružná animácia pri otvorení.
@@ -58,8 +71,34 @@ internal fun FinishScreen(summary: FinishSummary, onDone: () -> Unit) {
             .padding(horizontal = 20.dp, vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(Modifier.height(24.dp))
-        Text(text = "🏆", fontSize = 96.sp, modifier = Modifier.scale(trophyScale.value))
+        Spacer(Modifier.height(16.dp))
+        if (summary.imageUrl != null) {
+            // Obrázok špacírky a pohár v krúžku prekrývajúci jeho spodný okraj.
+            Box(contentAlignment = Alignment.BottomCenter) {
+                AsyncImage(
+                    model = summary.imageUrl,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp + TROPHY_OVERLAP)
+                        .padding(bottom = TROPHY_OVERLAP)
+                        .clip(RoundedCornerShape(16.dp))
+                )
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .scale(trophyScale.value)
+                        .size(TROPHY_OVERLAP * 2)
+                        .shadow(8.dp, CircleShape)
+                        .background(CardBg, CircleShape)
+                ) {
+                    Text(text = "🏆", fontSize = 52.sp)
+                }
+            }
+        } else {
+            Text(text = "🏆", fontSize = 96.sp, modifier = Modifier.scale(trophyScale.value))
+        }
         Spacer(Modifier.height(12.dp))
         Text(
             text = "Dokázali ste to!",
@@ -118,9 +157,20 @@ internal fun FinishScreen(summary: FinishSummary, onDone: () -> Unit) {
                 fontWeight = FontWeight.SemiBold,
             )
         }
-        Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(28.dp))
+        AsyncImage(
+            model = R.drawable.logo,
+            contentDescription = "Špacírkovník",
+            modifier = Modifier
+                .size(56.dp)
+                .alpha(0.9f)
+        )
+        Spacer(Modifier.height(24.dp))
     }
 }
+
+/** O koľko pohár prečnieva pod obrázok (polovica priemeru krúžku). */
+private val TROPHY_OVERLAP = 44.dp
 
 @Composable
 private fun StatCard(value: String, label: String, modifier: Modifier = Modifier) {

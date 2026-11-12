@@ -7,8 +7,8 @@ import org.junit.Test
 class FinishSummaryTest {
 
     private val screens = listOf(
-        GameScreen(type = ScreenType.CONTINUE),
-        GameScreen(type = ScreenType.NAVIGATION),
+        GameScreen(type = ScreenType.CONTINUE, imageUrl = ""),
+        GameScreen(type = ScreenType.NAVIGATION, imageUrl = "https://x/uvod.jpg"),
         GameScreen(type = ScreenType.QUESTION),
         GameScreen(type = ScreenType.NAVIGATION),
         GameScreen(type = ScreenType.QUESTION),
@@ -22,6 +22,7 @@ class FinishSummaryTest {
         assertEquals(2, s.stops)
         assertEquals(3, s.questions)
         assertEquals(85, s.durationMinutes)
+        assertEquals("https://x/uvod.jpg", s.imageUrl)
     }
 
     @Test
