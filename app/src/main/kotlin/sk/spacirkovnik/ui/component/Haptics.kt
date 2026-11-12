@@ -19,6 +19,9 @@ internal object Haptics {
     /** Jeden krátky pulz: správna odpoveď. */
     fun correct(context: Context) = vibrate(context, longArrayOf(0, 60))
 
+    /** Jeden dlhší pulz: zlá odpoveď. */
+    fun wrong(context: Context) = vibrate(context, longArrayOf(0, 250))
+
     private fun vibrate(context: Context, timings: LongArray) {
         runCatching {
             val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

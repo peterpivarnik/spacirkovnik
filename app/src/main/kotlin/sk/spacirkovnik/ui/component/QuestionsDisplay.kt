@@ -1,6 +1,8 @@
 package sk.spacirkovnik.ui.component
 
 import android.content.Context
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,15 +15,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.filled.WifiOff
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -30,9 +31,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -44,6 +45,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
@@ -289,12 +291,10 @@ private fun TwoButtons(
 @Composable
 private fun QuestionWithAnswers(answers: List<GameAnswer>, onCorrectChoice: () -> Unit) {
     val context = LocalContext.current
-    // Stav viažeme na otázku: dve otázky za sebou by inak zdieľali „správne" z predchádzajúcej.
-    val showAlertMessage = remember(answers) { mutableStateOf(false) }
+    // Stav viažeme na otázku: dve otázky za sebou by inak zdieľali stav predchádzajúcej.
     var correctAnswer by remember(answers) { mutableStateOf<GameAnswer?>(null) }
-    if (showAlertMessage.value) {
-        MyAlertDialog(showAlertMessage)
-    }
+    val wrongAnswers = remember(answers) { mutableStateListOf<GameAnswer>() }
+
     // Správna odpoveď: tlačidlo na chvíľu zozelenie s „✓", telefón krátko zavibruje
     // a až potom sa ide ďalej — hráč (dieťa) vidí, že trafil.
     LaunchedEffect(correctAnswer) {
@@ -303,87 +303,83 @@ private fun QuestionWithAnswers(answers: List<GameAnswer>, onCorrectChoice: () -
         delay(CORRECT_ANSWER_PAUSE_MS)
         onCorrectChoice()
     }
+
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Zlá odpoveď nevyskakuje v okne, ktoré treba zatvárať: tlačidlo sa zatrasie, ostane
+        // označené „✗" a nad odpoveďami sa objaví povzbudenie. Skúšať sa dá hneď ďalej.
+        if (wrongAnswers.isNotEmpty() && correctAnswer == null) {
+            Text(
+                text = "Tadiaľto cesta nevedie — skús inú odpoveď!",
+                fontSize = 15.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = TextOnDark,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
+        }
         answers.forEach { answer ->
-            val isCorrectPick = correctAnswer == answer
-            Button(
+            AnswerButton(
+                text = answer.text,
+                state = when {
+                    correctAnswer == answer -> AnswerState.CORRECT
+                    answer in wrongAnswers -> AnswerState.WRONG
+                    else -> AnswerState.OPEN
+                },
                 onClick = {
-                    if (correctAnswer != null) return@Button // už ideme ďalej
+                    if (correctAnswer != null) return@AnswerButton // už ideme ďalej
                     if (answer.correct) {
                         correctAnswer = answer
                     } else {
-                        showAlertMessage.value = true
+                        wrongAnswers.add(answer)
+                        Haptics.wrong(context)
                     }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .defaultMinSize(minHeight = 48.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = if (isCorrectPick) CorrectGreen else SecondaryButton,
-                    contentColor = if (isCorrectPick) Color.White else SecondaryButtonText
-                )
-            ) {
-                Text(
-                    text = if (isCorrectPick) "✓ Správne! ${answer.text}" else answer.text,
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center
-                )
-            }
+                }
+            )
         }
     }
 }
 
+private enum class AnswerState { OPEN, CORRECT, WRONG }
+
 @Composable
-private fun MyAlertDialog(showAlertMessage: MutableState<Boolean>) {
-    AlertDialog(
-        onDismissRequest = { showAlertMessage.value = false },
-        // Bez toho by podklad prišiel z témy (systémový tmavý režim) a tmavé texty by zmizli.
-        containerColor = CardBg,
-        titleContentColor = TextDark,
-        textContentColor = TextMedium,
-        icon = {
-            Icon(
-                Icons.Default.Warning,
-                contentDescription = "Varovanie",
-                tint = Amber,
-                modifier = Modifier.size(40.dp)
-            )
-        },
-        title = {
-            Text(
-                text = "Zlá odpoveď",
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
-                color = TextDark,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
-            )
-        },
-        text = {
-            Text(
-                text = "Skúš to znova, určite to zvládneš!",
-                fontSize = 16.sp,
-                color = TextMedium,
-                textAlign = TextAlign.Center,
-                lineHeight = 22.sp,
-                modifier = Modifier.fillMaxWidth()
-            )
-        },
-        confirmButton = {
-            Button(
-                onClick = { showAlertMessage.value = false },
-                modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 44.dp),
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = PrimaryButton)
-            ) {
-                Text("Skúsim znova", color = PrimaryButtonText, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-            }
+private fun AnswerButton(text: String, state: AnswerState, onClick: () -> Unit) {
+    // Zatrasenie pri zlej odpovedi — ako „nie" hlavou.
+    val shake = remember { Animatable(0f) }
+    LaunchedEffect(state) {
+        if (state != AnswerState.WRONG) return@LaunchedEffect
+        for (x in listOf(-14f, 14f, -10f, 10f, -5f, 5f, 0f)) {
+            shake.animateTo(x, animationSpec = tween(durationMillis = 45))
         }
-    )
+    }
+    Button(
+        onClick = onClick,
+        // Zlú odpoveď už znova neťukne; ostane viditeľná, aby bolo jasné, čo už skúšal.
+        enabled = state != AnswerState.WRONG,
+        modifier = Modifier
+            .fillMaxWidth()
+            .defaultMinSize(minHeight = 48.dp)
+            .offset { IntOffset(shake.value.dp.roundToPx(), 0) },
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = if (state == AnswerState.CORRECT) CorrectGreen else SecondaryButton,
+            contentColor = if (state == AnswerState.CORRECT) Color.White else SecondaryButtonText,
+            disabledContainerColor = WrongRed.copy(alpha = 0.8f),
+            disabledContentColor = Color.White.copy(alpha = 0.9f)
+        )
+    ) {
+        Text(
+            text = when (state) {
+                AnswerState.CORRECT -> "✓ Správne! $text"
+                AnswerState.WRONG -> "✗ $text"
+                AnswerState.OPEN -> text
+            },
+            fontSize = 16.sp,
+            textAlign = TextAlign.Center
+        )
+    }
 }
 
 @Composable
@@ -427,3 +423,4 @@ private fun GenderSelectionScreen(onSelected: (Gender) -> Unit) {
 private const val CORRECT_ANSWER_PAUSE_MS = 900L
 
 private val CorrectGreen = Color(0xFF2E7D32)
+private val WrongRed = Color(0xFFB3261E)
