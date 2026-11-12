@@ -5,10 +5,13 @@
  * Funkcia nákup overí priamo u Googlu, potvrdí ho (acknowledge) a až potom zapíše aktiváciu.
  * [checkVoidedPurchases] raz denne odoberie aktivácie pri vrátených / zrušených nákupoch.
  *
- * Štruktúra v RTDB (zapisuje iba server, Admin SDK obchádza pravidlá):
+ * Štruktúra v RTDB (Admin SDK obchádza pravidlá):
  *   purchaseClaims/{sha256(token)} = uid           — jeden nákup patrí jednému účtu (aj staré záznamy z appky)
  *   purchases/{sha256(token)}      = {uid, gameId, productId, orderId, ...}  — evidencia pre vrátenia
- *   activations/{uid}/{gameId}     = true
+ *   activations/{uid}/{gameId}     = {active: true, type: "purchase"}       — zapisuje server po nákupe
+ *                                  = {active: true, type: "prize", note}    — zapisuje prevádzkovateľ ručne
+ *                                  = true                                   — starý tvar, platí naďalej
+ * Server siaha len na aktivácie z nákupu (type "purchase" alebo starý tvar true) — výhry nechá tak.
  */
 import { createHash } from "node:crypto";
 import { initializeApp } from "firebase-admin/app";
@@ -56,6 +59,21 @@ interface PurchaseRecord {
 }
 
 const sha256 = (s: string) => createHash("sha256").update(s).digest("hex");
+
+/** Aktivácia z nákupu — tú server smie zapísať aj zmazať. Ostatné (výhry) sú ručné. */
+const PURCHASE_ACTIVATION = { active: true, type: "purchase" } as const;
+
+/** Je existujúca aktivácia z nákupu (alebo starého tvaru `true`)? Na výhry server nesiaha. */
+function isPurchaseActivation(value: unknown): boolean {
+  if (value === true) return true;
+  return typeof value === "object" && value !== null && (value as { type?: unknown }).type === "purchase";
+}
+
+/** Odomyká záznam hru? Rovnaké pravidlo ako v appke (isActivationActive). */
+function isActiveActivation(value: unknown): boolean {
+  if (value === true) return true;
+  return typeof value === "object" && value !== null && (value as { active?: unknown }).active === true;
+}
 
 /** Katalóg z RTDB (deploy-games.py ho nahráva na catalog/games-info). Firebase môže pole vrátiť aj ako objekt. */
 async function loadCatalog(): Promise<CatalogItem[]> {
@@ -135,11 +153,14 @@ export const verifyPurchase = onCall(async (request) => {
   }
 
   // 4. Aktivácia + evidencia pre prípadné vrátenie.
+  // Ak hráč hru už má ako výhru, aktiváciu neprepíšeme — inak by ju vrátenie nákupu zmazalo.
   const record: PurchaseRecord = { uid, gameId, productId, orderId: purchase.orderId ?? null, verifiedAt: Date.now() };
-  await db.ref().update({
-    [`activations/${uid}/${gameId}`]: true,
-    [`purchases/${tokenHash}`]: record,
-  });
+  const existing = (await db.ref(`activations/${uid}/${gameId}`).get()).val();
+  const updates: Record<string, unknown> = { [`purchases/${tokenHash}`]: record };
+  if (!isActiveActivation(existing) || isPurchaseActivation(existing)) {
+    updates[`activations/${uid}/${gameId}`] = PURCHASE_ACTIVATION;
+  }
+  await db.ref().update(updates);
 
   logger.info("Nákup overený", { uid, gameId, orderId: purchase.orderId });
   return { status: "activated", gameId };
@@ -209,8 +230,10 @@ export const checkVoidedPurchases = onSchedule(
         const updates: Record<string, unknown> = {
           [`purchases/${tokenHash}`]: { ...record, voided: true, voidedAt: Number(v.voidedTimeMillis) || Date.now() },
         };
-        if (!(await hasOtherValidPurchase(record.uid, record.gameId, tokenHash))) {
-          updates[`activations/${record.uid}/${record.gameId}`] = null;
+        const activationPath = `activations/${record.uid}/${record.gameId}`;
+        const activation = (await db.ref(activationPath).get()).val();
+        if (isPurchaseActivation(activation) && !(await hasOtherValidPurchase(record.uid, record.gameId, tokenHash))) {
+          updates[activationPath] = null;
           revoked++;
         }
         await db.ref().update(updates);

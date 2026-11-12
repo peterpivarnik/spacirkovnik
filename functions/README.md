@@ -5,6 +5,18 @@
 | `verifyPurchase` (callable) | Appka pošle `purchaseToken` + `productId`. Funkcia nákup overí u Googlu, priradí ho účtu (`purchaseClaims`), potvrdí (acknowledge) a zapíše `activations/{uid}/{gameId}` + záznam do `purchases/`. |
 | `checkVoidedPurchases` (denne 4:00) | Načíta vrátené/zrušené nákupy z Play (posledných 7 dní) a odoberie k nim aktivácie. |
 
+## Aktivácie hier — `activations/{uid}/{gameId}`
+
+| Hodnota | Kto zapisuje | Význam |
+|---|---|---|
+| `{ active: true, type: "purchase" }` | server po overení nákupu | kúpená hra; pri vrátení peňazí ju server zmaže |
+| `{ active: true, type: "prize", note: "Výhra – Dni Petržalky 2026" }` | ručne vo Firebase konzole | výhra; server na ňu nesiaha |
+| `true` | staré záznamy | platí naďalej, server ju berie ako nákup |
+
+Výhra ručne: Realtime Database → `activations` → UID hráča (Authentication → Users) → pridať
+podľa ID hry tri polia: `active` = `true` (boolean), `type` = `prize`, `note` = text. Hráč ju uvidí
+po ďalšom spustení appky alebo prihlásení. Ak hráč hru neskôr aj kúpi, výhra ostane.
+
 Región `europe-west1` (ako databáza). `gameId` sa určuje z katalógu v RTDB podľa `googlePlayProductId`.
 
 ## Jednorazové nastavenie

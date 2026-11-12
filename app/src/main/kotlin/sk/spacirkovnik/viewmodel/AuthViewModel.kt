@@ -40,6 +40,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeout
 import sk.spacirkovnik.data.FIREBASE_DATABASE_URL
 import sk.spacirkovnik.data.reportNonFatal
+import sk.spacirkovnik.model.isActivationActive
 import kotlin.time.Duration.Companion.seconds
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
@@ -265,7 +266,8 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
                 val activatedGames = mutableSetOf<String>()
                 snapshot.children.forEach { child ->
-                    if (child.getValue(Boolean::class.java) == true) {
+                    // Záznam je `true` alebo objekt { active, type, note } — viď isActivationActive.
+                    if (isActivationActive(child.value)) {
                         activatedGames.add(child.key ?: return@forEach)
                     }
                 }
