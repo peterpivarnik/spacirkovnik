@@ -29,20 +29,25 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import kotlinx.coroutines.delay
 import sk.spacirkovnik.model.GameAnswer
 import sk.spacirkovnik.model.Gender
 import sk.spacirkovnik.model.LocationData
@@ -70,6 +75,11 @@ fun QuestionsDisplay(
     context: Context? = null,
     onGameFinished: () -> Unit = {}
 ) {
+    gameDataViewModel.state.value.finished?.let { summary ->
+        FinishScreen(summary = summary, onDone = onGameFinished)
+        return
+    }
+
     val gender by gameDataViewModel.gender
     val resolvedGender = gender
 
@@ -183,9 +193,7 @@ fun QuestionsDisplay(
                 ScreenType.CONTINUE -> OneButton(
                     {
                         if (gameDataViewModel.isLastScreen()) {
-                            gameDataViewModel.recordCompletion()
-                            gameDataViewModel.clearProgress()
-                            onGameFinished()
+                            gameDataViewModel.finishGame()
                         } else {
                             gameDataViewModel.incrementIndex()
                         }
@@ -200,10 +208,13 @@ fun QuestionsDisplay(
                     nextButtonOnClick = { gameDataViewModel.incrementIndex() },
                     nextButtonText = currentScreen.nextButtonText ?: "Ďalej"
                 )
-                ScreenType.QUESTION -> QuestionWithAnswers(
-                    answers = currentScreen.answers ?: emptyList(),
-                    onCorrectChoice = { gameDataViewModel.incrementIndex() }
-                )
+                // key: každá otázka má vlastný stav, aj keď majú dve za sebou rovnaké odpovede.
+                ScreenType.QUESTION -> key(gameDataViewModel.getCurrentIndex()) {
+                    QuestionWithAnswers(
+                        answers = currentScreen.answers ?: emptyList(),
+                        onCorrectChoice = { gameDataViewModel.incrementIndex() }
+                    )
+                }
                 ScreenType.NAVIGATION -> {}
                 null -> {}
             }
@@ -277,19 +288,32 @@ private fun TwoButtons(
 
 @Composable
 private fun QuestionWithAnswers(answers: List<GameAnswer>, onCorrectChoice: () -> Unit) {
-    val showAlertMessage = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    // Stav viažeme na otázku: dve otázky za sebou by inak zdieľali „správne" z predchádzajúcej.
+    val showAlertMessage = remember(answers) { mutableStateOf(false) }
+    var correctAnswer by remember(answers) { mutableStateOf<GameAnswer?>(null) }
     if (showAlertMessage.value) {
         MyAlertDialog(showAlertMessage)
+    }
+    // Správna odpoveď: tlačidlo na chvíľu zozelenie s „✓", telefón krátko zavibruje
+    // a až potom sa ide ďalej — hráč (dieťa) vidí, že trafil.
+    LaunchedEffect(correctAnswer) {
+        if (correctAnswer == null) return@LaunchedEffect
+        Haptics.correct(context)
+        delay(CORRECT_ANSWER_PAUSE_MS)
+        onCorrectChoice()
     }
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         answers.forEach { answer ->
+            val isCorrectPick = correctAnswer == answer
             Button(
                 onClick = {
+                    if (correctAnswer != null) return@Button // už ideme ďalej
                     if (answer.correct) {
-                        onCorrectChoice.invoke()
+                        correctAnswer = answer
                     } else {
                         showAlertMessage.value = true
                     }
@@ -299,12 +323,12 @@ private fun QuestionWithAnswers(answers: List<GameAnswer>, onCorrectChoice: () -
                     .defaultMinSize(minHeight = 48.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = SecondaryButton,
-                    contentColor = SecondaryButtonText
+                    containerColor = if (isCorrectPick) CorrectGreen else SecondaryButton,
+                    contentColor = if (isCorrectPick) Color.White else SecondaryButtonText
                 )
             ) {
                 Text(
-                    text = answer.text,
+                    text = if (isCorrectPick) "✓ Správne! ${answer.text}" else answer.text,
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center
                 )
@@ -398,3 +422,8 @@ private fun GenderSelectionScreen(onSelected: (Gender) -> Unit) {
         }
     }
 }
+
+/** Ako dlho ostane správna odpoveď zelená, kým sa hra posunie ďalej. */
+private const val CORRECT_ANSWER_PAUSE_MS = 900L
+
+private val CorrectGreen = Color(0xFF2E7D32)

@@ -94,7 +94,8 @@ fun GamePlayScreen(
                 .fillMaxWidth()
                 .padding(top = 8.dp, end = 8.dp)
         ) {
-            IconButton(
+            // Na záverečnej obrazovke už nie je čo ukončovať ani ukladať.
+            if (state.finished == null) IconButton(
                 onClick = { showExitDialog = true },
                 modifier = Modifier.align(Alignment.TopEnd)
             ) {

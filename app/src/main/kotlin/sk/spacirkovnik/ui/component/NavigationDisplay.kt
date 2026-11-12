@@ -23,6 +23,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -35,6 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.text.font.FontWeight
@@ -86,6 +88,7 @@ fun NavigationDisplay(
     }
 
     TrackLocationWhileVisible(context, locationViewModel)
+    KeepScreenOnWhileVisible()
     val deviceAzimuth = rememberDeviceAzimuth(context)
 
     val currentLocation = locationViewModel.location.value
@@ -99,6 +102,17 @@ fun NavigationDisplay(
     }
 
     val arrowRotation = bearingToTarget - deviceAzimuth
+
+    // Hráč došiel k cieľu: zavibruje raz za zastávku — aj keď GPS okolo hranice 10 m
+    // poskakuje dnu a von, ďalšie vibrácie by len rušili.
+    val isCloseEnough = distanceMeters != null && distanceMeters <= ARRIVAL_RADIUS_METERS
+    var arrivalAnnounced by remember(targetLat, targetLng) { mutableStateOf(false) }
+    LaunchedEffect(isCloseEnough) {
+        if (isCloseEnough && !arrivalAnnounced) {
+            arrivalAnnounced = true
+            Haptics.arrived(context)
+        }
+    }
 
     val route = rememberWalkingRoute(
         context = context,
@@ -249,7 +263,6 @@ fun NavigationDisplay(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        val isCloseEnough = distanceMeters != null && distanceMeters <= 10
         Button(
             onClick = onContinue,
             enabled = isCloseEnough,
@@ -354,4 +367,20 @@ fun NavigationDisplay(
         )
     }
   }
+}
+
+/** Ako blízko k cieľu musí hráč prísť, aby mohol pokračovať. */
+private const val ARRIVAL_RADIUS_METERS = 10
+
+/**
+ * Kým je obrazovka s navigáciou na displeji, telefón nezhasne — hráč počas chôdze nemusí telefón
+ * stále odomykať. Po odchode z obrazovky sa správa ako zvyčajne.
+ */
+@Composable
+private fun KeepScreenOnWhileVisible() {
+    val view = LocalView.current
+    DisposableEffect(view) {
+        view.keepScreenOn = true
+        onDispose { view.keepScreenOn = false }
+    }
 }

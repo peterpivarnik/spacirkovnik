@@ -10,10 +10,13 @@ import kotlinx.coroutines.launch
 import sk.spacirkovnik.data.GameCacheManager
 import sk.spacirkovnik.data.GameCompletionManager
 import sk.spacirkovnik.data.GameProgressManager
+import sk.spacirkovnik.data.ImagePrefetcher
 import sk.spacirkovnik.data.reportNonFatal
+import sk.spacirkovnik.model.FinishSummary
 import sk.spacirkovnik.model.GameDefinition
 import sk.spacirkovnik.model.Gender
 import sk.spacirkovnik.model.GameScreen
+import sk.spacirkovnik.model.finishSummary
 
 class GameDataViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -52,6 +55,9 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
 
     private fun showGame(gameId: String, game: GameDefinition?) {
         if (game != null && game.screens.isNotEmpty()) {
+            // Hry stiahnuté pred touto verziou appky obrázky vopred nemajú — doplníme ich teraz.
+            ImagePrefetcher.prefetch(getApplication<Application>(), game)
+            progressManager.markStartedIfNeeded(gameId)
             val savedProgress = progressManager.getProgress(gameId)
             _index.intValue = savedProgress.coerceAtMost(game.screens.size - 1)
             _state.value = GameState(
@@ -97,11 +103,20 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
         return _index.intValue >= _state.value.screens.size - 1
     }
 
-    fun recordCompletion() {
-        currentGameId?.let {
-            completionManager.recordCompletion(it)
-            progressManager.markCompleted(it)
-        }
+    /**
+     * Hráč dohral špacírku: zapíše dokončenie, vymaže postup a pripraví zhrnutie pre záverečnú
+     * obrazovku (zastávky, úlohy, čas).
+     */
+    fun finishGame() {
+        val gameId = currentGameId ?: return
+        val startedAt = progressManager.getStartedAt(gameId)
+        completionManager.recordCompletion(gameId)
+        progressManager.markCompleted(gameId)
+        progressManager.clearProgress(gameId)
+        val current = _state.value
+        _state.value = current.copy(
+            finished = finishSummary(current.title, current.screens, startedAt, System.currentTimeMillis())
+        )
     }
 
     fun clearProgress() {
@@ -127,6 +142,7 @@ class GameDataViewModel(application: Application) : AndroidViewModel(application
         val screens: List<GameScreen> = emptyList(),
         val title: String = "",
         val loading: Boolean = true,
-        val error: String? = null
+        val error: String? = null,
+        val finished: FinishSummary? = null
     )
 }

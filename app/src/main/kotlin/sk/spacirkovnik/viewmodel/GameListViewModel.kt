@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import sk.spacirkovnik.data.GameCacheManager
+import sk.spacirkovnik.data.ImagePrefetcher
 import sk.spacirkovnik.data.RetrofitInstance
 import sk.spacirkovnik.data.reportNonFatal
 import sk.spacirkovnik.model.GameInfo
@@ -97,6 +98,8 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
                 val game = RetrofitInstance.apiService.getGame(gameId)
                 cacheManager.saveGame(game)
                 updateGameStatus(gameId, DownloadStatus.DOWNLOADED)
+                // Obrázky na pozadí, kým je hráč ešte doma na Wi-Fi; hrať sa dá hneď.
+                ImagePrefetcher.prefetch(getApplication<Application>(), game)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {

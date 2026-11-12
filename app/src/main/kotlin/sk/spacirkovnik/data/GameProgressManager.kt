@@ -20,8 +20,19 @@ class GameProgressManager(context: Context) {
     }
 
     fun clearProgress(gameId: String) {
-        prefs.edit { remove(gameId) }
+        prefs.edit {
+            remove(gameId)
+            remove("started_$gameId")
+        }
     }
+
+    /** Zapamätá si, kedy hráč špacírku začal — ak ešte nie je zapísané. Pre čas na konci hry. */
+    fun markStartedIfNeeded(gameId: String, nowMs: Long = System.currentTimeMillis()) {
+        if (!prefs.contains("started_$gameId")) prefs.edit { putLong("started_$gameId", nowMs) }
+    }
+
+    fun getStartedAt(gameId: String): Long? =
+        if (prefs.contains("started_$gameId")) prefs.getLong("started_$gameId", 0) else null
 
     fun markCompleted(gameId: String) {
         prefs.edit { putBoolean("completed_$gameId", true) }
