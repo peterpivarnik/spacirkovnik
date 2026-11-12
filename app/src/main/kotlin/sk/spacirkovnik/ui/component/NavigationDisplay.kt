@@ -2,6 +2,7 @@ package sk.spacirkovnik.ui.component
 
 import android.content.Context
 import android.location.Location
+import android.os.Build
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -88,6 +89,14 @@ fun NavigationDisplay(
     }
 
     TrackLocationWhileVisible(context, locationViewModel)
+    // V emulátore (len debug build) GPS nie je: poloha začne v predchádzajúcom cieli, na prvej
+    // zastávke rovno v cieli. Ďalej si ju LocationViewModel drží sám — na každej ďalšej zastávke
+    // hráč „stojí" tam, kam ho presunulo tlačidlo „Presunúť sa do cieľa".
+    LaunchedEffect(Unit) {
+        if (BuildConfig.DEBUG && isEmulator() && !locationViewModel.isDebugMode.value) {
+            locationViewModel.setDebugLocation(debugStartLocation ?: LocationData(targetLat, targetLng))
+        }
+    }
     KeepScreenOnWhileVisible()
     val deviceAzimuth = rememberDeviceAzimuth(context)
 
@@ -286,8 +295,10 @@ fun NavigationDisplay(
 
         if (BuildConfig.DEBUG) {
             Spacer(modifier = Modifier.height(12.dp))
+            // Skúšanie bez chodenia: presunie polohu na cieľ, ďalej sa ide bežným „Pokračovať"
+            // (aj s vibráciou pri príchode). Poloha potom ostane tu aj pre ďalšiu zastávku.
             Button(
-                onClick = onContinue,
+                onClick = { locationViewModel.setDebugLocation(LocationData(targetLat, targetLng)) },
                 modifier = Modifier
                         .fillMaxWidth()
                         .height(44.dp),
@@ -298,30 +309,7 @@ fun NavigationDisplay(
                 )
             ) {
                 Text(
-                    text = "[DEBUG] Preskočiť navigáciu",
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Normal
-                )
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Button(
-                onClick = {
-                    val loc = debugStartLocation ?: LocationData(48.109349, 17.114448)
-                    locationViewModel.setDebugLocation(loc)
-                },
-                modifier = Modifier
-                        .fillMaxWidth()
-                        .height(44.dp),
-                shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF444444),
-                    contentColor = Color.White
-                )
-            ) {
-                Text(
-                    text = "[DEBUG] Nastaviť polohu",
+                    text = "[DEBUG] Presunúť sa do cieľa",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Normal
                 )
@@ -384,3 +372,10 @@ private fun KeepScreenOnWhileVisible() {
         onDispose { view.keepScreenOn = false }
     }
 }
+
+/** Beží appka v emulátore z Android Studia? Používa sa len v debug builde na skúšanie trás. */
+private fun isEmulator(): Boolean =
+    Build.FINGERPRINT.startsWith("generic") ||
+        Build.FINGERPRINT.contains("emulator") ||
+        Build.HARDWARE in setOf("goldfish", "ranchu") ||
+        Build.PRODUCT.contains("sdk")
