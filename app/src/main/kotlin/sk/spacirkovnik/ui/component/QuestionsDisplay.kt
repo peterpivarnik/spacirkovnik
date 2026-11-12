@@ -200,7 +200,10 @@ fun QuestionsDisplay(
                             gameDataViewModel.incrementIndex()
                         }
                     },
-                    currentScreen.buttonText ?: "Ďalej"
+                    // Z poslednej obrazovky sa ide na záverečnú obrazovku, nie do zoznamu — preto
+                    // jednotný text bez ohľadu na údaje špacírky (staršie majú „Späť na zoznam").
+                    if (gameDataViewModel.isLastScreen()) FINISH_BUTTON_TEXT
+                    else currentScreen.buttonText ?: "Ďalej"
                 )
                 ScreenType.BROWSE -> TwoButtons(
                     backButtonEnabled = gameDataViewModel.getCurrentIndex() > 0,
@@ -418,6 +421,9 @@ private fun GenderSelectionScreen(onSelected: (Gender) -> Unit) {
         }
     }
 }
+
+/** Tlačidlo poslednej obrazovky špacírky — vedie na záverečnú obrazovku s pohárom. */
+private const val FINISH_BUTTON_TEXT = "Dokončiť špacírku"
 
 /** Ako dlho ostane správna odpoveď zelená, kým sa hra posunie ďalej. */
 private const val CORRECT_ANSWER_PAUSE_MS = 900L

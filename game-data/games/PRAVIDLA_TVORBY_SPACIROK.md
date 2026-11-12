@@ -53,7 +53,7 @@ Nastavuje sa pre každú navigačnú obrazovku zvlášť, takže jedna špacírk
 > `BROWSE` zobrazuje tlačidlo „Späť", ktorým by sa hráč vrátil naspäť na navigačnú mapu (ktorú už prešiel) — to je mätúce. `CONTINUE` má len jedno tlačidlo „Ďalej" (bez „Späť"), takže hráč po príchode na miesto plynule pokračuje v príbehu. Ostatné `BROWSE` obrazovky v slučke (napr. pochvala po otázke) môžu zostať `BROWSE`.
 5. **Záver** — rozuzlenie príbehu, poďakovanie hráčovi
 6. **Outro od Špacírkovníka** — typ `CONTINUE`, text o tom, že šípka zhasla, dobrodružstvo splnené, ostatné šípky ešte čakajú
-7. **Posledná obrazovka** — typ `CONTINUE`, `fontSize: 22`, `buttonText: "Späť na zoznam špacírok"`
+7. **Posledná obrazovka** — typ `CONTINUE`, `fontSize: 22`. Tlačidlo appka vždy nazve „Dokončiť špacírku" (vedie na záverečnú obrazovku s pohárom a výsledkami); `buttonText` sa tu nepoužije.
 
 ---
 
@@ -152,7 +152,7 @@ Slovenské úvodzovky v JSON sú najčastejší zdroj chýb. **Povinný postup:*
 
 - [ ] JSON je validný (žiadne trailing čiarky, správne úvodzovky)
 - [ ] Prvá obrazovka je CONTINUE s názvom špacírky
-- [ ] Posledná obrazovka je CONTINUE s "Späť na zoznam špacírok"
+- [ ] Posledná obrazovka je CONTINUE (tlačidlo „Dokončiť špacírku" doplní appka)
 - [ ] Každá QUESTION má presne 1 správnu odpoveď
 - [ ] Všetky GPS súradnice sú reálne a v rozumnej pešej vzdialenosti
 - [ ] Gender formy `{m|ž}` sú konzistentné a kompletné
