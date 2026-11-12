@@ -162,7 +162,7 @@ internal fun FinishScreen(summary: FinishSummary, onDone: () -> Unit) {
             model = R.drawable.logo,
             contentDescription = "Špacírkovník",
             modifier = Modifier
-                .size(56.dp)
+                .size(110.dp)
                 .alpha(0.9f)
         )
         Spacer(Modifier.height(24.dp))
