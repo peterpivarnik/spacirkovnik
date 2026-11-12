@@ -7,11 +7,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -49,6 +52,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import sk.spacirkovnik.model.GameConsent
 import sk.spacirkovnik.ui.theme.Amber
 import sk.spacirkovnik.ui.theme.CardBg
 import sk.spacirkovnik.ui.theme.PrimaryButton
@@ -59,10 +63,16 @@ import sk.spacirkovnik.viewmodel.AuthViewModel
 
 private enum class AuthMode { LOGIN, REGISTER, RESET }
 
+/**
+ * Prihlásenie. Keď je zadaný [consent] (špacírka so súhlasom, napr. súťaž), panel ukáže aj
+ * podmienky s políčkom na súhlas — prihlásenie a súhlas sú tak jeden krok. Prihlásiť sa dá až po
+ * zaškrtnutí; súhlas zapíše volajúci po úspešnom prihlásení.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AuthBottomSheet(
     state: AuthViewModel.AuthState,
+    consent: GameConsent? = null,
     onDismiss: () -> Unit,
     onEmailSignIn: (String, String) -> Unit,
     onEmailRegister: (String, String, Boolean) -> Unit,
@@ -77,6 +87,7 @@ fun AuthBottomSheet(
     var showPassword by remember { mutableStateOf(false) }
     var localError by remember { mutableStateOf<String?>(null) }
     var marketingOptIn by remember { mutableStateOf(false) }
+    var consentChecked by remember { mutableStateOf(false) }
     // The sheet opens on a clean two-button choice; the email/password form is revealed only
     // once the user picks "e-mailom".
     var emailExpanded by remember { mutableStateOf(false) }
@@ -85,6 +96,15 @@ fun AuthBottomSheet(
         mode = target
         confirmPassword = ""
         localError = null
+    }
+
+    // Pri špacírke so súhlasom pustí prihlásenie ďalej, len keď je políčko zaškrtnuté.
+    fun withConsent(action: () -> Unit) {
+        if (consent != null && !consentChecked) {
+            localError = "Najprv zaškrtni súhlas s podmienkami."
+        } else {
+            action()
+        }
     }
 
     fun collapse() {
@@ -113,12 +133,22 @@ fun AuthBottomSheet(
                     mode == AuthMode.REGISTER -> "Registrácia"
                     mode == AuthMode.RESET -> "Obnova hesla"
                     emailExpanded -> "Prihlásenie e-mailom"
+                    consent != null -> consent.title ?: "Podmienky účasti"
                     else -> "Prihlásenie"
                 },
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
-                color = TextOnBeige
+                color = TextOnBeige,
+                textAlign = TextAlign.Center
             )
+
+            if (consent != null && mode != AuthMode.RESET) {
+                ConsentBlock(
+                    consent = consent,
+                    checked = consentChecked,
+                    onCheckedChange = { consentChecked = it; localError = null },
+                )
+            }
 
             if (mode == AuthMode.RESET) {
                 Spacer(Modifier.height(8.dp))
@@ -135,7 +165,7 @@ fun AuthBottomSheet(
                 Spacer(Modifier.height(20.dp))
 
                 Button(
-                    onClick = onGoogleSignIn,
+                    onClick = { withConsent(onGoogleSignIn) },
                     enabled = !state.loading,
                     modifier = Modifier.fillMaxWidth().height(50.dp),
                     shape = RoundedCornerShape(12.dp),
@@ -238,10 +268,10 @@ fun AuthBottomSheet(
                 Button(
                     onClick = {
                         when (mode) {
-                            AuthMode.LOGIN -> onEmailSignIn(email, password)
+                            AuthMode.LOGIN -> withConsent { onEmailSignIn(email, password) }
                             AuthMode.REGISTER ->
                                 if (password != confirmPassword) localError = "Heslá sa nezhodujú."
-                                else onEmailRegister(email, password, marketingOptIn)
+                                else withConsent { onEmailRegister(email, password, marketingOptIn) }
                             AuthMode.RESET -> onPasswordReset(email)
                         }
                     },
@@ -308,6 +338,67 @@ fun AuthBottomSheet(
             Spacer(Modifier.height(12.dp))
             LegalNotice()
         }
+    }
+}
+
+/**
+ * Podmienky špacírky v prihlasovacom paneli: krátke zhrnutie (pri dlhom texte sa posúva),
+ * organizátor a políčko na súhlas s odkazom na celé podmienky.
+ */
+@Composable
+private fun ConsentBlock(
+    consent: GameConsent,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+) {
+    consent.summary?.let {
+        Spacer(Modifier.height(12.dp))
+        Text(
+            text = it,
+            fontSize = 14.sp,
+            lineHeight = 20.sp,
+            color = TextOnBeige,
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(max = 160.dp)
+                .verticalScroll(rememberScrollState())
+        )
+    }
+    consent.organizer?.let {
+        Spacer(Modifier.height(4.dp))
+        Text(
+            text = "Organizátor: $it",
+            fontSize = 12.sp,
+            color = TextOnBeigeSecondary,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+    Spacer(Modifier.height(8.dp))
+    val linkStyle = TextLinkStyles(
+        style = SpanStyle(color = Amber, textDecoration = TextDecoration.Underline)
+    )
+    val label = buildAnnotatedString {
+        append("Súhlasím s ")
+        val url = consent.url
+        if (url != null) {
+            withLink(LinkAnnotation.Url(url, linkStyle)) { append("podmienkami") }
+        } else {
+            append("podmienkami")
+        }
+    }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onCheckedChange(!checked) }
+    ) {
+        Checkbox(checked = checked, onCheckedChange = onCheckedChange)
+        Text(
+            text = label,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = TextOnBeige
+        )
     }
 }
 

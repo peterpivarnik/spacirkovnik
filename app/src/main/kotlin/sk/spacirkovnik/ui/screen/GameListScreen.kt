@@ -103,6 +103,16 @@ fun GameListScreen(
     val scope = rememberCoroutineScope()
     val consentManager = remember { ConsentManager(context) }
     var consentRequest by remember { mutableStateOf<ConsentRequest?>(null) }
+    // Špacírka so súhlasom, kvôli ktorej sa hráč práve prihlasuje: panel ukáže aj podmienky
+    // a po prihlásení súhlas zapíšeme — prihlásenie a súhlas sú pre hráča jeden krok.
+    var signInConsent by remember { mutableStateOf<ConsentRequest?>(null) }
+    val progressManager = remember { GameProgressManager(context) }
+
+    fun needsConsent(info: GameInfo): Boolean {
+        val consent = info.consent ?: return false
+        return !authViewModel.hasConsent(info.id, consent.version) &&
+            consentManager.acceptedVersion(info.id) < consent.version
+    }
 
     val signInLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -154,7 +164,19 @@ fun GameListScreen(
 
     LaunchedEffect(authState.isSignedIn) {
         gameListViewModel.refresh()
-        if (authState.isSignedIn) showAuthSheet = false
+        if (!authState.isSignedIn) return@LaunchedEffect
+        showAuthSheet = false
+        // Súhlas zaškrtnutý v prihlasovacom paneli zapíšeme až teraz, keď poznáme účet.
+        // Ak sa zápis nepodarí, súhlas sa hráča opýta znova pri štarte špacírky.
+        val req = signInConsent ?: return@LaunchedEffect
+        signInConsent = null
+        val consent = req.info.consent ?: return@LaunchedEffect
+        authViewModel.recordConsent(req.info.id, consent.version) { success ->
+            if (success) {
+                consentManager.setAccepted(req.info.id, consent.version)
+                req.proceed()
+            }
+        }
     }
 
     LaunchedEffect(authState.testGames) {
@@ -359,9 +381,11 @@ fun GameListScreen(
                     if (showAuthSheet) {
                         AuthBottomSheet(
                             state = authState,
+                            consent = signInConsent?.info?.consent,
                             onDismiss = {
                                 showAuthSheet = false
                                 pendingUnlockGameId = null
+                                signInConsent = null
                                 authViewModel.clearError()
                             },
                             onEmailSignIn = { email, password ->
@@ -392,7 +416,11 @@ fun GameListScreen(
                         )
                     }
 
+                    // Na novinky sa pýtame až hráča, ktorý už dohral špacírku — vtedy otázka dáva
+                    // zmysel; hneď po prihlásení by len prekážala ceste k hre.
+                    val hasFinishedAnyGame = state.games.any { progressManager.isCompleted(it.info.id) }
                     if (authState.isSignedIn &&
+                        hasFinishedAnyGame &&
                         authState.marketingConsentLoaded &&
                         shouldAskMarketingConsent(
                             authState.marketingConsent,
@@ -400,7 +428,8 @@ fun GameListScreen(
                         ) &&
                         !marketingPromptDismissed &&
                         !showAuthSheet &&
-                        !showSignOutDialog
+                        !showSignOutDialog &&
+                        consentRequest == null
                     ) {
                         MarketingConsentDialog(
                             onAnswer = { optIn ->
@@ -412,8 +441,6 @@ fun GameListScreen(
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))
-
-                    val progressManager = remember { GameProgressManager(context) }
 
                     LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         items(state.games) { gameWithStatus ->
@@ -432,20 +459,15 @@ fun GameListScreen(
                             // Consent gate: if the game requires consent and the player hasn't
                             // accepted the current version yet, show the dialog before starting.
                             fun gatedStart(proceed: () -> Unit) {
-                                val consent = info.consent
-                                val accepted = consent == null ||
-                                    authViewModel.hasConsent(gameId, consent.version) ||
-                                    consentManager.acceptedVersion(gameId) >= consent.version
-                                if (accepted) {
+                                if (!needsConsent(info)) {
                                     proceed()
                                     return
                                 }
                                 if (!authState.isSignedIn) {
-                                    scope.launch {
-                                        snackbarHostState.showSnackbar(
-                                            "Pre túto špacírku sa najprv prihlás – zdieľa sa e-mail s organizátorom."
-                                        )
-                                    }
+                                    // Prihlásenie aj súhlas v jednom paneli; po nich sa špacírka spustí.
+                                    signInConsent = ConsentRequest(info, proceed)
+                                    authViewModel.clearError()
+                                    showAuthSheet = true
                                     return
                                 }
                                 consentRequest = ConsentRequest(info, proceed)
@@ -478,6 +500,7 @@ fun GameListScreen(
                                 },
                                 onSignInRequest = {
                                     pendingUnlockGameId = gameId
+                                    signInConsent = if (needsConsent(info)) ConsentRequest(info) {} else null
                                     authViewModel.clearError()
                                     showAuthSheet = true
                                 }
